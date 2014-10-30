@@ -13,3 +13,4 @@
     <td><a href='./?locale=<?=$lang?>&amp;output=json'>Json</a></td>
 </tr>
 <?php endforeach; ?>
+</table>
