@@ -22,6 +22,9 @@ switch($case) {
                 case 'json':
                     $view = 'locale_json';
                     break;
+                case 'html':
+                    $view = 'locale_escaped';
+                    break;
                 default:
                     $view = 'locale';
                     break;
