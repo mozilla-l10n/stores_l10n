@@ -1,24 +1,8 @@
 <?php
 namespace Play;
 
-$output = function($translate) use($_) {
-    $replacements = [
-        '{{support_link}}'     => 'https://support.mozilla.org/mobile',
-        '{{features_link}}'    => 'http://mzl.la/FXFeatures',
-        '{{permission_link}}'  => 'http://mzl.la/Permissions',
-        '{{blog_link}}'        => 'https://blog.mozilla.org',
-        '{{facebook_link}}'    => 'http://mzl.la/FXFacebook',
-        '{{twitter_link}}'     => 'http://mzl.la/FXTwitter',
-        '{{amo_link}}'         => 'https://addons.mozilla.org/android/',
-        '{{mozilla_org_link}}' => 'https://www.mozilla.org/',
-    ];
-
+$top_10 = function($translate) use($_) {
     return <<<OUT
-<hr>
-<i><b>Top 10 Features for Google Play Store</b></i>
-<hr>
-<br>
-
 {$_('Sync')} &mdash;
 {$_('Bring your passwords, bookmarks, open tabs and more everywhere you go.')}
 
@@ -58,12 +42,22 @@ $output = function($translate) use($_) {
 {$_('Send to Device')} &mdash;
 {$_('Stream video content from your device to your TV.')}
 
-<br><br>
-<hr>
-<i><b>Google Play Listing Copy</b></i>
-<hr>
-<br>
+OUT;
+};
 
+$description = function($translate) use($_) {
+    $replacements = [
+        '{{support_link}}'     => 'https://support.mozilla.org/mobile',
+        '{{features_link}}'    => 'http://mzl.la/FXFeatures',
+        '{{permission_link}}'  => 'http://mzl.la/Permissions',
+        '{{blog_link}}'        => 'https://blog.mozilla.org',
+        '{{facebook_link}}'    => 'http://mzl.la/FXFacebook',
+        '{{twitter_link}}'     => 'http://mzl.la/FXTwitter',
+        '{{amo_link}}'         => 'https://addons.mozilla.org/android/',
+        '{{mozilla_org_link}}' => 'https://www.mozilla.org/',
+    ];
+
+    return <<<OUT
 {$_('We make it Firefox. You make it your own.')}
 {$_('Meet our most customizable Android browser yet.')}
 {$_('Fast, smart and safe, the official Firefox for Android browser from Mozilla offers more ways than ever to make your mobile browsing experience uniquely yours.')}
@@ -191,7 +185,6 @@ $output = function($translate) use($_) {
 {$_("We're a global community of users, contributors and developers working to innovate on your behalf.")}
 {$_('When you use Firefox, you become a part of that community, helping us build a brighter future for the Web.')}
 {$_('Learn more at {{mozilla_org_link}}.', $replacements)}
-
 
 OUT;
 };
