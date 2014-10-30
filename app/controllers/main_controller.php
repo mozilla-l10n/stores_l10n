@@ -8,6 +8,8 @@ if (isset($_GET['locale']) && in_array($_GET['locale'], $android_locales)) {
 }else {
     $case = 'home';
 }
+// By default, we want to output our data in a template
+$raw_output = false;
 
 switch($case) {
     case 'home':
@@ -53,7 +55,7 @@ if ($model) {
 }
 
 ob_start();
-include include APP_ROOT .'views/' . $view . '_view.php';
+include APP_ROOT .'views/' . $view . '_view.php';
 $content = ob_get_contents();
 ob_end_clean();
 
