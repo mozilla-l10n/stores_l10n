@@ -1,11 +1,6 @@
 <?php
 namespace Play;
-// header()
-require_once __DIR__ . '/classes/Langchecker/DotLangParser.php';
-require_once __DIR__ . '/classes/Langchecker/Utils.php';
-require_once __DIR__ . '/classes/Transvision/Json.php';
-require_once __DIR__ . '/classes/Play/Translate.php';
-
+require_once __DIR__ . '/vendor/autoload.php';
 
 $android_locales = ['an', 'as', 'be', 'bn-IN', 'ca', 'cs', 'cy', 'da', 'de',
                     'es-AR', 'es-ES', 'es-MX', 'et', 'eu', 'fi', 'ff', 'fr',
