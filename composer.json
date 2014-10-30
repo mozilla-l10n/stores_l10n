@@ -1,9 +1,9 @@
 {
   "autoload": {
     "psr-0": {
-        "Play": "classes/",
-        "Transvision": "classes/",
-        "Langchecker": "classes/"
+        "Play": "app/classes/",
+        "Transvision": "app/classes/",
+        "Langchecker": "app/classes/"
     }
   }
 }

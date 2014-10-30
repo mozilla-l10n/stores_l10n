@@ -18,8 +18,8 @@ class Translate extends Dotlang
 
     public function __construct($locale, $file)
     {
-        $this->locale  = $locale;
-        $this->repo  = realpath(__DIR__ .'/../../locales') . '/';
+        $this->locale = $locale;
+        $this->repo   = LOCALES;
         $this->translations = $this->parseFile($this->repo .$this->locale . '/' . $file);
     }
 
