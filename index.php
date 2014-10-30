@@ -45,7 +45,7 @@ $_ = function($string, $replacements = false) use($translate) {
 require_once __DIR__ . '/templates/listing_nov_2014.php';
 
 if (! isset($_GET['json'])) {
-    print '<pre>' . $output($translate);
+    print $output($translate);
 } else {
     print \Transvision\Json::output([$output($translate)], false, true);
 }
