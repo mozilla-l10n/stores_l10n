@@ -1,3 +1,4 @@
+<h2>Web application generating localized Google Play descriptions based on a template</h2>
 <table>
 <tr>
     <th>Locale</th>
