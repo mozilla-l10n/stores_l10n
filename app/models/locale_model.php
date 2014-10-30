@@ -14,4 +14,4 @@ $_ = function($string, $replacements = false) use($translate) {
 };
 
 // Include the current template
-require_once APP_ROOT . '/templates/' . $current_template;
+require_once APP_ROOT . '/templates/' . array_values($current_template)[0];

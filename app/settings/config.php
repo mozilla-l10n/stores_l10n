@@ -14,4 +14,4 @@ $android_locales = [
     'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW'
 ];
 
-$current_template = 'listing_nov_2014.php';
+$current_template = ['November 2014' => 'listing_nov_2014.php'];
