@@ -148,7 +148,7 @@ $description = function($translate) use($_) {
 
 </ul>
 
-{$_('Curious about add-ons? Check them out on {{amo_link}}:', $replacements)}
+{$_('Curious about add-ons? Check them out on {{amo_link}} :', $replacements)}
 
 <ul>
 <li>
