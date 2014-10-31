@@ -34,4 +34,12 @@ class Translate extends Dotlang
         }
         return $string;
     }
+
+    public function isTranslated($string) {
+        if ($string == $this->translations['strings'][$string]) {
+            return false;
+        }
+
+        return true;
+    }
 }
