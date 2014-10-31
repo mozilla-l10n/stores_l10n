@@ -385,3 +385,21 @@ table#count_summary td:nth-child(3) {
 table#count_summary .help {
     cursor: help;
 }
+
+/* Google Play App specific styles */
+
+.homebutton {
+    position: absolute;
+    top: 0px;
+    right:0px;
+    width: 100px;
+    min-height: 20px;
+    background: darkgray;
+    text-align:center;
+    font-size: 1.5em;
+}
+
+.homebutton a {
+    color:white;
+
+}

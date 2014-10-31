@@ -8,6 +8,9 @@
 <body class"sand">
 <div id="outer-wrapper">
     <div id="wrapper">
+    <?php if ( $view != 'home'):?>
+    <div class="homebutton"><a href="./">Home</a></div>
+    <?php endif;?>
 <?=$content?>
     </div>
 </div>
