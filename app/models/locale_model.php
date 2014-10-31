@@ -15,3 +15,5 @@ $_ = function($string, $replacements = false) use($translate) {
 
 // Include the current template
 require_once APP_ROOT . '/templates/' . array_values($current_template)[0];
+
+$description_length = trim(mb_strlen($description($translate)));

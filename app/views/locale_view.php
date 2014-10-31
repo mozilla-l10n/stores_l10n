@@ -5,7 +5,7 @@
 <?=$top_10($translate);?>
 <br><br>
 <hr>
-<i><b>Google Play Listing Copy</b></i>
+<i><b>Google Play Listing Copy</b> &mdash; <?=$description_length?> characters</i>
 <hr>
 <br>
 <?=$description($translate);?>
