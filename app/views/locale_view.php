@@ -1,11 +1,5 @@
-<hr>
-<i><b>Top 10 Features for Google Play Store</b></i>
-<hr>
-<br>
+<h3>Top 10 Features for Google Play Store</h3>
 <?= $top_10($translate) ?>
-<br><br>
-<hr>
-<i><b>Google Play Listing Copy</b> &mdash; <?= $warning ?></i>
-<hr>
-<br>
+<h3>Google Play Listing Copy &mdash; <?= $warning ?></h3>
+
 <?= $description($translate) ?>

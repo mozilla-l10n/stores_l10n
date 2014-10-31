@@ -37,5 +37,3 @@ if ($description_length < 4000) {
 } else {
     $warning = '<strong style="color:red">' . $description_length . ' characters, too long. Limit is 4000.</strong>';
 }
-
-error_log($translate->isFileTranslated());

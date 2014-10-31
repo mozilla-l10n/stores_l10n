@@ -1,7 +1,6 @@
-<hr>
-<i><b>Google Play Listing Copy</b> &mdash; <?=$description_length?> characters</i>
-<hr>
-<br>
-<pre>
+<h3>Top 10 Features for Google Play Store</h3>
+<?= $top_10($translate) ?>
+<h3>Google Play Listing Copy &mdash; <?= $warning ?></h3>
+<pre contenteditable="true">
 <?= htmlspecialchars($description($translate)) ?>
 </pre>
