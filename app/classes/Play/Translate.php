@@ -35,11 +35,18 @@ class Translate extends Dotlang
         return $string;
     }
 
-    public function isTranslated($string) {
+    public function isStringTranslated($string) {
         if ($string == $this->translations['strings'][$string]) {
             return false;
         }
 
         return true;
+    }
+
+    public function isFileTranslated() {
+        $todo = array_keys($this->translations['strings']);
+        $done = array_values($this->translations['strings']);
+
+        return count(array_diff($todo, $done)) - count($this->translations['strings']) == 0;
     }
 }

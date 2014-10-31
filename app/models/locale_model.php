@@ -18,7 +18,7 @@ $_ = function($string, $replacements = false) use($translate, $view) {
     }
 
     if ($view == 'locale') {
-        $warning = $translate->isTranslated($string)
+        $warning = $translate->isStringTranslated($string)
                    ? 'title="' . $string . '"'
                    : 'style="color: darkorange"';
         return '<span ' . $warning . '>' . $return_string . '</span>';
@@ -38,4 +38,4 @@ if ($description_length < 4000) {
     $warning = '<strong style="color:red">' . $description_length . ' characters, too long. Limit is 4000.</strong>';
 }
 
-error_log(trim(strip_tags($description($translate))));
+error_log($translate->isFileTranslated());

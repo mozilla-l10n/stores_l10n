@@ -403,3 +403,7 @@ table#count_summary .help {
     color:white;
 
 }
+
+td.translated {
+    background-color:lightgreen;
+}
