@@ -3,5 +3,5 @@
 <hr>
 <br>
 <pre>
-<?=htmlspecialchars($description($translate));?>
+<?= htmlspecialchars($description($translate)) ?>
 </pre>
