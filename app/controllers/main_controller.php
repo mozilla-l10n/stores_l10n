@@ -5,7 +5,7 @@ if (isset($_GET['locale']) && in_array($_GET['locale'], $android_locales)) {
     $case = 'locale';
 } elseif(isset($_GET['locale_list'])) {
     $case = 'locale_list';
-} else {
+}else {
     $case = 'home';
 }
 // By default, we want to output our data in a template
@@ -51,11 +51,11 @@ switch($case) {
 }
 
 if ($model) {
-    include MODELS . $model . '_model.php';
+    include APP_ROOT .'models/' . $model . '_model.php';
 }
 
 ob_start();
-include APP .'views/' . $view . '_view.php';
+include APP_ROOT .'views/' . $view . '_view.php';
 $content = ob_get_contents();
 ob_end_clean();
 
@@ -63,5 +63,5 @@ ob_end_clean();
 if ($raw_output) {
     die($content);
 } else {
-    include TEMPLATES . 'html.php';
+    include APP_ROOT .'templates/template.php';
 }

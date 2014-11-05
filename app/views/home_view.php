@@ -12,9 +12,9 @@
 <tr>
     <th><?=$lang?></th>
     <td class='<?=$status[$lang]?>'><?=$status[$lang]?></td>
-    <td><a href="./locale/<?=$lang?>/show/">Show</a></td>
-    <td><a href="./locale/<?=$lang?>/html/">HTML</a></td>
-    <td><a href="./locale/<?=$lang?>/json/">Json</a></td>
+    <td><a href="./?locale=<?=$lang?>">Show</a></td>
+    <td><a href="./?locale=<?=$lang?>&amp;output=html">HTML</a></td>
+    <td><a href="./?locale=<?=$lang?>&amp;output=json">Json</a></td>
 </tr>
 <?php endforeach; ?>
 </table>
