@@ -1,9 +1,12 @@
 {
-  "autoload": {
-    "psr-0": {
-        "Play": "app/classes/",
-        "Transvision": "app/classes/",
-        "Langchecker": "app/classes/"
+    "require": {
+        "monolog/monolog" : "1.10.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Play": "app/classes/",
+            "Transvision": "app/classes/",
+            "Langchecker": "app/classes/"
+        }
     }
-  }
 }

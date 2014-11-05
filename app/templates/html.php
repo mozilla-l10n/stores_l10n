@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title><?=$title?></title>
-  <link href="./media/css/base.css" rel="stylesheet">
+  <base href="<?=BASE_HTML_URL?>">
+  <link href="/media/css/base.css" rel="stylesheet">
 </head>
 <body class="sand">
 <div id="outer-wrapper">
