@@ -388,20 +388,19 @@ table#count_summary .help {
 
 /* Google Play App specific styles */
 
-.homebutton {
+.topbutton {
     position: absolute;
-    top: 0px;
-    left:0px;
+    top: 0;
+    right: 0;
     width: 100px;
     min-height: 20px;
     background: black;
-    text-align:center;
+    text-align: center;
     font-size: 1.5em;
 }
 
-.homebutton a {
-    color:white;
-
+.topbutton a {
+    color: white;
 }
 
 td.translated {
@@ -415,6 +414,20 @@ h3 {
     padding: 4px;
 }
 
+pre {
+    margin: 0;
+}
+
+dt {
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+
 pre:focus {
     background-color: white;
+}
+
+.dim {
+    opacity: 0.4;
 }

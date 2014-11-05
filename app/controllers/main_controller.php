@@ -1,39 +1,32 @@
 <?php
 namespace Play;
 
-if (isset($_GET['locale']) && in_array($_GET['locale'], $android_locales)) {
-    $case = 'locale';
-} elseif(isset($_GET['locale_list'])) {
-    $case = 'locale_list';
-}else {
-    $case = 'home';
+if (! isset($model)) {
+    $model = '404';
 }
+
 // By default, we want to output our data in a template
 $raw_output = false;
 
-switch($case) {
+switch($model) {
     case 'home':
-        $title = 'Google Play Description';
+        $title = 'Google Play l10n - Overview';
         $model = 'home';
         $view  = 'home';
         break;
-    case 'locale_list':
-        $model = false;
-        $view  = 'locale_list_json';
-        $raw_output = true;
-        break;
     case 'locale':
-        $locale = $_GET['locale'];
+        if (isset($_GET['code']) && in_array($_GET['code'], $android_locales)) {
+            $locale = $_GET['code'];
+        } else {
+            die('No valid locale code provided.');
+        }
+
         $title = "Google Play Description for: {$locale}";
-        $model = 'locale';
         $view = 'locale';
+
         // Another output for the view?
         if (isset($_GET['output'])) {
             switch($_GET['output']) {
-                case 'json':
-                    $view = 'locale_json';
-                    $raw_output = true;
-                    break;
                 case 'html':
                     $view = 'locale_escaped';
                     break;
@@ -43,9 +36,12 @@ switch($case) {
             }
         }
         break;
+    case 'api':
+        $raw_output = true;
+        $view = 'json';
+        break;
     default:
         $title = 'Google Play Description';
-        $model = 'home';
         $locale = false;
         break;
 }
@@ -55,7 +51,7 @@ if ($model) {
 }
 
 ob_start();
-include APP_ROOT .'views/' . $view . '_view.php';
+include APP_ROOT . 'views/' . $view . '_view.php';
 $content = ob_get_contents();
 ob_end_clean();
 
@@ -63,5 +59,5 @@ ob_end_clean();
 if ($raw_output) {
     die($content);
 } else {
-    include APP_ROOT .'templates/template.php';
+    include APP_ROOT .'templates/html.php';
 }

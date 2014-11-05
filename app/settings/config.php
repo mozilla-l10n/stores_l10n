@@ -11,7 +11,67 @@ $android_locales = [
     'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
     'lv', 'ml', 'mr', 'ms', 'nb-NO', 'nl', 'or', 'pa-IN',
     'pl', 'pt-BR', 'pt-PT', 'ro', 'ru', 'sq', 'sk', 'sl',
-    'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW'
+    'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW',
 ];
 
-$current_template = ['November 2014' => 'listing_nov_2014.php'];
+$current_template = [
+    'November 2014' => 'listing_nov_2014.php',
+];
+
+$locale_mapping = [
+    'af'     => 'af',
+    'ar'     => 'ar',
+    'am'     => false,
+    'be'     => 'be',
+    'bg'     => 'bg',
+    'cs-CZ'  => 'cs',
+    'ca'     => 'ca',
+    'da-DK'  => 'da',
+    'de-DE'  => 'de',
+    'el-GR'  => 'el',
+    'en-GB'  => 'en-GB',
+    'es-419' => 'es-MX', // Spanish, South America
+    'es-ES'  => 'es-ES',
+    'es-US'  => 'es-MX', // Spanish, South America
+    'et'     => 'et',
+    'fa'     => 'fa',
+    'fi-FI'  => 'fi',
+    'fil'    => false, // Filipino
+    'fr-CA'  => 'fr',
+    'fr-FR'  => 'fr',
+    'hi-IN'  => 'hi-IN',
+    'hu-HU'  => 'hu',
+    'hr'     => 'hr',
+    'id'     => 'id',
+    'it-IT'  => 'it',
+    'iw-IL'  => 'he',
+    'ja-JP'  => 'ja',
+    'ko-KR'  => 'ko',
+    'lt'     => 'lt',
+    'lv'     => 'lv',
+    'ms'     => 'ms',
+    'nl-NL'  => 'nl',
+    'no-NO'  => 'nb-NO',
+    'pl-PL'  => 'pl',
+    'pt-BR'  => 'pt-BR',
+    'pt-PT'  => 'pt-PT',
+    'rm'     => 'rm',
+    'ro'     => 'ro',
+    'ru-RU'  => 'ru',
+    'sk'     => 'sk',
+    'sl'     => 'sl',
+    'sr'     => 'sr',
+    'sv-SE'  => 'sv-SE',
+    'sw'     => 'sw',
+    'th'     => 'th',
+    'tr-TR'  => 'tr',
+    'uk'     => 'uk',
+    'vi'     => 'vi',
+    'zh-CN'  => 'zh-CN',
+    'zh-TW'  => 'zh-TW',
+    'zu'     => 'zu',
+];
+
+$play_locales = array_keys($locale_mapping);
+
+$google_mozilla_supported = array_intersect($android_locales, array_values(array_filter($locale_mapping)));

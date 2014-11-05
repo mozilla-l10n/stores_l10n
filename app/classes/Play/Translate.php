@@ -20,7 +20,7 @@ class Translate extends Dotlang
     {
         $this->locale = $locale;
         $this->repo   = LOCALES;
-        $this->translations = $this->parseFile($this->repo .$this->locale . '/' . $file);
+        $this->translations = $this->parseFile($this->repo . $this->locale . '/' . $file);
     }
 
     public function getAllStrings()
