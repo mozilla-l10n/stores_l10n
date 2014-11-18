@@ -5,13 +5,18 @@ namespace Play;
 
 $actions = ['play_locales', 'firefox_locales', 'locale_mapping', 'done', 'locale'];
 
-$action = 'documentation';
+$action = false;
 
 foreach($actions as $get) {
     if (isset($_GET[$get])) {
         $action = $get;
         break;
     }
+}
+
+// No Get parameter, let's display the documentation to the API
+if (empty($_GET)) {
+    $action = 'documentation';
 }
 
 switch($action) {
@@ -27,7 +32,6 @@ switch($action) {
         } else {
             $mapping = $locale_mapping;
         }
-
         $view = 'locale_mapping_json';
         break;
     case 'done':
@@ -44,5 +48,7 @@ switch($action) {
         $view = 'locale_json';
         break;
     default:
+        http_response_code(400);
+        die(\Transvision\Json::output(['error' => 'Not a valid API call.'], false, true));
         break;
 }
