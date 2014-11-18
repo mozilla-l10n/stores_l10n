@@ -1,4 +1,4 @@
 <?php
 namespace Play;
 
-print \Transvision\Json::output([$description($translate)], false, true);
+print \Transvision\Json::output($json, false, true);

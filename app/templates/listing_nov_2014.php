@@ -1,6 +1,9 @@
 <?php
 namespace Play;
 
+// Include closure needed in template
+include INC . 'utilities.php';
+
 $top_10 = function($translate) use($_) {
     return <<<OUT
 {$_('Sync')} &mdash;
@@ -188,3 +191,13 @@ $description = function($translate) use($_) {
 
 OUT;
 };
+
+$short_desc = function($translate) use($_) {
+    return $_('We make it Firefox. You make it your own.');
+};
+
+
+$app_title = function($translate) use($_) {
+    return $_('Firefox for Android');
+};
+

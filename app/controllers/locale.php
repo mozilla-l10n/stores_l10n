@@ -1,7 +1,7 @@
 <?php
 namespace Play;
 
-$actions = ['html', 'show', 'json', 'status'];
+$actions = ['html', 'show', 'status'];
 $components = explode('/', $url['path']);
 // We no longer need the locale/ part of the url
 array_shift($components);
@@ -30,11 +30,6 @@ switch($components[1]) {
     case 'html':
         $view  = 'locale_escaped';
         $template = 'html.php';
-        break;
-    case 'json':
-        $view  = 'locale_escaped';
-        include MODELS . 'locale_model.php';
-        die(\Transvision\Json::output([$description($translate)], false, true));
         break;
     default:
         $view = 'locale';
