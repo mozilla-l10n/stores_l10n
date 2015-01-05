@@ -1,9 +1,13 @@
 {
-  "autoload": {
-    "psr-0": {
-        "Play": "app/classes/",
-        "Transvision": "app/classes/",
-        "Langchecker": "app/classes/"
+    "autoload": {
+        "psr-0": {
+            "Play": "app/classes/",
+            "Transvision": "app/classes/",
+            "Langchecker": "app/classes/"
+        },
+        "files": ["app/helpers/debug.php"]
+    },
+    "require": {
+        "symfony/var-dumper": "~2.6"
     }
-  }
 }
