@@ -24,6 +24,7 @@ switch($action) {
         $view = 'play_json';
         break;
     case 'firefox_locales':
+        $locales = include MODELS . 'api/locales_per_channel_model.php';
         $view = 'locale_list_json';
         break;
     case 'locale_mapping':

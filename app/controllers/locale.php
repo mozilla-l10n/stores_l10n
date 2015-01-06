@@ -6,7 +6,7 @@ $components = explode('/', $url['path']);
 // We no longer need the locale/ part of the url
 array_shift($components);
 
-if (! in_array($components[0], $android_locales)) {
+if (! in_array($components[0], $android_locales_release)) {
     die ("Not a locale code supported by Firefox");
 } else {
     $locale = $components[0];

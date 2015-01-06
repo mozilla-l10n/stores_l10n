@@ -4,7 +4,10 @@ define('APP_ROOT', realpath(__DIR__ . '/../') . '/');
 define('WEB_ROOT', realpath(__DIR__ . '/../../web/') . '/');
 define('LOCALES', realpath(__DIR__ .'/../../locales') . '/');
 
-$android_locales = [
+// Source : http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
+// Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
+// Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
+$android_locales_release = [
     'an', 'as', 'be', 'bn-IN', 'ca', 'cs', 'cy', 'da', 'de',
     'es-AR', 'es-ES', 'es-MX', 'et', 'eu', 'fi', 'ff', 'fr',
     'fy-NL', 'ga-IE', 'gd', 'gl' ,'gu-IN', 'hi-IN', 'hu',
@@ -13,6 +16,9 @@ $android_locales = [
     'pl', 'pt-BR', 'pt-PT', 'ro', 'ru', 'sq', 'sk', 'sl',
     'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW',
 ];
+
+// As of 2015-01-06, the 3 channels above have exactly the same locales list
+$android_locales_aurora = $android_locales_beta = $android_locales_release;
 
 $current_template = [
     'November 2014' => 'listing_nov_2014.php',
@@ -74,4 +80,4 @@ $locale_mapping = [
 
 $play_locales = array_keys($locale_mapping);
 
-$google_mozilla_supported = array_intersect($android_locales, array_values(array_filter($locale_mapping)));
+$google_mozilla_supported = array_intersect($android_locales_release, array_values(array_filter($locale_mapping)));

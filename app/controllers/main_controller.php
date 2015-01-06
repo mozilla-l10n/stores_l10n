@@ -15,7 +15,7 @@ switch($model) {
         $view  = 'home';
         break;
     case 'locale':
-        if (isset($_GET['code']) && in_array($_GET['code'], $android_locales)) {
+        if (isset($_GET['code']) && in_array($_GET['code'], $android_locales_release)) {
             $locale = $_GET['code'];
         } else {
             die('No valid locale code provided.');
