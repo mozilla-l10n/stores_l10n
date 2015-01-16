@@ -62,95 +62,82 @@ $description = function($translate) use($_) {
 
     return <<<OUT
 {$_('We make it Firefox. You make it your own.')}
-<br/>
 {$_('Meet our most customizable Android browser yet.')}
-<br/>
 {$_('Fast, smart and safe, the official Firefox for Android browser from Mozilla offers more ways than ever to make your mobile browsing experience uniquely yours.')}
 
-<br/><br/>
 
 {$_('FAST.')}
-
 {$_('Access, browse and search the Web at blazing speeds.')}
-<br/><br/>
 
 {$_('SMART.')}
-
 {$_('Share and search just how you like, and keep your favorite Web content a tap away with our most customizable and intuitive features yet.')}
-<br/><br/>
 
 {$_('SAFE.')}
-
 {$_('Make sure your browsing stays safe and private with extensive security settings, add-ons and features like Do Not Track.')}
-<br/><br/>
-
 
 <b>{$_('Key Features:')}</b>
 
-<br/><b>• {$_('Customizable Home Panels:')}</b>
+<b>• {$_('Customizable Home Panels:')}</b>
 {$_('Customize and display your Home panels however you like. Add new Web content any time and access your favorite feeds — like Instagram and Pocket Hits — instantly.')}
 
-<br/><b>• {$_('Sync:')}</b>
+<b>• {$_('Sync:')}</b>
 {$_('Sync your Firefox desktop tabs, history, bookmarks and passwords to all your devices and streamline your browsing.')}
 
-<br/><b>• {$_('Add-ons:')}</b>
+<b>• {$_('Add-ons:')}</b>
 {$_('Customize your Web browser just the way you like it with add-ons including Ad-Blocker, Password Manager and more.')}
 
-<br/><b>• {$_('Speed:')}</b>
+<b>• {$_('Speed:')}</b>
 {$_('Get to the Internet faster, with quick startup and page load times.')}
 
-<br/><b>• {$_('Accessibility:')}</b>
+<b>• {$_('Accessibility:')}</b>
 {$_('Over 59 supported languages can be easily selected through the browser settings.')}
 
-<br/><b>• {$_('HTML5:')}</b>
+<b>• {$_('HTML5:')}</b>
 {$_('Experience the unlimited possibilities of the Internet on mobile with support for HTML5 and Web APIs.')}
 
-<br/><b>• {$_('Mobile Video:')}</b>
+<b>• {$_('Mobile Video:')}</b>
 {$_('Firefox for Android has mobile video support for a wide range of video formats, including h.264.')}
 
-<br/><b>• {$_('Security:')}</b>
+<b>• {$_('Security:')}</b>
 {$_('Keep your browsing safe and private. Control your privacy, security and how much data you share on the Web.')}
 
 
-<br/>
 {$_('For a complete list of features, check out {{features_link}}', $replacements)}
-<br/>
-<br/>
 
 <b>{$_('Learn more about Firefox for Android:')}</b>
 
-<br/>• {$_('Have questions or need help? Visit {{support_link}}', $replacements)}
+• {$_('Have questions or need help? Visit {{support_link}}', $replacements)}
 
-<br/>• {$_('Read about Firefox permissions: {{permission_link}}', $replacements)}
+• {$_('Read about Firefox permissions: {{permission_link}}', $replacements)}
 
-<br/>• {$_('Learn more about what’s up at Mozilla: {{blog_link}}', $replacements)}
+• {$_('Learn more about what’s up at Mozilla: {{blog_link}}', $replacements)}
 
-<br/>• {$_('Like Firefox on Facebook: {{facebook_link}}', $replacements)}
+• {$_('Like Firefox on Facebook: {{facebook_link}}', $replacements)}
 
-<br/>• {$_('Follow Firefox on Twitter: {{twitter_link}}', $replacements)}
+• {$_('Follow Firefox on Twitter: {{twitter_link}}', $replacements)}
 
-<br/><br/>
+
 {$_('Curious about add-ons? Check them out on {{amo_link}} :', $replacements)}
 
-<br/><b>• {$_('Browsing:')}</b>&nbsp;
+<b>• {$_('Browsing:')}</b>&nbsp;
 {$_('Adblock Plus, AutoPager, Full Screen mobile and more')}
 
-<br/><b>• {$_('Security:')}</b>&nbsp;
+
+<b>• {$_('Security:')}</b>&nbsp;
 {$_('LastPass Password Manager, NoScript, Dr. Web LinkChecker and more')}
 
-<br/><b>• {$_('Reading:')}</b>&nbsp;
+
+<b>• {$_('Reading:')}</b>&nbsp;
 {$_('AutoPager, X-Notifier lite and more')}
 
-<br/><b>• {$_('Watching:')}</b>&nbsp;
+<b>• {$_('Watching:')}</b>&nbsp;
 {$_('Low Quality Flash, ProxTube and more')}
 
-<br/><b>• {$_('Social Networks:')}</b>&nbsp;
+<b>• {$_('Social Networks:')}</b>&nbsp;
 {$_('Shareaholic, Foursquare and more')}
 
-<br/><br/>
 
 <b>{$_('ABOUT MOZILLA')}</b>
-<br/><br/>
 
 {$_("Mozilla is a proudly non-profit organization dedicated to keeping the power of the Web in people's hands.")}
 {$_("We're a global community of users, contributors and developers working to innovate on your behalf.")}
