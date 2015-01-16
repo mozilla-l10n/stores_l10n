@@ -11,7 +11,7 @@ if (isset($_GET['locale']) && in_array($_GET['locale'], $android_locales_release
 include MODELS . 'locale_model.php';
 
 return $json = [
-    'title' => $app_title($translate),
+    'title'      => $app_title($translate),
     'short_desc' => $short_desc($translate),
-    'long_desc'  => str_replace(["\r", "\n"], '', $description($translate)),
+    'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translate)),
 ];
