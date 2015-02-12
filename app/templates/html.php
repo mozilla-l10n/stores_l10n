@@ -13,7 +13,7 @@
 <body class="sand">
 <div id="outer-wrapper">
     <div id="wrapper">
-    <?php if ( $view == 'home'):?>
+    <?php if ($view == 'home'):?>
     <div class="topbutton"><a href="./api/">API&nbsp;»</a></div>
     <?php else:?>
     <div class="topbutton"><a href="./">«&nbsp;Home</a></div>

@@ -24,7 +24,7 @@ use Monolog\Handler\ErrorLogHandler;
  *
  * @package Play
  */
-Class API
+class API
 {
     public $url;
     public $parameters;
@@ -78,7 +78,7 @@ Class API
         $parameters = array_values($parameters);
 
         return array_map(
-            function($item) {
+            function ($item) {
                 return trim(urldecode($item));
             },
             $parameters
@@ -215,11 +215,11 @@ Class API
                     return false;
                 }
 
-                if (! $this->verifyLocaleExists($this->parameters[4], $this->parameters[3]) ) {
+                if (! $this->verifyLocaleExists($this->parameters[4], $this->parameters[3])) {
                     return false;
                 }
 
-                if (! $this->verifyLocaleExists($this->parameters[5], $this->parameters[3]) ) {
+                if (! $this->verifyLocaleExists($this->parameters[5], $this->parameters[3])) {
                     return false;
                 }
 
@@ -234,11 +234,11 @@ Class API
                     return false;
                 }
 
-                if (! $this->verifyLocaleExists($this->parameters[3], $this->parameters[2]) ) {
+                if (! $this->verifyLocaleExists($this->parameters[3], $this->parameters[2])) {
                     return false;
                 }
 
-                if (! $this->verifyLocaleExists($this->parameters[4], $this->parameters[2]) ) {
+                if (! $this->verifyLocaleExists($this->parameters[4], $this->parameters[2])) {
                     return false;
                 }
 
@@ -289,7 +289,7 @@ Class API
      */
     private function verifyRepositoryExists($repository)
     {
-        if (! in_array($repository, Project::getRepositories() )) {
+        if (! in_array($repository, Project::getRepositories())) {
             $this->log("The repo queried ({$repository}) doesn't exist.");
             return false;
         }
@@ -306,7 +306,7 @@ Class API
      */
     private function verifyLocaleExists($locale, $repository)
     {
-        if (! in_array($locale, Project::getRepositoryLocales($repository) )) {
+        if (! in_array($locale, Project::getRepositoryLocales($repository))) {
             $this->log("The locale queried ({$locale}) is not "
                        . "available for the repository ({$repository}).");
             return false;

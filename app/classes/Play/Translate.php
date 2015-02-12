@@ -1,5 +1,6 @@
 <?php
 namespace Play;
+
 use Langchecker\DotLangParser as Dotlang;
 use Langchecker\Utils as Utils;
 /*
@@ -28,14 +29,16 @@ class Translate extends Dotlang
         return $this->translations['strings'];
     }
 
-    public function get($string) {
+    public function get($string)
+    {
         if (isset($this->translations['strings'][$string])) {
             return Utils::cleanString($this->translations['strings'][$string]);
         }
         return $string;
     }
 
-    public function isStringTranslated($string) {
+    public function isStringTranslated($string)
+    {
         if ($string == $this->translations['strings'][$string]) {
             return false;
         }
@@ -43,7 +46,8 @@ class Translate extends Dotlang
         return true;
     }
 
-    public function isFileTranslated() {
+    public function isFileTranslated()
+    {
         $todo = array_keys($this->translations['strings']);
         $done = array_values($this->translations['strings']);
 

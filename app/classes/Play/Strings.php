@@ -20,7 +20,7 @@ class Strings
      */
     public static function startsWith($haystack, $needles)
     {
-        foreach((array) $needles as $prefix) {
+        foreach ((array) $needles as $prefix) {
             if (! strncmp($haystack, $prefix, mb_strlen($prefix))) {
                 return true;
             }
@@ -39,7 +39,7 @@ class Strings
      */
     public static function endsWith($haystack, $needles)
     {
-        foreach((array) $needles as $suffix) {
+        foreach ((array) $needles as $suffix) {
             if (mb_substr($haystack, -mb_strlen($suffix)) === $suffix) {
                 return true;
             }

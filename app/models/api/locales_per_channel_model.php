@@ -4,7 +4,7 @@ namespace Play;
 
 $channel = isset($_GET['channel']) ? $_GET['channel'] : 'org.mozilla.firefox';
 
-switch($channel) {
+switch ($channel) {
     // Aurora
     case 'org.mozilla.fennec_aurora':
         return $android_locales_aurora;

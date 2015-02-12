@@ -7,7 +7,7 @@ $actions = ['play_locales', 'firefox_locales', 'locale_mapping', 'done', 'locale
 
 $action = false;
 
-foreach($actions as $get) {
+foreach ($actions as $get) {
     if (isset($_GET[$get])) {
         $action = $get;
         break;
@@ -19,7 +19,7 @@ if (empty($_GET)) {
     $action = 'documentation';
 }
 
-switch($action) {
+switch ($action) {
     case 'play_locales':
         $view = 'play_json';
         break;

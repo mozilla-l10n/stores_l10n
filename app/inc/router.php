@@ -39,7 +39,7 @@ if (in_array(explode('/', $url['path'])[0], $urls)) {
 }
 
 if (! $match) {
-    header ('HTTP/1.1 404 Not Found');
+    header('HTTP/1.1 404 Not Found');
     die('resource not found');
 }
 

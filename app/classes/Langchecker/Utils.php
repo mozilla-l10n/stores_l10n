@@ -193,7 +193,8 @@ class Utils
      * @param   string  $fallback  Optional fallback value
      * @return  string             Parameter value, or fallback
      */
-    public static function getQueryParam($param, $fallback = '') {
+    public static function getQueryParam($param, $fallback = '')
+    {
         if (isset($_GET[$param])) {
             return is_bool($fallback)
                    ? true
@@ -211,7 +212,8 @@ class Utils
      * @param   string   $fallback  Optional fallback value
      * @return  string              Parameter value, or fallback
      */
-    public static function getCliParam($paramnum, $options, $fallback = '') {
+    public static function getCliParam($paramnum, $options, $fallback = '')
+    {
         if (isset($options[$paramnum])) {
             return self::secureText($options[$paramnum]);
         }

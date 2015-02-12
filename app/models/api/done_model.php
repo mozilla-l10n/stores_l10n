@@ -3,9 +3,9 @@ namespace Play;
 
 $done = [];
 
-foreach($android_locales_release as $lang) {
+foreach ($android_locales_release as $lang) {
     $obj = new Translate($lang, 'description_page.lang');
-    if($obj->isFileTranslated()) {
+    if ($obj->isFileTranslated()) {
         $done[] = $lang;
     }
 }

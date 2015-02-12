@@ -8,7 +8,7 @@ if (! isset($model)) {
 // By default, we want to output our data in a template
 $raw_output = false;
 
-switch($model) {
+switch ($model) {
     case 'home':
         $title = 'Google Play l10n - Overview';
         $model = 'home';
@@ -26,7 +26,7 @@ switch($model) {
 
         // Another output for the view?
         if (isset($_GET['output'])) {
-            switch($_GET['output']) {
+            switch ($_GET['output']) {
                 case 'html':
                     $view = 'locale_escaped';
                     break;

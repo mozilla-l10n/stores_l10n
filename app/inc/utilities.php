@@ -2,7 +2,7 @@
 namespace Play;
 
 // Closure to use in the template
-$_ = function($string, $replacements = false) use($translate, $view) {
+$_ = function ($string, $replacements = false) use ($translate, $view) {
 
     $return_string = $translate->get($string);
     $warning = '';

@@ -8,7 +8,7 @@
     <th>Description Raw HTML</th>
     <th>Description Json</th>
 </tr>
-<?php foreach($google_mozilla_supported as $lang): ?>
+<?php foreach ($google_mozilla_supported as $lang): ?>
 <tr>
     <th><?=$lang?></th>
     <td class='<?=$status[$lang]?>'><?=$status[$lang]?></td>
