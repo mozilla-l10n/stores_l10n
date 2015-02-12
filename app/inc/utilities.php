@@ -19,6 +19,7 @@ $_ = function ($string, $replacements = false) use ($translate, $view) {
         $warning = $translate->isStringTranslated($string)
                    ? 'title="' . $string . '"'
                    : 'style="color: darkorange"';
+
         return '<span ' . $warning . '>' . $return_string . '</span>';
     }
 

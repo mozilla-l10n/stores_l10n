@@ -15,7 +15,7 @@ define('DEBUG',         true);
 if ($_SERVER['SERVER_NAME'] == 'l10n.mozilla-community.org') {
     define('BASE_HTML_URL', 'https://l10n.mozilla-community.org/~pascalc/google_play_description/');
 } elseif ($_SERVER['SERVER_NAME'] == 'demos.mozfr.org') {
-    define('BASE_HTML_URL', 'http://' . $_SERVER['HTTP_HOST'] .'/google_play_copy/web/');
+    define('BASE_HTML_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/google_play_copy/web/');
 } else {
-    define('BASE_HTML_URL', 'http://' . $_SERVER['HTTP_HOST'] .'/');
+    define('BASE_HTML_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
 }

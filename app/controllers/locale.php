@@ -39,7 +39,7 @@ switch ($components[1]) {
 include MODELS . 'locale_model.php';
 
 ob_start();
-include APP .'views/' . $view . '_view.php';
+include APP . 'views/' . $view . '_view.php';
 $content = ob_get_contents();
 ob_end_clean();
 

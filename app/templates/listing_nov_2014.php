@@ -150,7 +150,6 @@ $short_desc = function ($translate) use ($_) {
     return $_('We make it Firefox. You make it your own.');
 };
 
-
 $app_title = function ($translate) use ($_) {
     return $_('Firefox for Android');
 };

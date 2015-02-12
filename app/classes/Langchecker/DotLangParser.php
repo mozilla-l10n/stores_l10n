@@ -24,6 +24,7 @@ class DotLangParser
             if ($show_errors) {
                 Utils::logger("{$path} does not exist.");
             }
+
             return false;
         }
 

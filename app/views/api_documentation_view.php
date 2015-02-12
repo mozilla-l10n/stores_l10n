@@ -1,5 +1,5 @@
 <?php
-$base = '<em class="dim">' . BASE_HTML_URL .'</em>';
+$base = '<em class="dim">' . BASE_HTML_URL . '</em>';
 ?>
 
 <h2>API calls available</h2>

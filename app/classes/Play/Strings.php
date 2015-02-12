@@ -34,7 +34,7 @@ class Strings
      * $needles can be a string or an array of strings.
      *
      * @param  string  $haystack String to analyse
-     * @param  array   $needles The strings to look for
+     * @param  array   $needles  The strings to look for
      * @return boolean True if the $haystack string ends with a string in $needles
      */
     public static function endsWith($haystack, $needles)

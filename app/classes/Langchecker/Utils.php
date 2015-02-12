@@ -56,7 +56,7 @@ class Utils
     {
         if (! is_array($origin)) {
             // If $origin is a string, always return a string
-            $origin  = array($origin);
+            $origin  = [$origin];
             $isarray = false;
         }
 

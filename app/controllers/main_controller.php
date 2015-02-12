@@ -47,7 +47,7 @@ switch ($model) {
 }
 
 if ($model) {
-    include APP_ROOT .'models/' . $model . '_model.php';
+    include APP_ROOT . 'models/' . $model . '_model.php';
 }
 
 ob_start();
@@ -59,5 +59,5 @@ ob_end_clean();
 if ($raw_output) {
     die($content);
 } else {
-    include APP_ROOT .'templates/html.php';
+    include APP_ROOT . 'templates/html.php';
 }

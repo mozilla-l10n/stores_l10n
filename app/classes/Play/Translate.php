@@ -34,6 +34,7 @@ class Translate extends Dotlang
         if (isset($this->translations['strings'][$string])) {
             return Utils::cleanString($this->translations['strings'][$string]);
         }
+
         return $string;
     }
 

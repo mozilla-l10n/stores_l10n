@@ -2,7 +2,7 @@
 
 define('APP_ROOT', realpath(__DIR__ . '/../') . '/');
 define('WEB_ROOT', realpath(__DIR__ . '/../../web/') . '/');
-define('LOCALES', realpath(__DIR__ .'/../../locales') . '/');
+define('LOCALES', realpath(__DIR__ . '/../../locales') . '/');
 
 // Source : http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
 // Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales

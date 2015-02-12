@@ -37,7 +37,7 @@ switch ($action) {
         break;
     case 'done':
         $done = include MODELS . 'api/done_model.php';
-        $view ='locales_done_json';
+        $view = 'locales_done_json';
         break;
     case 'documentation':
         $raw_output = false;
