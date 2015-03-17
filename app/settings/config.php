@@ -21,7 +21,7 @@ $android_locales_release = [
 $android_locales_aurora = $android_locales_beta = $android_locales_release;
 
 $current_template = [
-    'November 2014' => 'listing_nov_2014.php',
+    'November 2014' => 'release/listing_nov_2014.php',
 ];
 
 $locale_mapping = [
