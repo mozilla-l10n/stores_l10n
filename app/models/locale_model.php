@@ -11,7 +11,7 @@ $get_length = function ($string) {
 };
 
 $set_limit = function ($limit, $length) {
-    if ($length < $limit) {
+    if ($length <= $limit) {
         return $length . ' characters';
     }
 
