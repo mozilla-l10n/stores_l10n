@@ -1,10 +1,10 @@
 <?php
-namespace Play;
+namespace Stores;
 
-$translate = new Translate($locale, 'description_page.lang');
+$translate = new Translate($request['locale'], $project->getLangFile($request['store'], $request['channel']));
 
 // Include the current template
-require_once APP_ROOT . '/templates/' . array_values($current_template)[0];
+require_once TEMPLATES . $project->getTemplate($request['store'], $request['channel']);
 
 $get_length = function ($string) {
     return mb_strlen(trim(strip_tags($string)));

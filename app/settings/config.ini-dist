@@ -1,0 +1,7 @@
+[config]
+
+; Public path where the app is installed, if not installed at the server root
+url='http://localhost/stores_l10n/web/'
+
+; Set up a debug parameter for logging in dev mode to the console
+debug=true

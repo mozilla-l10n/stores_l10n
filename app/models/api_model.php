@@ -1,55 +1,52 @@
 <?php
-namespace Play;
+namespace Stores;
 
-// API
-
-$actions = ['play_locales', 'firefox_locales', 'locale_mapping', 'done', 'locale'];
-
-$action = false;
-
-foreach ($actions as $get) {
-    if (isset($_GET[$get])) {
-        $action = $get;
+switch ($request->getService()) {
+    case 'storelocales':
+        $json = $project->getStoreLocales($request->query['store']);
         break;
-    }
-}
-
-// No Get parameter, let's display the documentation to the API
-if (empty($_GET)) {
-    $action = 'documentation';
-}
-
-switch ($action) {
-    case 'play_locales':
-        $view = 'play_json';
+    case 'firefoxlocales':
+       $json = $project->getFirefoxLocales($request->query['store'], $request->query['channel']);
         break;
-    case 'firefox_locales':
-        $locales = include MODELS . 'api/locales_per_channel_model.php';
-        $view = 'locale_list_json';
+    case 'localesmapping':
+        $json = $project->getLocalesMapping(
+            $request->query['store'],
+            $reverse = isset($_GET['reverse'])
+        );
         break;
-    case 'locale_mapping':
-        if (isset($_GET['reverse'])) {
-            $mapping = array_flip(array_filter($locale_mapping));
-        } else {
-            $mapping = $locale_mapping;
-        }
-        $view = 'locale_mapping_json';
+    case 'translation':
+        $request = [
+            'locale'  => $request->query['locale'],
+            'store'   => $request->query['store'],
+            'channel' => $request->query['channel'],
+        ];
+        $view = 'api';
+        include MODELS . 'locale_model.php';
+        $json = [
+            'title'      => $app_title($translate),
+            'short_desc' => $short_desc($translate),
+            'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translate)),
+        ];
         break;
     case 'done':
-        $done = include MODELS . 'api/done_model.php';
-        $view = 'locales_done_json';
-        break;
-    case 'documentation':
-        $raw_output = false;
-        $title = 'Google Play l10n - JSON API description';
-        $view = 'api_documentation';
-        break;
-    case 'locale':
-        $json = include MODELS . 'api/locale_model.php';
-        $view = 'locale_json';
+        $done = [];
+
+        foreach ($project->getFirefoxLocales($request->query['store'], $request->query['channel']) as $lang) {
+            $obj = new Translate($lang, $project->getLangFile($request->query['store'], $request->query['channel']));
+            if ($obj->isFileTranslated()) {
+                $done[] = $lang;
+            }
+        }
+
+        $supported = array_unique(array_values($project->getLocalesMapping($request->query['store'])));
+
+        $json = array_values(array_intersect($done, $supported));
+
         break;
     default:
         http_response_code(400);
-        die(\Transvision\Json::output(['error' => 'Not a valid API call.'], false, true));
+        $json = ['error' => 'Not a valid API call.'];
         break;
 }
+
+$json = $response->output($json, false, true);
