@@ -1,0 +1,14 @@
+reminder: this is the common set of includes for a page load
+
+<url>
+-> app/inc/router.php
+    -> app/inc/urls.php
+-> app/inc/init.php
+    -> app/config/settings/constants.php
+    -> vendor/autoload.php
+    -> app/config/settings/config.php
+-> app/inc/dispatcher.php
+    -> app/inc/controller/{page}_controller.php
+        -> app/inc/models/{page}_model.php
+        -> app/inc/views/{page}_view.php
+-> app/templates/html.php

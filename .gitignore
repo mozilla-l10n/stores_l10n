@@ -1,3 +1,7 @@
-vendor
-locales
+app/settings/config.ini
 composer.lock
+locales
+logs/api-errors.log
+vendor
+web/.htaccess
+web/media/assets

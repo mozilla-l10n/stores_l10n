@@ -1,5 +1,17 @@
 <?php
 
+// Initialize the application
+require_once __DIR__ . '/init.php';
+
+// This is a hack to be able to install the app in a subfolder
+$base_url = parse_url(BASE_HTML_URL)['path'];
+$base_url = rtrim($base_url, '/');
+
+if (substr($_SERVER['REQUEST_URI'], 0, strlen($base_url)) == $base_url) {
+    $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], strlen($base_url));
+}
+unset($base_url);
+
 $url  = parse_url($_SERVER['REQUEST_URI']);
 $file = pathinfo($url['path']);
 
@@ -23,12 +35,12 @@ if ($url['path'] != '/') {
 }
 
 // Include all valid urls here
-require_once __DIR__ . '/urls.php';
+require_once INC . 'urls.php';
 
 // We start pessimistic, the url asked is not valid
 $match = false;
 
-// Perfect match between requested url and a staticpage we provide
+// Perfect match between requested url and a static page we provide
 if (in_array($url['path'], array_keys($urls))) {
     $match = true;
 }
@@ -48,9 +60,15 @@ $temp_url = parse_url($_SERVER['REQUEST_URI']);
 
 if (substr($temp_url['path'], -1) != '/') {
     unset($temp_url);
-    header('Location:/' . $url['path'] . '/');
+    header(
+        'Location:'
+        . BASE_HTML_URL
+        . $url['path']
+        . '/'
+        . (isset($url['query']) ? '?' . $url['query'] : '')
+    );
     exit;
 }
 
-// We can now initialize the application and dispatch urls
-require_once __DIR__ . '/init.php';
+// Dispatch urls, the dispatcher will call the right controller
+require_once INC . 'dispatcher.php';

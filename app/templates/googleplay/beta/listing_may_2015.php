@@ -1,5 +1,5 @@
 <?php
-namespace Play;
+namespace Stores;
 
 // Include closure needed in template
 include INC . 'utilities.php';
@@ -151,5 +151,5 @@ $short_desc = function ($translate) use ($_) {
 };
 
 $app_title = function ($translate) use ($_) {
-    return $_('Firefox for Android');
+    return $_('Firefox Beta for Android');
 };

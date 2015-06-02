@@ -3,8 +3,8 @@
   RewriteEngine On
   RewriteBase /
 
-  # existing files and folders are not redirected
+  # Existing files and folders are not redirected
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule (.*) /index.php [L,QSA]
+  RewriteRule (.*) index.php [L,QSA]
 </IfModule>

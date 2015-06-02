@@ -1,26 +1,45 @@
 <?php
-namespace Play;
+namespace Stores;
+
+use Langchecker\Utils;
 
 $template = true;
 
 switch ($url['path']) {
     case '/':
-        $controller = 'main_controller';
-        $show_title = false;
+        $controller = 'home';
         break;
 
-    case Strings::StartsWith($url['path'], 'api'):
+    case 'api/documentation':
+        $controller = 'api_doc';
+        break;
+
+    case Utils::StartsWith($url['path'], 'api'):
         $controller = 'api';
         $template = false;
         break;
 
-    case Strings::StartsWith($url['path'], 'locale'):
+    case Utils::StartsWith($url['path'], 'locale'):
         $controller = 'locale';
         break;
 
     default:
-        $controller = 'main_controller';
+        $controller = 'home';
         break;
 }
 
-include CONTROLLERS . $controller . '.php';
+if ($template) {
+    ob_start();
+    include CONTROLLERS . $controller . '_controller.php';
+    $content = ob_get_contents();
+    ob_end_clean();
+
+    // display the page
+    require_once TEMPLATES . 'html.php';
+} else {
+    include CONTROLLERS . $controller . '_controller.php';
+}
+
+// Log script performance in PHP integrated developement server console
+// Utils::logScriptPerformances();
+

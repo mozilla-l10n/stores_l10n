@@ -1,5 +1,5 @@
 <?php
-namespace Play;
+namespace Stores;
 
 // Make sure we have a timezone set
 date_default_timezone_set('Europe/Paris');
@@ -13,7 +13,5 @@ require_once __DIR__ . '/../settings/constants.php';
 // Autoloading of classes (both /vendor and /classes)
 require_once INSTALL . 'vendor/autoload.php';
 
-// Load all global variables for the application
-require_once APP . 'settings/config.php';
-
-require_once __DIR__ . '/../controllers/main_controller.php';
+// Initalize a Project object that contains key information
+$project = new Project;

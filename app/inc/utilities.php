@@ -1,5 +1,5 @@
 <?php
-namespace Play;
+namespace Stores;
 
 // Closure to use in the template
 $_ = function ($string, $replacements = false) use ($translate, $view) {

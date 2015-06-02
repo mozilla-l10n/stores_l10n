@@ -1,56 +1,96 @@
 <?php
 namespace Langchecker;
 
-/*
+/**
  * Utils class
  *
  * Utility functions like string management.
+ *
  *
  * @package Langchecker
  */
 class Utils
 {
-    /*
+    /**
      * Remove a substring from the left of a string, return the trimmed result
      *
-     * @param   string  $origin     Original string
-     * @param   string  $substring  Substring to remove
-     * @return  string              Resulting string
+     * @param string $origin    Original string
+     * @param string $substring Substring to remove
+     *
+     * @return string Resulting string
      */
     public static function leftStrip($origin, $substring)
     {
-        return trim(substr($origin, strlen($substring)));
+        // Lang file common cases: reference string or comment
+        if ($substring === ';' || $substring === '#') {
+            return trim(mb_substr($origin, 1));
+        }
+
+        return trim(mb_substr($origin, mb_strlen($substring)));
     }
 
-    /*
+    /**
      * Return a string without extra tags like {ok}
      *
-     * @param   string  $origin  Original string
-     * @return  string           String cleaned from extra-tags
+     * @param string $origin Original string
+     *
+     * @return string String cleaned from extra-tags
      */
     public static function cleanString($origin)
     {
         return trim(str_ireplace('{ok}', '', $origin));
     }
 
-    /*
-     * Check if $haystack starts with the $needle string
+    /**
+     * Check if $haystack starts with a string in $needles.
+     * $needles can be a string or an array of strings.
      *
-     * @param   string   $haystack  Full string
-     * @param   string   $needle    Substring to search
-     * @return  boolean             True is string starts with $needle
+     * @param string $haystack String to analyse
+     * @param array  $needles  The strings to look for
+     *
+     * @return boolean True       if the $haystack string starts with a
+     *                 string in $needles
      */
-    public static function startsWith($haystack, $needle)
+    public static function startsWith($haystack, $needles)
     {
-        return ! strncmp($haystack, $needle, strlen($needle));
+        // Lang file common case: reference string
+        if ($needles === ';') {
+            return $haystack[0] == ';';
+        }
+
+        // Lang file common case: comment
+        if ($needles === '#') {
+            return $haystack[0] == '#';
+        }
+
+        foreach ((array) $needles as $needle) {
+            if (mb_strpos($haystack, $needle, 0) === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    /*
+    /**
+     * Get multibyte UTF-8 string length, html tags stripped
+     *
+     * @param string $str A multibyte string
+     *
+     * @return int The length of the string after removing all html
+     */
+    public static function getLength($str)
+    {
+        return mb_strlen(strip_tags($str), 'UTF-8');
+    }
+
+    /**
      * Function sanitizing a string or an array of strings.
      *
-     * @param   array         $origin    String to sanitize
-     * @param   boolean       $isarray   If $origin must be treated as array
-     * @return  string/array             Sanitized string or array
+     * @param mixed   $origin  String/Array of strings to sanitize
+     * @param boolean $isarray If $origin must be treated as array
+     *
+     * @return mixed Sanitized string or array
      */
     public static function secureText($origin, $isarray = true)
     {
@@ -83,11 +123,12 @@ class Utils
         return ($isarray == true) ? $sanitized : $sanitized[0];
     }
 
-    /*
+    /**
      * Highlight Python variables in string
      *
-     * @param   array   $origin  Original string
-     * @return  string           String withon Python variables marked with <em>
+     * @param array $origin Original string
+     *
+     * @return string String withon Python variables marked with <em>
      */
     public static function highlightPythonVar($origin)
     {
@@ -101,28 +142,35 @@ class Utils
         return $origin;
     }
 
-    /*
+    /**
      * Return false if file is not in UTF-8 or US-Ascii format
      *
-     * @param   string   $filename  File to analyze
-     * @return  boolean             False if file is in the wrong encoding
+     * @param string $filename File to analyze
+     *
+     * @return boolean False if file is in the wrong encoding
      */
     public static function isUTF8($filename)
     {
-        $info = finfo_open(FILEINFO_MIME_ENCODING);
-        $type = finfo_buffer($info, file_get_contents($filename));
-        finfo_close($info);
+        $magic = '/usr/share/file/magic';
+        $magic = file_exists($magic)
+            ? $magic
+            : null;
+
+        $f = new \finfo(FILEINFO_MIME_ENCODING, $magic);
+        $type = $f->file($filename);
 
         return ($type == 'utf-8' || $type == 'us-ascii') ? true : false;
     }
 
-    /*
+    /**
      * Return
      *
-     * @param   string $filename  File to analyze
-     * @return  int               Timestamp of last commit from SVN, or local if that fails
+     * @param string $filename File to analyze
+     *
+     * @return int Timestamp of last commit from SVN,
+     *             or local if that fails
      */
-    public function getSVNCommitTimestamp($filename)
+    public static function getSVNCommitTimestamp($filename)
     {
         exec("svn info --xml {$filename} 2>/dev/null", $output, $return_code);
 
@@ -136,11 +184,11 @@ class Utils
         return $date->getTimestamp();
     }
 
-    /*
+    /**
      * Print error, quit application if requested
      *
-     * @param  string  $message  Message to display
-     * @param  string  $action   If 'quit', leave the app
+     * @param string $message Message to display
+     * @param string $action  If 'quit', leave the app
      */
     public static function logger($message, $action = '')
     {
@@ -150,11 +198,12 @@ class Utils
         }
     }
 
-    /*
+    /**
      * Check type of EOL used in the file
      *
-     * @param   string  $line  First line of the file
-     * @return  string         End of line characters, default Unix "\n"
+     * @param string $line First line of the file
+     *
+     * @return string End of line characters, default Unix "\n"
      */
     public static function checkEOL($line)
     {
@@ -165,11 +214,11 @@ class Utils
         return "\n";
     }
 
-    /*
+    /**
      * Save file in path, create folders if necessary
      *
-     * @param  string  $path     File path
-     * @param  string  $content  File content
+     * @param string $path    File path
+     * @param string $content File content
      */
     public static function fileForceContent($path, $content)
     {
@@ -186,12 +235,13 @@ class Utils
         file_put_contents("{$dir}/{$file}", $content);
     }
 
-    /*
+    /**
      * Read GET parameter if set, or fallback
      *
-     * @param   string  $param     GET parameter to check
-     * @param   string  $fallback  Optional fallback value
-     * @return  string             Parameter value, or fallback
+     * @param string $param    GET parameter to check
+     * @param string $fallback Optional fallback value
+     *
+     * @return string Parameter value, or fallback
      */
     public static function getQueryParam($param, $fallback = '')
     {
@@ -204,13 +254,14 @@ class Utils
         return $fallback;
     }
 
-    /*
+    /**
      * Read CLI parameter if set, or fallback
      *
-     * @param   integer  $paramnum  Argument number
-     * @param   array    $options   Array of parameters
-     * @param   string   $fallback  Optional fallback value
-     * @return  string              Parameter value, or fallback
+     * @param integer $paramnum Argument number
+     * @param array   $options  Array of parameters
+     * @param string  $fallback Optional fallback value
+     *
+     * @return string Parameter value, or fallback
      */
     public static function getCliParam($paramnum, $options, $fallback = '')
     {

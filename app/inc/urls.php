@@ -1,7 +1,8 @@
 <?php
 
 $urls = [
-    '/'      => 'root',
-    'locale' => 'locale',
-    'api'    => 'api',
+    '/'                 => 'root',
+    'locale'            => 'locale',
+    'api'               => 'api',
+    'api/documentation' => 'documentation',
 ];

@@ -1,13 +1,27 @@
 {
     "autoload": {
-        "psr-0": {
-            "Play": "app/classes/",
+            "psr-0": {
+            "Stores": "app/classes/",
             "Transvision": "app/classes/",
             "Langchecker": "app/classes/"
         },
         "files": ["app/helpers/debug.php"]
     },
+
+    "config": {
+        "component-dir": "web/media/assets"
+    },
+
     "require": {
-        "symfony/var-dumper": "~2.6"
+        "monolog/monolog" : "~1.1",
+        "components/jquery": "~1.1",
+        "components/bootstrap": "~3.3",
+        "components/bootstrap-default": "~3.2"
+    },
+
+    "require-dev": {
+        "atoum/atoum" : "~1.1",
+        "symfony/var-dumper": "~2.6",
+        "fabpot/php-cs-fixer": "~1.4"
     }
 }
