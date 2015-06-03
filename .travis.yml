@@ -5,7 +5,7 @@ php:
 before_script:
   ## Composer
   - composer self-update
-  - composer install --no-interaction --dev
+  - composer install --no-interaction --prefer-source
 script:
   - vendor/atoum/atoum/bin/atoum -d tests/units/
   - vendor/bin/php-cs-fixer --diff --dry-run -v fix
