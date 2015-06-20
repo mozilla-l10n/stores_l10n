@@ -11,7 +11,7 @@ $response = new Json;
 if ($request->isValidRequest()) {
     include MODELS . 'api_model.php';
 } else {
-    $json = $response->output($request->invalidAPICall(), false, true);
+    $json = $response->output($request->invalidAPICall());
 }
 
 include VIEWS . 'json_view.php';

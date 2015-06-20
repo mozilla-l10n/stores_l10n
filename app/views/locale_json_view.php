@@ -1,4 +1,4 @@
 <?php
 namespace Stores;
 
-print \Transvision\Json::output($json, false, true);
+print \Transvision\Json::output($json);

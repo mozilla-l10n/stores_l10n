@@ -1,4 +1,4 @@
 <?php
 namespace Stores;
 
-print \Transvision\Json::output($locales, false, true);
+print \Transvision\Json::output($locales);

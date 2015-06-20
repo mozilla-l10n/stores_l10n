@@ -49,4 +49,4 @@ switch ($request->getService()) {
         break;
 }
 
-$json = $response->output($json, false, true);
+$json = $response->output($json);
