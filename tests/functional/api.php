@@ -16,8 +16,12 @@ exec('php -S localhost:8082 -t web/ > /dev/null 2>&1 & echo $!', $output);
 // We will need the pid to kill it, beware, this is the pid of the bash process started with start.sh
 $pid = $output[0];
 
-// Pause to let time for the dev server to launch in the background
-sleep(1);
+// Pause to let time for the dev server to launch in the background, also, Travis is slower
+if (! getenv('TRAVIS')) {
+    sleep(1);
+} else {
+    sleep(4);
+}
 
 $paths = [
     ['', 400, '{"error":"No service requested"}'],
@@ -55,11 +59,8 @@ $obj
     ->setPath('google/translation/release/ja/')
     ->hasKeys(['title', 'short_desc', 'long_desc']);
 
-
-
 $obj->report();
 
 // Kill PHP dev server by killing all children processes of the bash process we opened in the background
 exec('kill ' . $pid);
 die($obj->returnStatus());
-
