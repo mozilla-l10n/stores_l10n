@@ -10,7 +10,7 @@ Installation
 ================
 1. Clone the repo
 2. install dependencies with ```composer install --no-dev```
-3. Checkout the translations in a ```locales``` folder  at the root of the cloned repo (```svn co https://svn.mozilla.org/projects/l10n-misc/trunk/googleplay locales```)
+3. Clone the translations repo in a ```locales``` folder at the root of the cloned repo (```git clone https://github.com/mozilla-l10n/appstores/ locales```)
 4. Point a virtual host to the ```web``` directory
 5. copy web/.htaccess-dist to web/.htaccess and change the path of RewriteBase if you installed in a subfolder
 6. Set up a cron job to update the svn repository every 15mn
