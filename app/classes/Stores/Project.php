@@ -92,25 +92,57 @@ class Project
         'zu'     => 'zu',
     ];
 
-    // This is a stub, couldn't find yet an official list of locales for Apple appstore
+    // Not exactly official, but this is the tool we use for our automation:
+    // https://github.com/KrauseFx/deliver#available-language-codes
     private $apple_locales_mapping = [
-        'af'     => 'af',
-        'ar'     => 'ar',
+        'da'      => 'da',
+        'de-DE'   => 'de',
+        'el'      => 'el',
+        'en-AU'   => 'en-GB',
+        'en-CA'   => 'en-US',
+        'en-GB'   => 'en-GB',
+        'en-US'   => 'en-US',
+        'es-ES'   => 'es-ES',
+        'es-MX'   => 'es-MX',
+        'fi'      => 'fi',
+        'fr-CA'   => 'fr',
+        'fr-FR'   => 'fr',
+        'id'      => 'id',
+        'it'      => 'it',
+        'ja'      => 'ja',
+        'ko'      => 'ko',
+        'ms'      => 'ms',
+        'nl'      => 'nl',
+        'no'      => 'nb-NO',
+        'pt-BR'   => 'pt-BR',
+        'pt-PT'   => 'pt-PT',
+        'ru'      => 'ru',
+        'sv'      => 'sv-SE',
+        'th'      => 'th',
+        'tr'      => 'tr',
+        'vi'      => 'vi',
+        'zh-Hans' => 'zh-CN',
+        'zh-Hant' => 'zh-TW',
     ];
 
     public $templates = [
         'google' => [
             // channel => path to template file
             'release' => [
-                'template' => 'googleplay/release/listing_nov_2014.php',
+                'template' => 'google/release/listing_nov_2014.php',
                 'langfile' => 'description_page.lang',
                 ],
             'beta' => [
-                'template' => 'googleplay/beta/listing_may_2015.php',
+                'template' => 'google/beta/listing_may_2015.php',
                 'langfile' => 'description_beta_page.lang',
                 ],
         ],
         'apple' => [
+            // channel => path to template file
+            'release' => [
+                'template' => 'apple/release/listing_sept_2015.php',
+                'langfile' => 'apple_description_release.lang',
+                ],
         ],
     ];
 
@@ -203,6 +235,28 @@ class Project
             $locales,
             array_values(array_filter($this->apple_locales_mapping))
         );
+    }
+
+    /**
+     * Get Common Locales supported by the store and Mozilla
+     * @param  string $store   Name of the store, ex: google, apple
+     * @param  string $channel Name of the channel, can be release or beta
+     * @return Mixed  Array of locales of False if the call is incorrect
+     */
+    public function getStoreMozillaCommonLocales($store, $channel)
+    {
+        if ($store == 'google') {
+            if (in_array($channel, ['beta', 'release'])) {
+                return $this->getGoogleMozillaCommonLocales($channel);
+            }
+        }
+        if ($store == 'apple') {
+            if (in_array($channel, ['release'])) {
+                return $this->getAppleMozillaCommonLocales($channel);
+            }
+        }
+
+        return false;
     }
 
     /**

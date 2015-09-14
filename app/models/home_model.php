@@ -26,6 +26,11 @@ $status['google']['beta'] = $get_status(
     $project->getGoogleMozillaCommonLocales('beta')
 );
 
+$status['apple']['release'] = $get_status(
+    $project->getLangFile('apple', 'release'),
+    $project->getAppleMozillaCommonLocales('release')
+);
+
 $html_table = function ($table_id, $table_title, $store, $channel) use ($status, $project) {
     ob_start();
     ?>
@@ -40,7 +45,7 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
             <th class="text-center">Description Raw HTML</th>
             <th class="text-center">Description Json</th>
         </tr>
-        <?php foreach ($project->getGoogleMozillaCommonLocales($channel) as $lang): ?>
+        <?php foreach ($project->getStoreMozillaCommonLocales($store, $channel) as $lang): ?>
         <tr class="text-center">
             <th><?=$lang?></th>
             <?php
@@ -79,4 +84,11 @@ $stores['play']['beta'] = $html_table(
     'Google Play <big class="text-danger">Beta</big> Channel',
     'google',
     'beta'
+);
+
+$stores['appstore']['release'] = $html_table(
+    'app_store_release_table',
+    'Apple AppStore <big class="text-danger">Release</big> Channel',
+    'apple',
+    'release'
 );

@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="media/assets/bootstrap/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="media/assets/bootstrap/css/bootstrap-theme.min.css">
+    <!-- App specific styles -->
+    <link rel="stylesheet" href="media/css/extra.css">
 </head>
 
 <body role="document">

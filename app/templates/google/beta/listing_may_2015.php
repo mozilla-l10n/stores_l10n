@@ -21,7 +21,6 @@ $description = function ($translate) use ($_) {
 {$_('Want to know more about the permissions Firefox requests? {{permission_link}}', $replacements)}
 {$_('See our list of supported devices and latest minimum system requirements at https://www.mozilla.org/en-US/firefox/mobile/platforms/.')}
 
-
 <b>{$_('ABOUT MOZILLA')}</b>
 
 {$_("Mozilla is a proudly non-profit organization dedicated to keeping the power of the Web in people's hands.")}
