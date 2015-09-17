@@ -36,5 +36,5 @@ $short_desc = function ($translate) use ($_) {
 };
 
 $app_title = function ($translate) use ($_) {
-    return $_('Firefox Beta for Android');
+    return $_('Firefox for Android Beta');
 };
