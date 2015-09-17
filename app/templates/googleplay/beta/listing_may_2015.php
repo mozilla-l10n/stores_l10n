@@ -32,7 +32,7 @@ OUT;
 };
 
 $short_desc = function ($translate) use ($_) {
-    return $_('We make it Firefox. You make it your own.');
+    return $_('Get the official free Firefox Beta browser and give your feedback!');
 };
 
 $app_title = function ($translate) use ($_) {
