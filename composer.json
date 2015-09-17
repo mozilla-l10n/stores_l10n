@@ -23,7 +23,8 @@
         "monolog/monolog" : "~1.1",
         "components/jquery": "~1.1",
         "components/bootstrap": "~3.3",
-        "components/bootstrap-default": "~3.2"
+        "components/bootstrap-default": "~3.2",
+        "robloach/component-installer": "*"
     },
 
     "require-dev": {

@@ -31,7 +31,7 @@ class DotLangParser
      *
      * @var boolean
      */
-    public static $log_errors = true;
+    public static $log_errors = false;
 
     /**
      * Load file, remove empty lines and return an array of strings

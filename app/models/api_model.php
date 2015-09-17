@@ -30,16 +30,35 @@ switch ($request->getService()) {
         break;
     case 'done':
         $done = [];
+        $view = 'api';
 
         foreach ($project->getFirefoxLocales($request->query['store'], $request->query['channel']) as $lang) {
-            $obj = new Translate($lang, $project->getLangFile($request->query['store'], $request->query['channel']));
-            if ($obj->isFileTranslated()) {
-                $done[] = $lang;
+            $translate = new Translate($lang, $project->getLangFile($request->query['store'], $request->query['channel']));
+            $translate::$log_errors = false;
+            if ($translate->isFileTranslated()) {
+                // The Google Store has string lengths constraints
+                if ($request->query['store'] == 'google') {
+                    $set_limit = function ($limit, $string) {
+                        return mb_strlen(trim(strip_tags($string))) <= $limit;
+                    };
+
+                    // Include the current template
+                    require TEMPLATES . $project->getTemplate('google', $request->query['channel']);
+
+                    $desc       = $set_limit(4000, $description($translate));
+                    $title      = $set_limit(30, $app_title($translate));
+                    $short_desc = $set_limit(80, $short_desc($translate));
+
+                    if ($desc && $title && $short_desc) {
+                        $done[] = $lang;
+                    }
+                } else {
+                    $done[] = $lang;
+                }
             }
         }
 
         $supported = array_unique(array_values($project->getLocalesMapping($request->query['store'])));
-
         $json = array_values(array_intersect($done, $supported));
 
         break;
