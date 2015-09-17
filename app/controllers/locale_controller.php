@@ -62,9 +62,9 @@ switch ($request['output']) {
         $template = 'html.php';
         break;
     default:
-        $view = 'locale';
+        $view  = 'locale';
         break;
 }
 
 include MODELS . 'locale_model.php';
-include VIEWS . $view . '_view.php';
+include VIEWS . $request['store'] . '/' . $request['channel'] . '/' . $view . '_view.php';
