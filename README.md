@@ -13,4 +13,4 @@ Installation
 3. Clone the translations repo in a ```locales``` folder at the root of the cloned repo (```git clone https://github.com/mozilla-l10n/appstores/ locales```)
 4. Point a virtual host to the ```web``` directory
 5. copy web/.htaccess-dist to web/.htaccess and change the path of RewriteBase if you installed in a subfolder
-6. Set up a cron job to update the svn repository every 15mn
+6. Set up a cron job to update the ```locales``` sub-repository every 15mn

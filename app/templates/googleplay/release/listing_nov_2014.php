@@ -96,7 +96,7 @@ $description = function ($translate) use ($_) {
 {$_('Experience the unlimited possibilities of the Internet on mobile with support for HTML5 and Web APIs.')}
 
 <b>• {$_('Mobile Video:')}</b>
-{$_('Firefox for Android has mobile video support for a wide range of video formats, including h.264.')}
+{$_('Firefox for Android has mobile video support for a wide range of video formats, including H.264.')}
 
 <b>• {$_('Security:')}</b>
 {$_('Keep your browsing safe and private. Control your privacy, security and how much data you share on the Web.')}
