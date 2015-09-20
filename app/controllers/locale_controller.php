@@ -46,7 +46,7 @@ if (! in_array($request['locale'], $locales)) {
     die('Not a locale code supported by Firefox');
 }
 
-$title = "Store Description for: {$request['locale']}";
+$title = ucfirst($request['store']) . " Store Description, {$request['channel']} channel, for: {$request['locale']}";
 
 if (! isset($request['output'])) {
     $request['output'] = 'show';

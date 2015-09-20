@@ -16,15 +16,21 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h3 class="text-primary">{store}/storelocales/</h3>
 <h4>Description:</h4>
 <p>This call will list all the locales that the store supports.</p>
-<h4>Example:</h4>
-<p>List of Google Play locale codes: <?=$base?><a href="api/google/storelocales/">google/storelocales/</a></p>
+<h4>Examples:</h4>
+<ul>
+    <li>List of Google Play locale codes: <?=$base?><a href="api/google/storelocales/">google/storelocales/</a></li>
+    <li>List of AppStore locale codes: <?=$base?><a href="api/apple/storelocales/">apple/storelocales/</a></li>
+</ul>
 
 
 <h3 class="text-primary">{store}/localesmapping/</h3>
 <h4>Description:</h4>
 <p>Lists the mapping of locale codes between the store and Mozilla locale codes</p>
-<h4>Example:</h4>
-<p>Locale mapping for Google Play: <?=$base?><a href="api/google/localesmapping/">google/localesmapping/</a></p>
+<h4>Examples:</h4>
+<ul>
+    <li>Locale mapping for Google Play: <?=$base?><a href="api/google/localesmapping/">google/localesmapping/</a></li>
+    <li>Locale mapping for AppStore: <?=$base?><a href="api/apple/localesmapping/">apple/localesmapping/</a></li>
+</ul>
 <h4>Notes:</h4>
 <ul>
     <li><code>False</code>: not a locale supported by Mozilla.</li>
@@ -39,21 +45,45 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 
 <h3 class="text-primary">{store}/done/{channel}/</h3>
 <h4>Description:</h4>
-<p>List all the locales for which the store description page is fully translated for a channel</p>
+<p>List all the locales for which the store description page is fully translated for a channel. A locale is listed as done if the translation is complete and there are no strings longer than the store limits.</p>
 <h4>Example:</h4>
-<p>All Firefox for Android description listings ready for the release channel: <?=$base?><a href="api/google/done/release/">google/done/release/</a></p>
+<ul>
+    <li>All Firefox for Android description listings ready for the beta channel: <?=$base?><a href="api/google/done/release/">google/done/release/</a></li>
+    <li>All Firefox for iOs description listings ready for the release channel: <?=$base?><a href="api/apple/done/release/">apple/done/release/</a></li>
+</ul>
 
 <h3 class="text-primary">{store}/translation/{channel}/{locale}/</h3>
 <h4>Description:</h4>
 <p>Return the translation for a page listing for the store and channel selected.</p>
-<h4>Example:</h4>
+<h4>Examples:</h4>
 <p>Translation of the Google Play listing for Japanese, release channel: <?=$base?><a href="api/google/translation/release/ja/">/google/translation/release/ja/</a></p>
-<h4>Output:</h4>
+<h4>Output for Google Play:</h4>
 <p>
 <pre><code class="json">{
     "title": "Blabla",
     "short_desc": "Blabla",
-    "long_desc": "blabla"
+    "long_desc": "Blabla"
+}</code></pre>
+</p>
+
+<p>Translation of the Apple AppStore listing for French: <?=$base?><a href="api/apple/translation/release/fr/">/google/translation/release/fr/</a></p>
+<h4>Output for Apple AppsStore:</h4>
+<p>
+<pre><code class="json">{
+    "title": "Blabla",
+    "description": "Blabla",
+    "keywords": "Blabla",
+    "screenshots": [
+        {
+            "title": "Title for screenshot 1",
+            "text": "Text for \nscreenshot 1,\n note the line breaks"
+
+        },
+        {
+            "title": "Title for screenshot 2",
+            "text": "Text for \nscreenshot 2,\n note the line breaks"
+        }
+    ]
 }</code></pre>
 </p>
 <h2 class="bg-primary">&nbsp;NOTES</h2>
@@ -63,6 +93,5 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
     "error": "Explanation of the error"
 }</code></pre>
     </li>
-    <li>Altough the app technically does support Apple AppStore, this is not enabled yet since we haven't yet shipped for this platform and we don't know yet this Store technical constraints.</li>
     <li>If you find a bug or would like an improvement to the API, please <a href="https://github.com/mozilla-l10n/stores_l10n/issues">file an issue on Github</a>.</li>
 </ol>

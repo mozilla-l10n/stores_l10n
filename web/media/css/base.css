@@ -416,6 +416,7 @@ h3 {
 
 pre {
     margin: 0;
+    white-space: pre-wrap;
 }
 
 dt {

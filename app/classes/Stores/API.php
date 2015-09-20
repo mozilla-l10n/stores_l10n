@@ -24,7 +24,7 @@ class API
     public $extra_parameters;
 
     public $channels = [
-        'apple'  => false,
+        'apple'  => ['release'],
         'google' => ['release', 'beta'],
     ];
 

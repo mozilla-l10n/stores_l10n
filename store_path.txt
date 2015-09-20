@@ -8,7 +8,7 @@ reminder: this is the common set of includes for a page load
     -> vendor/autoload.php
     -> app/config/settings/config.php
 -> app/inc/dispatcher.php
-    -> app/inc/controller/{page}_controller.php
+    -> app/controller/{page}_controller.php
         -> app/models/{page}_model.php
         -> app/views/{page}_view.php
 -> app/templates/html.php

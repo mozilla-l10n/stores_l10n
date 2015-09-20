@@ -5,7 +5,10 @@
             "Transvision": "app/classes/",
             "Langchecker": "app/classes/"
         },
-        "files": ["app/helpers/debug.php"]
+        "files": [
+            "app/helpers/debug.php",
+            "app/helpers/utilities.php"
+        ]
     },
 
     "config": {

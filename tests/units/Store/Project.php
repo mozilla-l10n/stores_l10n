@@ -29,14 +29,14 @@ class Project extends atoum\test
         $obj = new _Project();
         $this
             ->array($obj->getAppleStoreLocales(true))
-                ->hasKey('af')
-                ->contains('af')
-                ->hassize(2)
+                ->hasKey('zh-Hans')
+                ->contains('zh-CN')
+                ->hassize(28)
             ;
         $this
             ->array($obj->getAppleStoreLocales(false))
-                ->contains('af')
-                ->hassize(2)
+                ->contains('fr-CA')
+                ->hassize(28)
             ;
     }
 
@@ -57,6 +57,28 @@ class Project extends atoum\test
         $obj = new _Project();
         $this
             ->array($obj->getAppleMozillaCommonLocales('release'))
+            ;
+    }
+
+    public function testGetStoreMozillaCommonLocales()
+    {
+        $obj = new _Project();
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
+            ;
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('google', 'beta'))
+            ;
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'))
+            ;
+        $this
+            ->boolean($obj->getStoreMozillaCommonLocales('apple', 'beta'))
+                ->isFalse()
+            ;
+        $this
+            ->boolean($obj->getStoreMozillaCommonLocales('FAKE_STORE', 'beta'))
+                ->isFalse()
             ;
     }
 
