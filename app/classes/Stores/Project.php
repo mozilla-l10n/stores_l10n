@@ -27,8 +27,11 @@ class Project
 
     // source: https://l10n.mozilla-community.org/~flod/webstatus/api/?product=firefox-ios
     // translations are at: http://svn.mozilla.org/projects/l10n-misc/trunk/firefox-ios/
+    // For iOS we used the locale code es for Spanish from Spain, that was a mistake, this is
+    // why I changed it to es-ES in the array below, otherwise the Spanish team would have
+    // to work in the es-ES folder for Android and the es folder for iOS
     private $ios_locales_release = [
-        'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'es',
+        'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'es-ES',
         'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'hsb', 'id', 'is', 'it',
         'ja', 'ko', 'lt', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'ru',
         'sk', 'sl', 'son', 'sv-SE', 'templates', 'tr', 'uk', 'uz', 'zh-CN',
