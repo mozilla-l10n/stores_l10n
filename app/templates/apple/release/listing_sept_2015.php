@@ -80,7 +80,7 @@ OUT;
 };
 
 $keywords = function ($translate) use ($_) {
-    return $_('internet,safari,chrome,opera,explorer,search,adblock,flash,browse,browsing,incognito,private,browse');
+    return $_('internet,safari,chrome,opera,explorer,search,adblock,flash,browser,browsing,incognito,private,browse');
 };
 
 $other = function ($translate) use ($_) {
