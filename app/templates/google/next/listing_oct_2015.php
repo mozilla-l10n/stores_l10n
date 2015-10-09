@@ -15,15 +15,7 @@ $app_title2 = function ($translate) use ($_) {
 $screenshots = function ($translate) use ($_) {
     return <<<OUT
 <b>{$_('Fast. Smart. Yours')}</b>
-{$_('Upgrade to the power of Firefox and<br>join hundreds of millions of<br>Firefox users on desktop and mobile.')}
-
-<b>{$_('Fast. Smart. Yours')}</b>
-{$_('Upgrade to the power of Firefox and<br>join hundreds of millions of Firefox users')}
-
-<b>{$_('Fast. Smart. Yours')}</b>
 {$_('Upgrade to Firefox and join<br>hundreds of millions of Firefox users')}
-
-{$_('Announcing<br>Firefox for iOS<br>Download now!')}
 
 <b>{$_('Intuitive visual tab design')}</b>
 {$_('Quickly find and manage<br>your open browser tabs')}
@@ -34,7 +26,17 @@ $screenshots = function ($translate) use ($_) {
 <b>{$_('Seamless browsing <br>with Sync')}</b>
 {$_('Instantly access your bookmarks, <br>history, open tabs and passwords <br>everywhere you use Firefox')}
 
-<b>{$_('Private Browsing')}</b>
-{$_('Make specific tabs private and browse<br>the Web without your history being saved')}
+<b>{$_('Next level privacy')}</b>
+{$_('Private Browsing with Tracking <br>Protection blocks parts of Web <br>pages that may track your browsing activity')}
+
+<b>{$_('Add-ons for everything')}</b>
+{$_('Personalize your Web browser with <br>add-ons like ad blockers, password <br>and download managers and more.')}
+
+<b>{$_('Quick Share')}</b>
+{$_('Firefox remembers your recently <br>used apps to help you get the <br>word out the way you want')}
+
+<b>{$_('Send to device')}</b>
+{$_('Send video and Web content from <br>your smartphone or tablet <br>to any supported device')}
+
 OUT;
 };
