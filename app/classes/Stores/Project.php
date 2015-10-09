@@ -24,8 +24,8 @@ class Project
     ];
 
     private $android_locales_marketing = [
-        'de', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR',
-        'ru', 'tr', 'zh-CN',
+        'de', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pt-BR',
+        'ru', 'zh-CN',
     ];
 
     private $android_locales_aurora = [];
