@@ -1,5 +1,7 @@
 <h1>Apple Store Listing Copy</h1>
-<h2 contenteditable="true"><?= htmlspecialchars($app_title($translate)) ?></h2>
+<h3>Title</h3>
+<pre contenteditable="true"><?= htmlspecialchars($app_title($translate)) ?></pre>
+
 <h3>Description</h3>
 <pre contenteditable="true"><?= strip_tags($description($translate)) ?></pre>
 

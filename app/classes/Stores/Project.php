@@ -22,7 +22,14 @@ class Project
         'pl', 'pt-BR', 'pt-PT', 'ro', 'ru', 'sq', 'sk', 'sl',
         'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW',
     ];
+
+    private $android_locales_marketing = [
+        'de', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR',
+        'ru', 'tr', 'zh-CN',
+    ];
+
     private $android_locales_aurora = [];
+
     private $android_locales_beta = [];
 
     // source: https://l10n.mozilla-community.org/~flod/webstatus/api/?product=firefox-ios
@@ -139,6 +146,10 @@ class Project
                 'template' => 'google/beta/listing_may_2015.php',
                 'langfile' => 'description_beta_page.lang',
                 ],
+            'next' => [
+                'template' => 'google/next/listing_oct_2015.php',
+                'langfile' => ['description_page.lang', 'apple_description_release.lang'],
+                ],
         ],
         'apple' => [
             // channel => path to template file
@@ -152,10 +163,10 @@ class Project
     public function __construct()
     {
         // As of 2015-06-01, android and ios channels have exactly the same locales list
-        $this->android_locales_aurora = $this->android_locales_release;
-        $this->android_locales_beta   = $this->android_locales_release;
-        $this->ios_locales_aurora     = $this->ios_locales_release;
-        $this->ios_locales_beta       = $this->ios_locales_release;
+        $this->android_locales_aurora    = $this->android_locales_release;
+        $this->android_locales_beta      = $this->android_locales_release;
+        $this->ios_locales_aurora        = $this->ios_locales_release;
+        $this->ios_locales_beta          = $this->ios_locales_release;
     }
 
     /**
@@ -200,6 +211,9 @@ class Project
                 break;
             case 'beta':
                 $locales = $this->android_locales_beta;
+                break;
+            case 'next':
+                $locales = $this->android_locales_marketing;
                 break;
             case 'release':
             default:
@@ -249,7 +263,7 @@ class Project
     public function getStoreMozillaCommonLocales($store, $channel)
     {
         if ($store == 'google') {
-            if (in_array($channel, ['beta', 'release'])) {
+            if (in_array($channel, ['beta', 'release', 'next'])) {
                 return $this->getGoogleMozillaCommonLocales($channel);
             }
         }
@@ -295,6 +309,8 @@ class Project
                     return $this->android_locales_aurora;
                 case 'beta':
                     return $this->android_locales_beta;
+                case 'next':
+                    return $this->android_locales_marketing;
                 case 'release':
                 default:
                     return $this->android_locales_release;
