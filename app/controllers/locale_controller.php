@@ -17,7 +17,7 @@ if (! in_array($request['store'], ['google', 'apple'])) {
     die('Unknown marketplace provider.');
 }
 
-if (! in_array($request['channel'], ['beta', 'release'])) {
+if (! in_array($request['channel'], ['beta', 'release', 'next'])) {
     die('This Firefox channel is not supported.');
 }
 
@@ -25,6 +25,9 @@ if ($request['store'] == 'google') {
     switch ($request['channel']) {
         case 'beta':
             $locales = $project->getGoogleMozillaCommonLocales('beta');
+            break;
+        case 'next':
+            $locales = $project->getGoogleMozillaCommonLocales('next');
             break;
         case 'release':
         default:

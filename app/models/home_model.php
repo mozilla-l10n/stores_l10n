@@ -26,6 +26,11 @@ $status['google']['beta'] = $get_status(
     $project->getGoogleMozillaCommonLocales('beta')
 );
 
+$status['google']['next'] = $get_status(
+    $project->getLangFile('google', 'next'),
+    $project->getGoogleMozillaCommonLocales('next')
+);
+
 $status['apple']['release'] = $get_status(
     $project->getLangFile('apple', 'release'),
     $project->getAppleMozillaCommonLocales('release')
@@ -40,10 +45,14 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
         </tr>
         <tr>
             <th class="text-center">Locale</th>
+            <?php if ($channel != 'next'): ?>
             <th class="text-center">Completion</th>
+            <?php endif; ?>
             <th class="text-center">General View</th>
+            <?php if ($channel != 'next'): ?>
             <th class="text-center">Description Raw HTML</th>
             <th class="text-center">Description Json</th>
+            <?php endif; ?>
         </tr>
         <?php foreach ($project->getStoreMozillaCommonLocales($store, $channel) as $lang): ?>
         <tr class="text-center">
@@ -55,10 +64,14 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
                 $color = '';
             }
             ?>
+            <?php if ($channel != 'next'): ?>
             <td class='<?=$color?>'></td>
+            <?php endif; ?>
             <td><a href="./locale/<?=$lang?>/<?=$store?>/<?=$channel?>/">Show</a></td>
+            <?php if ($channel != 'next'): ?>
             <td><a href="./locale/<?=$lang?>/<?=$store?>/<?=$channel?>/html">HTML</a></td>
             <td><a href="./api/<?=$store?>/translation/<?=$channel?>/<?=$lang?>/">Json</a></td>
+            <?php endif; ?>
         </tr>
         <?php endforeach; ?>
         </table>
@@ -74,21 +87,28 @@ $stores = [];
 
 $stores['play']['release'] = $html_table(
     'play_release_table',
-    'Google Play <big class="text-danger">Release</big> Channel',
+    'Google Play <span class="text-danger">Release</span> Channel',
     'google',
     'release'
 );
 
 $stores['play']['beta'] = $html_table(
     'play_beta_table',
-    'Google Play <big class="text-danger">Beta</big> Channel',
+    'Google Play <span class="text-danger">Beta</span> Channel',
     'google',
     'beta'
 );
 
+$stores['play']['next'] = $html_table(
+    'play_next_table',
+    'Google Play <span class="text-danger">Next</span> (future release) Channel',
+    'google',
+    'next'
+);
+
 $stores['appstore']['release'] = $html_table(
     'app_store_release_table',
-    'Apple AppStore <big class="text-danger">Release</big> Channel',
+    'Apple AppStore <span class="text-danger">Release</span> Channel',
     'apple',
     'release'
 );

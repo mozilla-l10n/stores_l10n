@@ -1,6 +1,8 @@
 
 <h1>Apple Store Listing Copy</h1>
-<h2><?= $app_title($translate) ?></h2>
+<h3>Title</h3>
+<pre><?= $app_title($translate) ?></pre>
+
 <h3>Description</h3>
 <pre><?= $description($translate) ?></pre>
 

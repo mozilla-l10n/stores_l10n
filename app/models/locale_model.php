@@ -17,14 +17,20 @@ $set_limit = function ($limit, $length) {
 
     return '<strong style="color:red">' . $length . " characters, too long. Limit is {$limit}.</strong>";
 };
+
 // Google Play has lengths constraints, here we detect translations that are too long and insert a warning message
 if ($request['store'] == 'google') {
-    $listing_warning    = $set_limit(4000, $get_length($description($translate)));
-    $title_warning      = $set_limit(30, $get_length($app_title($translate)));
-    $short_desc_warning = $set_limit(80, $get_length($short_desc($translate)));
+    if ($request['channel'] != 'next') {
+        $title_warning      = $set_limit(30, $get_length($app_title($translate)));
+        $listing_warning    = $set_limit(4000, $get_length($description($translate)));
+        $short_desc_warning = $set_limit(80, $get_length($short_desc($translate)));
+    } else {
+        $title_warning1 = $set_limit(30, $get_length($app_title1($translate)));
+        $title_warning2 = $set_limit(30, $get_length($app_title2($translate)));
+    }
 }
 
 // Google Appstore also has lengths constraints
 if ($request['store'] == 'apple') {
-    $keywords_warning    = $set_limit(100, $get_length($keywords($translate)));
+    $keywords_warning = $set_limit(100, $get_length($keywords($translate)));
 }

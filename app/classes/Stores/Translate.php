@@ -19,12 +19,34 @@ class Translate extends Dotlang
     // protected $locale;
     public $repo;
 
-    public function __construct($locale, $file)
+    public function __construct($locale, $files)
     {
         $this->locale = $locale;
         $this->repo   = LOCALES;
-        $this->translations = $this->parseFile($this->repo . $this->locale . '/' . $file);
-        $this->source_strings = array_keys($this->parseFile($this->repo . 'en-US/' . $file)['strings']);
+        // We are passing several files
+        if (is_array($files)) {
+            $translations = $source_strings = [];
+            foreach ($files as $file) {
+                $translations  = array_merge(
+                    $translations,
+                    $this->parseFile($this->repo . $this->locale . '/' . $file)['strings']
+                );
+
+                $source_strings = array_merge(
+                    $source_strings,
+                    array_keys($this->parseFile($this->repo . 'en-US/' . $file)['strings'])
+                );
+            }
+            $this->translations =  [
+                'activated' => false,
+                'strings'   => $translations,
+                'errors'    => ['ignoredstrings' => []],
+            ];
+            $this->source_strings = $source_strings;
+        } else {
+            $this->translations = $this->parseFile($this->repo . $this->locale . '/' . $files);
+            $this->source_strings = array_keys($this->parseFile($this->repo . 'en-US/' . $files)['strings']);
+        }
     }
 
     /**
