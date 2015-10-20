@@ -20,23 +20,32 @@ $description = function ($translate) use ($_) {
     ];
 
     return <<<OUT
-{$_('Experience a fast, smart and personal Web.')} {$_('Firefox is the independent, people-first browser made by Mozilla, voted the Most Trusted Internet Company for Privacy.')} {$_('Hundreds of millions of people around the world use Firefox on desktop for a more personal browsing experience.')}
+{$_('Experience a fast, smart and personal Web.')} {$_('Firefox is the independent, people-first browser made by Mozilla, voted the Most Trusted Internet Company for Privacy.')} {$_('Upgrade today and join hundreds of millions who depend on Firefox for a more personal browsing experience.')}
 
-{$_('FAST. SMART. YOURS.')} {$_('Firefox is made with you in mind. That’s why we design the product with smart features that take the guesswork out of browsing.')}
+{$_('FAST. SMART. YOURS.')}
+{$_('Firefox is made with you in mind and gives you the power to take back control of your Web experience.')}
+{$_('That’s why we design the product with smart features that take the guesswork out of browsing.')}
 
-{$_('GET THERE FASTER WITH INTELLIGENT SEARCH')}
-{$_('Firefox anticipates your needs and intuitively provides multiple suggested and previously searched results across your favorite search engines. Every time.')}
+{$_('SEARCH INTELLIGENTLY & GET THERE FASTER')}
+- {$_('Firefox anticipates your needs and intuitively provides multiple suggested and previously searched results across your favorite search engines. Every time.')}
+- {$_('Easily access shortcuts to search providers including Wikipedia, Twitter and Amazon.')}
 
-{$_('EASY ACCESS TO YOUR TOP SITES')}
-{$_('Spend your time reading your favorites sites instead of looking for them.')}
+{$_('BROWSE PRIVATELY')}
+- {$_('Your personal information belongs to you. In Private Browsing mode, Firefox won’t remember any of your history or cookies, but new bookmarks will be saved.')}
+- {$_('Delete your browsing history, passwords and more in a single tap.')}
+- {$_('Choose the private data you want to remove.')}
+- **{$_('iOS 9 required for Private Browsing mode')}**
 
 {$_('SYNC FIREFOX ACROSS YOUR DEVICES')}
-- {$_('With a Firefox Account, access your history and open tabs everywhere you use Firefox.')}
+- {$_('With a Firefox Account, access your history, bookmarks and open tabs from your desktop on your smartphone and tablet.')}
 - {$_('Firefox also safely remembers your passwords across devices so you don’t have to.')}
 
-{$_('INTUITIVE NUMBERED TABS')}
+{$_('INTUITIVE VISUAL TABS')}
 - {$_('Intuitive visual and numbered tabs easily let you find content for future reference.')}
 - {$_('Open as many tabs as you like without losing track of your open Web pages.')}
+
+{$_('EASY ACCESS TO YOUR TOP SITES')}
+- {$_('Spend your time reading your favorites sites instead of looking for them.')}
 
 {$_('Learn more about Firefox for iOS:')}
 - {$_('Have questions or need help? Visit {{support_link}}', $replacements)}

@@ -8,7 +8,7 @@
 <pre contenteditable="true"><em><?= $short_desc($translate) ?></em></pre>
 
 <h3>Description &mdash; <?= $listing_warning ?></h3>
-<pre><?= $description($translate) ?></pre>
+<pre contenteditable="true"><?= htmlspecialchars($description($translate)) ?></pre>
 
 <h3>Google Play Next Screenshots Copy</h3>
-<pre style="text-align: center;"><?= $screenshots($translate) ?></pre>
+<pre style="text-align: center;"  contenteditable="true"><?= htmlspecialchars(strip_tags($screenshots($translate))) ?></pre>

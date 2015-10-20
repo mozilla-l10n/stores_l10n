@@ -15,16 +15,16 @@ class Project
     // Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
     private $android_locales_release = [
         'an', 'as', 'be', 'bn-IN', 'ca', 'cs', 'cy', 'da', 'de',
-        'es-AR', 'es-ES', 'es-MX', 'et', 'eu', 'fi', 'ff', 'fr',
-        'fy-NL', 'ga-IE', 'gd', 'gl' ,'gu-IN', 'hi-IN', 'hu',
-        'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
+        'en-GB', 'en-US', 'es-AR', 'es-ES', 'es-MX', 'et', 'eu', 'fi',
+        'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl' ,'gu-IN', 'hi-IN',
+        'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
         'lv', 'ml', 'mr', 'ms', 'nb-NO', 'nl', 'or', 'pa-IN',
         'pl', 'pt-BR', 'pt-PT', 'ro', 'ru', 'sq', 'sk', 'sl',
         'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW',
     ];
 
     private $android_locales_marketing = [
-        'de', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pt-BR',
+        'de', 'en-US', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pt-BR',
         'ru', 'zh-CN',
     ];
 
@@ -41,7 +41,7 @@ class Project
         'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'es-ES',
         'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'hsb', 'id', 'is', 'it',
         'ja', 'ko', 'lt', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'ru',
-        'sk', 'sl', 'son', 'sv-SE', 'templates', 'tr', 'uk', 'uz', 'zh-CN',
+        'sk', 'sl', 'son', 'sv-SE', 'tr', 'uk', 'uz', 'zh-CN',
         'zh-TW',
     ];
 
@@ -60,6 +60,7 @@ class Project
         'de-DE'  => 'de',
         'el-GR'  => 'el',
         'en-GB'  => 'en-GB',
+        'en-US'  => 'en-US',
         'es-419' => 'es-MX', // Spanish, South America
         'es-ES'  => 'es-ES',
         'es-US'  => 'es-MX', // Spanish, South America
@@ -148,11 +149,7 @@ class Project
                 ],
             'next' => [
                 'template' => 'google/next/listing_oct_2015.php',
-                'langfile' => [
-                    'description_page.lang',
-                    'apple_description_release.lang',
-                    'android_42_release.lang',
-                    ],
+                'langfile' => 'android_42_release.lang',
                 ],
         ],
         'apple' => [
@@ -217,7 +214,7 @@ class Project
                 $locales = $this->android_locales_beta;
                 break;
             case 'next':
-                $locales = $this->android_locales_marketing;
+                $locales = $this->android_locales_release;
                 break;
             case 'release':
             default:
@@ -314,7 +311,7 @@ class Project
                 case 'beta':
                     return $this->android_locales_beta;
                 case 'next':
-                    return $this->android_locales_marketing;
+                    return $this->android_locales_release;
                 case 'release':
                 default:
                     return $this->android_locales_release;
