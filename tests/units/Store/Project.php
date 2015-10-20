@@ -15,12 +15,12 @@ class Project extends atoum\test
             ->array($obj->getGoogleStoreLocales(true))
                 ->hasKey('es-419')
                 ->contains('de')
-                ->hassize(51)
+                ->hassize(52)
             ;
         $this
             ->array($obj->getGoogleStoreLocales(false))
                 ->contains('es-419')
-                ->hassize(51)
+                ->hassize(52)
             ;
     }
 
@@ -48,7 +48,7 @@ class Project extends atoum\test
                 ->contains('be')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(34)
+                ->hassize(36)
             ;
     }
 

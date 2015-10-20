@@ -8,7 +8,12 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h2 class="bg-primary">&nbsp;Variables used in the API</h2>
 <ul>
     <li><code>{store}</code>: <var>google</var>, <var>apple</var></li>
-    <li><code>{channel}</code>: <var>aurora</var>, <var>beta</var>, <var>release</var></li>
+    <li><code>{channel}</code>:
+        <ul>
+            <li>Google: <var>aurora</var>, <var>beta</var>, <var>release</var>, <var>next</var>.</li>
+            <li>Apple: <var>release</var>.</li>
+        </ul>
+    </li>
     <li><code>{locale}</code>: a Mozilla locale code, ex: fr, es-MX, de.</li>
 </ul>
 

@@ -25,7 +25,7 @@ class API
 
     public $channels = [
         'apple'  => ['release'],
-        'google' => ['release', 'beta'],
+        'google' => ['release', 'beta', 'next'],
     ];
 
     public $services = [
