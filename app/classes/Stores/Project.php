@@ -149,7 +149,10 @@ class Project
                 ],
             'next' => [
                 'template' => 'google/next/listing_oct_2015.php',
-                'langfile' => 'android_42_release.lang',
+                'langfile' => [
+                    'android_42_release.lang',
+                    'apple_description_release.lang',
+                    ],
                 ],
         ],
         'apple' => [
