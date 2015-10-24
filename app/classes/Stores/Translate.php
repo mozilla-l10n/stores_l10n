@@ -74,6 +74,11 @@ class Translate extends Dotlang
             return false;
         }
 
+        // the string doesn't exist
+        if (! isset($this->translations['strings'][$string])) {
+            return false;
+        }
+
         return true;
     }
 
