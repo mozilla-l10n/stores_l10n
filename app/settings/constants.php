@@ -17,10 +17,14 @@ if (file_exists(SETTINGS . 'config.ini')) {
     $config = parse_ini_file(SETTINGS . 'config.ini');
 }
 
+$protocol = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443
+            ? 'https'
+            : 'http';
+
 if (isset($config['url'])) {
     define('BASE_HTML_URL', $config['url']);
 } else {
-    define('BASE_HTML_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
+    define('BASE_HTML_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/');
 }
 
 if (isset($config['debug'])) {

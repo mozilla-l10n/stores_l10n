@@ -133,5 +133,9 @@ $short_desc = function ($translate) use ($_) {
 
 $whatsnew = function ($translate) use ($_) {
     return <<<OUT
+*{$_('Tab audio indicator displays in tab list')}
+*{$_('Include URL when sharing selected text from web page')}
+*{$_('Accessibility improvements')}
+*{$_('Users can now mark read/unread state of items in reading list panel')}
 OUT;
 };

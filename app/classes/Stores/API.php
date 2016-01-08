@@ -31,6 +31,7 @@ class API
     public $services = [
         'storelocales', 'firefoxlocales',
         'localesmapping', 'translation', 'done',
+        'whatsnew', 'listing',
     ];
 
     public $error;
@@ -182,17 +183,44 @@ class API
                 }
                 break;
             case 'storelocales':
-            // ex: api/apple/storelocales/
-            // We don't have anything specific to check as there is no parameter for this service call
+            /*
+                ex: api/apple/storelocales/
+                We don't have anything specific to check as there is no parameter
+                for this service call
+            */
                 break;
             case 'done':
-            // ex: /api/google/done/beta/
+            /*
+                ex: /api/google/done/beta/
+                Legacy API call we are redirecting to 'listing'.
+            */
+                break;
+            case 'listing':
+            // ex: /api/google/listing/beta/
                 if (! $this->verifyEnoughParameters(3)) {
                     return false;
                 }
 
                 if (! in_array($this->query['channel'], $this->channels[$this->query['store']])) {
                     $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['store']}.");
+
+                    return false;
+                }
+                break;
+            case 'whatsnew':
+            // ex: /api/google/whatsnew/release/
+                if (! $this->verifyEnoughParameters(3)) {
+                    return false;
+                }
+
+                if (! in_array($this->query['channel'], $this->channels[$this->query['store']])) {
+                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['store']}.");
+
+                    return false;
+                }
+
+                if (! $this->project->getWhatsnewFiles($this->query['store'], $this->query['channel'])) {
+                    $this->log("Whatsnew section is not supported for {$this->query['store']} on '{$this->query['channel']}' channel.");
 
                     return false;
                 }

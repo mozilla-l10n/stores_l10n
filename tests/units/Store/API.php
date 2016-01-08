@@ -74,6 +74,14 @@ class API extends atoum\test
                 true,
             ],
             [
+                ['path' => 'api/google/listing/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/google/whatsnew/release/'],
+                true,
+            ],
+            [
                 ['path' => 'api/google/translation/beta/de/'],
                 true,
             ],
