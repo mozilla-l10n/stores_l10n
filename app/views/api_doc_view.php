@@ -10,11 +10,11 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
     <li><code>{store}</code>: <var>google</var>, <var>apple</var></li>
     <li><code>{channel}</code>:
         <ul>
-            <li>Google: <var>aurora</var>, <var>beta</var>, <var>release</var>, <var>next</var>.</li>
+            <li>Google: <var>aurora</var>, <var>beta</var>, <var>release</var>.</li>
             <li>Apple: <var>release</var>.</li>
         </ul>
     </li>
-    <li><code>{locale}</code>: a Mozilla locale code, ex: fr, es-MX, de.</li>
+    <li><code>{locale}</code>: a Mozilla locale code, ex: fr, es-MX, de.
 </ul>
 
 <h2 class="bg-primary">&nbsp;API Calls</h2>
@@ -48,30 +48,39 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h4>Example:</h4>
 <p>All Firefox for Android locales on the release Channel: <?=$base?><a href="api/google/firefoxlocales/release/">google/firefoxlocales/release/</a></p>
 
-<h3 class="text-primary">{store}/done/{channel}/</h3>
+<h3 class="text-primary">{store}/listing/{channel}/</h3>
 <h4>Description:</h4>
 <p>List all the locales for which the store description page is fully translated for a channel. A locale is listed as done if the translation is complete and there are no strings longer than the store limits.</p>
 <h4>Example:</h4>
 <ul>
-    <li>All Firefox for Android description listings ready for the beta channel: <?=$base?><a href="api/google/done/release/">google/done/release/</a></li>
-    <li>All Firefox for iOs description listings ready for the release channel: <?=$base?><a href="api/apple/done/release/">apple/done/release/</a></li>
+    <li>All Firefox for Android description listings ready for the beta channel: <?=$base?><a href="api/google/listing/beta/">google/listing/beta/</a></li>
+    <li>All Firefox for iOs description listings ready for the release channel: <?=$base?><a href="api/apple/listing/release/">apple/listing/release/</a></li>
+</ul>
+
+<h3 class="text-primary">{store}/whatsnew/{channel}/</h3>
+<h4>Description:</h4>
+<p>List all the locales for which the what's new section is fully translated for a channel. A locale is listed as done if the translation is complete and there are no strings longer than the section limit.</p>
+<h4>Example:</h4>
+<ul>
+    <li>All Firefox for Android locales that fully translated what's new section for the release channel: <?=$base?><a href="api/google/whatsnew/release/">google/whatsnew/release/</a></li>
 </ul>
 
 <h3 class="text-primary">{store}/translation/{channel}/{locale}/</h3>
 <h4>Description:</h4>
 <p>Return the translation for a page listing for the store and channel selected.</p>
 <h4>Examples:</h4>
-<p>Translation of the Google Play listing for Japanese, release channel: <?=$base?><a href="api/google/translation/release/ja/">/google/translation/release/ja/</a></p>
+<p>Translation of the Google Play listing for Japanese, release channel: <?=$base?><a href="api/google/translation/release/ja/">google/translation/release/ja/</a></p>
 <h4>Output for Google Play:</h4>
 <p>
 <pre><code class="json">{
     "title": "Blabla",
     "short_desc": "Blabla",
-    "long_desc": "Blabla"
+    "long_desc": "Blabla",
+    "whatsnew": "Blabla"
 }</code></pre>
 </p>
 
-<p>Translation of the Apple AppStore listing for French: <?=$base?><a href="api/apple/translation/release/fr/">/google/translation/release/fr/</a></p>
+<p>Translation of the Apple AppStore listing for French: <?=$base?><a href="api/apple/translation/release/fr/">google/translation/release/fr/</a></p>
 <h4>Output for Apple AppsStore:</h4>
 <p>
 <pre><code class="json">{

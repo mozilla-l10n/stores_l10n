@@ -32,16 +32,19 @@ class Project
 
     private $android_locales_beta = [];
 
-    // source: https://l10n.mozilla-community.org/~flod/webstatus/api/?product=firefox-ios
-    // translations are at: http://svn.mozilla.org/projects/l10n-misc/trunk/firefox-ios/
-    // For iOS we used the locale code es for Spanish from Spain, that was a mistake, this is
-    // why I changed it to es-ES in the array below, otherwise the Spanish team would have
-    // to work in the es-ES folder for Android and the es folder for iOS
+    /*
+        source: https://l10n.mozilla-community.org/~flod/webstatus/api/?product=firefox-ios
+        translations are at: https://github.com/mozilla-l10n/firefoxios-l10n/
+        For iOS we used the locale code es for Spanish from Spain, that was a
+        mistake, this is why I changed it to es-ES in the array below, otherwise
+        the Spanish team would have to work in the es-ES folder for Android and
+        the es folder for iOS
+    */
     private $ios_locales_release = [
         'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'es-ES',
         'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'hsb', 'id', 'is', 'it',
-        'ja', 'ko', 'lt', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'ru',
-        'sk', 'sl', 'son', 'sv-SE', 'tr', 'uk', 'uz', 'zh-CN',
+        'ja', 'ko', 'lt', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT',
+        'ru', 'sk', 'sl', 'son', 'sv-SE', 'tr', 'uk', 'uz', 'zh-CN',
         'zh-TW',
     ];
 
@@ -103,8 +106,10 @@ class Project
         'zu'     => 'zu',
     ];
 
-    // Not exactly official, but this is the tool we use for our automation:
-    // https://github.com/KrauseFx/deliver#available-language-codes
+    /*
+        Not exactly official, but this is the tool we use for our automation:
+        https://github.com/KrauseFx/deliver#available-language-codes
+    */
     private $apple_locales_mapping = [
         'da'      => 'da',
         'de-DE'   => 'de',
@@ -140,8 +145,9 @@ class Project
         'google' => [
             // channel => path to template file
             'release' => [
-                'template' => 'google/release/listing_nov_2014.php',
-                'langfile' => 'description_page.lang',
+                'template' => 'google/release/listing_oct_2015.php',
+                'langfile' => 'android_42_release.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_44.lang',
                 ],
             'beta' => [
                 'template' => 'google/beta/listing_may_2015.php',
@@ -149,10 +155,7 @@ class Project
                 ],
             'next' => [
                 'template' => 'google/next/listing_oct_2015.php',
-                'langfile' => [
-                    'android_42_release.lang',
-                    'apple_description_release.lang',
-                    ],
+                'langfile' => 'android_42_release.lang',
                 ],
         ],
         'apple' => [
@@ -160,7 +163,7 @@ class Project
             'release' => [
                 'template' => 'apple/release/listing_sept_2015.php',
                 'langfile' => 'apple_description_release.lang',
-                ],
+            ],
         ],
     ];
 
@@ -176,7 +179,7 @@ class Project
     /**
      * Return all the locales supported by Google Play
      *
-     * @param  boolean $mapping If True, return the Google/mMzilla locale mapping list
+     * @param  boolean $mapping If True, return the Google/Mozilla locale mapping list
      * @return array   List of locales, key is Google code, value is Mozilla code.
      *                         If we don't support a Google locale, the value is False
      */
@@ -375,17 +378,43 @@ class Project
     }
 
     /**
-     * Get the lang file name for a Store and Channel
+     * Get the lang file name(s) for a Store and Channel. Can be filtered by Section.
      * @param  string $store   Name of the Store
-     * @param  string $channel Name of the Channel
-     * @return mixed  String containing the langfile name or False
+     * @param  string $channel Name of the channel
+     * @param  string $section Name of the section defined in $this->template
+     *                         containing the lang file(s).
+     * @return mixed  String containing the langfile name(s) or False
      */
-    public function getLangFile($store, $channel)
+    protected function getLangFile($store, $channel, $section)
     {
-        if (! isset($this->templates[$store][$channel]['langfile'])) {
+        if (! isset($this->templates[$store][$channel][$section])) {
             return false;
         }
 
-        return $this->templates[$store][$channel]['langfile'];
+        return $this->templates[$store][$channel][$section];
+    }
+
+    /**
+     * Get the lang file name(s) for whatsnew section if it exists. Returns
+     * false otherwise.
+     * @param  string $store   Name of the Store
+     * @param  string $channel Channel of the store
+     * @return mixed  String containing the langfile name(s) or False
+     */
+    public function getWhatsnewFiles($store, $channel)
+    {
+        return $this->getLangFile($store, $channel, 'whatsnew');
+    }
+
+    /**
+     * Get the lang file name(s) for listing section if it exists. Returns
+     * false otherwise.
+     * @param  string $store   Name of the Store
+     * @param  string $channel Channel of the store
+     * @return mixed  String containing the langfile name(s) or False
+     */
+    public function getListingFiles($store, $channel)
+    {
+        return $this->getLangFile($store, $channel, 'langfile');
     }
 }

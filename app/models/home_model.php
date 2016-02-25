@@ -17,22 +17,22 @@ $get_status = function ($lang_file, $store_locales) {
 };
 
 $status['google']['release'] = $get_status(
-    $project->getLangFile('google', 'release'),
+    $project->getListingFiles('google', 'release'),
     $project->getGoogleMozillaCommonLocales('release')
 );
 
 $status['google']['beta'] = $get_status(
-    $project->getLangFile('google', 'beta'),
+    $project->getListingFiles('google', 'beta'),
     $project->getGoogleMozillaCommonLocales('beta')
 );
 
 $status['google']['next'] = $get_status(
-    $project->getLangFile('google', 'next'),
+    $project->getListingFiles('google', 'next'),
     $project->getGoogleMozillaCommonLocales('next')
 );
 
 $status['apple']['release'] = $get_status(
-    $project->getLangFile('apple', 'release'),
+    $project->getListingFiles('apple', 'release'),
     $project->getAppleMozillaCommonLocales('release')
 );
 

@@ -157,15 +157,26 @@ class Project extends atoum\test
                 ->isFalse()
             ;
     }
-    public function testGetLangFile()
+    public function testGetListingFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getLangFile('google', 'release'))
-            ->string($obj->getLangFile('google', 'beta'))
+            ->string($obj->getListingFiles('google', 'release'))
+            ->string($obj->getListingFiles('google', 'beta'))
             ;
         $this
-            ->boolean($obj->getLangFile('google', 'foobar'))
+            ->boolean($obj->getListingFiles('google', 'foobar'))
+                ->isFalse()
+            ;
+    }
+    public function testGetWhatsnewFiles()
+    {
+        $obj = new _Project();
+        $this
+            ->string($obj->getWhatsnewFiles('google', 'release'))
+            ;
+        $this
+            ->boolean($obj->getWhatsnewFiles('google', 'beta'))
                 ->isFalse()
             ;
     }

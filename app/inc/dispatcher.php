@@ -4,6 +4,7 @@ namespace Stores;
 use Langchecker\Utils;
 
 $template = true;
+$view = '';
 
 switch ($url['path']) {
     case '/':

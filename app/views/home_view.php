@@ -5,13 +5,11 @@
 <ul id="filters" class="nav nav-pills">
     <li class="filter"><a href="#play_beta" id="play_beta">Google Play Beta</a></li>
     <li class="filter active"><a href="#play_release" id="play_release">Google Play Release</a></li>
-    <li class="filter"><a href="#play_next" id="play_next">Google Play Next</a></li>
     <li class="filter"><a href="#app_store_release" id="app_store_release">Apple Appstore Release</a></li>
 </ul>
 
 <?=$stores['play']['beta']?>
 <?=$stores['play']['release']?>
-<?=$stores['play']['next']?>
 <?=$stores['appstore']['release']?>
 
 <script src="media/assets/jquery/jquery.min.js"></script>
