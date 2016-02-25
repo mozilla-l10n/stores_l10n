@@ -31,9 +31,12 @@ $paths = [
     ['apple/localesmapping/', 200, '{"da":"da","de-DE":"de","el":"el","en-AU":"en-GB","en-CA":"en-US","en-GB":"en-GB","en-US":"en-US","es-ES":"es-ES","es-MX":"es-MX","fi":"fi","fr-CA":"fr","fr-FR":"fr","id":"id","it":"it","ja":"ja","ko":"ko","ms":"ms","nl":"nl","no":"nb-NO","pt-BR":"pt-BR","pt-PT":"pt-PT","ru":"ru","sv":"sv-SE","th":"th","tr":"tr","vi":"vi","zh-Hans":"zh-CN","zh-Hant":"zh-TW"}'],
     ['google/firefoxlocales/release/', 200, '["an","as","be","bn-IN","ca","cs","cy","da","de","en-GB","en-US","es-AR","es-ES","es-MX","et","eu","fi","ff","fr","fy-NL","ga-IE","gd","gl","gu-IN","hi-IN","hu","hy-AM","id","is","it","ja","kk","kn","ko","lt","lv","ml","mr","ms","nb-NO","nl","or","pa-IN","pl","pt-BR","pt-PT","ro","ru","sq","sk","sl","sv-SE","ta","te","th","tr","uk","zh-CN","zh-TW"]'],
     ['google/done/release/', 200, false],
+    ['google/done/beta/', 200, false],
     ['apple/done/release/', 200, false],
     ['google/translation/release/ja/', 200, false],
     ['google/translation/beta/fr/', 200, false],
+    ['google/whatsnew/release/', 200, false],
+    ['google/listing/release/', 200, false],
 ];
 
 $obj = new \pchevrel\Verif('Check API responses');
@@ -68,6 +71,11 @@ $obj
     ->setPath('apple/translation/release/ja/')
     ->fetchContent()
     ->hasKeys(['title', 'description', 'keywords', 'screenshots']);
+
+$obj
+    ->setPath('google/translation/release/fr/')
+    ->fetchContent()
+    ->hasKeys(['title',  'short_desc', 'long_desc', 'whatsnew']);
 
 $obj->report();
 
