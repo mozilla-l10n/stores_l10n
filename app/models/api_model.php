@@ -37,8 +37,12 @@ switch ($request->getService()) {
                 'title'      => $app_title($translations),
                 'short_desc' => $short_desc($translations),
                 'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translations)),
-                'whatsnew'   => $whatsnew($translations),
             ];
+
+            // Do we have a Whatsnew file for this release ?
+            if (isset($whatsnew)) {
+                $json['whatsnew'] = $whatsnew($translations);
+            }
         }
 
         if ($store == 'apple') {
