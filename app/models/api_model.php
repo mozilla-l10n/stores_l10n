@@ -1,8 +1,6 @@
 <?php
 namespace Stores;
 
-use Transvision\Json;
-
 switch ($request->getService()) {
     case 'storelocales':
         $json = $project->getStoreLocales($request->query['store']);
@@ -45,35 +43,19 @@ switch ($request->getService()) {
         }
         break;
     case 'whatsnew':
-        $done = $json = [];
-        $listing = Json::fetch('http://localhost:8042/api/google/listing/release/');
+        $done = [];
 
-        foreach ($project->getFirefoxLocales('google',
-        $request->query['channel']) as $lang) {
-            /*
-                Check if description is done by calling listing API.
-                Skip locale if not done.
-            */
-            if (! in_array($lang, array_values($listing))) {
-                continue;
-            }
-
+        foreach ($project->getFirefoxLocales('google', $request->query['channel']) as $lang) {
             $translations = new Translate(
                 $lang,
-                $project->getWhatsnewFiles(
-                    'google',
-                    $request->query['channel'],
-                    'whatsnew'
-                )
+                $project->getWhatsnewFiles('google', $request->query['channel'])
             );
+
             $translations::$log_errors = false;
 
             if ($translations->isFileTranslated()) {
                 // Include the current template
-                require TEMPLATES . $project->getTemplate(
-                    'google',
-                    $request->query['channel']
-                );
+                require TEMPLATES . $project->getTemplate('google', $request->query['channel']);
 
                 if ($set_limit(500, $whatsnew($translations))) {
                     $done[] = $lang;
@@ -82,31 +64,20 @@ switch ($request->getService()) {
         }
 
         $supported = array_unique(array_values($project->getLocalesMapping('google')));
-        $json = empty($json) ? array_values(array_intersect($done, $supported)) : $json;
+        $json = array_values(array_intersect($done, $supported));
         break;
     case 'listing':
-        $done = [];
-
-        foreach ($project->getFirefoxLocales($request->query['store'],
-        $request->query['channel']) as $lang) {
-            $translations = new Translate(
-                $lang,
-                $project->getListingFiles(
-                    $request->query['store'],
-                    $request->query['channel']
-                )
-            );
+        $done    = [];
+        $store   = $request->query['store'];
+        $channel = $request->query['channel'];
+        foreach ($project->getFirefoxLocales($store, $channel) as $lang) {
+            $translations = new Translate($lang, $project->getListingFiles($store, $channel));
             $translations::$log_errors = false;
 
             if ($translations->isFileTranslated()) {
+                require TEMPLATES . $project->getTemplate($store, $channel);
                 // The Google Store has string lengths constraints
-                if ($request->query['store'] == 'google') {
-                    // Include the current template
-                    require TEMPLATES . $project->getTemplate(
-                        'google',
-                        $request->query['channel']
-                    );
-
+                if ($store == 'google') {
                     $desc       = $set_limit(4000, $description($translations));
                     $title      = $set_limit(30, $app_title($translations));
                     $short_desc = $set_limit(80, $short_desc($translations));
@@ -114,28 +85,19 @@ switch ($request->getService()) {
                     if (($desc + $title + $short_desc) == 3) {
                         $done[] = $lang;
                     }
-                } elseif ($request->query['store'] == 'apple') {
-                    // Include the current template
-                    require TEMPLATES . $project->getTemplate(
-                        'apple',
-                        $request->query['channel']
-                    );
+                }
 
-                    $keywords = $set_limit(100, $keywords($translations));
-
-                    if ($keywords) {
+                // The Apple AppStore has keywords lengths constraints
+                if ($store == 'apple') {
+                    if ($set_limit(100, $keywords($translations))) {
                         $done[] = $lang;
                     }
-                } else {
-                    $done[] = $lang;
                 }
             }
         }
 
-        $supported = array_unique(array_values(
-            $project->getLocalesMapping($request->query['store']))
-        );
-        $json = empty($json) ? array_values(array_intersect($done, $supported)) : $json;
+        $supported = array_unique(array_values($project->getLocalesMapping($store)));
+        $json = array_values(array_intersect($done, $supported));
         break;
     default:
         $request->error = 'Not a valid API call.';
