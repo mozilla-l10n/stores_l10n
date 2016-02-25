@@ -33,6 +33,7 @@ $paths = [
     ['google/done/release/', 200, false],
     ['apple/done/release/', 200, false],
     ['google/translation/release/ja/', 200, false],
+    ['google/translation/beta/fr/', 200, false],
 ];
 
 $obj = new \pchevrel\Verif('Check API responses');
