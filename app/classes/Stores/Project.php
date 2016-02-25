@@ -14,13 +14,13 @@ class Project
     // Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
     // Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
     private $android_locales_release = [
-        'an', 'as', 'be', 'bn-IN', 'ca', 'cs', 'cy', 'da', 'de',
-        'en-GB', 'en-US', 'es-AR', 'es-ES', 'es-MX', 'et', 'eu', 'fi',
-        'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl' ,'gu-IN', 'hi-IN',
-        'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
-        'lv', 'ml', 'mr', 'ms', 'nb-NO', 'nl', 'or', 'pa-IN',
-        'pl', 'pt-BR', 'pt-PT', 'ro', 'ru', 'sq', 'sk', 'sl',
-        'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'zh-CN', 'zh-TW',
+        'an', 'as', 'az', 'be', 'bn-IN', 'br', 'ca', 'cs', 'cy', 'da', 'de',
+        'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-ES', 'es-MX', 'et', 'eu',
+        'fi', 'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gu-IN', 'hi-IN', 'hr',
+        'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
+        'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'or', 'pa-IN', 'pl',
+        'pt-BR', 'pt-PT', 'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sv-SE', 'ta',
+        'te', 'th', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
     private $android_locales_marketing = [
@@ -41,11 +41,12 @@ class Project
         the es folder for iOS
     */
     private $ios_locales_release = [
-        'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'es-ES',
-        'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'hsb', 'id', 'is', 'it',
-        'ja', 'ko', 'lt', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT',
-        'ru', 'sk', 'sl', 'son', 'sv-SE', 'tr', 'uk', 'uz', 'zh-CN',
-        'zh-TW',
+        'ar', 'az', 'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'el',
+        'en-US', 'eo', 'es-ES', 'es-CL', 'es-MX', 'fa', 'fr', 'fy-NL', 'ga-IE',
+        'gd', 'gl', 'hsb', 'id', 'is', 'it', 'ja', 'kk', 'km', 'ko', 'lo', 'lt',
+        'lv', 'ml', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'or', 'pl', 'pt-BR',
+        'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sv-SE', 'th', 'tl', 'tr',
+         'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
     private $ios_locales_aurora = [];
