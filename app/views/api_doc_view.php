@@ -10,7 +10,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
     <li><code>{store}</code>: <var>google</var>, <var>apple</var></li>
     <li><code>{channel}</code>:
         <ul>
-            <li>Google: <var>aurora</var>, <var>beta</var>, <var>release</var>.</li>
+            <li>Google: <var>beta</var>, <var>release</var>.</li>
             <li>Apple: <var>release</var>.</li>
         </ul>
     </li>
@@ -63,6 +63,15 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h4>Example:</h4>
 <ul>
     <li>All Firefox for Android locales that fully translated what's new section for the release channel: <?=$base?><a href="api/google/whatsnew/release/">google/whatsnew/release/</a></li>
+</ul>
+
+<h3 class="text-primary">{store}/done/{channel}/</h3>
+<h4>Description:</h4>
+<p>List all the locales for which all files needed are fully translated for a channel. A locale is listed as done if the translation is complete and there are no strings exceeding the store limits. In the case of Google, for the release channel this APU returns the locales that have translated both the listing page on Google Play and the Whatsnew page. We do not translate yet the What's New section for the Beta channel.</p>
+<h4>Example:</h4>
+<ul>
+    <li>All Firefox for Android description listings ready for the beta channel: <?=$base?><a href="api/google/done/release/">google/done/release/</a></li>
+    <li>All Firefox for iOs description listings ready for the release channel: <?=$base?><a href="api/apple/done/release/">apple/done/release/</a></li>
 </ul>
 
 <h3 class="text-primary">{store}/translation/{channel}/{locale}/</h3>
