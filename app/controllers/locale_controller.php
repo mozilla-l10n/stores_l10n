@@ -22,27 +22,11 @@ if (! in_array($request['channel'], ['beta', 'release', 'next'])) {
 }
 
 if ($request['store'] == 'google') {
-    switch ($request['channel']) {
-        case 'beta':
-            $locales = $project->getGoogleMozillaCommonLocales('beta');
-            break;
-        case 'next':
-            $locales = $project->getGoogleMozillaCommonLocales('next');
-            break;
-        case 'release':
-        default:
-            $locales = $project->getGoogleMozillaCommonLocales('release');
-            break;
-    }
+    $locales = $project->getGoogleMozillaCommonLocales($request['channel']);
 }
 
 if ($request['store'] == 'apple') {
-    switch ($request['channel']) {
-        case 'release':
-        default:
-            $locales = $project->getAppleMozillaCommonLocales('release');
-            break;
-    }
+    $locales = $project->getAppleMozillaCommonLocales($request['channel']);
 }
 
 if (! in_array($request['locale'], $locales)) {

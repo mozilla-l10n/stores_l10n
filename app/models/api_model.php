@@ -29,17 +29,17 @@ switch ($request->getService()) {
         $json = [];
         if ($request['store'] == 'google') {
             $json = [
-                'title'      => $app_title($translate),
-                'short_desc' => $short_desc($translate),
-                'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translate)),
-                'whatsnew'   => $whatsnew($translate),
+                'title'      => $app_title($translations),
+                'short_desc' => $short_desc($translations),
+                'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translations)),
+                'whatsnew'   => $whatsnew($translations),
             ];
         }
         if ($request['store'] == 'apple') {
             $json = [
-                'title'       => $app_title($translate),
-                'description' => strip_tags(br2nl($description($translate))),
-                'keywords'    => $keywords($translate),
+                'title'       => $app_title($translations),
+                'description' => strip_tags(br2nl($description($translations))),
+                'keywords'    => $keywords($translations),
                 'screenshots' => $screenshots_api,
             ];
         }
@@ -58,7 +58,7 @@ switch ($request->getService()) {
                 continue;
             }
 
-            $translate = new Translate(
+            $translations = new Translate(
                 $lang,
                 $project->getWhatsnewFiles(
                     'google',
@@ -66,16 +66,16 @@ switch ($request->getService()) {
                     'whatsnew'
                 )
             );
-            $translate::$log_errors = false;
+            $translations::$log_errors = false;
 
-            if ($translate->isFileTranslated()) {
+            if ($translations->isFileTranslated()) {
                 // Include the current template
                 require TEMPLATES . $project->getTemplate(
                     'google',
                     $request->query['channel']
                 );
 
-                if ($set_limit(500, $whatsnew($translate))) {
+                if ($set_limit(500, $whatsnew($translations))) {
                     $done[] = $lang;
                 }
             }
@@ -89,16 +89,16 @@ switch ($request->getService()) {
 
         foreach ($project->getFirefoxLocales($request->query['store'],
         $request->query['channel']) as $lang) {
-            $translate = new Translate(
+            $translations = new Translate(
                 $lang,
                 $project->getListingFiles(
                     $request->query['store'],
                     $request->query['channel']
                 )
             );
-            $translate::$log_errors = false;
+            $translations::$log_errors = false;
 
-            if ($translate->isFileTranslated()) {
+            if ($translations->isFileTranslated()) {
                 // The Google Store has string lengths constraints
                 if ($request->query['store'] == 'google') {
                     // Include the current template
@@ -107,9 +107,9 @@ switch ($request->getService()) {
                         $request->query['channel']
                     );
 
-                    $desc       = $set_limit(4000, $description($translate));
-                    $title      = $set_limit(30, $app_title($translate));
-                    $short_desc = $set_limit(80, $short_desc($translate));
+                    $desc       = $set_limit(4000, $description($translations));
+                    $title      = $set_limit(30, $app_title($translations));
+                    $short_desc = $set_limit(80, $short_desc($translations));
 
                     if (($desc + $title + $short_desc) == 3) {
                         $done[] = $lang;
@@ -121,7 +121,7 @@ switch ($request->getService()) {
                         $request->query['channel']
                     );
 
-                    $keywords = $set_limit(100, $keywords($translate));
+                    $keywords = $set_limit(100, $keywords($translations));
 
                     if ($keywords) {
                         $done[] = $lang;
