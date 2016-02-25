@@ -4,15 +4,15 @@ namespace Stores;
 // Include closure needed in template
 include INC . 'utilities.php';
 
-$app_title = function ($translate) use ($_) {
+$app_title = function ($translations) use ($_) {
     return $_('Firefox Web Browser');
 };
 
-$app_title2 = function ($translate) use ($_) {
+$app_title2 = function ($translations) use ($_) {
     return $_('Firefox for Android');
 };
 
-$description = function ($translate) use ($_) {
+$description = function ($translations) use ($_) {
     $replacements = [
         '{{support_link}}'     => 'https://support.mozilla.org/mobile',
         '{{permission_link}}'  => 'http://mzl.la/Permissions',
@@ -71,7 +71,7 @@ $description = function ($translate) use ($_) {
 OUT;
 };
 
-$screenshots = function ($translate) use ($_) {
+$screenshots = function ($translations) use ($_) {
     return <<<OUT
 <b>{$_('Fast. Smart. Yours')}</b>
 {$_('Upgrade to the power of Firefox and<br>join hundreds of millions of<br>Firefox users on desktop and mobile.')}
@@ -98,7 +98,7 @@ $screenshots = function ($translate) use ($_) {
 OUT;
 };
 
-$screenshots = function ($translate) use ($_) {
+$screenshots = function ($translations) use ($_) {
     return <<<OUT
 <b>{$_('Fast. Smart. Yours')}</b>
 {$_('Upgrade to Firefox and join<br>hundreds of millions of Firefox users')}
@@ -127,11 +127,11 @@ $screenshots = function ($translate) use ($_) {
 OUT;
 };
 
-$short_desc = function ($translate) use ($_) {
+$short_desc = function ($translations) use ($_) {
     return $_('Fast. Free. Uniquely yours. Browse the Web your way with Firefox.');
 };
 
-$whatsnew = function ($translate) use ($_) {
+$whatsnew = function ($translations) use ($_) {
     return <<<OUT
 OUT;
 };

@@ -4,7 +4,7 @@ namespace Stores;
 // Include closure needed in template
 include INC . 'utilities.php';
 
-$description = function ($translate) use ($_) {
+$description = function ($translations) use ($_) {
     $replacements = [
         '{{android_bugs}}'     => 'http://mzl.la/android_bugs',
         '{{permission_link}}'  => 'http://mzl.la/Permissions',
@@ -30,10 +30,10 @@ $description = function ($translate) use ($_) {
 OUT;
 };
 
-$short_desc = function ($translate) use ($_) {
+$short_desc = function ($translations) use ($_) {
     return $_('Get the official free Firefox Beta browser and give your feedback!');
 };
 
-$app_title = function ($translate) use ($_) {
+$app_title = function ($translations) use ($_) {
     return $_('Firefox for Android Beta');
 };

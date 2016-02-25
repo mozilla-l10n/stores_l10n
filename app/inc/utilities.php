@@ -2,21 +2,21 @@
 namespace Stores;
 
 // Closure to use in the template
-$_ = function ($string, $replacements = false) use ($translate, $view) {
+$_ = function ($string, $replacements = false) use ($translations, $view) {
 
-    $return_string = $translate->get($string);
+    $return_string = $translations->get($string);
     $warning = '';
 
     if (is_array($replacements)) {
         $return_string = str_replace(
             array_keys($replacements),
             array_values($replacements),
-            $translate->get($string)
+            $translations->get($string)
         );
     }
 
     if ($view == 'locale') {
-        $warning = $translate->isStringTranslated($string)
+        $warning = $translations->isStringTranslated($string)
                    ? 'title="' . $string . '"'
                    : 'style="color: darkorange"';
 
