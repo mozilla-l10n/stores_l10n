@@ -1,31 +1,38 @@
 <?php
 namespace Stores;
 
+// Shortcut variables to make the code easier to read
+$channel           = isset($request->query['channel']) ? $request->query['channel'] : '';
+$locale            = isset($request->query['locale']) ? $request->query['locale'] : '';
+$store             = isset($request->query['store']) ? $request->query['store'] : '';
+$firefox_locales   = $project->getFirefoxLocales($store, $channel);
+$supported_locales = array_unique(array_values($project->getLocalesMapping($store)));
+$valid_locales = function ($done) use ($supported_locales) {
+    return array_values(array_intersect($done, $supported_locales));
+};
+
+$json = $done = [];
+
 switch ($request->getService()) {
     case 'storelocales':
-        $json = $project->getStoreLocales($request->query['store']);
+        $json = $project->getStoreLocales($store);
         break;
     case 'firefoxlocales':
-        $json = $project->getFirefoxLocales(
-            $request->query['store'],
-            $request->query['channel']
-        );
+        $json = $firefox_locales;
         break;
     case 'localesmapping':
-        $json = $project->getLocalesMapping(
-            $request->query['store'],
-            $reverse = isset($_GET['reverse'])
-        );
+        $json = $project->getLocalesMapping($store, isset($_GET['reverse']));
         break;
     case 'translation':
         $request = [
-            'locale'  => $request->query['locale'],
-            'store'   => $request->query['store'],
-            'channel' => $request->query['channel'],
+            'locale'  => $locale,
+            'store'   => $store,
+            'channel' => $channel,
         ];
+
         include MODELS . 'locale_model.php';
-        $json = [];
-        if ($request['store'] == 'google') {
+
+        if ($store == 'google') {
             $json = [
                 'title'      => $app_title($translations),
                 'short_desc' => $short_desc($translations),
@@ -33,7 +40,8 @@ switch ($request->getService()) {
                 'whatsnew'   => $whatsnew($translations),
             ];
         }
-        if ($request['store'] == 'apple') {
+
+        if ($store == 'apple') {
             $json = [
                 'title'       => $app_title($translations),
                 'description' => strip_tags(br2nl($description($translations))),
@@ -43,34 +51,29 @@ switch ($request->getService()) {
         }
         break;
     case 'whatsnew':
-        $done = [];
-
-        foreach ($project->getFirefoxLocales('google', $request->query['channel']) as $lang) {
+        foreach ($firefox_locales as $lang) {
             $translations = new Translate(
                 $lang,
-                $project->getWhatsnewFiles('google', $request->query['channel'])
+                $project->getWhatsnewFiles($store, $channel)
             );
 
             $translations::$log_errors = false;
 
             if ($translations->isFileTranslated()) {
                 // Include the current template
-                require TEMPLATES . $project->getTemplate('google', $request->query['channel']);
+                require TEMPLATES . $project->getTemplate($store, $channel);
 
-                if ($set_limit(500, $whatsnew($translations))) {
+                // Google has a 500 characters limit for the What's New section
+                if ($store == 'google' && $set_limit(500, $whatsnew($translations))) {
                     $done[] = $lang;
                 }
             }
         }
 
-        $supported = array_unique(array_values($project->getLocalesMapping('google')));
-        $json = array_values(array_intersect($done, $supported));
+        $json = $valid_locales($done);
         break;
     case 'listing':
-        $done    = [];
-        $store   = $request->query['store'];
-        $channel = $request->query['channel'];
-        foreach ($project->getFirefoxLocales($store, $channel) as $lang) {
+        foreach ($firefox_locales as $lang) {
             $translations = new Translate($lang, $project->getListingFiles($store, $channel));
             $translations::$log_errors = false;
 
@@ -96,8 +99,7 @@ switch ($request->getService()) {
             }
         }
 
-        $supported = array_unique(array_values($project->getLocalesMapping($store)));
-        $json = array_values(array_intersect($done, $supported));
+        $json = $valid_locales($done);
         break;
     default:
         $request->error = 'Not a valid API call.';
