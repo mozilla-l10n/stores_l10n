@@ -190,25 +190,15 @@ class API
             */
                 break;
             case 'done':
-            /*
-                ex: /api/google/done/beta/
-                Legacy API call we are redirecting to 'listing'.
-            */
-                break;
             case 'listing':
-            // ex: /api/google/listing/beta/
-                if (! $this->verifyEnoughParameters(3)) {
-                    return false;
-                }
-
-                if (! in_array($this->query['channel'], $this->channels[$this->query['store']])) {
-                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['store']}.");
-
-                    return false;
-                }
-                break;
             case 'whatsnew':
-            // ex: /api/google/whatsnew/release/
+                /*
+                    ex:
+                    /api/google/done/beta/
+                    /api/google/listing/beta/
+                    /api/google/whatsnew/release/
+                    We have an extra check for Whatsnew
+                */
                 if (! $this->verifyEnoughParameters(3)) {
                     return false;
                 }
@@ -219,10 +209,12 @@ class API
                     return false;
                 }
 
-                if (! $this->project->getWhatsnewFiles($this->query['store'], $this->query['channel'])) {
-                    $this->log("Whatsnew section is not supported for {$this->query['store']} on '{$this->query['channel']}' channel.");
+                if ($service == 'whatsnew') {
+                    if (! $this->project->getWhatsnewFiles($this->query['store'], $this->query['channel'])) {
+                        $this->log("Whatsnew section is not supported for {$this->query['store']} on '{$this->query['channel']}' channel.");
 
-                    return false;
+                        return false;
+                    }
                 }
                 break;
             default:
