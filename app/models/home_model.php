@@ -21,6 +21,13 @@ $status['google']['release'] = $get_status(
     $project->getGoogleMozillaCommonLocales('release')
 );
 
+foreach ($status['google']['release'] as $lang => $state) {
+    if ($state == 'translated') {
+        $obj = new Translate($lang, $project->getWhatsnewFiles('google', 'release'));
+        $status['google']['release'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
+    }
+}
+
 $status['google']['beta'] = $get_status(
     $project->getListingFiles('google', 'beta'),
     $project->getGoogleMozillaCommonLocales('beta')
