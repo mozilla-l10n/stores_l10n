@@ -100,6 +100,16 @@ $other = function ($translations) use ($_) {
 OUT;
 };
 
+$whatsnew = function ($translations) use ($_) {
+    return <<<OUT
+- {$_('Open Firefox tabs from the home screen with 3D Touch')}
+- {$_('Preview pages on your tab list with 3D Touch')}
+- {$_('Open web pages in Firefox in Spotlight Search')}
+- {$_('Find words and phrases on a web page with Find in Page')}
+- {$_('Save and manage login information with Password Manager')}
+OUT;
+};
+
 $screenshots_api = [
     [
         'title' => br2nl($_('Fast. Smart. Yours')),
