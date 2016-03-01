@@ -56,7 +56,7 @@ $listing_json = $valid_locales($done);
 */
 $whatsnew_json = $listing_json;
 
-if ($store == 'google' && $channel == 'release') {
+if ($channel == 'release') {
     $done = [];
     foreach ($firefox_locales as $lang) {
         $translations = new Translate($lang, $project->getWhatsnewFiles($store, $channel));
@@ -66,9 +66,21 @@ if ($store == 'google' && $channel == 'release') {
             // Include the current template
             require TEMPLATES . $project->getTemplate($store, $channel);
 
-            // Google has a 500 characters limit for the What's New section
-            if ($store == 'google' && $set_limit(500, $whatsnew($translations))) {
-                $done[] = $lang;
+            switch ($store) {
+                case 'google':
+                    /*
+                        Only Google has a 500 characters limit for the What's
+                        New section.
+                    */
+                    if ($set_limit(500, $whatsnew($translations))) {
+                        $done[] = $lang;
+                    }
+                    break;
+                case 'apple':
+                    $done[] = $lang;
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -100,11 +112,6 @@ switch ($request->getService()) {
                 'short_desc' => $short_desc($translations),
                 'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translations)),
             ];
-
-            // Do we have a Whatsnew file for this release ?
-            if (isset($whatsnew)) {
-                $json['whatsnew'] = $whatsnew($translations);
-            }
         }
 
         if ($store == 'apple') {
@@ -114,6 +121,11 @@ switch ($request->getService()) {
                 'keywords'    => $keywords($translations),
                 'screenshots' => $screenshots_api,
             ];
+        }
+
+        // Do we have a Whatsnew file for this release ?
+        if (isset($whatsnew)) {
+            $json['whatsnew'] = $whatsnew($translations);
         }
         break;
     case 'whatsnew':
