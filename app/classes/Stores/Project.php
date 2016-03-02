@@ -148,7 +148,7 @@ class Project
             'release' => [
                 'template' => 'google/release/listing_oct_2015.php',
                 'langfile' => 'android_42_release.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_44.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_45.lang',
                 ],
             'beta' => [
                 'template' => 'google/beta/listing_may_2015.php',
@@ -164,7 +164,6 @@ class Project
             'release' => [
                 'template' => 'apple/release/listing_sept_2015.php',
                 'langfile' => 'apple_description_release.lang',
-                'whatsnew' => 'whatsnew/whatsnew_ios_2.lang',
             ],
         ],
     ];
