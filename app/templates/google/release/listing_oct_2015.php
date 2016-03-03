@@ -133,9 +133,7 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Tab audio indicator displays in tab list')}
-* {$_('Include URL when sharing selected text from web page')}
-* {$_('Accessibility improvements')}
-* {$_('Users can now mark read/unread state of items in reading list panel')}
+* {$_('Click-to-view images feature, under "Advanced" Settings menu, to provide control over data bandwidth usage.')}
+* {$_('Re-organization of Settings menu to help users find their setting preferences better.')}
 OUT;
 };
