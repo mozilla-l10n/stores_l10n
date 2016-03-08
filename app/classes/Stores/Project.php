@@ -52,6 +52,9 @@ class Project
     private $ios_locales_aurora = [];
     private $ios_locales_beta = [];
 
+    /*
+        Original list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
+     */
     private $google_locales_mapping = [
         'af'     => 'af',
         'ar'     => 'ar',
