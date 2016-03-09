@@ -176,8 +176,7 @@ class Project extends atoum\test
             ->string($obj->getWhatsnewFiles('google', 'release'))
             ;
         $this
-            ->boolean($obj->getWhatsnewFiles('google', 'beta'))
-                ->isFalse()
+            ->string($obj->getWhatsnewFiles('google', 'beta'))
             ;
     }
 }

@@ -37,3 +37,11 @@ $short_desc = function ($translations) use ($_) {
 $app_title = function ($translations) use ($_) {
     return $_('Firefox for Android Beta');
 };
+
+$whatsnew = function ($translations) use ($_) {
+    return <<<OUT
+* {$_('Notifications about tabs opened in the background now list the URLs')}
+* {$_('Firefox will request permissions at runtime instead of installation time (Android 6.0+)')}
+* {$_('Previously cached pages will be displayed when offline')}
+OUT;
+};
