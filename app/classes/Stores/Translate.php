@@ -16,7 +16,7 @@ class Translate extends Dotlang
 {
     protected $source_strings;
     protected $translations;
-    // protected $locale;
+    protected $locale;
     public $repo;
 
     public function __construct($locale, $files)

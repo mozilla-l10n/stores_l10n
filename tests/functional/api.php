@@ -36,6 +36,7 @@ $paths = [
     ['google/translation/release/ja/', 200, false],
     ['google/translation/beta/fr/', 200, false],
     ['google/whatsnew/release/', 200, false],
+    ['google/whatsnew/beta/', 200, false],
     ['google/listing/release/', 200, false],
 ];
 
@@ -74,6 +75,11 @@ $obj
 
 $obj
     ->setPath('google/translation/release/fr/')
+    ->fetchContent()
+    ->hasKeys(['title',  'short_desc', 'long_desc', 'whatsnew']);
+
+$obj
+    ->setPath('google/translation/beta/fr/')
     ->fetchContent()
     ->hasKeys(['title',  'short_desc', 'long_desc', 'whatsnew']);
 

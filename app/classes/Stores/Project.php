@@ -156,6 +156,7 @@ class Project
             'beta' => [
                 'template' => 'google/beta/listing_may_2015.php',
                 'langfile' => 'description_beta_page.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_46_beta.lang',
                 ],
             'next' => [
                 'template' => 'google/next/listing_oct_2015.php',
