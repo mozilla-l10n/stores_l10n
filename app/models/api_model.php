@@ -14,7 +14,7 @@ $valid_locales = function ($done) use ($supported_locales) {
 
 /*
     The Done API returns the status of a locale which can have mutiple files
-    to translate. Specifically, for Google Release channel, localizers should
+    to translate. Specifically, for Google channels, localizers should
     translate the listing page on Google Play but also periodically a file that
     contains strings for the What's New pane.
 
@@ -56,36 +56,34 @@ $listing_json = $valid_locales($done);
 */
 $whatsnew_json = $listing_json;
 
-if ($channel == 'release') {
-    $done = [];
-    foreach ($firefox_locales as $lang) {
-        $translations = new Translate($lang, $project->getWhatsnewFiles($store, $channel));
-        $translations::$log_errors = false;
+$done = [];
+foreach ($firefox_locales as $lang) {
+    $translations = new Translate($lang, $project->getWhatsnewFiles($store, $channel));
+    $translations::$log_errors = false;
 
-        if ($translations->isFileTranslated()) {
-            // Include the current template
-            require TEMPLATES . $project->getTemplate($store, $channel);
+    if ($translations->isFileTranslated()) {
+        // Include the current template
+        require TEMPLATES . $project->getTemplate($store, $channel);
 
-            switch ($store) {
-                case 'google':
-                    /*
-                        Only Google has a 500 characters limit for the What's
-                        New section.
-                    */
-                    if ($set_limit(500, $whatsnew($translations))) {
-                        $done[] = $lang;
-                    }
-                    break;
-                case 'apple':
+        switch ($store) {
+            case 'google':
+                /*
+                    Only Google has a 500 characters limit for the What's
+                    New section.
+                */
+                if ($set_limit(500, $whatsnew($translations))) {
                     $done[] = $lang;
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case 'apple':
+                $done[] = $lang;
+                break;
+            default:
+                break;
         }
     }
-    $whatsnew_json = $valid_locales($done);
 }
+$whatsnew_json = $valid_locales($done);
 
 switch ($request->getService()) {
     case 'storelocales':
