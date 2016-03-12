@@ -168,6 +168,7 @@ class Project
             'release' => [
                 'template' => 'apple/release/listing_sept_2015.php',
                 'langfile' => 'apple_description_release.lang',
+                'whatsnew' => 'whatsnew/whatsnew_ios_2_1.lang',
             ],
         ],
     ];
