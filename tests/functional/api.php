@@ -37,6 +37,7 @@ $paths = [
     ['google/translation/beta/fr/', 200, false],
     ['google/whatsnew/release/', 200, false],
     ['google/whatsnew/beta/', 200, false],
+    ['apple/whatsnew/release/', 200, false],
     ['google/listing/release/', 200, false],
 ];
 

@@ -50,13 +50,12 @@ $status['apple']['release'] = $get_status(
     $project->getAppleMozillaCommonLocales('release')
 );
 
-/*
 foreach ($status['apple']['release'] as $lang => $state) {
     if ($state == 'translated') {
         $obj = new Translate($lang, $project->getWhatsnewFiles('apple', 'release'));
         $status['apple']['release'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
-}*/
+}
 
 $html_table = function ($table_id, $table_title, $store, $channel) use ($status, $project) {
     ob_start();

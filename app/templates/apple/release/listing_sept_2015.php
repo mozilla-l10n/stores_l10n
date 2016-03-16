@@ -85,6 +85,18 @@ $screenshots = function ($translations) use ($_) {
 
 <b>{$_('Private Browsing')}</b>
 {$_('Make specific tabs private and browse<br>the Web without your history being saved')}
+
+<hr/><h4>Firefox for iOS 3.0 screenshots</h4>
+
+<b>{$_('Join hundreds<br>of millions of<br>Firefox users')}</b>
+
+<b>{$_('Fast and<br>intelligent search')}</b>
+
+<b>{$_('Access tabs,<br>bookmarks and history<br>from other devices')}</b>
+
+<b>{$_('Simple<br>browser tabs')}</b>
+
+<b>{$_('Private<br>browsing')}</b>
 OUT;
 };
 
@@ -102,6 +114,9 @@ OUT;
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
+• {$_('Support for third-party keyboards has been enabled (note that some keyboards have trouble with the Firefox location bar)')}
+• {$_('Fix for a bug where it was not always possible to edit passwords in the login manager')}
+• {$_('Fix for a possible crash on page load')}
 OUT;
 };
 
@@ -133,5 +148,25 @@ $screenshots_api = [
     [
         'title' => br2nl($_('Private Browsing')),
         'text'  => br2nl($_('Make specific tabs private and browse<br>the Web without your history being saved')),
+    ],
+    [
+        'title' => br2nl($_('Join hundreds<br>of millions of<br>Firefox users')),
+        'text'  => '',
+    ],
+    [
+        'title' => br2nl($_('Fast and<br>intelligent search')),
+        'text'  => '',
+    ],
+    [
+        'title' => br2nl($_('Access tabs,<br>bookmarks and history<br>from other devices')),
+        'text'  => '',
+    ],
+    [
+        'title' => br2nl($_('Simple<br>browser tabs')),
+        'text'  => '',
+    ],
+    [
+        'title' => br2nl($_('Private<br>browsing')),
+        'text'  => '',
     ],
 ];

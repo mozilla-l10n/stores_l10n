@@ -5,13 +5,11 @@
 <h3>Description</h3>
 <pre contenteditable="true"><?= strip_tags($description($translations)) ?></pre>
 
-<!--
 <h3>What’s new</h3>
 <pre contenteditable="true"><?= $whatsnew($translations) ?></pre>
--->
 
 <h3>Screenshots text</h3>
-<pre  contenteditable="true" style="text-align: center;"><?= br2nl($screenshots($translations)) ?></pre>
+<pre contenteditable="true" style="text-align: center;"><?= br2nl($screenshots($translations)) ?></pre>
 
 <h3>Keywords &mdash; <?= $keywords_warning ?></h3>
 <pre contenteditable="true"><?= htmlspecialchars($keywords($translations)) ?></pre>
