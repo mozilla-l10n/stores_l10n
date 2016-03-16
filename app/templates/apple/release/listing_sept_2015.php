@@ -85,7 +85,13 @@ $screenshots = function ($translations) use ($_) {
 
 <b>{$_('Private Browsing')}</b>
 {$_('Make specific tabs private and browse<br>the Web without your history being saved')}
+OUT;
+};
 
+// IOSHACK
+if ($needs_v3_screenshots) {
+    $screenshots_v3 = function ($translations) use ($_) {
+        return <<<OUT
 <hr/><h4>Firefox for iOS 3.0 screenshots</h4>
 
 <b>{$_('Join hundreds<br>of millions of<br>Firefox users')}</b>
@@ -98,7 +104,8 @@ $screenshots = function ($translations) use ($_) {
 
 <b>{$_('Private<br>browsing')}</b>
 OUT;
-};
+    };
+}
 
 $keywords = function ($translations) use ($_) {
     return $_('internet,safari,chrome,opera,explorer,search,adblock,flash,browser,browsing,incognito,private,browse');
