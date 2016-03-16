@@ -17,10 +17,12 @@ $get_status = function ($lang_files, $store_locales) use ($project) {
             for Google but this is the best we can do for now.
          */
         if (! in_array($lang, $project->ios_v3_screenshots) && is_array($lang_files)) {
-            $lang_files = array_diff($lang_files, ['apple_screenshots_v3.lang']);
+            $files = array_diff($lang_files, ['apple_screenshots_v3.lang']);
+        } else {
+            $files = $lang_files;
         }
 
-        $obj = new Translate($lang, $lang_files);
+        $obj = new Translate($lang, $files);
         $status[$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
 
