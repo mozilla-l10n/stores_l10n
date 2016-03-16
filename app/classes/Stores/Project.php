@@ -49,6 +49,17 @@ class Project
          'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
+    /*
+        IOSHACK:
+        Here we have a hack to change the list of lang files supported for
+        iOS because screenshots for Firefox iOS v3 will be created only for
+        a subset of locales. It would break if we add multiple lang files
+        for Google but this is the best we can do for now.
+     */
+    public $ios_v3_screenshots = [
+        'de', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pt-BR', 'ru', 'zh-CN', 'zh-TW',
+    ];
+
     private $ios_locales_aurora = [];
     private $ios_locales_beta = [];
 
@@ -167,7 +178,10 @@ class Project
             // channel => path to template file
             'release' => [
                 'template' => 'apple/release/listing_sept_2015.php',
-                'langfile' => 'apple_description_release.lang',
+                'langfile' => [
+                    'apple_description_release.lang',
+                    'apple_screenshots_v3.lang',
+               ],
                 'whatsnew' => 'whatsnew/whatsnew_ios_2_1.lang',
             ],
         ],
