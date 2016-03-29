@@ -92,8 +92,6 @@ OUT;
 if ($needs_v3_screenshots) {
     $screenshots_v3 = function ($translations) use ($_) {
         return <<<OUT
-<hr/><h4>Firefox for iOS 3.0 screenshots</h4>
-
 <b>{$_('Join hundreds<br>of millions of<br>Firefox users')}</b>
 
 <b>{$_('Fast and<br>intelligent search')}</b>

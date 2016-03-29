@@ -10,9 +10,13 @@ namespace Stores;
  */
 class Project
 {
-    // Source : http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
-    // Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
-    // Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
+    private $rtl = ['ar', 'fa', 'he', 'ur'];
+
+    /*
+        Source : http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
+        Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
+        Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
+    */
     private $android_locales_release = [
         'an', 'as', 'az', 'be', 'bn-IN', 'br', 'ca', 'cs', 'cy', 'da', 'de',
         'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-ES', 'es-MX', 'et', 'eu',
@@ -23,17 +27,12 @@ class Project
         'te', 'th', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
-    private $android_locales_marketing = [
-        'de', 'en-US', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pt-BR',
-        'ru', 'zh-CN',
-    ];
-
     private $android_locales_aurora = [];
 
     private $android_locales_beta = [];
 
     /*
-        source: https://l10n.mozilla-community.org/~flod/webstatus/api/?product=firefox-ios
+        source: https://raw.githubusercontent.com/mozilla/firefox-ios/v3.x/shipping_locales.txt
         translations are at: https://github.com/mozilla-l10n/firefoxios-l10n/
         For iOS we used the locale code es for Spanish from Spain, that was a
         mistake, this is why I changed it to es-ES in the array below, otherwise
@@ -41,12 +40,11 @@ class Project
         the es folder for iOS
     */
     private $ios_locales_release = [
-        'ar', 'az', 'bg', 'bn-IN', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'el',
-        'en-US', 'eo', 'es-ES', 'es-CL', 'es-MX', 'fa', 'fr', 'fy-NL', 'ga-IE',
-        'gd', 'gl', 'hsb', 'id', 'is', 'it', 'ja', 'kk', 'km', 'ko', 'lo', 'lt',
-        'lv', 'ml', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'or', 'pl', 'pt-BR',
-        'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sv-SE', 'th', 'tl', 'tr',
-         'uk', 'uz', 'zh-CN', 'zh-TW',
+        'az', 'bg', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'eo',
+        'es-ES', 'es-CL', 'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd', 'hsb', 'id', 'is',
+        'it', 'ja', 'kk', 'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO', 'nl', 'nn-NO',
+        'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'sv-SE', 'th',
+        'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
     /*
@@ -197,6 +195,14 @@ class Project
     }
 
     /**
+     * Return true if $locale is a Right-To-Left locale, false otherwise.
+     */
+    public function isRTL($locale)
+    {
+        return in_array($locale, $this->rtl);
+    }
+
+    /**
      * Return all the locales supported by Google Play
      *
      * @param  boolean $mapping If True, return the Google/Mozilla locale mapping list
@@ -245,6 +251,9 @@ class Project
             case 'release':
             default:
                 $locales = $this->android_locales_release;
+                // HACK: adding ar as experiment (bug 1259200)
+                $locales[] = 'ar';
+                sort($locales);
                 break;
         }
 
