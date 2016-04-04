@@ -1,6 +1,8 @@
 <?php
 namespace Stores;
 
+$direction = $project->isRTL($request['locale']) ? 'dir="rtl"' : 'dir="ltr"';
+
 $listing_files  = $project->getListingFiles($request['store'], $request['channel']);
 $whatsnew_files = $project->getWhatsnewFiles($request['store'], $request['channel']);
 
