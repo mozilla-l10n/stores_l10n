@@ -195,7 +195,10 @@ class Project
     }
 
     /**
-     * Return true if $locale is a Right-To-Left locale, false otherwise.
+     * Check if a locale is Right-To-Left
+     *
+     * @param  String  $locale Locale code to check
+     * @return boolean true if $locale is a Right-To-Left locale, false otherwise.
      */
     public function isRTL($locale)
     {
