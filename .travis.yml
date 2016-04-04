@@ -5,6 +5,8 @@ php:
   - 5.6
   - 7.0
 before_script:
+  ## Disabling xdebug
+  - phpenv config-rm xdebug.ini
   ## Composer
   - composer self-update
   - composer install --no-interaction --prefer-source
