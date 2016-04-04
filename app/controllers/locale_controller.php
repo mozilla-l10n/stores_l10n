@@ -35,7 +35,6 @@ if (! in_array($request['locale'], $locales)) {
 }
 
 $title = ucfirst($request['store']) . " Store Description, {$request['channel']} channel, for: {$request['locale']}";
-$direction = $project->isRTL($request['locale']) ? 'dir="rtl"' : 'dir="ltr"';
 
 if (! isset($request['output'])) {
     $request['output'] = 'show';
