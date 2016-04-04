@@ -8,10 +8,13 @@ before_script:
   ## Composer
   - composer self-update
   - composer install --no-interaction --prefer-source
+  ## Install ESLint
+  - npm install -g eslint
 script:
   - vendor/atoum/atoum/bin/atoum -d tests/units/
   - php tests/functional/api.php
   - vendor/bin/php-cs-fixer --diff --dry-run -v fix
+  - eslint web/media/js
 notifications:
   irc:
     channels:
