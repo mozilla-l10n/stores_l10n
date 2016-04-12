@@ -158,8 +158,8 @@ class Project
         'google' => [
             // channel => path to template file
             'release' => [
-                'template' => 'google/release/listing_oct_2015.php',
-                'langfile' => 'android_42_release.lang',
+                'template' => 'google/release/listing_apr_2016.php',
+                'langfile' => 'android_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_45.lang',
                 ],
             'beta' => [
@@ -168,8 +168,8 @@ class Project
                 'whatsnew' => 'whatsnew/whatsnew_android_46_beta.lang',
                 ],
             'next' => [
-                'template' => 'google/next/listing_oct_2015.php',
-                'langfile' => 'android_42_release.lang',
+                'template' => 'google/next/listing_apr_2016.php',
+                'langfile' => 'android_release.lang',
                 ],
         ],
         'apple' => [

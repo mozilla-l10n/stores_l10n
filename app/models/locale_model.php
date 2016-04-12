@@ -41,20 +41,6 @@ if ($request['store'] == 'google') {
     $listing_warning    = $set_limit(4000, $get_length($description($translations)));
     $title_warning      = $set_limit(30, $get_length($app_title($translations)));
 
-    /*
-        Historically we have two titles on the Release channel for Google:
-        Firefox Web Browser
-        Firefox for Android
-
-        The Beta channel only has one title:
-        Firefox for Android Beta
-
-        Let's alias one to the other for non-release channels.
-    */
-    $title_warning2 = isset($app_title2)
-        ? $set_limit(30, $get_length($app_title2($translations)))
-        : $title_warning;
-
     if (in_array($request['channel'], ['beta', 'release'])) {
         $whatsnew_warning = $set_limit(500, $get_length($whatsnew($translations)));
     }
