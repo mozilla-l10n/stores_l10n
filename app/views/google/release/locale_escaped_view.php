@@ -1,8 +1,6 @@
 <h1>Firefox for Android</h1>
 <h3>Title 1 &mdash; <?= $title_warning ?></h3>
 <pre <?=$direction?>><?= $app_title($translations) ?></pre>
-<h3>Title 2 &mdash; <?= $title_warning2 ?></h3>
-<pre <?=$direction?>><?= $app_title2($translations) ?></pre>
 
 <h3>What’s new &mdash; <?= $whatsnew_warning ?></h3>
 <pre contenteditable="true" <?=$direction?>><?= $whatsnew($translations) ?></pre>
