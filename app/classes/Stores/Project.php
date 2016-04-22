@@ -160,7 +160,7 @@ class Project
             'release' => [
                 'template' => 'google/release/listing_apr_2016.php',
                 'langfile' => 'android_release.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_45.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_46.lang',
                 ],
             'beta' => [
                 'template' => 'google/beta/listing_may_2015.php',

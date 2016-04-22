@@ -129,7 +129,9 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Click-to-view images feature, under "Advanced" Settings menu, to provide control over data bandwidth usage.')}
-* {$_('Re-organization of Settings menu to help users find their setting preferences better.')}
+* {$_('Notifications about tabs opened in the background now list the URLs')}
+* {$_('Top Sites panel now lists popular sites by default')}
+* {$_('Previously cached pages will be displayed when offline')}
+* {$_('Firefox will request permissions at runtime instead of installation time (Android 6.0+)')}
 OUT;
 };
