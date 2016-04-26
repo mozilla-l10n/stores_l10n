@@ -40,8 +40,8 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Notifications about tabs opened in the background now list the URLs')}
-* {$_('Firefox will request permissions at runtime instead of installation time (Android 6.0+)')}
-* {$_('Previously cached pages will be displayed when offline')}
+* {$_('Add “Show/Hide web fonts” in advanced settings to reduce bandwidth and data')}
+* {$_('Add system notification to highlight features on browser update')}
+* {$_('This is the last release to support Android Gingerbread')}
 OUT;
 };
