@@ -119,9 +119,10 @@ OUT;
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-• {$_('Support for third-party keyboards has been enabled (note that some keyboards have trouble with the Firefox location bar)')}
-• {$_('Fix for a bug where it was not always possible to edit passwords in the login manager')}
-• {$_('Fix for a possible crash on page load')}
+• {$_('Search your bookmarks and history in your browser’s URL bar.  The awesome bar is now even more awesome!')}
+• {$_('Manage certificate errors when visiting a secure website (https) by viewing the certificate and temporarily ignoring the error')}
+• {$_('Quickly open a new tab, a new private tab or a copied URL in Firefox through iOS’s today widget')}
+• {$_('Print web pages through Airprint printers')}
 OUT;
 };
 
