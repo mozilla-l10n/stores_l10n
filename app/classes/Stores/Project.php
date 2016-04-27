@@ -165,7 +165,7 @@ class Project
             'beta' => [
                 'template' => 'google/beta/listing_may_2015.php',
                 'langfile' => 'description_beta_page.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_46_beta.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_47_beta.lang',
                 ],
             'next' => [
                 'template' => 'google/next/listing_apr_2016.php',
@@ -180,7 +180,7 @@ class Project
                     'apple_description_release.lang',
                     'apple_screenshots_v3.lang',
                ],
-                'whatsnew' => 'whatsnew/whatsnew_ios_2_1.lang',
+                'whatsnew' => 'whatsnew/whatsnew_ios_4_0.lang',
             ],
         ],
     ];
