@@ -120,7 +120,7 @@ OUT;
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
 • {$_('Search your bookmarks and history in your browser’s URL bar.  The awesome bar is now even more awesome!')}
-• {$_('Manage certificate errors when visiting a secure website (https) by viewing the certificate and temporarily ignoring the error')}
+• {$_('Manage certificate errors when visiting a secure website (https) by temporarily ignoring the error')}
 • {$_('Quickly open a new tab, a new private tab or a copied URL in Firefox through iOS’s today widget')}
 • {$_('Print web pages through Airprint printers')}
 OUT;
