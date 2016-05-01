@@ -1,5 +1,6 @@
 app/settings/config.ini
 composer.lock
+composer.phar
 locales
 logs/api-errors.log
 vendor
