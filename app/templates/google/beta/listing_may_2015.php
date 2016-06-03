@@ -40,8 +40,8 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Add “Show/Hide web fonts” in advanced settings to reduce bandwidth and data')}
-* {$_('Add system notification to highlight features on browser update')}
-* {$_('This is the last release to support Android Gingerbread')}
+* {$_('Content Notifications for infrequent websites')}
+* {$_('Suggest “Add to home screen” for frequently used websites')}
+* {$_('Migrate reading list to bookmarks')}
 OUT;
 };
