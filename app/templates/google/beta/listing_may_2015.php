@@ -40,7 +40,6 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Content Notifications for infrequent websites')}
 * {$_('Suggest “Add to home screen” for frequently used websites')}
 * {$_('Migrate reading list to bookmarks')}
 OUT;
