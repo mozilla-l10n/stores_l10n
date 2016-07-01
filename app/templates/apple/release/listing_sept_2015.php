@@ -119,10 +119,11 @@ OUT;
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-• {$_('Search your bookmarks and history in your browser’s URL bar.  The awesome bar is now even more awesome!')}
-• {$_('Manage certificate errors when visiting a secure website (https) by temporarily ignoring the error')}
-• {$_('Quickly open a new tab, a new private tab or a copied URL in Firefox through iOS’s today widget')}
-• {$_('Print web pages through Airprint printers')}
+• {$_('Add any search provider to Firefox')}
+• {$_('New menu in the toolbar for quick access to popular features')}
+• {$_('Ability to “Close All Tabs” and to recover them')}
+• {$_('Set a custom homepage and get access to your favorite web page faster')}
+• {$_('Synced tabs can now be found in the History icon')}
 OUT;
 };
 

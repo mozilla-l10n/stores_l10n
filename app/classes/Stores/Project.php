@@ -180,7 +180,7 @@ class Project
                     'apple_description_release.lang',
                     'apple_screenshots_v3.lang',
                ],
-                'whatsnew' => 'whatsnew/whatsnew_ios_4_0.lang',
+                'whatsnew' => 'whatsnew/whatsnew_ios_5_0.lang',
             ],
         ],
     ];
