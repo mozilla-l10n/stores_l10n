@@ -160,12 +160,12 @@ class Project
             'release' => [
                 'template' => 'google/release/listing_apr_2016.php',
                 'langfile' => 'android_release.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_47.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_48.lang',
                 ],
             'beta' => [
                 'template' => 'google/beta/listing_may_2015.php',
                 'langfile' => 'description_beta_page.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_48_beta.lang',
+                'whatsnew' => 'whatsnew/whatsnew_android_49_beta.lang',
                 ],
             'next' => [
                 'template' => 'google/next/listing_apr_2016.php',
