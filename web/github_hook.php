@@ -1,13 +1,13 @@
 <?php
-/* Webhook to update a repo for each push on GitHub. */
+// Webhook to update a repo for each push on GitHub
 
 date_default_timezone_set('Europe/Paris');
 
-// app variables
+// App variables
 $app_root = realpath(__DIR__ . '/../');
 $composer = $app_root . '/composer.phar';
 
-// git variables
+// Git variables
 $branch = 'master';
 $header = 'HTTP_X_HUB_SIGNATURE';
 $secret = parse_ini_file($app_root . '/app/settings/config.ini')['github_key'];
@@ -21,7 +21,7 @@ function logHookResult($message, $success = false)
             $log_headers .= "$header: $value \n";
         }
     }
-    file_put_contents(__DIR__ . '/github_log.txt', $log_headers);
+    file_put_contents(__DIR__ . '/../logs/github_log.txt', $log_headers);
 }
 
 // CHECK: Download composer in the app root if it is not already there
@@ -40,7 +40,21 @@ if (isset($_SERVER[$header])) {
     );
 
     if ($validation == explode('=', $_SERVER[$header])[1]) {
+        $log = '';
+
+        // Aknowledge request
+        ob_start();
+        echo '{}';
+        header($_SERVER["SERVER_PROTOCOL"] . " 202 Accepted");
+        header("Status: 202 Accepted");
+        header("Content-Type: application/json");
+        header('Content-Length: ' . ob_get_length());
+        ob_end_flush();
+        ob_flush();
+        flush();
+
         // Pull latest changes
+        $log = "Updating Git repository\n";
         exec("git checkout $branch ; git pull origin $branch");
 
         // Install or update dependencies
@@ -48,20 +62,25 @@ if (isset($_SERVER[$header])) {
             chdir($app_root);
 
             // www-data does not have a HOME or COMPOSER_HOME, create one
-            if (! is_dir("{$app_root}/cache/.composer")) {
-                mkdir("{$app_root}/cache/.composer");
+            $cache_folder = "{$app_root}/cache/.composer";
+            if (! is_dir($cache_folder)) {
+                $log = "Creating folder {$cache_folder}\n";
+                mkdir($cache_folder);
             }
 
             putenv("COMPOSER_HOME={$app_root}/cache/.composer");
 
             if (file_exists($app_root . '/vendor')) {
+                $log .= "Updating Composer\n";
                 exec("php {$composer} update > /dev/null 2>&1");
             } else {
+                $log .= "Installing Composer\n";
                 exec("php {$composer} install > /dev/null 2>&1");
             }
         }
 
-        logHookResult('Last update: ' . date('d-m-Y H:i:s'), true);
+        $log .= 'Last update: ' . date('d-m-Y H:i:s');
+        logHookResult($log, true);
     } else {
         logHookResult('Invalid GitHub secret');
     }
