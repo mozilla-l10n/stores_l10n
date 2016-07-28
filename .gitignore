@@ -1,7 +1,9 @@
 app/settings/config.ini
+cache
 composer.lock
 composer.phar
 locales
 logs/api-errors.log
+logs/github_log.txt
 vendor
 web/media/assets
