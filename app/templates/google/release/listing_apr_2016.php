@@ -129,8 +129,8 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Suggest “Add to home screen” for frequently used websites')}
-* {$_('Migrate reading list to bookmarks')}
-* {$_('Video controls get a new look! Snazzy')}
+* {$_('Remember scroll position and zoom level for open tabs')}
+* {$_('Updated First Run to showcase several exciting features')}
+* {$_('Outdated tabs are now hidden when restore tabs setting is set to "Always restore"')}
 OUT;
 };
