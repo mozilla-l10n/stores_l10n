@@ -3,7 +3,6 @@ namespace Stores;
 
 // Closure to use in the template
 $_ = function ($string, $replacements = false) use ($translations, $view) {
-
     $return_string = $translations->get($string);
     $warning = '';
 

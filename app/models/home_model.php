@@ -71,8 +71,7 @@ foreach ($status['apple']['release'] as $lang => $state) {
 }
 
 $html_table = function ($table_id, $table_title, $store, $channel) use ($status, $project) {
-    ob_start();
-    ?>
+    ob_start(); ?>
         <table id="<?=$table_id?>" class="table table-bordered table-condensed table-striped">
         <tr>
             <th class="text-center" colspan="5"><?=$table_title?></th>
@@ -95,8 +94,7 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
                 $color = ' success';
             } else {
                 $color = '';
-            }
-            ?>
+            } ?>
             <td class='<?=$color?>'></td>
             <?php endif; ?>
             <td><a href="./locale/<?=$lang?>/<?=$store?>/<?=$channel?>/">Show</a></td>
