@@ -35,6 +35,7 @@
             <li class="<?=($url['path'] == '/') ? 'active' : ''?>"><a href="#">Home</a></li>
             <li class="<?=($url['path'] == 'api/documentation') ? 'active' : ''?>"><a href="api/documentation">API</a></li>
             <li><a href="https://github.com/mozilla-l10n/stores_l10n/">Code on Github</a></li>
+            <li><a href="https://github.com/mozilla-l10n/stores_l10n/issues">Report bug</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
