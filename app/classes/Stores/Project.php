@@ -18,7 +18,7 @@ class Project
         Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
     */
     private $android_locales_release = [
-        'an', 'as', 'az', 'be', 'bn-IN', 'br', 'ca', 'cs', 'cy', 'da', 'de',
+        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cs', 'cy', 'da', 'de',
         'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-ES', 'es-MX', 'et', 'eu',
         'fi', 'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gu-IN', 'hi-IN', 'hr',
         'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
@@ -68,7 +68,6 @@ class Project
         'af'     => 'af',
         'ar'     => 'ar',
         'am'     => false,
-        'be'     => 'be',
         'bg'     => 'bg',
         'cs-CZ'  => 'cs',
         'ca'     => 'ca',
