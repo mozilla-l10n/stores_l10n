@@ -73,7 +73,7 @@ class Project extends atoum\test
                 ->contains('ca')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(36)
+                ->hassize(38)
             ;
     }
 

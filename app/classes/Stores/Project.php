@@ -18,13 +18,13 @@ class Project
         Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
     */
     private $android_locales_release = [
-        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cs', 'cy', 'da', 'de',
-        'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-ES', 'es-MX', 'et', 'eu',
-        'fi', 'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gu-IN', 'hi-IN', 'hr',
-        'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt',
-        'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'or', 'pa-IN', 'pl',
-        'pt-BR', 'pt-PT', 'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sv-SE', 'ta',
-        'te', 'th', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
+        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
+        'dsb', 'es-CL', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-ES', 'es-MX', 'et',
+        'eu', 'fi', 'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'hi-IN',
+        'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko',
+        'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'or', 'pa-IN',
+        'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr',
+        'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh', 'zh-CN', 'zh-TW',
     ];
 
     private $android_locales_aurora = [];
@@ -40,10 +40,11 @@ class Project
         the es folder for iOS
     */
     private $ios_locales_release = [
-        'az', 'bg', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-US', 'eo',
-        'es-ES', 'es-CL', 'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd', 'hsb', 'id', 'is',
-        'it', 'ja', 'kk', 'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO', 'nl', 'nn-NO',
-        'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'sv-SE', 'th',
+        'ast', 'az', 'bg', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-GB',
+        'eo', 'es-ES', 'es-CL', 'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd',
+        'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kk', 'km', 'ko', 'lo',
+        'lt', 'lv', 'nb-NO', 'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR',
+        'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sv-SE', 'te', 'th',
         'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
