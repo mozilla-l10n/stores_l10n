@@ -40,12 +40,12 @@ class Project extends atoum\test
             ->array($obj->getGoogleStoreLocales(true))
                 ->hasKey('es-419')
                 ->contains('de')
-                ->hassize(52)
+                ->hassize(51)
             ;
         $this
             ->array($obj->getGoogleStoreLocales(false))
                 ->contains('es-419')
-                ->hassize(52)
+                ->hassize(51)
             ;
     }
 
@@ -70,10 +70,10 @@ class Project extends atoum\test
         $obj = new _Project();
         $this
             ->array($obj->getGoogleMozillaCommonLocales('release'))
-                ->contains('be')
+                ->contains('ca')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(37)
+                ->hassize(36)
             ;
     }
 
