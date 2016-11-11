@@ -129,8 +129,7 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Remember scroll position and zoom level for open tabs')}
-* {$_('Updated First Run to showcase several exciting features')}
-* {$_('Outdated tabs are now hidden when restore tabs setting is set to "Always restore"')}
+* {$_('Simplified panels by combining “Recent Tabs” into “History” panel')}
+* {$_('Support of HLS videos via player overlay')}
 OUT;
 };

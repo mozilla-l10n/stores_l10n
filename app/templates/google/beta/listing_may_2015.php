@@ -40,7 +40,7 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Simplified panels by combining “Recent Tabs” into “History” panel')}
-* {$_('Support of HLS videos via player overlay')}
+* {$_('Use Skia library for content rendering')}
+* {$_('Added Nepali (ne-NP), Bulgarian (bg) and Kabyle (kab) locales')}
 OUT;
 };
