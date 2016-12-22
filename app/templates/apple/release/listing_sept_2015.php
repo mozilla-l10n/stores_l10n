@@ -119,12 +119,9 @@ OUT;
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-• {$_('Under the hood optimizations. Users can now get to Web pages faster while seeing battery life savings. Of course, all devices and humans are different so results may vary.')}
-• {$_('Add any website specific search provider to Firefox')}
-• {$_('New menu in the toolbar for quick access to popular features')}
-• {$_('Ability to “Close All Tabs” and to recover them')}
-• {$_('Set a custom homepage and get access to your favorite web page faster')}
-• {$_('Synced tabs can now be found in the History icon')}
+• {$_('Automatically open web links in Firefox from mail apps such as Outlook, Airmail, Mail.Ru, myMail and Spark. Also, make one of these mail services your default mail app when sending emails from Firefox')}
+• {$_('Fixed other bugs')}
+• {$_('App optimization improvements')}
 OUT;
 };
 
