@@ -17,7 +17,7 @@ if (! in_array($request['store'], ['google', 'apple'])) {
     die('Unknown marketplace provider.');
 }
 
-if (! in_array($request['channel'], ['beta', 'release', 'next'])) {
+if (! in_array($request['channel'], ['beta', 'release'])) {
     die('This Firefox channel is not supported.');
 }
 

@@ -164,10 +164,6 @@ class Project
                 'langfile' => 'description_beta_page.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_51_beta.lang',
                 ],
-            'next' => [
-                'template' => 'google/next/listing_apr_2016.php',
-                'langfile' => 'android_release.lang',
-                ],
         ],
         'apple' => [
             // channel => path to template file
@@ -255,9 +251,6 @@ class Project
             case 'beta':
                 $locales = $this->android_locales_beta;
                 break;
-            case 'next':
-                $locales = $this->android_locales_release;
-                break;
             case 'release':
             default:
                 $locales = $this->android_locales_release;
@@ -309,7 +302,7 @@ class Project
     public function getStoreMozillaCommonLocales($store, $channel)
     {
         if ($store == 'google') {
-            if (in_array($channel, ['beta', 'release', 'next'])) {
+            if (in_array($channel, ['beta', 'release'])) {
                 return $this->getGoogleMozillaCommonLocales($channel);
             }
         }
@@ -355,8 +348,6 @@ class Project
                     return $this->android_locales_aurora;
                 case 'beta':
                     return $this->android_locales_beta;
-                case 'next':
-                    return $this->android_locales_release;
                 case 'release':
                 default:
                     return $this->android_locales_release;

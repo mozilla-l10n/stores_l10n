@@ -53,11 +53,6 @@ foreach ($status['google']['beta'] as $lang => $state) {
     }
 }
 
-$status['google']['next'] = $get_status(
-    $project->getListingFiles('google', 'next'),
-    $project->getGoogleMozillaCommonLocales('next')
-);
-
 $status['apple']['release'] = $get_status(
     $project->getListingFiles('apple', 'release'),
     $project->getAppleMozillaCommonLocales('release')
@@ -78,9 +73,7 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
         </tr>
         <tr>
             <th class="text-center">Locale</th>
-            <?php if ($channel != 'next'): ?>
             <th class="text-center">Completion</th>
-            <?php endif; ?>
             <th class="text-center">General View</th>
             <th class="text-center">Description Raw HTML</th>
             <th class="text-center">Description Json</th>
@@ -88,7 +81,6 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
         <?php foreach ($project->getStoreMozillaCommonLocales($store, $channel) as $lang): ?>
         <tr class="text-center">
             <th><?=$lang?></th>
-            <?php if ($channel != 'next'): ?>
             <?php
             if ($status[$store][$channel][$lang] == 'translated') {
                 $color = ' success';
@@ -96,7 +88,6 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
                 $color = '';
             } ?>
             <td class='<?=$color?>'></td>
-            <?php endif; ?>
             <td><a href="./locale/<?=$lang?>/<?=$store?>/<?=$channel?>/">Show</a></td>
             <td><a href="./locale/<?=$lang?>/<?=$store?>/<?=$channel?>/html">HTML</a></td>
             <td><a href="./api/<?=$store?>/translation/<?=$channel?>/<?=$lang?>/">Json</a></td>
@@ -125,13 +116,6 @@ $stores['play']['beta'] = $html_table(
     'Google Play <span class="text-danger">Beta</span> Channel',
     'google',
     'beta'
-);
-
-$stores['play']['next'] = $html_table(
-    'play_next_table',
-    'Google Play <span class="text-danger">Next</span> (future release) Channel',
-    'google',
-    'next'
 );
 
 $stores['appstore']['release'] = $html_table(

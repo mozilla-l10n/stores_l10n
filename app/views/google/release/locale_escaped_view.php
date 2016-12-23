@@ -11,5 +11,5 @@
 <h3>Description &mdash; <?= $listing_warning ?></h3>
 <pre contenteditable="true" <?=$direction?>><?= htmlspecialchars($description($translations)) ?></pre>
 
-<h3>Google Play Next Screenshots Copy</h3>
+<h3>Google Play Screenshots Copy</h3>
 <pre style="text-align: center;" contenteditable="true" <?=$direction?>><?= htmlspecialchars(strip_tags($screenshots($translations))) ?></pre>
