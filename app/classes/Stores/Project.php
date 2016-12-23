@@ -18,13 +18,14 @@ class Project
         Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
     */
     private $android_locales_release = [
-        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
-        'dsb', 'es-CL', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-ES', 'es-MX', 'et',
-        'eu', 'fi', 'ff', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'hi-IN',
-        'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn', 'ko',
-        'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'or', 'pa-IN',
-        'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr',
-        'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh', 'zh-CN', 'zh-TW',
+        'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da',
+        'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX',
+        'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn',
+        'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja',
+        'ka', 'kk', 'kn', 'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my',
+        'nb-NO', 'nl', 'nn-NO', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm',
+        'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th',
+        'tr', 'uk', 'uz', 'xh', 'zh-CN', 'zh-TW',
     ];
 
     private $android_locales_aurora = [];
@@ -33,19 +34,15 @@ class Project
 
     /*
         source: https://raw.githubusercontent.com/mozilla/firefox-ios/v3.x/shipping_locales.txt
-        translations are at: https://github.com/mozilla-l10n/firefoxios-l10n/
-        For iOS we used the locale code es for Spanish from Spain, that was a
-        mistake, this is why I changed it to es-ES in the array below, otherwise
-        the Spanish team would have to work in the es-ES folder for Android and
-        the es folder for iOS
+        This list needs to be cleaned up later in the costructor.
     */
     private $ios_locales_release = [
-        'ast', 'az', 'bg', 'br', 'cs', 'cy', 'da', 'de', 'dsb', 'en-GB',
-        'eo', 'es-ES', 'es-CL', 'es-MX', 'fr', 'fy-NL', 'ga-IE', 'gd',
-        'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kk', 'km', 'ko', 'lo',
-        'lt', 'lv', 'nb-NO', 'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR',
-        'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sv-SE', 'te', 'th',
-        'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
+        'ast', 'az', 'bg', 'bn-BD', 'br', 'ca', 'cs', 'cy', 'da', 'de', 'dsb',
+        'en-GB', 'en-US', 'eo', 'es-ES', 'es-CL', 'es-MX', 'eu', 'fr', 'fy-NL',
+        'ga-IE', 'gd', 'he', 'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk',
+        'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO', 'ne-NP', 'nl', 'nn-NO', 'pl',
+        'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'son', 'sk', 'sl', 'sv-SE', 'te',
+        'th', 'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
     /*
@@ -187,6 +184,16 @@ class Project
 
     public function __construct()
     {
+        /*
+            Some changes are needed from the raw list of locales for iOS:
+            * es -> es-ES
+            * ses -> son
+            * drop en-US
+        */
+        $this->ios_locales_release = array_diff($this->ios_locales_release, ['es', 'en-US', 'ses']);
+        $this->ios_locales_release = array_merge($this->ios_locales_release, ['es-ES', 'son']);
+        sort($this->ios_locales_release);
+
         // As of 2015-06-01, android and ios channels have exactly the same locales list
         $this->android_locales_aurora    = $this->android_locales_release;
         $this->android_locales_beta      = $this->android_locales_release;
