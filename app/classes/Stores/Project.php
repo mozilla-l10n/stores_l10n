@@ -29,11 +29,10 @@ class Project
     ];
 
     private $android_locales_aurora = [];
-
     private $android_locales_beta = [];
 
     /*
-        source: https://raw.githubusercontent.com/mozilla/firefox-ios/v3.x/shipping_locales.txt
+        source: https://raw.githubusercontent.com/mozilla/firefox-ios/v6.x/shipping_locales.txt
         This list needs to be cleaned up later in the costructor.
     */
     private $ios_locales_release = [
@@ -43,17 +42,6 @@ class Project
         'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO', 'ne-NP', 'nl', 'nn-NO', 'pl',
         'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'son', 'sk', 'sl', 'sv-SE', 'te',
         'th', 'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
-    ];
-
-    /*
-        IOSHACK:
-        Here we have a hack to change the list of lang files supported for
-        iOS because screenshots for Firefox iOS v3 will be created only for
-        a subset of locales. It would break if we add multiple lang files
-        for Google but this is the best we can do for now.
-     */
-    public $ios_v3_screenshots = [
-        'de', 'es-ES', 'es-MX', 'fr', 'id', 'it', 'ja', 'pt-BR', 'ru', 'zh-CN', 'zh-TW',
     ];
 
     private $ios_locales_aurora = [];
@@ -169,10 +157,7 @@ class Project
             // channel => path to template file
             'release' => [
                 'template' => 'apple/release/listing_sept_2015.php',
-                'langfile' => [
-                    'apple_description_release.lang',
-                    'apple_screenshots_v3.lang',
-               ],
+                'langfile' => 'apple_description_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_ios_6_0.lang',
             ],
         ],

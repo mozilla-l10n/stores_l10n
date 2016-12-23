@@ -88,23 +88,6 @@ $screenshots = function ($translations) use ($_) {
 OUT;
 };
 
-// IOSHACK
-if ($needs_v3_screenshots) {
-    $screenshots_v3 = function ($translations) use ($_) {
-        return <<<OUT
-<b>{$_('Join hundreds<br>of millions of<br>Firefox users')}</b>
-
-<b>{$_('Fast and<br>intelligent search')}</b>
-
-<b>{$_('Access tabs,<br>bookmarks and history<br>from other devices')}</b>
-
-<b>{$_('Simple<br>browser tabs')}</b>
-
-<b>{$_('Private<br>browsing')}</b>
-OUT;
-    };
-}
-
 $keywords = function ($translations) use ($_) {
     return $_('internet,safari,chrome,opera,explorer,search,adblock,flash,browser,browsing,incognito,private,browse');
 };
@@ -153,25 +136,5 @@ $screenshots_api = [
     [
         'title' => br2nl($_('Private Browsing')),
         'text'  => br2nl($_('Make specific tabs private and browse<br>the Web without your history being saved')),
-    ],
-    [
-        'title' => br2nl($_('Join hundreds<br>of millions of<br>Firefox users')),
-        'text'  => '',
-    ],
-    [
-        'title' => br2nl($_('Fast and<br>intelligent search')),
-        'text'  => '',
-    ],
-    [
-        'title' => br2nl($_('Access tabs,<br>bookmarks and history<br>from other devices')),
-        'text'  => '',
-    ],
-    [
-        'title' => br2nl($_('Simple<br>browser tabs')),
-        'text'  => '',
-    ],
-    [
-        'title' => br2nl($_('Private<br>browsing')),
-        'text'  => '',
     ],
 ];

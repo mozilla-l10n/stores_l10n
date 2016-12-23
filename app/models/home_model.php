@@ -7,22 +7,9 @@ $status = [];
 // Don't log missing lang files
 \Langchecker\DotLangParser::$log_errors = false;
 
-$get_status = function ($lang_files, $store_locales) use ($project) {
+$get_status = function ($lang_file, $store_locales) {
     foreach ($store_locales as $lang) {
-        /*
-            IOSHACK:
-            Here we have a hack to change the list of lang files supported for
-            iOS because screenshots for Firefox iOS v3 will be created only for
-            a subset of locales. It would break if we add multiple lang files
-            for Google but this is the best we can do for now.
-         */
-        if (! in_array($lang, $project->ios_v3_screenshots) && is_array($lang_files)) {
-            $files = array_diff($lang_files, ['apple_screenshots_v3.lang']);
-        } else {
-            $files = $lang_files;
-        }
-
-        $obj = new Translate($lang, $files);
+        $obj = new Translate($lang, $lang_file);
         $status[$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
 
