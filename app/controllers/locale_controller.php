@@ -17,7 +17,7 @@ if (! in_array($request['store'], ['google', 'apple'])) {
     die('Unknown marketplace provider.');
 }
 
-if (! in_array($request['channel'], ['beta', 'release', 'next'])) {
+if (! in_array($request['channel'], ['beta', 'release'])) {
     die('This Firefox channel is not supported.');
 }
 
@@ -27,7 +27,6 @@ if ($request['store'] == 'google') {
 
 if ($request['store'] == 'apple') {
     $locales = $project->getAppleMozillaCommonLocales($request['channel']);
-    $needs_v3_screenshots = in_array($request['locale'], $project->ios_v3_screenshots); // IOSHACK
 }
 
 if (! in_array($request['locale'], $locales)) {

@@ -70,6 +70,10 @@ class Translate extends Dotlang
      */
     public function isStringTranslated($string)
     {
+        if (! isset($this->translations['strings'][$string])) {
+            return false;
+        }
+
         if ($string == $this->translations['strings'][$string]) {
             return false;
         }

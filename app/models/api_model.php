@@ -24,26 +24,7 @@ $valid_locales = function ($done) use ($supported_locales) {
     lists.
 */
 foreach ($firefox_locales as $lang) {
-    /*
-        IOSHACK:
-        Here we have a hack to change the list of lang files supported for
-        iOS because screenshots for Firefox iOS v3 will be created only for
-        a subset of locales. It would break if we add multiple lang files
-        for Google but this is the best we can do for now.
-     */
-     $original_lang_files = $project->templates['apple']['release']['langfile'];
-    if ($store == 'apple') {
-        $needs_v3_screenshots = in_array($lang, $project->ios_v3_screenshots);
-        if (! $needs_v3_screenshots && is_array($project->templates['apple']['release']['langfile'])) {
-            $project->templates['apple']['release']['langfile'] = array_diff(
-                $project->templates['apple']['release']['langfile'],
-                ['apple_screenshots_v3.lang']
-            );
-        }
-    }
-
     $translations = new Translate($lang, $project->getListingFiles($store, $channel));
-    $project->templates['apple']['release']['langfile'] = $original_lang_files; //IOSHACK
     $translations::$log_errors = false;
 
     if ($translations->isFileTranslated()) {
