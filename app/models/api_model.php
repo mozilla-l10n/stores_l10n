@@ -160,4 +160,4 @@ switch ($request->getService()) {
         break;
 }
 
-$json = $response->output($json);
+$json = $response->outputContent($json);

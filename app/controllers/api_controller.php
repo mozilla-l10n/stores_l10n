@@ -1,7 +1,7 @@
 <?php
 namespace Stores;
 
-use Transvision\Json;
+use Json\Json;
 
 // Create our API object
 $request = new API($url);
@@ -11,7 +11,7 @@ $response = new Json;
 if ($request->isValidRequest()) {
     include MODELS . 'api_model.php';
 } else {
-    $json = $response->output($request->invalidAPICall());
+    $json = $response->outputContent($request->invalidAPICall());
 }
 
 include VIEWS . 'json_view.php';

@@ -1,4 +1,7 @@
 <?php
 namespace Stores;
 
-print \Transvision\Json::output($done);
+use Json\Json;
+
+$json_data = new Json;
+die($json_data->outputContent($done));
