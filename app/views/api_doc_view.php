@@ -30,7 +30,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 
 <h3 class="text-primary">{store}/localesmapping/</h3>
 <h4>Description:</h4>
-<p>Lists the mapping of locale codes between the store and Mozilla locale codes</p>
+<p>Lists the mapping of locale codes between the store and Mozilla locale codes.</p>
 <h4>Examples:</h4>
 <ul>
     <li>Locale mapping for Google Play: <?=$base?><a href="api/google/localesmapping/">google/localesmapping/</a></li>
@@ -44,7 +44,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 
 <h3 class="text-primary">{store}/firefoxlocales/{channel}/</h3>
 <h4>Description:</h4>
-<p>List all Firefox locale codes supported for a release and a platform</p>
+<p>List all Firefox locale codes supported for a release and a platform.</p>
 <h4>Example:</h4>
 <p>All Firefox for Android locales on the release Channel: <?=$base?><a href="api/google/firefoxlocales/release/">google/firefoxlocales/release/</a></p>
 
@@ -67,10 +67,10 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 
 <h3 class="text-primary">{store}/done/{channel}/</h3>
 <h4>Description:</h4>
-<p>List all the locales for which all files needed are fully translated for a channel. A locale is listed as done if the translation is complete and there are no strings exceeding the store limits. In the case of Google, for the release channel this APU returns the locales that have translated both the listing page on Google Play and the Whatsnew page. We do not translate yet the What's New section for the Beta channel.</p>
+<p>List all the locales for which all files needed are fully translated for a channel. A locale is listed as done if the translation is complete and there are no strings exceeding the store limits. In the case of Google, for the release channel this API returns the locales that have translated both the listing page on Google Play and the Whatsnew page.</p>
 <h4>Example:</h4>
 <ul>
-    <li>All Firefox for Android description listings ready for the beta channel: <?=$base?><a href="api/google/done/release/">google/done/release/</a></li>
+    <li>All Firefox for Android description listings ready for the release channel: <?=$base?><a href="api/google/done/release/">google/done/release/</a></li>
     <li>All Firefox for iOs description listings ready for the release channel: <?=$base?><a href="api/apple/done/release/">apple/done/release/</a></li>
 </ul>
 
