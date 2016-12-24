@@ -44,9 +44,6 @@ class Project
         'th', 'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
-    private $ios_locales_aurora = [];
-    private $ios_locales_beta = [];
-
     /*
         Original list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
      */
@@ -178,8 +175,6 @@ class Project
         // As of 2015-06-01, android and ios channels have exactly the same locales list
         $this->android_locales_aurora    = $this->android_locales_release;
         $this->android_locales_beta      = $this->android_locales_release;
-        $this->ios_locales_aurora        = $this->ios_locales_release;
-        $this->ios_locales_beta          = $this->ios_locales_release;
     }
 
     /**
@@ -260,13 +255,10 @@ class Project
     public function getAppleMozillaCommonLocales($channel)
     {
         switch ($channel) {
-            case 'aurora':
-                $locales = $this->ios_locales_aurora;
-                break;
-            case 'beta':
-                $locales = $this->ios_locales_beta;
-                break;
-            case 'release':
+            /*
+                Return the same list for all channels. There are no other
+                channels for iOS besides release
+            */
             default:
                 $locales = $this->ios_locales_release;
                 break;
@@ -341,11 +333,10 @@ class Project
 
         if ($store == 'apple') {
             switch ($channel) {
-                case 'aurora':
-                    return $this->ios_locales_aurora;
-                case 'beta':
-                    return $this->ios_locales_beta;
-                case 'release':
+                /*
+                    Return the same list for all channels. There are no other
+                    channels for iOS besides release
+                */
                 default:
                     return $this->ios_locales_release;
             }
