@@ -69,6 +69,12 @@ if ($request['store'] == 'apple') {
     $supported_locales = $project->getAppleMozillaCommonLocales($request['channel']);
 }
 
+// Include en-US in this view
+if (! in_array('en-US', $supported_locales)) {
+    $supported_locales[] = 'en-US';
+    sort($supported_locales);
+}
+
 // If not provided, try to get a better locale match with Accept-Language
 if (! $request['locale']) {
     $request['locale'] = Utils::detectLocale($supported_locales);
