@@ -13,8 +13,7 @@ class Translate extends atoum\test
         $obj = new _Translate('fr', 'foobar1.lang');
         $this
             ->string($obj->get("This is a string"))
-                ->isEqualTo("C'est une chaîne")
-            ;
+                ->isEqualTo("C'est une chaîne");
     }
 
     public function testIsStringTranslated()
@@ -22,10 +21,10 @@ class Translate extends atoum\test
         $obj = new _Translate('fr', 'foobar1.lang');
         $this
             ->boolean($obj->isStringTranslated("This is a string"))
-                ->isTrue()
+                ->isTrue();
+        $this
             ->boolean($obj->isStringTranslated("This is another string"))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
 
     public function testIsFileTranslated()
@@ -33,17 +32,14 @@ class Translate extends atoum\test
         $obj = new _Translate('fr', 'foobar1.lang');
         $this
             ->boolean($obj->isFileTranslated())
-                ->isFalse()
-            ;
+                ->isFalse();
         $obj = new _Translate('fr', 'foobar2.lang');
         $this
             ->boolean($obj->isFileTranslated())
-                ->isTrue()
-            ;
+                ->isTrue();
         $obj = new _Translate('fr', 'Idontexist.lang');
         $this
             ->boolean($obj->isFileTranslated())
-                ->isFalse()
-            ;
+                ->isFalse();
     }
 }

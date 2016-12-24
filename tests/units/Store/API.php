@@ -46,8 +46,7 @@ class API extends atoum\test
         $obj = new _API($a);
         $this
             ->string($obj->getService())
-                ->isEqualTo($b)
-            ;
+                ->isEqualTo($b);
     }
 
     public function isValidRequestDP()
@@ -96,8 +95,7 @@ class API extends atoum\test
         $obj = new _API($a);
         $this
             ->boolean($obj->isValidRequest())
-                ->isEqualTo($b)
-            ;
+                ->isEqualTo($b);
     }
 
     public function invalidAPICallDP()
@@ -125,7 +123,6 @@ class API extends atoum\test
         $obj->isValidRequest();
         $this
             ->array($obj->invalidAPICall())
-                ->isEqualTo($b)
-            ;
+                ->isEqualTo($b);
     }
 }
