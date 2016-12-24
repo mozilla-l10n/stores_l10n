@@ -53,14 +53,6 @@ if ($url_parts == 3) {
     ];
 }
 
-if (! in_array($request['store'], ['google', 'apple'])) {
-    die('Unknown marketplace provider or output format.');
-}
-
-if (! in_array($request['channel'], ['beta', 'release'])) {
-    die('This Firefox channel is not supported.');
-}
-
 if ($request['store'] == 'google') {
     $supported_locales = $project->getGoogleMozillaCommonLocales($request['channel']);
 }
@@ -75,9 +67,27 @@ if (! in_array('en-US', $supported_locales)) {
     sort($supported_locales);
 }
 
-// If not provided, try to get a better locale match with Accept-Language
+/*
+    If not provided, try to get a better locale match with Accept-Language
+    and redirect user to the URL with explicit locale
+*/
 if (! $request['locale']) {
-    $request['locale'] = Utils::detectLocale($supported_locales);
+    /*
+        Locale needs to be inserted in 2nd position, between locale and store.
+        E.g. from /locale/apple/release/ to /locale/it/apple/release/
+    */
+    array_splice($components, 1, 0, Utils::detectLocale($supported_locales));
+    $redirected_url = BASE_HTML_URL . implode('/', $components);
+    header("Location: {$redirected_url}");
+    exit();
+}
+
+if (! in_array($request['store'], ['google', 'apple'])) {
+    die('Unknown marketplace provider or output format.');
+}
+
+if (! in_array($request['channel'], ['beta', 'release'])) {
+    die('This Firefox channel is not supported.');
 }
 
 if (! in_array($request['locale'], $supported_locales)) {
