@@ -1,5 +1,5 @@
 <?php
-namespace Langchecker;
+namespace Stores;
 
 /**
  * DotLangParser class
@@ -7,7 +7,7 @@ namespace Langchecker;
  * This class is for all the methods we use to read .lang files
  *
  *
- * @package Langchecker
+ * @package Stores
  */
 class DotLangParser
 {

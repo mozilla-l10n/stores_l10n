@@ -1,5 +1,5 @@
 <?php
-namespace Langchecker;
+namespace Stores;
 
 /**
  * Utils class
@@ -7,7 +7,7 @@ namespace Langchecker;
  * Utility functions like string management.
  *
  *
- * @package Langchecker
+ * @package Stores
  */
 class Utils
 {
