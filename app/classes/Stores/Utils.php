@@ -71,18 +71,4 @@ class Utils
 
         return false;
     }
-
-    /**
-     * Print error, quit application if requested
-     *
-     * @param string $message Message to display
-     * @param string $action  If 'quit', leave the app
-     */
-    public static function logger($message, $action = '')
-    {
-        error_log($message . "\n");
-        if ($action == 'quit') {
-            die;
-        }
-    }
 }

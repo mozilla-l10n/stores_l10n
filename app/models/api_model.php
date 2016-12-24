@@ -25,7 +25,6 @@ $valid_locales = function ($done) use ($supported_locales) {
 */
 foreach ($firefox_locales as $lang) {
     $translations = new Translate($lang, $project->getListingFiles($store, $channel));
-    $translations::$log_errors = false;
 
     if ($translations->isFileTranslated()) {
         require TEMPLATES . $project->getTemplate($store, $channel);
@@ -59,7 +58,6 @@ $whatsnew_json = $listing_json;
 $done = [];
 foreach ($firefox_locales as $lang) {
     $translations = new Translate($lang, $project->getWhatsnewFiles($store, $channel));
-    $translations::$log_errors = false;
 
     if ($translations->isFileTranslated()) {
         // Include the current template

@@ -40,8 +40,6 @@ class Translate extends atoum\test
             ->boolean($obj->isFileTranslated())
                 ->isTrue()
             ;
-        // Logging for a missing file would break the tests
-        _Translate::$log_errors = false;
         $obj = new _Translate('fr', 'Idontexist.lang');
         $this
             ->boolean($obj->isFileTranslated())
