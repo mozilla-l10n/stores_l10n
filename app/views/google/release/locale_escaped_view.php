@@ -1,4 +1,4 @@
-<h1>Firefox for Android</h1>
+<h1>Firefox for Android (<?= $request['locale'] ?>)</h1>
 <h3>Title 1 &mdash; <?= $title_warning ?></h3>
 <pre <?=$direction?>><?= $app_title($translations) ?></pre>
 

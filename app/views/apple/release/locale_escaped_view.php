@@ -1,4 +1,4 @@
-<h1>Apple Store Listing Copy</h1>
+<h1>Apple Store Listing Copy (<?= $request['locale'] ?>)</h1>
 <h3>Title</h3>
 <pre contenteditable="true"><?= htmlspecialchars($app_title($translations)) ?></pre>
 
