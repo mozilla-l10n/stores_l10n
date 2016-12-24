@@ -1,5 +1,5 @@
 <?php
-namespace Langchecker;
+namespace Stores;
 
 /**
  * Utils class
@@ -7,7 +7,7 @@ namespace Langchecker;
  * Utility functions like string management.
  *
  *
- * @package Langchecker
+ * @package Stores
  */
 class Utils
 {
@@ -70,19 +70,5 @@ class Utils
         }
 
         return false;
-    }
-
-    /**
-     * Print error, quit application if requested
-     *
-     * @param string $message Message to display
-     * @param string $action  If 'quit', leave the app
-     */
-    public static function logger($message, $action = '')
-    {
-        error_log($message . "\n");
-        if ($action == 'quit') {
-            die;
-        }
     }
 }

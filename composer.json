@@ -1,8 +1,7 @@
 {
     "autoload": {
             "psr-0": {
-            "Stores": "app/classes/",
-            "Langchecker": "app/classes/"
+            "Stores": "app/classes/"
         },
         "files": [
             "app/helpers/debug.php",

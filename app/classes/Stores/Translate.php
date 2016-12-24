@@ -1,9 +1,6 @@
 <?php
 namespace Stores;
 
-use Langchecker\DotLangParser as Dotlang;
-use Langchecker\Utils as Utils;
-
 /*
  * Stores class
  *
@@ -12,7 +9,7 @@ use Langchecker\Utils as Utils;
  *
  * @package Stores
  */
-class Translate extends Dotlang
+class Translate extends DotLangParser
 {
     protected $source_strings;
     protected $translations;

@@ -4,9 +4,6 @@ namespace Stores;
 // Compute the completion status for all locales
 $status = [];
 
-// Don't log missing lang files
-\Langchecker\DotLangParser::$log_errors = false;
-
 $get_status = function ($lang_file, $store_locales) {
     foreach ($store_locales as $lang) {
         $obj = new Translate($lang, $lang_file);

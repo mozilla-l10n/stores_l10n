@@ -1,5 +1,5 @@
 <?php
-namespace Langchecker;
+namespace Stores;
 
 /**
  * DotLangParser class
@@ -7,7 +7,7 @@ namespace Langchecker;
  * This class is for all the methods we use to read .lang files
  *
  *
- * @package Langchecker
+ * @package Stores
  */
 class DotLangParser
 {
@@ -27,13 +27,6 @@ class DotLangParser
     public static $extract_metadata = true;
 
     /**
-     * Logging errors has a performance impact avoid on public views
-     *
-     * @var boolean
-     */
-    public static $log_errors = false;
-
-    /**
      * Load file, remove empty lines and return an array of strings
      *
      * @param string $path Filename to analyze
@@ -44,10 +37,6 @@ class DotLangParser
     public static function getFile($path)
     {
         if (! is_file($path)) {
-            if (self::$log_errors) {
-                Utils::logger("{$path} does not exist.");
-            }
-
             return false;
         }
 

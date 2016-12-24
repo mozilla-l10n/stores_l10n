@@ -8,29 +8,47 @@ require_once __DIR__ . '/../bootstrap.php';
 
 class Project extends atoum\test
 {
+    public function testCleanUpiOS()
+    {
+        $obj = new _Project();
+        $shipping_locales = ['ar', 'es', 'en-GB', 'ses', 'son', 'ta'];
+        $shipping_locales = $obj->cleanUpiOS($shipping_locales);
+
+        $this
+            ->boolean(in_array('en-US', $shipping_locales))
+                ->isTrue();
+        $this
+            ->boolean(in_array('es-ES', $shipping_locales))
+                ->isTrue();
+        $this
+            ->boolean(in_array('es', $shipping_locales))
+                ->isFalse();
+        $this
+            ->boolean(in_array('son', $shipping_locales))
+                ->isTrue();
+        $this
+            ->boolean(in_array('ses', $shipping_locales))
+                ->isFalse();
+    }
+
     public function testIsRTL()
     {
         $obj = new _Project();
         $this
             ->boolean($obj->isRTL('ar'))
-                ->isTrue()
-            ;
+                ->isTrue();
         $this
             ->boolean($obj->isRTL('fa'))
-                ->isTrue()
-            ;
+                ->isTrue();
         $this
             ->boolean($obj->isRTL('fr'))
-                ->isFalse()
-            ;
+                ->isFalse();
         $this
             ->boolean($obj->isRTL('he'))
-                ->isTrue()
-            ;
+                ->isTrue();
         $this
             ->boolean($obj->isRTL('ur'))
-                ->isTrue()
-            ;
+                ->isTrue();
     }
 
     public function testGetGoogleStoreLocales()
@@ -40,13 +58,11 @@ class Project extends atoum\test
             ->array($obj->getGoogleStoreLocales(true))
                 ->hasKey('es-419')
                 ->contains('de')
-                ->hassize(51)
-            ;
+                ->hassize(51);
         $this
             ->array($obj->getGoogleStoreLocales(false))
                 ->contains('es-419')
-                ->hassize(51)
-            ;
+                ->hassize(51);
     }
 
     public function testGetAppleStoreLocales()
@@ -56,13 +72,11 @@ class Project extends atoum\test
             ->array($obj->getAppleStoreLocales(true))
                 ->hasKey('zh-Hans')
                 ->contains('zh-CN')
-                ->hassize(28)
-            ;
+                ->hassize(28);
         $this
             ->array($obj->getAppleStoreLocales(false))
                 ->contains('fr-CA')
-                ->hassize(28)
-            ;
+                ->hassize(28);
     }
 
     public function testGetGoogleMozillaCommonLocales()
@@ -73,101 +87,79 @@ class Project extends atoum\test
                 ->contains('ca')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(38)
-            ;
+                ->hassize(38);
     }
 
     public function testGetAppleMozillaCommonLocales()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getAppleMozillaCommonLocales('release'))
-            ;
+            ->array($obj->getAppleMozillaCommonLocales('release'));
     }
 
     public function testGetStoreMozillaCommonLocales()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
-            ;
+            ->array($obj->getStoreMozillaCommonLocales('google', 'release'));
         $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'beta'))
-            ;
+            ->array($obj->getStoreMozillaCommonLocales('google', 'beta'));
         $this
-            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'))
-            ;
+            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'));
         $this
             ->boolean($obj->getStoreMozillaCommonLocales('apple', 'beta'))
-                ->isFalse()
-            ;
+                ->isFalse();
         $this
             ->boolean($obj->getStoreMozillaCommonLocales('FAKE_STORE', 'beta'))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
 
     public function testGetStoreLocales()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getStoreLocales('google', true))
-            ;
+            ->array($obj->getStoreLocales('google', true));
         $this
-            ->array($obj->getStoreLocales('google', false))
-            ;
+            ->array($obj->getStoreLocales('google', false));
         $this
-            ->array($obj->getStoreLocales('apple', true))
-            ;
+            ->array($obj->getStoreLocales('apple', true));
         $this
-            ->array($obj->getStoreLocales('apple', false))
-            ;
+            ->array($obj->getStoreLocales('apple', false));
         $this
             ->boolean($obj->getStoreLocales('foobar', false))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
 
     public function testGetFirefoxLocales()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getFirefoxLocales('google', true))
-            ;
+            ->array($obj->getFirefoxLocales('google', true));
         $this
-            ->array($obj->getFirefoxLocales('google', false))
-            ;
+            ->array($obj->getFirefoxLocales('google', false));
         $this
-            ->array($obj->getFirefoxLocales('apple', true))
-            ;
+            ->array($obj->getFirefoxLocales('apple', true));
         $this
-            ->array($obj->getFirefoxLocales('apple', false))
-            ;
+            ->array($obj->getFirefoxLocales('apple', false));
         $this
             ->boolean($obj->getFirefoxLocales('foobar', false))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
 
     public function testGetLocalesMapping()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getLocalesMapping('google', true))
-            ;
+            ->array($obj->getLocalesMapping('google', true));
         $this
-            ->array($obj->getFirefoxLocales('google', false))
-            ;
+            ->array($obj->getFirefoxLocales('google', false));
         $this
-            ->array($obj->getFirefoxLocales('apple', true))
-            ;
+            ->array($obj->getFirefoxLocales('apple', true));
         $this
-            ->array($obj->getFirefoxLocales('apple', false))
-            ;
+            ->array($obj->getFirefoxLocales('apple', false));
         $this
             ->boolean($obj->getFirefoxLocales('foobar', false))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
 
     public function testGetTemplate()
@@ -175,33 +167,27 @@ class Project extends atoum\test
         $obj = new _Project();
         $this
             ->string($obj->getTemplate('google', 'release'))
-            ->string($obj->getTemplate('google', 'beta'))
-            ;
+            ->string($obj->getTemplate('google', 'beta'));
         $this
             ->boolean($obj->getTemplate('google', 'foobar'))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
     public function testGetListingFiles()
     {
         $obj = new _Project();
         $this
             ->string($obj->getListingFiles('google', 'release'))
-            ->string($obj->getListingFiles('google', 'beta'))
-            ;
+            ->string($obj->getListingFiles('google', 'beta'));
         $this
             ->boolean($obj->getListingFiles('google', 'foobar'))
-                ->isFalse()
-            ;
+                ->isFalse();
     }
     public function testGetWhatsnewFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getWhatsnewFiles('google', 'release'))
-            ;
+            ->string($obj->getWhatsnewFiles('google', 'release'));
         $this
-            ->string($obj->getWhatsnewFiles('google', 'beta'))
-            ;
+            ->string($obj->getWhatsnewFiles('google', 'beta'));
     }
 }

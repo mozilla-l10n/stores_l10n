@@ -17,7 +17,7 @@ class Project
         Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
         Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
     */
-    private $android_locales_release = [
+    private $android_locales_aurora = [
         'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da',
         'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX',
         'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn',
@@ -28,8 +28,27 @@ class Project
         'tr', 'uk', 'uz', 'xh', 'zh-CN', 'zh-TW',
     ];
 
-    private $android_locales_aurora = [];
-    private $android_locales_beta = [];
+    private $android_locales_beta = [
+        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
+        'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'et',
+        'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN',
+        'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn',
+        'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
+        'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl',
+        'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh',
+        'zh-CN', 'zh-TW',
+    ];
+
+    private $android_locales_release = [
+        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
+        'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'et',
+        'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN',
+        'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn',
+        'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
+        'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl',
+        'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh',
+        'zh-CN', 'zh-TW',
+    ];
 
     /*
         source: https://raw.githubusercontent.com/mozilla/firefox-ios/v6.x/shipping_locales.txt
@@ -43,9 +62,6 @@ class Project
         'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'son', 'sk', 'sl', 'sv-SE', 'te',
         'th', 'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
-
-    private $ios_locales_aurora = [];
-    private $ios_locales_beta = [];
 
     /*
         Original list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
@@ -165,21 +181,40 @@ class Project
 
     public function __construct()
     {
+        $this->ios_locales_release = self::CleanUpiOS($this->ios_locales_release);
+    }
+
+    /**
+     * Clean up the list of shipping locales for iOS
+     *
+     * @param  String $shipping_locales The list of shipping locales
+     * @return String Cleaned up list of locales
+     */
+    public function cleanUpiOS($shipping_locales)
+    {
         /*
             Some changes are needed from the raw list of locales for iOS:
             * es -> es-ES
             * ses -> son
             * drop en-US
         */
-        $this->ios_locales_release = array_diff($this->ios_locales_release, ['es', 'en-US', 'ses']);
-        $this->ios_locales_release = array_merge($this->ios_locales_release, ['es-ES', 'son']);
-        sort($this->ios_locales_release);
+        if (in_array('es', $shipping_locales)) {
+            $shipping_locales = array_diff($shipping_locales, ['es']);
+            $shipping_locales[] = 'es-ES';
+        }
 
-        // As of 2015-06-01, android and ios channels have exactly the same locales list
-        $this->android_locales_aurora    = $this->android_locales_release;
-        $this->android_locales_beta      = $this->android_locales_release;
-        $this->ios_locales_aurora        = $this->ios_locales_release;
-        $this->ios_locales_beta          = $this->ios_locales_release;
+        if (in_array('ses', $shipping_locales)) {
+            $shipping_locales = array_diff($shipping_locales, ['ses']);
+            $shipping_locales[] = 'son';
+        }
+
+        $shipping_locales[] = 'en-US';
+
+        // Make sure the list doesn't have duplicates and it's sorted
+        $shipping_locales = array_unique($shipping_locales);
+        sort($shipping_locales);
+
+        return $shipping_locales;
     }
 
     /**
@@ -260,13 +295,10 @@ class Project
     public function getAppleMozillaCommonLocales($channel)
     {
         switch ($channel) {
-            case 'aurora':
-                $locales = $this->ios_locales_aurora;
-                break;
-            case 'beta':
-                $locales = $this->ios_locales_beta;
-                break;
-            case 'release':
+            /*
+                Return the same list for all channels. There are no other
+                channels for iOS besides release
+            */
             default:
                 $locales = $this->ios_locales_release;
                 break;
@@ -341,11 +373,10 @@ class Project
 
         if ($store == 'apple') {
             switch ($channel) {
-                case 'aurora':
-                    return $this->ios_locales_aurora;
-                case 'beta':
-                    return $this->ios_locales_beta;
-                case 'release':
+                /*
+                    Return the same list for all channels. There are no other
+                    channels for iOS besides release
+                */
                 default:
                     return $this->ios_locales_release;
             }
