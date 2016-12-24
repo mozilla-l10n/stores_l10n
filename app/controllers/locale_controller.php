@@ -1,30 +1,60 @@
 <?php
 namespace Stores;
 
-// format of an URL: http://localhost:8082/locale/de/google/beta/output/
-
-$formats = ['html', 'show', 'status'];
+// URL format: /locale/de/google/beta/html/
 $components = explode('/', $url['path']);
+$output_options = ['html', 'show'];
 
-// If locale is missing from URL, temporarily set it as en-US
-if (count($components) == 3) {
+/*
+    There are 4 possible combinations of URLs:
+    * /locale/apple/release/
+    * /locale/apple/release/html
+    * /locale/it/apple/release/
+    * /locale/it/apple/release/html
+
+    If an explicit locale is not requested, set it temporarily to null
+    and find a better match later.
+*/
+$url_parts = count($components);
+if ($url_parts == 3) {
+    // Url type: /locale/apple/release/
     $request = [
-        'locale'  => 'en-US',
+        'locale'  => null,
         'store'   => isset($components[1]) ? $components[1] : null,
         'channel' => isset($components[2]) ? $components[2] : null,
-        'output'  => isset($components[3]) ? $components[3] : null,
+        'output'  => 'show',
     ];
+} elseif ($url_parts == 4) {
+    $last_part = isset($components[3]) ? $components[3] : null;
+    if (in_array($last_part, $output_options)) {
+        // Url type: /locale/apple/release/html
+        $request = [
+            'locale'  => null,
+            'store'   => isset($components[1]) ? $components[1] : null,
+            'channel' => isset($components[2]) ? $components[2] : null,
+            'output'  => isset($components[3]) ? $components[3] : 'show',
+        ];
+    } else {
+        // Url type: /locale/it/apple/release/
+        $request = [
+            'locale'  => isset($components[1]) ? $components[1] : null,
+            'store'   => isset($components[2]) ? $components[2] : null,
+            'channel' => isset($components[3]) ? $components[3] : null,
+            'output'  => 'show',
+        ];
+    }
 } else {
+    // Url type: /locale/it/apple/release/html
     $request = [
         'locale'  => isset($components[1]) ? $components[1] : null,
         'store'   => isset($components[2]) ? $components[2] : null,
         'channel' => isset($components[3]) ? $components[3] : null,
-        'output'  => isset($components[4]) ? $components[4] : null,
+        'output'  => isset($components[4]) ? $components[4] : 'show',
     ];
 }
 
 if (! in_array($request['store'], ['google', 'apple'])) {
-    die('Unknown marketplace provider.');
+    die('Unknown marketplace provider or output format.');
 }
 
 if (! in_array($request['channel'], ['beta', 'release'])) {
@@ -40,7 +70,7 @@ if ($request['store'] == 'apple') {
 }
 
 // If not provided, try to get a better locale match with Accept-Language
-if (count($components) == 3) {
+if (! $request['locale']) {
     $request['locale'] = Utils::detectLocale($supported_locales);
 }
 
