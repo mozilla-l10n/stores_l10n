@@ -121,14 +121,32 @@ class Project extends atoum\test
     public function testGetFirefoxLocales()
     {
         $obj = new _Project();
+
+        // Google
         $this
-            ->array($obj->getFirefoxLocales('google', true));
+            ->array($obj->getFirefoxLocales('fx_android', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('google', false));
+            ->array($obj->getFirefoxLocales('google', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('apple', true));
+            ->array($obj->getFirefoxLocales('google', 'beta'));
+        // Check fallback to release
+        $release_locales = $obj->getFirefoxLocales('google', 'release');
         $this
-            ->array($obj->getFirefoxLocales('apple', false));
+            ->array($obj->getFirefoxLocales('google', false))
+                ->isEqualTo($release_locales);
+        $this
+            ->array($obj->getFirefoxLocales('google', 'foobar'))
+                ->isEqualTo($release_locales);
+
+        // AppStore
+        $this
+            ->array($obj->getFirefoxLocales('fx_ios', 'release'));
+        $this
+            ->array($obj->getFirefoxLocales('apple', 'release'));
+        $this
+            ->array($obj->getFirefoxLocales('apple', 'beta'));
+
+        // Unsupported product
         $this
             ->boolean($obj->getFirefoxLocales('foobar', false))
                 ->isFalse();

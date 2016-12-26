@@ -10,57 +10,77 @@ namespace Stores;
  */
 class Project
 {
-    private $rtl = ['ar', 'fa', 'he', 'ur'];
-
-    /*
-        Source : http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
-        Source : http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
-        Source : http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
-    */
-    private $android_locales_aurora = [
-        'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da',
-        'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX',
-        'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn',
-        'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja',
-        'ka', 'kk', 'kn', 'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my',
-        'nb-NO', 'nl', 'nn-NO', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm',
-        'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th',
-        'tr', 'uk', 'uz', 'xh', 'zh-CN', 'zh-TW',
+    /**
+     * List of RTL locales
+     *
+     * @var array
+     */
+    private $rtl = [
+        'ar', 'fa', 'he', 'ur',
     ];
 
-    private $android_locales_beta = [
-        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
-        'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'et',
-        'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN',
-        'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn',
-        'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
-        'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl',
-        'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh',
-        'zh-CN', 'zh-TW',
-    ];
-
-    private $android_locales_release = [
-        'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
-        'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'et',
-        'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN',
-        'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'kk', 'kn',
-        'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
-        'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl',
-        'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh',
-        'zh-CN', 'zh-TW',
-    ];
-
-    /*
-        source: https://raw.githubusercontent.com/mozilla/firefox-ios/v6.x/shipping_locales.txt
-        This list needs to be cleaned up later in the costructor.
-    */
-    private $ios_locales_release = [
-        'ast', 'az', 'bg', 'bn-BD', 'br', 'ca', 'cs', 'cy', 'da', 'de', 'dsb',
-        'en-GB', 'en-US', 'eo', 'es-ES', 'es-CL', 'es-MX', 'eu', 'fr', 'fy-NL',
-        'ga-IE', 'gd', 'he', 'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk',
-        'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO', 'ne-NP', 'nl', 'nn-NO', 'pl',
-        'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'son', 'sk', 'sl', 'sv-SE', 'te',
-        'th', 'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
+    /**
+     * Locales supported in products and channels.
+     *
+     * Sources for Android:
+     * http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
+     * http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
+     * http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
+     *
+     * Source for Firefox for iOS:
+     * https://raw.githubusercontent.com/mozilla/firefox-ios/v6.x/shipping_locales.txt
+     *
+     * The list for iOS needs to be cleaned up later in the costructor.
+     *
+     * @var array
+     */
+    private $supported_locales = [
+        'fx_android' => [
+            'aurora' => [
+                'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy',
+                'da', 'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL',
+                'es-ES', 'es-MX', 'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL',
+                'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu',
+                'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'kn', 'ko', 'lt',
+                'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
+                'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk',
+                'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk',
+                'uz', 'xh', 'zh-CN', 'zh-TW',
+            ],
+            'beta' => [
+                'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da',
+                'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES',
+                'es-MX', 'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd',
+                'gl', 'gn', 'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id',
+                'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt', 'lv', 'mai', 'ml',
+                'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'or', 'pa-IN', 'pl',
+                'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sq',
+                'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh',
+                'zh-CN', 'zh-TW',
+            ],
+            'release' => [
+                'an', 'as', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy', 'da',
+                'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL', 'es-ES',
+                'es-MX', 'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd',
+                'gl', 'gn', 'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu', 'hy-AM', 'id',
+                'is', 'it', 'ja', 'kk', 'kn', 'ko', 'lt', 'lv', 'mai', 'ml',
+                'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'or', 'pa-IN', 'pl',
+                'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'son', 'sq',
+                'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk', 'uz', 'xh',
+                'zh-CN', 'zh-TW',
+            ],
+        ],
+        'fx_ios' => [
+            'release' => [
+                'ast', 'az', 'bg', 'bn-BD', 'br', 'ca', 'cs', 'cy', 'da', 'de',
+                'dsb', 'en-GB', 'en-US', 'eo', 'es-ES', 'es-CL', 'es-MX', 'eu',
+                'fr', 'fy-NL', 'ga-IE', 'gd', 'he', 'hsb', 'hu', 'id', 'is',
+                'it', 'ja', 'kab', 'kk', 'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO',
+                'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro',
+                'ru', 'son', 'sk', 'sl', 'sv-SE', 'te', 'th', 'tl', 'tr', 'uk',
+                'uz', 'zh-CN', 'zh-TW',
+            ],
+        ],
     ];
 
     /**
@@ -71,12 +91,14 @@ class Project
      * Google: list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
      * Apple: https://github.com/KrauseFx/deliver#available-language-codes
      *
+     * See also http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
+     *
      * If false, locale is unsupported in Mozilla products.
      *
      * @var array
      */
     private $locales_mapping = [
-        'apple'  => [
+        'apple' => [
             'da'      => 'da',
             'de-DE'   => 'de',
             'el'      => 'el',
@@ -187,7 +209,16 @@ class Project
 
     public function __construct()
     {
-        $this->ios_locales_release = self::CleanUpiOS($this->ios_locales_release);
+        /*
+            Clean up list of locales supported in Firefox for iOS,
+            set beta and aurora channel with the same list as release.
+        */
+        $fx_ios_locales = self::CleanUpiOS($this->supported_locales['fx_ios']['release']);
+        $this->supported_locales['fx_ios'] = [
+            'aurora'  => $fx_ios_locales,
+            'beta'    => $fx_ios_locales,
+            'release' => $fx_ios_locales,
+        ];
     }
 
     /**
@@ -226,7 +257,8 @@ class Project
     /**
      * Check if a locale is Right-To-Left
      *
-     * @param  String  $locale Locale code to check
+     * @param String $locale Locale code to check
+     *
      * @return boolean true if $locale is a Right-To-Left locale, false otherwise.
      */
     public function isRTL($locale)
@@ -237,25 +269,20 @@ class Project
     /**
      * Return the intersection of locales supported by both Mozilla and Google Play
      *
-     * @param  string $channel The Mozilla channel, can be aurora, beta, release
-     * @return array  List of locales
+     * @param string $channel The Mozilla channel, can be aurora, beta, release
+     *
+     * @return array List of locales
      */
     public function getGoogleMozillaCommonLocales($channel)
     {
-        switch ($channel) {
-            case 'aurora':
-                $locales = $this->android_locales_aurora;
-                break;
-            case 'beta':
-                $locales = $this->android_locales_beta;
-                break;
-            case 'release':
-            default:
-                $locales = $this->android_locales_release;
-                // HACK: adding ar as experiment (bug 1259200)
-                $locales[] = 'ar';
-                sort($locales);
-                break;
+        if (isset($this->supported_locales['fx_android'][$channel])) {
+            $locales = $this->supported_locales['fx_android'][$channel];
+        }
+
+        // HACK: adding ar as experiment (bug 1259200)
+        if ($channel == 'release') {
+            $locales[] = 'ar';
+            sort($locales);
         }
 
         return array_intersect(
@@ -267,20 +294,13 @@ class Project
     /**
      * Return the intersection of locales supported by both Mozilla and AppStore
      *
-     * @param  string $channel The Mozilla channel, can be aurora, beta, release
-     * @return array  List of locales
+     * @param string $channel The Mozilla channel, can be aurora, beta, release
+     *
+     * @return array List of locales
      */
     public function getAppleMozillaCommonLocales($channel)
     {
-        switch ($channel) {
-            /*
-                Return the same list for all channels. There are no other
-                channels for iOS besides release
-            */
-            default:
-                $locales = $this->ios_locales_release;
-                break;
-        }
+        $locales = $this->supported_locales['fx_ios'][$channel];
 
         return array_intersect(
             $locales,
@@ -331,34 +351,29 @@ class Project
     }
 
     /**
-     * Get List of Firefox Locales for a product/channel combination
-     * @param  string $store   Name of store
-     * @param  string $channel Name of channel
-     * @return mixed  Array of locales of False
+     * Get List of Firefox locales for a product/channel combination
+     *
+     * @param string $product Name of product
+     * @param string $channel Name of channel
+     *
+     * @return mixed Array of locales of False
      */
-    public function getFirefoxLocales($store, $channel)
+    public function getFirefoxLocales($product, $channel)
     {
-        if ($store == 'google') {
-            switch ($channel) {
-                case 'aurora':
-                    return $this->android_locales_aurora;
-                case 'beta':
-                    return $this->android_locales_beta;
-                case 'release':
-                default:
-                    return $this->android_locales_release;
-            }
-        }
+        // Map generic store names to Firefox product codes
+        $mapping = [
+            'apple'  => 'fx_ios',
+            'google' => 'fx_android',
+        ];
+        $product = isset($mapping[$product])
+            ? $mapping[$product]
+            : $product;
 
-        if ($store == 'apple') {
-            switch ($channel) {
-                /*
-                    Return the same list for all channels. There are no other
-                    channels for iOS besides release
-                */
-                default:
-                    return $this->ios_locales_release;
-            }
+        if (isset($this->supported_locales[$product])) {
+            // Return requested channel, or fall back to release
+            return isset($this->supported_locales[$product][$channel])
+                ? $this->supported_locales[$product][$channel]
+                : $this->supported_locales[$product]['release'];
         }
 
         return false;
