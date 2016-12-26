@@ -5,84 +5,86 @@ namespace Stores;
 $json = $done = [];
 $channel = isset($request->query['channel']) ? $request->query['channel'] : '';
 $locale = isset($request->query['locale']) ? $request->query['locale'] : '';
-$product = isset($request->query['product']) ? $request->query['product'] : '';
-$store = $project->getProductStore($request->query['product']);
+$store = $request->query['store'];
+$product = $request->query['product'];
 $product_locales = $project->getProductLocales($product, $channel);
 $supported_locales = array_unique(array_values($project->getLocalesMapping($store)));
 $valid_locales = function ($done) use ($supported_locales) {
     return array_values(array_intersect($done, $supported_locales));
 };
 
-/*
-    The Done API returns the status of a locale which can have mutiple files
-    to translate. Specifically, for Google channels, localizers should
-    translate the listing page on Google Play but also periodically a file that
-    contains strings for the What's New pane.
+if ($request->query_type == 'product') {
+    /*
+        The Done API returns the status of a locale which can have mutiple files
+        to translate. Specifically, for Google channels, localizers should
+        translate the listing page on Google Play but also periodically a file that
+        contains strings for the What's New pane.
 
-    For this reason, we start by computing both the state of the listing and
-    whatsnew APIs before the switch so as to be able to just add a 'done' case
-    in the switch that is the intersection of both the listing and whatsnew
-    lists.
-*/
-foreach ($product_locales as $lang) {
-    $translations = new Translate($lang, $project->getListingFiles($product, $channel));
+        For this reason, we start by computing both the state of the listing and
+        whatsnew APIs before the switch so as to be able to just add a 'done' case
+        in the switch that is the intersection of both the listing and whatsnew
+        lists.
+    */
+    foreach ($product_locales as $lang) {
+        $translations = new Translate($lang, $project->getListingFiles($product, $channel));
 
-    if ($translations->isFileTranslated()) {
-        require TEMPLATES . $project->getTemplate($product, $channel);
-        // The Google Store has string lengths constraints
-        if ($store == 'google') {
-            $desc = $set_limit(4000, $description($translations));
-            $title = $set_limit(30, $app_title($translations));
-            $short_desc = $set_limit(80, $short_desc($translations));
+        if ($translations->isFileTranslated()) {
+            require TEMPLATES . $project->getTemplate($product, $channel);
+            // The Google Store has string lengths constraints
+            if ($store == 'google') {
+                $desc = $set_limit(4000, $description($translations));
+                $title = $set_limit(30, $app_title($translations));
+                $short_desc = $set_limit(80, $short_desc($translations));
 
-            if (($desc + $title + $short_desc) == 3) {
-                $done[] = $lang;
-            }
-        }
-
-        // The Apple AppStore has keywords lengths constraints
-        if ($store == 'apple') {
-            if ($set_limit(100, $keywords($translations))) {
-                $done[] = $lang;
-            }
-        }
-    }
-}
-$listing_json = $valid_locales($done);
-
-/*
-    By default, we consider whatsnew identical to listing, this way we ignore it
-    in the Done API when we intersect the arrays.
-*/
-$whatsnew_json = $listing_json;
-
-$done = [];
-foreach ($product_locales as $lang) {
-    $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel));
-
-    if ($translations->isFileTranslated()) {
-        // Include the current template
-        require TEMPLATES . $project->getTemplate($product, $channel);
-
-        switch ($store) {
-            case 'google':
-                /*
-                    Only Google has a 500 characters limit for the What's
-                    New section.
-                */
-                if ($set_limit(500, $whatsnew($translations))) {
+                if (($desc + $title + $short_desc) == 3) {
                     $done[] = $lang;
                 }
-                break;
-            case 'apple':
-                $done[] = $lang;
-                break;
-            default:
-                break;
+            }
+
+            // The Apple AppStore has keywords lengths constraints
+            if ($store == 'apple') {
+                if ($set_limit(100, $keywords($translations))) {
+                    $done[] = $lang;
+                }
+            }
         }
     }
+    $listing_json = $valid_locales($done);
+
+    /*
+        By default, we consider whatsnew identical to listing, this way we ignore it
+        in the Done API when we intersect the arrays.
+    */
+    $whatsnew_json = $listing_json;
+
+    $done = [];
+    foreach ($product_locales as $lang) {
+        $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel));
+
+        if ($translations->isFileTranslated()) {
+            // Include the current template
+            require TEMPLATES . $project->getTemplate($product, $channel);
+
+            switch ($store) {
+                case 'google':
+                    /*
+                        Only Google has a 500 characters limit for the What's
+                        New section.
+                    */
+                    if ($set_limit(500, $whatsnew($translations))) {
+                        $done[] = $lang;
+                    }
+                    break;
+                case 'apple':
+                    $done[] = $lang;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    $whatsnew_json = $valid_locales($done);
 }
-$whatsnew_json = $valid_locales($done);
 
 switch ($request->getService()) {
     case 'storelocales':

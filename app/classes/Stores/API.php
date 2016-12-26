@@ -80,6 +80,13 @@ class API
     public $query = [];
 
     /**
+     * Used to store query type
+     *
+     * @var string
+     */
+    public $query_type;
+
+    /**
      * Project object to get information like supported locales
      *
      * @var object
@@ -113,9 +120,19 @@ class API
             : [];
 
         if (isset($this->parameters[0])) {
-            // Make sure to convert legacy product IDs to updated ones
-            $this->query['product'] = $this->project->getUpdatedProductCode($this->parameters[0]);
-            $this->query['store'] = $this->project->getProductStore($this->query['product']);
+            if (isset($this->parameters[1])
+                && in_array($this->parameters[1], ['localesmapping', 'storelocales'])) {
+                // Store APIs
+                $this->query_type = 'store';
+                $this->query['product'] = '';
+                $this->query['store'] = $this->parameters[0];
+            } else {
+                // Product API
+                // Make sure to convert legacy product IDs to updated ones
+                $this->query_type = 'product';
+                $this->query['product'] = $this->project->getUpdatedProductCode($this->parameters[0]);
+                $this->query['store'] = $this->project->getProductStore($this->query['product']);
+            }
         }
 
         if (isset($this->parameters[1])) {
@@ -163,8 +180,17 @@ class API
         }
 
         // Check that the product is supported
-        if (! $this->isValidProduct()) {
-            return false;
+        if ($this->query_type == 'product') {
+            if (! $this->isValidProduct()) {
+                return false;
+            }
+        }
+
+        // Check that the store is supported
+        if ($this->query_type == 'store') {
+            if (! $this->isValidStore()) {
+                return false;
+            }
         }
 
         // Check if the service requested exists
@@ -194,7 +220,7 @@ class API
         switch ($service) {
             case 'firefoxlocales': // Legacy
             case 'productlocales':
-            // {product}/productlocales/{channel}/
+                // {product}/productlocales/{channel}/
                 if (! $this->verifyEnoughParameters(3)) {
                     return false;
                 }
@@ -206,13 +232,13 @@ class API
                 }
                 break;
             case 'localesmapping':
-            // {product}/localesmapping/{channel}/
+                // {product}/localesmapping/{channel}/
                 if (! $this->verifyEnoughParameters(2)) {
                     return false;
                 }
                 break;
             case 'translation':
-            // {product}/translation/{channel}/{locale}
+                // {product}/translation/{channel}/{locale}
                 if (! $this->verifyEnoughParameters(4)) {
                     return false;
                 }
@@ -230,11 +256,11 @@ class API
                 }
                 break;
             case 'storelocales':
-            /*
-                api/apple/storelocales/
-                We don't have anything specific to check as there is no parameter
-                for this service call
-            */
+                /*
+                    api/apple/storelocales/
+                    We don't have anything specific to check as there is no parameter
+                    for this service call
+                */
                 break;
             case 'done':
             case 'listing':
@@ -309,6 +335,22 @@ class API
     {
         if (! in_array($this->query['product'], $this->project->getSupportedProducts())) {
             $this->log("Product ({$this->parameters[0]}) is invalid.");
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the requested store is supported
+     *
+     * @return boolean True if the store is supported, false otherwise
+     */
+    private function isValidStore()
+    {
+        if (! in_array($this->query['store'], $this->project->getSupportedStores())) {
+            $this->log("Store ({$this->parameters[0]}) is invalid.");
 
             return false;
         }

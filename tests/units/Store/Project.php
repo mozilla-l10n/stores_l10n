@@ -87,6 +87,14 @@ class Project extends atoum\test
                 ->isEqualTo(['fx_android', 'fx_ios']);
     }
 
+    public function testGetSupportedStores()
+    {
+        $obj = new _Project();
+        $this
+            ->array($obj->getSupportedStores())
+                ->isEqualTo(['apple', 'google']);
+    }
+
     public function testGetProductStore()
     {
         $obj = new _Project();

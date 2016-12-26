@@ -15,10 +15,33 @@ class API extends atoum\test
                 ['path' => 'test'],
                 'Invalid service',
             ],
+            // Store APIs
             [
                 ['path' => 'api/google/storelocales/'],
                 'storelocales',
             ],
+            [
+                ['path' => 'api/google/localesmapping/'],
+                'localesmapping',
+            ],
+            // Product APIs
+            [
+                ['path' => 'api/fx_android/firefoxlocales/release/'],
+                'firefoxlocales',
+            ],
+            [
+                ['path' => 'api/fx_android/productlocales/release/'],
+                'productlocales',
+            ],
+            [
+                ['path' => 'api/fx_ios/done/beta/'],
+                'done',
+            ],
+            [
+                ['path' => 'api/fx_android/translation/beta/de/'],
+                'translation',
+            ],
+            // Legacy calls
             [
                 ['path' => 'api/google/firefoxlocales/release/'],
                 'firefoxlocales',
@@ -26,10 +49,6 @@ class API extends atoum\test
             [
                 ['path' => 'api/google/productlocales/release/'],
                 'productlocales',
-            ],
-            [
-                ['path' => 'api/google/localesmapping/'],
-                'localesmapping',
             ],
             [
                 ['path' => 'api/apple/done/beta/'],
@@ -134,6 +153,11 @@ class API extends atoum\test
             [
                 // invalid path
                 ['path'  => 'api/toto/storelocales/'],
+                ['error' => 'Store (toto) is invalid.'],
+            ],
+            [
+                // invalid path
+                ['path'  => 'api/toto/productlocales/'],
                 ['error' => 'Product (toto) is invalid.'],
             ],
         ];

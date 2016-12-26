@@ -40,6 +40,13 @@ class Project
     ];
 
     /**
+     * Supported stores
+     *
+     * @var array
+     */
+    private $supported_stores = ['apple', 'google'];
+
+    /**
      * Legacy product codes
      * apple = fx_ios
      * google = fx_android
@@ -367,6 +374,16 @@ class Project
     public function getSupportedProducts()
     {
         return array_keys($this->products_data);
+    }
+
+    /**
+     * Get a list of supported stores
+     *
+     * @return array List of supported stores
+     */
+    public function getSupportedStores()
+    {
+        return $this->supported_stores;
     }
 
     /**
