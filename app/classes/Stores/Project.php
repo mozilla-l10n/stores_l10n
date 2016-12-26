@@ -183,6 +183,11 @@ class Project
         ],
     ];
 
+    /**
+     * List of products and associated release channels/templates
+     *
+     * @var array
+     */
     public $templates = [
         'google' => [
             // channel => path to template file
@@ -224,7 +229,8 @@ class Project
     /**
      * Clean up the list of shipping locales for iOS
      *
-     * @param  String $shipping_locales The list of shipping locales
+     * @param String $shipping_locales The list of shipping locales
+     *
      * @return String Cleaned up list of locales
      */
     public function cleanUpiOS($shipping_locales)
@@ -353,7 +359,7 @@ class Project
      *
      * @return mixed Array of locales of False
      */
-    public function getFirefoxLocales($product, $channel)
+    public function getProductLocales($product, $channel)
     {
         // Map generic store names to Firefox product codes
         $mapping = [

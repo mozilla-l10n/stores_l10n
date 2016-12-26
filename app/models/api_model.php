@@ -6,7 +6,7 @@ $json = $done = [];
 $channel           = isset($request->query['channel']) ? $request->query['channel'] : '';
 $locale            = isset($request->query['locale']) ? $request->query['locale'] : '';
 $store             = isset($request->query['store']) ? $request->query['store'] : '';
-$firefox_locales   = $project->getFirefoxLocales($store, $channel);
+$firefox_locales   = $project->getProductLocales($store, $channel);
 $supported_locales = array_unique(array_values($project->getLocalesMapping($store)));
 $valid_locales = function ($done) use ($supported_locales) {
     return array_values(array_intersect($done, $supported_locales));

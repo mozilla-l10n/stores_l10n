@@ -129,37 +129,37 @@ class Project extends atoum\test
                 ->hassize(28);
     }
 
-    public function testGetFirefoxLocales()
+    public function testGetProductLocales()
     {
         $obj = new _Project();
 
         // Google
         $this
-            ->array($obj->getFirefoxLocales('fx_android', 'release'));
+            ->array($obj->getProductLocales('fx_android', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('google', 'release'));
+            ->array($obj->getProductLocales('google', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('google', 'beta'));
+            ->array($obj->getProductLocales('google', 'beta'));
         // Check fallback to release
-        $release_locales = $obj->getFirefoxLocales('google', 'release');
+        $release_locales = $obj->getProductLocales('google', 'release');
         $this
-            ->array($obj->getFirefoxLocales('google', false))
+            ->array($obj->getProductLocales('google', false))
                 ->isEqualTo($release_locales);
         $this
-            ->array($obj->getFirefoxLocales('google', 'foobar'))
+            ->array($obj->getProductLocales('google', 'foobar'))
                 ->isEqualTo($release_locales);
 
         // AppStore
         $this
-            ->array($obj->getFirefoxLocales('fx_ios', 'release'));
+            ->array($obj->getProductLocales('fx_ios', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('apple', 'release'));
+            ->array($obj->getProductLocales('apple', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('apple', 'beta'));
+            ->array($obj->getProductLocales('apple', 'beta'));
 
         // Unsupported product
         $this
-            ->boolean($obj->getFirefoxLocales('foobar', false))
+            ->boolean($obj->getProductLocales('foobar', false))
                 ->isFalse();
     }
 
