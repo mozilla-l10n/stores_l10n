@@ -79,6 +79,14 @@ class Project extends atoum\test
                 ->isEqualTo('fx_android');
     }
 
+    public function testGetSupportedProducts()
+    {
+        $obj = new _Project();
+        $this
+            ->array($obj->getSupportedProducts())
+                ->isEqualTo(['fx_android', 'fx_ios']);
+    }
+
     public function testGetProductStore()
     {
         $obj = new _Project();
@@ -117,6 +125,27 @@ class Project extends atoum\test
         $this
             ->string($obj->getProductName('foobar'))
                 ->isEqualTo('foobar');
+    }
+
+    public function testGetProductChannels()
+    {
+        $obj = new _Project();
+
+        $this
+            ->array($obj->getProductChannels('fx_android'))
+                ->isEqualTo(['beta', 'release']);
+        $this
+            ->array($obj->getProductChannels('google'))
+                ->isEqualTo(['beta', 'release']);
+        $this
+            ->array($obj->getProductChannels('fx_ios'))
+                ->isEqualTo(['release']);
+        $this
+            ->array($obj->getProductChannels('apple'))
+                ->isEqualTo(['release']);
+        $this
+            ->array($obj->getProductChannels('foobar'))
+                ->isEqualTo([]);
     }
 
     public function testGetStoreMozillaCommonLocales()

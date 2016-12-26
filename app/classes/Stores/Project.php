@@ -27,13 +27,15 @@ class Project
     private $products_data = [
         'fx_android' =>
             [
-                'name'  => 'Firefox for Android',
-                'store' => 'google',
+                'channels' => ['beta', 'release'],
+                'name'     => 'Firefox for Android',
+                'store'    => 'google',
             ],
         'fx_ios' =>
             [
-                'name'  => 'Firefox for iOS',
-                'store' => 'apple',
+                'channels' => ['release'],
+                'name'     => 'Firefox for iOS',
+                'store'    => 'apple',
             ],
     ];
 
@@ -338,6 +340,33 @@ class Project
         }
 
         return $product_name;
+    }
+
+    /**
+     * Get the channels supported for product ID
+     *
+     * @param String $product Product ID
+     *
+     * @return array List of supported channels
+     */
+    public function getProductChannels($product)
+    {
+        $product = $this->getUpdatedProductCode($product);
+        $channels = isset($this->products_data[$product])
+            ? $this->products_data[$product]['channels']
+            : [];
+
+        return $channels;
+    }
+
+    /**
+     * Get a list of supported product IDs
+     *
+     * @return array List of supported product IDs
+     */
+    public function getSupportedProducts()
+    {
+        return array_keys($this->products_data);
     }
 
     /**

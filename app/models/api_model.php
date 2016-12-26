@@ -88,7 +88,8 @@ switch ($request->getService()) {
     case 'storelocales':
         $json = $project->getStoreLocales($store);
         break;
-    case 'firefoxlocales':
+    case 'firefoxlocales': // Legacy
+    case 'productlocales':
         $json = $firefox_locales;
         break;
     case 'localesmapping':

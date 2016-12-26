@@ -24,6 +24,10 @@ class API extends atoum\test
                 'firefoxlocales',
             ],
             [
+                ['path' => 'api/google/productlocales/release/'],
+                'productlocales',
+            ],
+            [
                 ['path' => 'api/google/localesmapping/'],
                 'localesmapping',
             ],
@@ -65,9 +69,30 @@ class API extends atoum\test
                 true,
             ],
             [
+                ['path' => 'api/google/productlocales/release/'],
+                true,
+            ],
+            [
                 ['path' => 'api/google/localesmapping/'],
                 true,
             ],
+            [
+                ['path' => 'api/fx_android/done/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/fx_android/listing/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/fx_android/whatsnew/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/fx_android/translation/beta/de/'],
+                true,
+            ],
+            // Legacy calls
             [
                 ['path' => 'api/google/done/release/'],
                 true,
@@ -109,7 +134,7 @@ class API extends atoum\test
             [
                 // invalid path
                 ['path'  => 'api/toto/storelocales/'],
-                ['error' => 'The store (toto) is invalid.'],
+                ['error' => 'Product (toto) is invalid.'],
             ],
         ];
     }
