@@ -20,7 +20,7 @@ if ($url_parts == 3) {
     // Url type: /locale/apple/release/
     $request = [
         'locale'  => null,
-        'product' => isset($components[1]) ? $components[1] : null,
+        'product' => isset($components[1]) ? $project->getUpdatedProductCode($components[1]) : null,
         'channel' => isset($components[2]) ? $components[2] : null,
         'output'  => 'show',
     ];
@@ -30,7 +30,7 @@ if ($url_parts == 3) {
         // Url type: /locale/apple/release/html
         $request = [
             'locale'  => null,
-            'product' => isset($components[1]) ? $components[1] : null,
+            'product' => isset($components[1]) ? $project->getUpdatedProductCode($components[1]) : null,
             'channel' => isset($components[2]) ? $components[2] : null,
             'output'  => isset($components[3]) ? $components[3] : 'show',
         ];
@@ -38,7 +38,7 @@ if ($url_parts == 3) {
         // Url type: /locale/it/apple/release/
         $request = [
             'locale'  => isset($components[1]) ? $components[1] : null,
-            'product' => isset($components[2]) ? $components[2] : null,
+            'product' => isset($components[2]) ? $project->getUpdatedProductCode($components[2]) : null,
             'channel' => isset($components[3]) ? $components[3] : null,
             'output'  => 'show',
         ];
@@ -47,7 +47,7 @@ if ($url_parts == 3) {
     // Url type: /locale/it/apple/release/html
     $request = [
         'locale'  => isset($components[1]) ? $components[1] : null,
-        'product' => isset($components[2]) ? $components[2] : null,
+        'product' => isset($components[2]) ? $project->getUpdatedProductCode($components[2]) : null,
         'channel' => isset($components[3]) ? $components[3] : null,
         'output'  => isset($components[4]) ? $components[4] : 'show',
     ];
@@ -56,7 +56,7 @@ if ($url_parts == 3) {
 $supported_locales = $project->getStoreMozillaCommonLocales($request['product'], $request['channel']);
 
 // Include en-US in this view
-if (! in_array('en-US', $supported_locales)) {
+if ($supported_locales && ! in_array('en-US', $supported_locales)) {
     $supported_locales[] = 'en-US';
     sort($supported_locales);
 }
@@ -76,7 +76,7 @@ if (! $request['locale']) {
     exit();
 }
 
-if (! in_array($request['product'], ['google', 'apple', 'fx_android', 'fx_ios'])) {
+if (! in_array($request['product'], $project->getSupportedProducts())) {
     die('Unknown product or output format.');
 }
 
@@ -108,4 +108,4 @@ switch ($request['output']) {
         break;
 }
 include MODELS . 'locale_model.php';
-include VIEWS . $project->getUpdatedProductCode($request['product']) . '/' . $request['channel'] . '/' . $view . '_view.php';
+include VIEWS . $request['product'] . '/' . $request['channel'] . '/' . $view . '_view.php';
