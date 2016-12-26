@@ -20,6 +20,28 @@ class Project
     ];
 
     /**
+     * Mapping between product and store
+     *
+     * @var array
+     */
+    private $store_product_map = [
+        'fx_android' => 'google',
+        'fx_ios'     => 'apple',
+    ];
+
+    /**
+     * Legacy product codes
+     * apple = fx_ios
+     * google = fx_android
+     *
+     * @var array
+     */
+    private $legacy_products = [
+        'google' => 'fx_android',
+        'apple'  => 'fx_ios',
+    ];
+
+    /**
      * Locales supported in products and channels.
      *
      * Sources for Android:
@@ -282,19 +304,13 @@ class Project
      */
     public function getStoreMozillaCommonLocales($product, $channel)
     {
-        /*
-            Map products to stores. For backward compatibility support
-            apple=fx_ios, google=fx_android as product codes.
-        */
-        $store_product_map = [
-            'fx_android' => 'google',
-            'fx_ios'     => 'apple',
-        ];
-        if (isset($store_product_map[$product])) {
-            $store = $store_product_map[$product];
-        } else {
+        // Map product to its store. Support legacy product codes.
+        $store = '';
+        if (isset($this->store_product_map[$product])) {
+            $store = $this->store_product_map[$product];
+        } elseif (isset($this->legacy_products[$product])) {
             $store = $product;
-            $product = array_search($store, $store_product_map);
+            $product = $this->legacy_products[$store];
         }
 
         // Return early if store is unsupported
@@ -361,13 +377,8 @@ class Project
      */
     public function getProductLocales($product, $channel)
     {
-        // Map generic store names to Firefox product codes
-        $mapping = [
-            'apple'  => 'fx_ios',
-            'google' => 'fx_android',
-        ];
-        $product = isset($mapping[$product])
-            ? $mapping[$product]
+        $product = isset($this->legacy_products[$product])
+            ? $this->legacy_products[$product]
             : $product;
 
         // Return requested channel, or fall back to release
