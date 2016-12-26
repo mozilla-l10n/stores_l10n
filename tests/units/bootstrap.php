@@ -11,7 +11,7 @@ define('TEMPLATES',   APP . 'templates/');
 define('MODELS',      APP . 'models/');
 define('CONTROLLERS', APP . 'controllers/');
 define('TEST_FILES',  realpath(__DIR__ . '/../testfiles/') . '/');
-define('LOCALES',     TEST_FILES . 'langfiles/');
+define('LOCALES_PATH', TEST_FILES . 'langfiles/');
 
 // Hosting specific settings are in a INI file
 if (file_exists(SETTINGS . 'config.ini')) {

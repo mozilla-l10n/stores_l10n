@@ -4,7 +4,7 @@
 define('INSTALL',       realpath(__DIR__ . '/../../') . '/');
 define('APP',           INSTALL . 'app/');
 define('WEB',           INSTALL . 'web/');
-define('LOCALES',       INSTALL . 'locales/');
+define('LOCALES_PATH',  INSTALL . 'locales/');
 define('INC',           APP . 'inc/');
 define('VIEWS',         APP . 'views/');
 define('SETTINGS',      APP . 'settings/');
