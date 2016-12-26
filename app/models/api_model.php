@@ -7,7 +7,7 @@ $channel = isset($request->query['channel']) ? $request->query['channel'] : '';
 $locale = isset($request->query['locale']) ? $request->query['locale'] : '';
 $product = isset($request->query['product']) ? $request->query['product'] : '';
 $store = $project->getProductStore($request->query['product']);
-$firefox_locales = $project->getProductLocales($product, $channel);
+$product_locales = $project->getProductLocales($product, $channel);
 $supported_locales = array_unique(array_values($project->getLocalesMapping($store)));
 $valid_locales = function ($done) use ($supported_locales) {
     return array_values(array_intersect($done, $supported_locales));
@@ -24,7 +24,7 @@ $valid_locales = function ($done) use ($supported_locales) {
     in the switch that is the intersection of both the listing and whatsnew
     lists.
 */
-foreach ($firefox_locales as $lang) {
+foreach ($product_locales as $lang) {
     $translations = new Translate($lang, $project->getListingFiles($product, $channel));
 
     if ($translations->isFileTranslated()) {
@@ -57,7 +57,7 @@ $listing_json = $valid_locales($done);
 $whatsnew_json = $listing_json;
 
 $done = [];
-foreach ($firefox_locales as $lang) {
+foreach ($product_locales as $lang) {
     $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel));
 
     if ($translations->isFileTranslated()) {
@@ -90,16 +90,16 @@ switch ($request->getService()) {
         break;
     case 'firefoxlocales': // Legacy
     case 'productlocales':
-        $json = $firefox_locales;
+        $json = $product_locales;
         break;
     case 'localesmapping':
         $json = $project->getLocalesMapping($store, isset($_GET['reverse']));
         break;
     case 'translation':
         $request = [
-            'locale'    => $locale,
-            'product'   => $product,
-            'channel'   => $channel,
+            'locale'  => $locale,
+            'product' => $product,
+            'channel' => $channel,
         ];
 
         require MODELS . 'locale_model.php';

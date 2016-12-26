@@ -466,7 +466,7 @@ class Project
     }
 
     /**
-     * Get List of Firefox locales for a product/channel combination
+     * Get list of supported locales for a product/channel combination
      *
      * @param string $product Product ID
      * @param string $channel Channel ID
