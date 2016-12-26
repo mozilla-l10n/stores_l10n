@@ -53,13 +53,7 @@ if ($url_parts == 3) {
     ];
 }
 
-if ($request['store'] == 'google') {
-    $supported_locales = $project->getGoogleMozillaCommonLocales($request['channel']);
-}
-
-if ($request['store'] == 'apple') {
-    $supported_locales = $project->getAppleMozillaCommonLocales($request['channel']);
-}
+$supported_locales = $project->getStoreMozillaCommonLocales($request['store'], $request['channel']);
 
 // Include en-US in this view
 if (! in_array('en-US', $supported_locales)) {

@@ -51,38 +51,49 @@ class Project extends atoum\test
                 ->isTrue();
     }
 
-    public function testGetGoogleMozillaCommonLocales()
+    public function testGetStoreMozillaCommonLocales()
     {
         $obj = new _Project();
+
+        // Google
         $this
-            ->array($obj->getGoogleMozillaCommonLocales('release'))
+            ->array($obj->getStoreMozillaCommonLocales('fx_android', 'release'));
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('fx_android', 'beta'));
+
+        $tmp_locales = $obj->getStoreMozillaCommonLocales('fx_android', 'release');
+        $this
+            ->array($tmp_locales)
                 ->contains('ca')
                 ->notContains('af')
                 ->notContains('am')
                 ->hassize(38);
-    }
+        // Legacy product code
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
+                ->isEqualTo($tmp_locales);
 
-    public function testGetAppleMozillaCommonLocales()
-    {
-        $obj = new _Project();
+        // AppStore
         $this
-            ->array($obj->getAppleMozillaCommonLocales('release'));
-    }
-
-    public function testGetStoreMozillaCommonLocales()
-    {
-        $obj = new _Project();
+            ->array($obj->getStoreMozillaCommonLocales('fx_ios', 'release'));
         $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'release'));
-        $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'beta'));
-        $this
-            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'));
-        $this
-            ->boolean($obj->getStoreMozillaCommonLocales('apple', 'beta'))
+            ->boolean($obj->getStoreMozillaCommonLocales('fx_ios', 'beta'))
                 ->isFalse();
+        $tmp_locales = $obj->getStoreMozillaCommonLocales('fx_ios', 'release');
         $this
-            ->boolean($obj->getStoreMozillaCommonLocales('FAKE_STORE', 'beta'))
+            ->array($tmp_locales)
+                ->contains('da')
+                ->notContains('af')
+                ->notContains('zh-Hans')
+                ->hassize(21);
+        // Legacy product code
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'))
+                ->isEqualTo($tmp_locales);
+
+        // Unsupported
+        $this
+            ->boolean($obj->getStoreMozillaCommonLocales('FAKE_PRODUCT', 'beta'))
                 ->isFalse();
     }
 

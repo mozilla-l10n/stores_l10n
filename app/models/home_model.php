@@ -15,7 +15,7 @@ $get_status = function ($lang_file, $store_locales) {
 
 $status['google']['release'] = $get_status(
     $project->getListingFiles('google', 'release'),
-    $project->getGoogleMozillaCommonLocales('release')
+    $project->getStoreMozillaCommonLocales('fx_android', 'release')
 );
 
 foreach ($status['google']['release'] as $lang => $state) {
@@ -27,7 +27,7 @@ foreach ($status['google']['release'] as $lang => $state) {
 
 $status['google']['beta'] = $get_status(
     $project->getListingFiles('google', 'beta'),
-    $project->getGoogleMozillaCommonLocales('beta')
+    $project->getStoreMozillaCommonLocales('fx_android', 'beta')
 );
 
 foreach ($status['google']['beta'] as $lang => $state) {
@@ -39,7 +39,7 @@ foreach ($status['google']['beta'] as $lang => $state) {
 
 $status['apple']['release'] = $get_status(
     $project->getListingFiles('apple', 'release'),
-    $project->getAppleMozillaCommonLocales('release')
+    $project->getStoreMozillaCommonLocales('fx_ios', 'release')
 );
 
 foreach ($status['apple']['release'] as $lang => $state) {
@@ -49,7 +49,7 @@ foreach ($status['apple']['release'] as $lang => $state) {
     }
 }
 
-$html_table = function ($table_id, $table_title, $store, $channel) use ($status, $project) {
+$html_table = function ($table_id, $table_title, $product, $channel) use ($status, $project) {
     ob_start(); ?>
         <table id="<?=$table_id?>" class="table table-bordered table-condensed table-striped">
         <tr>
@@ -62,7 +62,7 @@ $html_table = function ($table_id, $table_title, $store, $channel) use ($status,
             <th class="text-center">Description Raw HTML</th>
             <th class="text-center">Description Json</th>
         </tr>
-        <?php foreach ($project->getStoreMozillaCommonLocales($store, $channel) as $lang): ?>
+        <?php foreach ($project->getStoreMozillaCommonLocales($product, $channel) as $lang): ?>
         <tr class="text-center">
             <th><?=$lang?></th>
             <?php
@@ -90,21 +90,21 @@ $stores = [];
 
 $stores['play']['release'] = $html_table(
     'play_release_table',
-    'Google Play <span class="text-danger">Release</span> Channel',
-    'google',
+    'Firefox for Android <span class="text-danger">Release</span> Channel',
+    'fx_android',
     'release'
 );
 
 $stores['play']['beta'] = $html_table(
     'play_beta_table',
-    'Google Play <span class="text-danger">Beta</span> Channel',
-    'google',
+    'Firefox for Android <span class="text-danger">Beta</span> Channel',
+    'fx_android',
     'beta'
 );
 
 $stores['appstore']['release'] = $html_table(
     'app_store_release_table',
-    'Apple AppStore <span class="text-danger">Release</span> Channel',
-    'apple',
+    'Firefox for iOS <span class="text-danger">Release</span> Channel',
+    'fx_ios',
     'release'
 );

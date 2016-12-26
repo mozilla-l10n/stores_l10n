@@ -3,9 +3,9 @@
     <h1>Dashboard and API for Google Play / Apple Appstore listings translation</h1>
 </div>
 <ul id="filters" class="nav nav-pills">
-    <li class="filter"><a href="#play_beta" id="play_beta">Google Play Beta</a></li>
-    <li class="filter active"><a href="#play_release" id="play_release">Google Play Release</a></li>
-    <li class="filter"><a href="#app_store_release" id="app_store_release">Apple Appstore Release</a></li>
+    <li class="filter"><a href="#play_beta" id="play_beta">Firefox for Android Beta</a></li>
+    <li class="filter active"><a href="#play_release" id="play_release">Firefox for Android Release</a></li>
+    <li class="filter"><a href="#app_store_release" id="app_store_release">Firefox for iOS Release</a></li>
 </ul>
 
 <?=$stores['play']['beta']?>

@@ -267,64 +267,59 @@ class Project
     }
 
     /**
-     * Return the intersection of locales supported by both Mozilla and Google Play
+     * Get Common Locales supported by the product's store and Mozilla
      *
-     * @param string $channel The Mozilla channel, can be aurora, beta, release
+     * @param string $product Name of product
+     * @param string $channel Name of the channel
      *
-     * @return array List of locales
+     * @return Mixed Array of locales or False if the call is incorrect
      */
-    public function getGoogleMozillaCommonLocales($channel)
+    public function getStoreMozillaCommonLocales($product, $channel)
     {
-        if (isset($this->supported_locales['fx_android'][$channel])) {
-            $locales = $this->supported_locales['fx_android'][$channel];
+        /*
+            Map products to stores. For backward compatibility support
+            apple=fx_ios, google=fx_android as product codes.
+        */
+        $store_product_map = [
+            'fx_android' => 'google',
+            'fx_ios'     => 'apple',
+        ];
+        if (isset($store_product_map[$product])) {
+            $store = $store_product_map[$product];
+        } else {
+            $store = $product;
+            $product = array_search($store, $store_product_map);
         }
 
-        // HACK: adding ar as experiment (bug 1259200)
-        if ($channel == 'release') {
-            $locales[] = 'ar';
-            sort($locales);
+        // Return early if store is unsupported
+        if (! isset($this->locales_mapping[$store])) {
+            return false;
         }
 
-        return array_intersect(
-            $locales,
-            array_values(array_filter($this->locales_mapping['google']))
-        );
-    }
+        $locales = [];
+        if ($store == 'google' && in_array($channel, ['beta', 'release'])) {
+            if (isset($this->supported_locales[$product][$channel])) {
+                $locales = $this->supported_locales[$product][$channel];
+            }
 
-    /**
-     * Return the intersection of locales supported by both Mozilla and AppStore
-     *
-     * @param string $channel The Mozilla channel, can be aurora, beta, release
-     *
-     * @return array List of locales
-     */
-    public function getAppleMozillaCommonLocales($channel)
-    {
-        $locales = $this->supported_locales['fx_ios'][$channel];
-
-        return array_intersect(
-            $locales,
-            array_values(array_filter($this->locales_mapping['apple']))
-        );
-    }
-
-    /**
-     * Get Common Locales supported by the store and Mozilla
-     * @param  string $store   Name of the store, ex: google, apple
-     * @param  string $channel Name of the channel, can be release or beta
-     * @return Mixed  Array of locales of False if the call is incorrect
-     */
-    public function getStoreMozillaCommonLocales($store, $channel)
-    {
-        if ($store == 'google') {
-            if (in_array($channel, ['beta', 'release'])) {
-                return $this->getGoogleMozillaCommonLocales($channel);
+            // HACK: adding ar as experiment (bug 1259200)
+            if ($channel == 'release') {
+                $locales[] = 'ar';
+                sort($locales);
             }
         }
-        if ($store == 'apple') {
-            if (in_array($channel, ['release'])) {
-                return $this->getAppleMozillaCommonLocales($channel);
+
+        if ($store == 'apple' && in_array($channel, ['release'])) {
+            if (isset($this->supported_locales[$product][$channel])) {
+                $locales = $this->supported_locales[$product][$channel];
             }
+        }
+
+        if (count($locales) > 0) {
+            return array_intersect(
+                $locales,
+                array_values(array_filter($this->locales_mapping[$store]))
+            );
         }
 
         return false;
@@ -333,7 +328,7 @@ class Project
     /**
      * Get locales supported by the requested store
      *
-     * @param string  $store   Name of the store: google, apple
+     * @param string  $store   Name of the store (google, apple)
      * @param boolean $mapping If false returns mapping as Store->Mozilla,
      *                         if true returns mapping as Mozilla->Store
      *
@@ -369,8 +364,8 @@ class Project
             ? $mapping[$product]
             : $product;
 
+        // Return requested channel, or fall back to release
         if (isset($this->supported_locales[$product])) {
-            // Return requested channel, or fall back to release
             return isset($this->supported_locales[$product][$channel])
                 ? $this->supported_locales[$product][$channel]
                 : $this->supported_locales[$product]['release'];
