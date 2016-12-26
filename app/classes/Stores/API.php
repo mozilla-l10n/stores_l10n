@@ -194,7 +194,7 @@ class API
         switch ($service) {
             case 'firefoxlocales': // Legacy
             case 'productlocales':
-            // {store}/productlocales/{channel}/
+            // {product}/productlocales/{channel}/
                 if (! $this->verifyEnoughParameters(3)) {
                     return false;
                 }
@@ -206,13 +206,13 @@ class API
                 }
                 break;
             case 'localesmapping':
-            // {store}/localesmapping/{channel}/
+            // {product}/localesmapping/{channel}/
                 if (! $this->verifyEnoughParameters(2)) {
                     return false;
                 }
                 break;
             case 'translation':
-            // {store}/translation/{channel}/{locale}
+            // {product}/translation/{channel}/{locale}
                 if (! $this->verifyEnoughParameters(4)) {
                     return false;
                 }
@@ -240,9 +240,9 @@ class API
             case 'listing':
             case 'whatsnew':
                 /*
-                    /api/google/done/beta/
-                    /api/google/listing/beta/
-                    /api/google/whatsnew/release/
+                    /api/fx_android/done/beta/
+                    /api/fx_android/listing/beta/
+                    /api/fx_android/whatsnew/release/
                     We have an extra check for Whatsnew
                 */
                 if (! $this->verifyEnoughParameters(3)) {

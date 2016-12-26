@@ -7,14 +7,15 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 
 <h2 class="bg-primary">&nbsp;Variables used in the API</h2>
 <ul>
-    <li><code>{store}</code>: <var>google</var>, <var>apple</var></li>
+    <li><code>{store}</code>: store providers. Supported values: <var>google</var>, <var>apple</var>.</li>
+    <li><code>{product}</code>: product IDs. Supported values: <var>fx_android</var> (<del>google</del>), <var>fx_ios</var> (<del>apple</del>). Between parenthesis are legacy deprecated values.</li>
     <li><code>{channel}</code>:
         <ul>
             <li>Google: <var>beta</var>, <var>release</var>.</li>
             <li>Apple: <var>release</var>.</li>
         </ul>
     </li>
-    <li><code>{locale}</code>: a Mozilla locale code, ex: fr, es-MX, de.
+    <li><code>{locale}</code>: a Mozilla locale code, e.g.: fr, es-MX, de.
 </ul>
 
 <h2 class="bg-primary">&nbsp;API Calls</h2>
@@ -39,7 +40,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h4>Notes:</h4>
 <ul>
     <li><code>False</code>: not a locale supported by Mozilla.</li>
-    <li>There is an optional <var>reverse</var> parameter that can be appended as a query string, ex: <?=$base?><a href="api/google/localesmapping/?reverse">google/localesmapping/?reverse</a>. <br>This will output a mapping based on Mozilla codes and not the store codes, which means that locales Mozilla doesn't support but are supported by the store are not listed.</li>
+    <li>There is an optional <var>reverse</var> parameter that can be appended as a query string, e.g.: <?=$base?><a href="api/google/localesmapping/?reverse">google/localesmapping/?reverse</a>. <br>This will output a mapping based on Mozilla codes and not the store codes, which means that locales Mozilla doesn't support but are supported by the store are not listed.</li>
 </ul>
 
 <h3 class="text-primary">{product}/productlocales/{channel}/</h3>
