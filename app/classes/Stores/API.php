@@ -68,7 +68,7 @@ class API
             : [];
 
         if (isset($this->parameters[0])) {
-            $this->query['store'] = $this->parameters[0];
+            $this->query['product'] = $this->parameters[0];
         }
 
         if (isset($this->parameters[1])) {
@@ -152,8 +152,8 @@ class API
                     return false;
                 }
 
-                if (! in_array($this->query['channel'], $this->channels[$this->query['store']])) {
-                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['store']}.");
+                if (! in_array($this->query['channel'], $this->channels[$this->query['product']])) {
+                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
 
                     return false;
                 }
@@ -170,14 +170,14 @@ class API
                     return false;
                 }
 
-                if (! in_array($this->query['channel'], $this->channels[$this->query['store']])) {
-                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['store']}.");
+                if (! in_array($this->query['channel'], $this->channels[$this->query['product']])) {
+                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
 
                     return false;
                 }
 
-                if (! in_array($this->query['locale'], $this->project->getStoreLocales($this->query['store'], true))) {
-                    $this->log("'{$this->query['locale']}' is not a supported locale for {$this->query['store']}.");
+                if (! in_array($this->query['locale'], $this->project->getStoreLocales($this->query['product'], true))) {
+                    $this->log("'{$this->query['locale']}' is not a supported locale for {$this->query['product']}.");
 
                     return false;
                 }
@@ -203,15 +203,15 @@ class API
                     return false;
                 }
 
-                if (! in_array($this->query['channel'], $this->channels[$this->query['store']])) {
-                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['store']}.");
+                if (! in_array($this->query['channel'], $this->channels[$this->query['product']])) {
+                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
 
                     return false;
                 }
 
                 if ($service == 'whatsnew') {
-                    if (! $this->project->getWhatsnewFiles($this->query['store'], $this->query['channel'])) {
-                        $this->log("Whatsnew section is not supported for {$this->query['store']} on '{$this->query['channel']}' channel.");
+                    if (! $this->project->getWhatsnewFiles($this->query['product'], $this->query['channel'])) {
+                        $this->log("Whatsnew section is not supported for {$this->query['product']} on '{$this->query['channel']}' channel.");
 
                         return false;
                     }

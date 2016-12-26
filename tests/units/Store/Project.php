@@ -51,6 +51,74 @@ class Project extends atoum\test
                 ->isTrue();
     }
 
+    public function testIsLegacyProduct()
+    {
+        $obj = new _Project();
+        $this
+            ->boolean($obj->isLegacyProduct('google'))
+                ->isTrue();
+        $this
+            ->boolean($obj->isLegacyProduct('apple'))
+                ->isTrue();
+        $this
+            ->boolean($obj->isLegacyProduct('fx_ios'))
+                ->isFalse();
+    }
+
+    public function testGetUpdatedProductCode()
+    {
+        $obj = new _Project();
+        $this
+            ->string($obj->getUpdatedProductCode('google'))
+                ->isEqualTo('fx_android');
+        $this
+            ->string($obj->getUpdatedProductCode('apple'))
+                ->isEqualTo('fx_ios');
+        $this
+            ->string($obj->getUpdatedProductCode('fx_android'))
+                ->isEqualTo('fx_android');
+    }
+
+    public function testGetProductStore()
+    {
+        $obj = new _Project();
+        $this
+            ->string($obj->getProductStore('fx_android'))
+                ->isEqualTo('google');
+        $this
+            ->string($obj->getProductStore('google'))
+                ->isEqualTo('google');
+        $this
+            ->string($obj->getProductStore('fx_ios'))
+                ->isEqualTo('apple');
+        $this
+            ->string($obj->getProductStore('apple'))
+                ->isEqualTo('apple');
+        $this
+            ->string($obj->getProductStore('foobar'))
+                ->isEqualTo('');
+    }
+
+    public function testGetProductName()
+    {
+        $obj = new _Project();
+        $this
+            ->string($obj->getProductName('fx_android'))
+                ->isEqualTo('Firefox for Android');
+        $this
+            ->string($obj->getProductName('google'))
+                ->isEqualTo('Firefox for Android');
+        $this
+            ->string($obj->getProductName('fx_ios'))
+                ->isEqualTo('Firefox for iOS');
+        $this
+            ->string($obj->getProductName('apple'))
+                ->isEqualTo('Firefox for iOS');
+        $this
+            ->string($obj->getProductName('foobar'))
+                ->isEqualTo('foobar');
+    }
+
     public function testGetStoreMozillaCommonLocales()
     {
         $obj = new _Project();
@@ -200,28 +268,30 @@ class Project extends atoum\test
     {
         $obj = new _Project();
         $this
-            ->string($obj->getTemplate('google', 'release'))
-            ->string($obj->getTemplate('google', 'beta'));
+            ->string($obj->getTemplate('fx_android', 'release'))
+            ->string($obj->getTemplate('fx_android', 'beta'));
         $this
-            ->boolean($obj->getTemplate('google', 'foobar'))
+            ->boolean($obj->getTemplate('fx_android', 'foobar'))
                 ->isFalse();
     }
+
     public function testGetListingFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getListingFiles('google', 'release'))
-            ->string($obj->getListingFiles('google', 'beta'));
+            ->string($obj->getListingFiles('fx_android', 'release'))
+            ->string($obj->getListingFiles('fx_android', 'beta'));
         $this
-            ->boolean($obj->getListingFiles('google', 'foobar'))
+            ->boolean($obj->getListingFiles('fx_android', 'foobar'))
                 ->isFalse();
     }
+
     public function testGetWhatsnewFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getWhatsnewFiles('google', 'release'));
+            ->string($obj->getWhatsnewFiles('fx_android', 'release'));
         $this
-            ->string($obj->getWhatsnewFiles('google', 'beta'));
+            ->string($obj->getWhatsnewFiles('fx_android', 'beta'));
     }
 }

@@ -24,9 +24,17 @@ class Project
      *
      * @var array
      */
-    private $store_product_map = [
-        'fx_android' => 'google',
-        'fx_ios'     => 'apple',
+    private $products_data = [
+        'fx_android' =>
+            [
+                'name'  => 'Firefox for Android',
+                'store' => 'google',
+            ],
+        'fx_ios' =>
+            [
+                'name'  => 'Firefox for iOS',
+                'store' => 'apple',
+            ],
     ];
 
     /**
@@ -211,23 +219,23 @@ class Project
      * @var array
      */
     public $templates = [
-        'google' => [
+        'fx_android' => [
             // channel => path to template file
             'release' => [
-                'template' => 'google/release/listing_apr_2016.php',
+                'template' => 'fx_android/release/listing_apr_2016.php',
                 'langfile' => 'android_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_50.lang',
                 ],
             'beta' => [
-                'template' => 'google/beta/listing_may_2015.php',
+                'template' => 'fx_android/beta/listing_may_2015.php',
                 'langfile' => 'description_beta_page.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_51_beta.lang',
                 ],
         ],
-        'apple' => [
+        'fx_ios' => [
             // channel => path to template file
             'release' => [
-                'template' => 'apple/release/listing_sept_2015.php',
+                'template' => 'fx_ios/release/listing_sept_2015.php',
                 'langfile' => 'apple_description_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_ios_6_0.lang',
             ],
@@ -287,7 +295,7 @@ class Project
      *
      * @param String $locale Locale code to check
      *
-     * @return boolean true if $locale is a Right-To-Left locale, false otherwise.
+     * @return boolean true if $locale is a Right-To-Left locale, false otherwise
      */
     public function isRTL($locale)
     {
@@ -295,23 +303,84 @@ class Project
     }
 
     /**
+     * Get the store associated to a product ID
+     *
+     * @param String $product Product ID
+     *
+     * @return string Store's code
+     */
+    public function getProductStore($product)
+    {
+        $store = '';
+        $product = $this->getUpdatedProductCode($product);
+        if (isset($this->products_data[$product])) {
+            $store = $this->products_data[$product]['store'];
+        } elseif ($this->isLegacyProduct($product)) {
+            $store = $product;
+        }
+
+        return $store;
+    }
+
+    /**
+     * Get the name associated to product ID
+     *
+     * @param String $product Product ID
+     *
+     * @return string Product's name
+     */
+    public function getProductName($product)
+    {
+        $product = $this->getUpdatedProductCode($product);
+        $product_name = $product;
+        if (isset($this->products_data[$product])) {
+            $product_name = $this->products_data[$product]['name'];
+        }
+
+        return $product_name;
+    }
+
+    /**
+     * Convert legacy product ID if necessary
+     *
+     * @param String $product Product ID
+     *
+     * @return string Product ID, updated if legacy
+     */
+    public function getUpdatedProductCode($product)
+    {
+        if ($this->isLegacyProduct($product)) {
+            $product = $this->legacy_products[$product];
+        }
+
+        return $product;
+    }
+
+    /**
+     * Check if the product ID is a legacy code
+     *
+     * @param String $product Product ID
+     *
+     * @return boolean true if $product is a legacy ID, false otherwise
+     */
+    public function isLegacyProduct($product)
+    {
+        return isset($this->legacy_products[$product]);
+    }
+
+    /**
      * Get Common Locales supported by the product's store and Mozilla
      *
-     * @param string $product Name of product
-     * @param string $channel Name of the channel
+     * @param string $product Product ID
+     * @param string $channel Channel ID
      *
-     * @return Mixed Array of locales or False if the call is incorrect
+     * @return Mixed Array of locales or false if the call is incorrect
      */
     public function getStoreMozillaCommonLocales($product, $channel)
     {
         // Map product to its store. Support legacy product codes.
-        $store = '';
-        if (isset($this->store_product_map[$product])) {
-            $store = $this->store_product_map[$product];
-        } elseif (isset($this->legacy_products[$product])) {
-            $store = $product;
-            $product = $this->legacy_products[$store];
-        }
+        $store = $this->getProductStore($product);
+        $product = $this->getUpdatedProductCode($product);
 
         // Return early if store is unsupported
         if (! isset($this->locales_mapping[$store])) {
@@ -354,7 +423,7 @@ class Project
      * @param boolean $mapping If false returns mapping as Store->Mozilla,
      *                         if true returns mapping as Mozilla->Store
      *
-     * @return Mixed Array of locales or False if the call is incorrect
+     * @return Mixed Array of locales or false if the call is incorrect
      */
     public function getStoreLocales($store, $mapping = false)
     {
@@ -370,16 +439,14 @@ class Project
     /**
      * Get List of Firefox locales for a product/channel combination
      *
-     * @param string $product Name of product
-     * @param string $channel Name of channel
+     * @param string $product Product ID
+     * @param string $channel Channel ID
      *
-     * @return mixed Array of locales of False
+     * @return mixed Array of locales or false
      */
     public function getProductLocales($product, $channel)
     {
-        $product = isset($this->legacy_products[$product])
-            ? $this->legacy_products[$product]
-            : $product;
+        $product = $this->getUpdatedProductCode($product);
 
         // Return requested channel, or fall back to release
         if (isset($this->supported_locales[$product])) {
@@ -392,12 +459,12 @@ class Project
     }
 
     /**
-     * Get mapping of locales for a Store
+     * Get mapping of locales for a store
      *
      * @param string  $store   Name of the store
      * @param boolean $reverse Optional, flip array keys and values
      *
-     * @return mixed List of locales or False
+     * @return mixed List of locales or false
      */
     public function getLocalesMapping($store, $reverse = false)
     {
@@ -411,59 +478,69 @@ class Project
     }
 
     /**
-     * Get the template path for a Store and channel
-     * @param string $store   Name of the store
-     * @param string $channel Name of the channel
+     * Get the template path for a product and channel
      *
-     * @return mixed String containing the template path or False
+     * @param string $product Product ID
+     * @param string $channel Channel ID
+     *
+     * @return mixed String containing the template path or false
      */
-    public function getTemplate($store, $channel)
+    public function getTemplate($product, $channel)
     {
-        if (! isset($this->templates[$store][$channel]['template'])) {
+        $product = $this->getUpdatedProductCode($product);
+        if (! isset($this->templates[$product][$channel]['template'])) {
             return false;
         }
 
-        return $this->templates[$store][$channel]['template'];
+        return $this->templates[$product][$channel]['template'];
     }
 
     /**
-     * Get the lang file name(s) for a Store and Channel. Can be filtered by Section.
-     * @param  string $store   Name of the Store
-     * @param  string $channel Name of the channel
-     * @param  string $section Name of the section defined in $this->template
-     *                         containing the lang file(s).
-     * @return mixed  String containing the langfile name(s) or False
+     * Get the lang file name(s) for a product and channel.
+     * Can be filtered by Section.
+     *
+     * @param string $product Product ID
+     * @param string $channel Channel ID
+     * @param string $section Name of the section defined in $this->template
+     *                        containing the lang file(s).
+     *
+     * @return mixed String containing the langfile name(s) or false
      */
-    protected function getLangFile($store, $channel, $section)
+    protected function getLangFile($product, $channel, $section)
     {
-        if (! isset($this->templates[$store][$channel][$section])) {
+        $product = $this->getUpdatedProductCode($product);
+        if (! isset($this->templates[$product][$channel][$section])) {
             return false;
         }
 
-        return $this->templates[$store][$channel][$section];
+        return $this->templates[$product][$channel][$section];
     }
 
     /**
      * Get the lang file name(s) for whatsnew section if it exists. Returns
      * false otherwise.
-     * @param  string $store   Name of the Store
-     * @param  string $channel Channel of the store
-     * @return mixed  String containing the langfile name(s) or False
+     *
+     * @param string $product Product ID
+     * @param string $channel Channel ID
+     *
+     * @return mixed String containing the langfile name(s) or false
      */
-    public function getWhatsnewFiles($store, $channel)
+    public function getWhatsnewFiles($product, $channel)
     {
-        return $this->getLangFile($store, $channel, 'whatsnew');
+        return $this->getLangFile($this->getUpdatedProductCode($product), $channel, 'whatsnew');
     }
 
     /**
      * Get the lang file name(s) for listing section if it exists. Returns
      * false otherwise.
-     * @param  string $store   Name of the Store
-     * @param  string $channel Channel of the store
-     * @return mixed  String containing the langfile name(s) or False
+     *
+     * @param string $product Product ID
+     * @param string $channel Channel ID
+     *
+     * @return mixed String containing the langfile name(s) or false
      */
-    public function getListingFiles($store, $channel)
+    public function getListingFiles($product, $channel)
     {
-        return $this->getLangFile($store, $channel, 'langfile');
+        return $this->getLangFile($this->getUpdatedProductCode($product), $channel, 'langfile');
     }
 }

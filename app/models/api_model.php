@@ -3,10 +3,11 @@ namespace Stores;
 
 // Shortcut variables to make the code easier to read
 $json = $done = [];
-$channel           = isset($request->query['channel']) ? $request->query['channel'] : '';
-$locale            = isset($request->query['locale']) ? $request->query['locale'] : '';
-$store             = isset($request->query['store']) ? $request->query['store'] : '';
-$firefox_locales   = $project->getProductLocales($store, $channel);
+$channel = isset($request->query['channel']) ? $request->query['channel'] : '';
+$locale = isset($request->query['locale']) ? $request->query['locale'] : '';
+$product = isset($request->query['product']) ? $request->query['product'] : '';
+$store = $project->getProductStore($request->query['product']);
+$firefox_locales = $project->getProductLocales($product, $channel);
 $supported_locales = array_unique(array_values($project->getLocalesMapping($store)));
 $valid_locales = function ($done) use ($supported_locales) {
     return array_values(array_intersect($done, $supported_locales));
@@ -24,14 +25,14 @@ $valid_locales = function ($done) use ($supported_locales) {
     lists.
 */
 foreach ($firefox_locales as $lang) {
-    $translations = new Translate($lang, $project->getListingFiles($store, $channel));
+    $translations = new Translate($lang, $project->getListingFiles($product, $channel));
 
     if ($translations->isFileTranslated()) {
-        require TEMPLATES . $project->getTemplate($store, $channel);
+        require TEMPLATES . $project->getTemplate($product, $channel);
         // The Google Store has string lengths constraints
         if ($store == 'google') {
-            $desc       = $set_limit(4000, $description($translations));
-            $title      = $set_limit(30, $app_title($translations));
+            $desc = $set_limit(4000, $description($translations));
+            $title = $set_limit(30, $app_title($translations));
             $short_desc = $set_limit(80, $short_desc($translations));
 
             if (($desc + $title + $short_desc) == 3) {
@@ -57,11 +58,11 @@ $whatsnew_json = $listing_json;
 
 $done = [];
 foreach ($firefox_locales as $lang) {
-    $translations = new Translate($lang, $project->getWhatsnewFiles($store, $channel));
+    $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel));
 
     if ($translations->isFileTranslated()) {
         // Include the current template
-        require TEMPLATES . $project->getTemplate($store, $channel);
+        require TEMPLATES . $project->getTemplate($product, $channel);
 
         switch ($store) {
             case 'google':
@@ -95,9 +96,9 @@ switch ($request->getService()) {
         break;
     case 'translation':
         $request = [
-            'locale'  => $locale,
-            'store'   => $store,
-            'channel' => $channel,
+            'locale'    => $locale,
+            'product'   => $product,
+            'channel'   => $channel,
         ];
 
         require MODELS . 'locale_model.php';
