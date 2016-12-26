@@ -51,34 +51,6 @@ class Project extends atoum\test
                 ->isTrue();
     }
 
-    public function testGetGoogleStoreLocales()
-    {
-        $obj = new _Project();
-        $this
-            ->array($obj->getGoogleStoreLocales(true))
-                ->hasKey('es-419')
-                ->contains('de')
-                ->hassize(51);
-        $this
-            ->array($obj->getGoogleStoreLocales(false))
-                ->contains('es-419')
-                ->hassize(51);
-    }
-
-    public function testGetAppleStoreLocales()
-    {
-        $obj = new _Project();
-        $this
-            ->array($obj->getAppleStoreLocales(true))
-                ->hasKey('zh-Hans')
-                ->contains('zh-CN')
-                ->hassize(28);
-        $this
-            ->array($obj->getAppleStoreLocales(false))
-                ->contains('fr-CA')
-                ->hassize(28);
-    }
-
     public function testGetGoogleMozillaCommonLocales()
     {
         $obj = new _Project();
@@ -117,17 +89,33 @@ class Project extends atoum\test
     public function testGetStoreLocales()
     {
         $obj = new _Project();
-        $this
-            ->array($obj->getStoreLocales('google', true));
-        $this
-            ->array($obj->getStoreLocales('google', false));
-        $this
-            ->array($obj->getStoreLocales('apple', true));
-        $this
-            ->array($obj->getStoreLocales('apple', false));
+
+        // Unsupported store
         $this
             ->boolean($obj->getStoreLocales('foobar', false))
                 ->isFalse();
+
+        // Google Play
+        $this
+            ->array($obj->getStoreLocales('google', true))
+                ->hasKey('es-419')
+                ->contains('de')
+                ->hassize(51);
+        $this
+            ->array($obj->getStoreLocales('google', false))
+                ->contains('es-419')
+                ->hassize(51);
+
+        // AppStore
+        $this
+            ->array($obj->getStoreLocales('apple', true))
+                ->hasKey('zh-Hans')
+                ->contains('zh-CN')
+                ->hassize(28);
+        $this
+            ->array($obj->getStoreLocales('apple', false))
+                ->contains('fr-CA')
+                ->hassize(28);
     }
 
     public function testGetFirefoxLocales()
@@ -149,17 +137,34 @@ class Project extends atoum\test
     public function testGetLocalesMapping()
     {
         $obj = new _Project();
+
+        // Unsupported store
         $this
-            ->array($obj->getLocalesMapping('google', true));
-        $this
-            ->array($obj->getFirefoxLocales('google', false));
-        $this
-            ->array($obj->getFirefoxLocales('apple', true));
-        $this
-            ->array($obj->getFirefoxLocales('apple', false));
-        $this
-            ->boolean($obj->getFirefoxLocales('foobar', false))
+            ->boolean($obj->getLocalesMapping('foobar', false))
                 ->isFalse();
+
+        // Google Play
+        $this
+            ->array($obj->getLocalesMapping('google', false))
+                ->hasKey('es-419')
+                ->contains('de')
+                ->hassize(51);
+        $this
+            ->array($obj->getLocalesMapping('google', true))
+                ->contains('de-DE')
+                ->hassize(47);
+
+        // AppStore
+        $this
+            ->array($obj->getLocalesMapping('apple', false))
+                ->hasKey('zh-Hans')
+                ->contains('zh-CN')
+                ->hassize(28);
+        $this
+            ->array($obj->getLocalesMapping('apple', true))
+                ->hasKey('zh-TW')
+                ->contains('zh-Hant')
+                ->hassize(25);
     }
 
     public function testGetTemplate()

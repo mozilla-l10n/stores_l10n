@@ -63,96 +63,102 @@ class Project
         'th', 'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
     ];
 
-    /*
-        Original list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
+    /**
+     * Locales mapping between Mozilla and Stores codes. Format:
+     * Store Code -> Mozilla Code
+     *
+     * Sources:
+     * Google: list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
+     * Apple: https://github.com/KrauseFx/deliver#available-language-codes
+     *
+     * If false, locale is unsupported in Mozilla products.
+     *
+     * @var array
      */
-    private $google_locales_mapping = [
-        'af'     => 'af',
-        'ar'     => 'ar',
-        'am'     => false,
-        'bg'     => 'bg',
-        'cs-CZ'  => 'cs',
-        'ca'     => 'ca',
-        'da-DK'  => 'da',
-        'de-DE'  => 'de',
-        'el-GR'  => 'el',
-        'en-GB'  => 'en-GB',
-        'en-US'  => 'en-US',
-        'es-419' => 'es-MX', // Spanish, South America
-        'es-ES'  => 'es-ES',
-        'es-US'  => 'es-MX', // Spanish, South America
-        'et'     => 'et',
-        'fa'     => 'fa',
-        'fi-FI'  => 'fi',
-        'fil'    => false, // Filipino
-        'fr-CA'  => 'fr',
-        'fr-FR'  => 'fr',
-        'hi-IN'  => 'hi-IN',
-        'hu-HU'  => 'hu',
-        'hr'     => 'hr',
-        'id'     => 'id',
-        'it-IT'  => 'it',
-        'iw-IL'  => 'he',
-        'ja-JP'  => 'ja',
-        'ko-KR'  => 'ko',
-        'lt'     => 'lt',
-        'lv'     => 'lv',
-        'ms'     => 'ms',
-        'nl-NL'  => 'nl',
-        'no-NO'  => 'nb-NO',
-        'pl-PL'  => 'pl',
-        'pt-BR'  => 'pt-BR',
-        'pt-PT'  => 'pt-PT',
-        'rm'     => 'rm',
-        'ro'     => 'ro',
-        'ru-RU'  => 'ru',
-        'sk'     => 'sk',
-        'sl'     => 'sl',
-        'sr'     => 'sr',
-        'sv-SE'  => 'sv-SE',
-        'sw'     => 'sw',
-        'th'     => 'th',
-        'tr-TR'  => 'tr',
-        'uk'     => 'uk',
-        'vi'     => 'vi',
-        'zh-CN'  => 'zh-CN',
-        'zh-TW'  => 'zh-TW',
-        'zu'     => 'zu',
-    ];
-
-    /*
-        Not exactly official, but this is the tool we use for our automation:
-        https://github.com/KrauseFx/deliver#available-language-codes
-    */
-    private $apple_locales_mapping = [
-        'da'      => 'da',
-        'de-DE'   => 'de',
-        'el'      => 'el',
-        'en-AU'   => 'en-GB',
-        'en-CA'   => 'en-US',
-        'en-GB'   => 'en-GB',
-        'en-US'   => 'en-US',
-        'es-ES'   => 'es-ES',
-        'es-MX'   => 'es-MX',
-        'fi'      => 'fi',
-        'fr-CA'   => 'fr',
-        'fr-FR'   => 'fr',
-        'id'      => 'id',
-        'it'      => 'it',
-        'ja'      => 'ja',
-        'ko'      => 'ko',
-        'ms'      => 'ms',
-        'nl'      => 'nl',
-        'no'      => 'nb-NO',
-        'pt-BR'   => 'pt-BR',
-        'pt-PT'   => 'pt-PT',
-        'ru'      => 'ru',
-        'sv'      => 'sv-SE',
-        'th'      => 'th',
-        'tr'      => 'tr',
-        'vi'      => 'vi',
-        'zh-Hans' => 'zh-CN',
-        'zh-Hant' => 'zh-TW',
+    private $locales_mapping = [
+        'apple'  => [
+            'da'      => 'da',
+            'de-DE'   => 'de',
+            'el'      => 'el',
+            'en-AU'   => 'en-GB',
+            'en-CA'   => 'en-US',
+            'en-GB'   => 'en-GB',
+            'en-US'   => 'en-US',
+            'es-ES'   => 'es-ES',
+            'es-MX'   => 'es-MX',
+            'fi'      => 'fi',
+            'fr-CA'   => 'fr',
+            'fr-FR'   => 'fr',
+            'id'      => 'id',
+            'it'      => 'it',
+            'ja'      => 'ja',
+            'ko'      => 'ko',
+            'ms'      => 'ms',
+            'nl'      => 'nl',
+            'no'      => 'nb-NO',
+            'pt-BR'   => 'pt-BR',
+            'pt-PT'   => 'pt-PT',
+            'ru'      => 'ru',
+            'sv'      => 'sv-SE',
+            'th'      => 'th',
+            'tr'      => 'tr',
+            'vi'      => 'vi',
+            'zh-Hans' => 'zh-CN',
+            'zh-Hant' => 'zh-TW',
+        ],
+        'google' => [
+            'af'     => 'af',
+            'ar'     => 'ar',
+            'am'     => false,
+            'bg'     => 'bg',
+            'cs-CZ'  => 'cs',
+            'ca'     => 'ca',
+            'da-DK'  => 'da',
+            'de-DE'  => 'de',
+            'el-GR'  => 'el',
+            'en-GB'  => 'en-GB',
+            'en-US'  => 'en-US',
+            'es-419' => 'es-MX', // Spanish, South America
+            'es-ES'  => 'es-ES',
+            'es-US'  => 'es-MX', // Spanish, South America
+            'et'     => 'et',
+            'fa'     => 'fa',
+            'fi-FI'  => 'fi',
+            'fil'    => false, // Filipino
+            'fr-CA'  => 'fr',
+            'fr-FR'  => 'fr',
+            'hi-IN'  => 'hi-IN',
+            'hu-HU'  => 'hu',
+            'hr'     => 'hr',
+            'id'     => 'id',
+            'it-IT'  => 'it',
+            'iw-IL'  => 'he',
+            'ja-JP'  => 'ja',
+            'ko-KR'  => 'ko',
+            'lt'     => 'lt',
+            'lv'     => 'lv',
+            'ms'     => 'ms',
+            'nl-NL'  => 'nl',
+            'no-NO'  => 'nb-NO',
+            'pl-PL'  => 'pl',
+            'pt-BR'  => 'pt-BR',
+            'pt-PT'  => 'pt-PT',
+            'rm'     => 'rm',
+            'ro'     => 'ro',
+            'ru-RU'  => 'ru',
+            'sk'     => 'sk',
+            'sl'     => 'sl',
+            'sr'     => 'sr',
+            'sv-SE'  => 'sv-SE',
+            'sw'     => 'sw',
+            'th'     => 'th',
+            'tr-TR'  => 'tr',
+            'uk'     => 'uk',
+            'vi'     => 'vi',
+            'zh-CN'  => 'zh-CN',
+            'zh-TW'  => 'zh-TW',
+            'zu'     => 'zu',
+        ],
     ];
 
     public $templates = [
@@ -229,34 +235,6 @@ class Project
     }
 
     /**
-     * Return all the locales supported by Google Play
-     *
-     * @param  boolean $mapping If True, return the Google/Mozilla locale mapping list
-     * @return array   List of locales, key is Google code, value is Mozilla code.
-     *                         If we don't support a Google locale, the value is False
-     */
-    public function getGoogleStoreLocales($mapping = false)
-    {
-        return $mapping
-            ? $this->google_locales_mapping
-            : array_keys($this->google_locales_mapping);
-    }
-
-    /**
-     * Return all the locales supported by Apple AppStore
-     *
-     * @param  boolean $mapping If True, return the Apple/Mozilla locale mapping list
-     * @return array   List of locales, key is Apple code, value is Mozilla code.
-     *                         If we don't support an Apple locale, the value is False
-     */
-    public function getAppleStoreLocales($mapping = false)
-    {
-        return $mapping
-            ? $this->apple_locales_mapping
-            : array_keys($this->apple_locales_mapping);
-    }
-
-    /**
      * Return the intersection of locales supported by both Mozilla and Google Play
      *
      * @param  string $channel The Mozilla channel, can be aurora, beta, release
@@ -282,7 +260,7 @@ class Project
 
         return array_intersect(
             $locales,
-            array_values(array_filter($this->google_locales_mapping))
+            array_values(array_filter($this->locales_mapping['google']))
         );
     }
 
@@ -306,7 +284,7 @@ class Project
 
         return array_intersect(
             $locales,
-            array_values(array_filter($this->apple_locales_mapping))
+            array_values(array_filter($this->locales_mapping['apple']))
         );
     }
 
@@ -333,19 +311,20 @@ class Project
     }
 
     /**
-     * Get Locales supported by the store
-     * @param  string  $store   Name of the store, ex: google, apple
-     * @param  boolean $mapping Return the Mozilla/Store locale mapping, False by Default
-     * @return Mixed   Array of locales of False if the call is incorrect
+     * Get locales supported by the requested store
+     *
+     * @param string  $store   Name of the store: google, apple
+     * @param boolean $mapping If false returns mapping as Store->Mozilla,
+     *                         if true returns mapping as Mozilla->Store
+     *
+     * @return Mixed Array of locales or False if the call is incorrect
      */
     public function getStoreLocales($store, $mapping = false)
     {
-        if ($store == 'google') {
-            return $this->getGoogleStoreLocales($mapping);
-        }
-
-        if ($store == 'apple') {
-            return $this->getAppleStoreLocales($mapping);
+        if (isset($this->locales_mapping[$store])) {
+            return $mapping
+                ? $this->locales_mapping[$store]
+                : array_keys($this->locales_mapping[$store]);
         }
 
         return false;
@@ -387,32 +366,29 @@ class Project
 
     /**
      * Get mapping of locales for a Store
-     * @param  string  $store   Name of the store
-     * @param  boolean $reverse Optional, flip array keys and values
-     * @return mixed   List of locales or False
+     *
+     * @param string  $store   Name of the store
+     * @param boolean $reverse Optional, flip array keys and values
+     *
+     * @return mixed List of locales or False
      */
     public function getLocalesMapping($store, $reverse = false)
     {
-        if (! in_array($store, array_keys($this->templates))) {
+        if (! isset($this->locales_mapping[$store])) {
             return false;
         }
 
-        if ($store == 'google') {
-            $data = $this->google_locales_mapping;
-        }
-
-        if ($store == 'apple') {
-            $data = $this->apple_locales_mapping;
-        }
+        $data = $this->locales_mapping[$store];
 
         return $reverse ? array_flip(array_filter($data)) : $data;
     }
 
     /**
      * Get the template path for a Store and channel
-     * @param  string $store   Name of the store
-     * @param  string $channel Name of the channel
-     * @return mixed  String containing the template path or False
+     * @param string $store   Name of the store
+     * @param string $channel Name of the channel
+     *
+     * @return mixed String containing the template path or False
      */
     public function getTemplate($store, $channel)
     {
