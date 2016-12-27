@@ -6,16 +6,16 @@ define('APP',         INSTALL . 'app/');
 define('WEB',         INSTALL . 'web/');
 define('INC',         APP . 'inc/');
 define('VIEWS',       APP . 'views/');
-define('SETTINGS',    APP . 'settings/');
+define('CONFIG',      APP . 'config/');
 define('TEMPLATES',   APP . 'templates/');
 define('MODELS',      APP . 'models/');
 define('CONTROLLERS', APP . 'controllers/');
 define('TEST_FILES',  realpath(__DIR__ . '/../testfiles/') . '/');
 define('LOCALES_PATH', TEST_FILES . 'langfiles/');
 
-// Hosting specific settings are in a INI file
-if (file_exists(SETTINGS . 'config.ini')) {
-    $config = parse_ini_file(SETTINGS . 'config.ini');
+// Hosting specific config are in a INI file
+if (file_exists(CONFIG . 'config.ini')) {
+    $config = parse_ini_file(CONFIG . 'config.ini');
 }
 
 if (isset($config['url'])) {

@@ -7,14 +7,14 @@ define('WEB',           INSTALL . 'web/');
 define('LOCALES_PATH',  INSTALL . 'locales/');
 define('INC',           APP . 'inc/');
 define('VIEWS',         APP . 'views/');
-define('SETTINGS',      APP . 'settings/');
+define('CONFIG',        APP . 'config/');
 define('TEMPLATES',     APP . 'templates/');
 define('MODELS',        APP . 'models/');
 define('CONTROLLERS',   APP . 'controllers/');
 
-// Hosting specific settings are in a INI file
-if (file_exists(SETTINGS . 'config.ini')) {
-    $config = parse_ini_file(SETTINGS . 'config.ini');
+// Hosting specific config are in a INI file
+if (file_exists(CONFIG . 'config.ini')) {
+    $config = parse_ini_file(CONFIG . 'config.ini');
 }
 
 $protocol = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443

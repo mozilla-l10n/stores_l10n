@@ -4,9 +4,9 @@ reminder: this is the common set of includes for a page load
 -> app/inc/router.php
     -> app/inc/urls.php
 -> app/inc/init.php
-    -> app/config/settings/constants.php
+    -> app/inc/constants.php
     -> vendor/autoload.php
-    -> app/config/settings/config.php
+    -> app/config/config.php
 -> app/inc/dispatcher.php
     -> app/controller/{page}_controller.php
         -> app/models/{page}_model.php

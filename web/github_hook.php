@@ -10,7 +10,7 @@ $composer = $app_root . '/composer.phar';
 // Git variables
 $branch = 'master';
 $header = 'HTTP_X_HUB_SIGNATURE';
-$secret = parse_ini_file($app_root . '/app/settings/config.ini')['github_key'];
+$secret = parse_ini_file($app_root . '/app/config/config.ini')['github_key'];
 
 // Logging function to output content to /github_log.txt
 function logHookResult($message, $success = false)
