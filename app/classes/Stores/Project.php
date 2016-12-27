@@ -275,12 +275,18 @@ class Project
             Clean up list of locales supported in Firefox for iOS,
             set beta and aurora channel with the same list as release.
         */
-        $fx_ios_locales = self::CleanUpiOS($this->supported_locales['fx_ios']['release']);
+        $fx_ios_locales = self::cleanUpiOS($this->supported_locales['fx_ios']['release']);
         $this->supported_locales['fx_ios'] = [
             'aurora'  => $fx_ios_locales,
             'beta'    => $fx_ios_locales,
             'release' => $fx_ios_locales,
         ];
+
+        // Add en-US to Android locales
+        foreach (['aurora', 'beta', 'release'] as $channel) {
+            $this->supported_locales['fx_android'][$channel][] = 'en-US';
+            sort($this->supported_locales['fx_android'][$channel]);
+        }
     }
 
     /**
