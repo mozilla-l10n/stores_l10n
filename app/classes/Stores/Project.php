@@ -341,7 +341,7 @@ class Project
         $product = $this->getUpdatedProductCode($product);
 
         return isset($this->products_data[$product])
-            ? $product_name = $this->products_data[$product]['name']
+            ? $this->products_data[$product]['name']
             : $product;
     }
 
