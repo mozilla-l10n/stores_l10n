@@ -6,28 +6,19 @@ define('APP',         INSTALL . 'app/');
 define('WEB',         INSTALL . 'web/');
 define('INC',         APP . 'inc/');
 define('VIEWS',       APP . 'views/');
-define('SETTINGS',    APP . 'settings/');
+define('CONFIG',      APP . 'config/');
 define('TEMPLATES',   APP . 'templates/');
 define('MODELS',      APP . 'models/');
 define('CONTROLLERS', APP . 'controllers/');
 define('TEST_FILES',  realpath(__DIR__ . '/../testfiles/') . '/');
-define('LOCALES',     TEST_FILES . 'langfiles/');
+define('LOCALES_PATH', TEST_FILES . 'langfiles/');
 
-// Hosting specific settings are in a INI file
-if (file_exists(SETTINGS . 'config.ini')) {
-    $config = parse_ini_file(SETTINGS . 'config.ini');
-}
-
-if (isset($config['url'])) {
-    define('BASE_HTML_URL', $config['url']);
+// Load local settings
+$settings_file = CONFIG . '/config.inc.php';
+if (! file_exists($settings_file)) {
+    die('File app/config/config.inc.php is missing. Please check your configuration.');
 } else {
-    define('BASE_HTML_URL', 'http://localhost/');
-}
-
-if (isset($config['debug'])) {
-    define('DEBUG', (boolean) $config['debug']);
-} else {
-    define('DEBUG', false);
+    require $settings_file;
 }
 
 // Make sure we have a timezone set

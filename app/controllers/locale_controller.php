@@ -20,7 +20,7 @@ if ($url_parts == 3) {
     // Url type: /locale/apple/release/
     $request = [
         'locale'  => null,
-        'store'   => isset($components[1]) ? $components[1] : null,
+        'product' => isset($components[1]) ? $project->getUpdatedProductCode($components[1]) : null,
         'channel' => isset($components[2]) ? $components[2] : null,
         'output'  => 'show',
     ];
@@ -30,7 +30,7 @@ if ($url_parts == 3) {
         // Url type: /locale/apple/release/html
         $request = [
             'locale'  => null,
-            'store'   => isset($components[1]) ? $components[1] : null,
+            'product' => isset($components[1]) ? $project->getUpdatedProductCode($components[1]) : null,
             'channel' => isset($components[2]) ? $components[2] : null,
             'output'  => isset($components[3]) ? $components[3] : 'show',
         ];
@@ -38,7 +38,7 @@ if ($url_parts == 3) {
         // Url type: /locale/it/apple/release/
         $request = [
             'locale'  => isset($components[1]) ? $components[1] : null,
-            'store'   => isset($components[2]) ? $components[2] : null,
+            'product' => isset($components[2]) ? $project->getUpdatedProductCode($components[2]) : null,
             'channel' => isset($components[3]) ? $components[3] : null,
             'output'  => 'show',
         ];
@@ -47,22 +47,16 @@ if ($url_parts == 3) {
     // Url type: /locale/it/apple/release/html
     $request = [
         'locale'  => isset($components[1]) ? $components[1] : null,
-        'store'   => isset($components[2]) ? $components[2] : null,
+        'product' => isset($components[2]) ? $project->getUpdatedProductCode($components[2]) : null,
         'channel' => isset($components[3]) ? $components[3] : null,
         'output'  => isset($components[4]) ? $components[4] : 'show',
     ];
 }
 
-if ($request['store'] == 'google') {
-    $supported_locales = $project->getGoogleMozillaCommonLocales($request['channel']);
-}
-
-if ($request['store'] == 'apple') {
-    $supported_locales = $project->getAppleMozillaCommonLocales($request['channel']);
-}
+$supported_locales = $project->getStoreMozillaCommonLocales($request['product'], $request['channel']);
 
 // Include en-US in this view
-if (! in_array('en-US', $supported_locales)) {
+if ($supported_locales && ! in_array('en-US', $supported_locales)) {
     $supported_locales[] = 'en-US';
     sort($supported_locales);
 }
@@ -82,19 +76,19 @@ if (! $request['locale']) {
     exit();
 }
 
-if (! in_array($request['store'], ['google', 'apple'])) {
-    die('Unknown marketplace provider or output format.');
+if (! in_array($request['product'], $project->getSupportedProducts())) {
+    die('Unknown product or output format.');
 }
 
 if (! in_array($request['channel'], ['beta', 'release'])) {
-    die('This Firefox channel is not supported.');
+    die('This channel is not supported.');
 }
 
 if (! in_array($request['locale'], $supported_locales)) {
-    die('Not a locale code supported by Firefox');
+    die('Not a locale code supported by this product.');
 }
 
-$title = ucfirst($request['store']) . " Store Description, {$request['channel']} channel, for: {$request['locale']}";
+$title = ucfirst($project->getProductName($request['product'])) . " Store Description, {$request['channel']} channel, for: {$request['locale']}";
 
 if (! isset($request['output'])) {
     $request['output'] = 'show';
@@ -114,4 +108,4 @@ switch ($request['output']) {
         break;
 }
 include MODELS . 'locale_model.php';
-include VIEWS . $request['store'] . '/' . $request['channel'] . '/' . $view . '_view.php';
+include VIEWS . $request['product'] . '/' . $request['channel'] . '/' . $view . '_view.php';

@@ -10,7 +10,6 @@ $composer = $app_root . '/composer.phar';
 // Git variables
 $branch = 'master';
 $header = 'HTTP_X_HUB_SIGNATURE';
-$secret = parse_ini_file($app_root . '/app/settings/config.ini')['github_key'];
 
 // Logging function to output content to /github_log.txt
 function logHookResult($message, $success = false)
@@ -36,7 +35,7 @@ if (isset($_SERVER[$header])) {
     $validation = hash_hmac(
         'sha1',
         file_get_contents("php://input"),
-        $secret
+        GITHUB_SECRET
     );
 
     if ($validation == explode('=', $_SERVER[$header])[1]) {

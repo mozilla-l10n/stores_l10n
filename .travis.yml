@@ -4,14 +4,18 @@ php:
   - 5.6
   - 7.0
 before_install:
+  ## Disable xdebug
+  - phpenv config-rm xdebug.ini
+  ## Update Composer
+  - composer self-update
   ## Install latest version of node
   - nvm install node
-before_script:
-  ## Disabling xdebug
-  - phpenv config-rm xdebug.ini
-  ## Composer
-  - composer self-update
+install:
+  ## Install Composer dependencies
   - composer install --no-interaction --prefer-source
+before_script:
+  ## Travis configuration
+  - cp app/config/config.inc.php.ini app/config/config.inc.php
   ## Install ESLint
   - npm install -g eslint
 script:

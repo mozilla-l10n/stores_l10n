@@ -1,22 +1,22 @@
      <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="page-header">
-    <h1>Dashboard and API for Google Play / Apple Appstore listings translation</h1>
+    <h1>Dashboard and API for Google and Apple stores translations</h1>
 </div>
 <ul id="filters" class="nav nav-pills">
-    <li class="filter"><a href="#play_beta" id="play_beta">Google Play Beta</a></li>
-    <li class="filter active"><a href="#play_release" id="play_release">Google Play Release</a></li>
-    <li class="filter"><a href="#app_store_release" id="app_store_release">Apple Appstore Release</a></li>
+    <li class="filter"><a href="#fx_android_beta" id="fx_android_beta">Firefox for Android Beta</a></li>
+    <li class="filter active"><a href="#fx_android_release" id="fx_android_release">Firefox for Android Release</a></li>
+    <li class="filter"><a href="#fx_ios_release" id="fx_ios_release">Firefox for iOS Release</a></li>
 </ul>
 
-<?=$stores['play']['beta']?>
-<?=$stores['play']['release']?>
-<?=$stores['appstore']['release']?>
+<?=$stores['fx_android']['beta']?>
+<?=$stores['fx_android']['release']?>
+<?=$stores['fx_ios']['release']?>
 
 <script src="media/assets/jquery/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
     $('table').hide();
-    $('#play_release_table').show();
+    $('#fx_android_release_table').show();
     $('#filters a').click(function(e) {
         e.preventDefault();
         $('#filters li').removeClass('active');
@@ -30,7 +30,7 @@ $(document).ready(function() {
         $('#' + anchor).click();
     } else {
         $('#filters li').removeClass('active');
-        $('#play_release').parent().addClass('active');
+        $('#fx_android_release').parent().addClass('active');
     }
 });
 </script>

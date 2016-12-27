@@ -11,50 +11,71 @@ namespace Stores;
  */
 class Translate extends DotLangParser
 {
-    protected $source_strings;
-    protected $translations;
-    protected $locale;
-    public $repo;
+    /**
+     * Array of source strings
+     *
+     * @var Array
+     */
+    protected $source_strings = [];
 
-    public function __construct($locale, $files)
+    /**
+     * Array of translations
+     *
+     * @var Array
+     */
+    protected $translations = [];
+
+    /**
+     * Locale currently parsed
+     *
+     * @var string
+     */
+    protected $locale;
+
+    /**
+     * Path to the /locales folder storing translation files
+     *
+     * @var string
+     */
+    protected $locales_path;
+
+    public function __construct($locale, $files, $locales_path)
     {
         $this->locale = $locale;
-        $this->repo   = LOCALES;
+        $this->locales_path = $locales_path;
         // We are passing several files
         if (is_array($files)) {
             $translations = $source_strings = [];
             foreach ($files as $file) {
-                $translations  = array_merge(
+                $translations = array_merge(
                     $translations,
-                    $this->parseFile($this->repo . $this->locale . '/' . $file)['strings']
+                    $this->parseFile($this->locales_path . $this->locale . '/' . $file)['strings']
                 );
 
                 $source_strings = array_merge(
                     $source_strings,
-                    array_keys($this->parseFile($this->repo . 'en-US/' . $file)['strings'])
+                    array_keys($this->parseFile($this->locales_path . 'en-US/' . $file)['strings'])
                 );
             }
-            $this->translations =  [
-                'activated' => false,
-                'strings'   => $translations,
-                'errors'    => ['ignoredstrings' => []],
-            ];
+            $this->translations = $translations;
             $this->source_strings = $source_strings;
         } else {
-            $this->translations = $this->parseFile($this->repo . $this->locale . '/' . $files);
-            $this->source_strings = array_keys($this->parseFile($this->repo . 'en-US/' . $files)['strings']);
+            $this->translations = $this->parseFile($this->locales_path . $this->locale . '/' . $files)['strings'];
+            $this->source_strings = array_keys($this->parseFile($this->locales_path . 'en-US/' . $files)['strings']);
         }
     }
 
     /**
      * Return the translation for a string
-     * @param  string $string The string we want the translation for
+     *
+     * @param string $string The string we want to translate
+     *
      * @return string The translation of the string or the source string if not translated
      */
     public function get($string)
     {
-        if (isset($this->translations['strings'][$string])) {
-            return Utils::cleanString($this->translations['strings'][$string]);
+        if (isset($this->translations[$string])) {
+            return Utils::cleanString($this->translations[$string]);
         }
 
         return $string;
@@ -62,21 +83,20 @@ class Translate extends DotLangParser
 
     /**
      * Check if a string is translated
-     * @param  string  $string The string we want to check
-     * @return boolean True if translated, False if not
+     *
+     * @param string $string The string we want to check
+     *
+     * @return boolean True if translated, false if not
      */
     public function isStringTranslated($string)
     {
-        if (! isset($this->translations['strings'][$string])) {
+        // String doesn't exist
+        if (! isset($this->translations[$string])) {
             return false;
         }
 
-        if ($string == $this->translations['strings'][$string]) {
-            return false;
-        }
-
-        // the string doesn't exist
-        if (! isset($this->translations['strings'][$string])) {
+        // String is identical to source
+        if ($string == $this->translations[$string]) {
             return false;
         }
 
@@ -85,7 +105,9 @@ class Translate extends DotLangParser
 
     /**
      * Check if a file is fully translated
-     * @return boolean True if Translated, False is not translated or if file doesn't exist
+     *
+     * @return boolean True if Translated, false is not translated or if
+     *                 file doesn't exist
      */
     public function isFileTranslated()
     {
@@ -96,12 +118,12 @@ class Translate extends DotLangParser
 
         foreach ($this->source_strings as $value) {
             // Missing string in localized file
-            if (! isset($this->translations['strings'][$value])) {
+            if (! isset($this->translations[$value])) {
                 return false;
             }
 
             // Untranslated string in localized file
-            if ($value == $this->translations['strings'][$value]) {
+            if ($value == $this->translations[$value]) {
                 return false;
             }
         }

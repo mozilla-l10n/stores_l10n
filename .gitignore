@@ -1,4 +1,4 @@
-app/settings/config.ini
+app/config/config.inc.php
 cache
 composer.lock
 composer.phar

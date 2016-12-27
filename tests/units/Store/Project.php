@@ -51,143 +51,284 @@ class Project extends atoum\test
                 ->isTrue();
     }
 
-    public function testGetGoogleStoreLocales()
+    public function testIsLegacyProduct()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getGoogleStoreLocales(true))
-                ->hasKey('es-419')
-                ->contains('de')
-                ->hassize(51);
+            ->boolean($obj->isLegacyProduct('google'))
+                ->isTrue();
         $this
-            ->array($obj->getGoogleStoreLocales(false))
-                ->contains('es-419')
-                ->hassize(51);
+            ->boolean($obj->isLegacyProduct('apple'))
+                ->isTrue();
+        $this
+            ->boolean($obj->isLegacyProduct('fx_ios'))
+                ->isFalse();
     }
 
-    public function testGetAppleStoreLocales()
+    public function testGetUpdatedProductCode()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getAppleStoreLocales(true))
-                ->hasKey('zh-Hans')
-                ->contains('zh-CN')
-                ->hassize(28);
+            ->string($obj->getUpdatedProductCode('google'))
+                ->isEqualTo('fx_android');
         $this
-            ->array($obj->getAppleStoreLocales(false))
-                ->contains('fr-CA')
-                ->hassize(28);
+            ->string($obj->getUpdatedProductCode('apple'))
+                ->isEqualTo('fx_ios');
+        $this
+            ->string($obj->getUpdatedProductCode('fx_android'))
+                ->isEqualTo('fx_android');
     }
 
-    public function testGetGoogleMozillaCommonLocales()
+    public function testGetSupportedProducts()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getGoogleMozillaCommonLocales('release'))
-                ->contains('ca')
-                ->notContains('af')
-                ->notContains('am')
-                ->hassize(38);
+            ->array($obj->getSupportedProducts())
+                ->isEqualTo(['fx_android', 'fx_ios']);
     }
 
-    public function testGetAppleMozillaCommonLocales()
+    public function testGetSupportedStores()
     {
         $obj = new _Project();
         $this
-            ->array($obj->getAppleMozillaCommonLocales('release'));
+            ->array($obj->getSupportedStores())
+                ->isEqualTo(['apple', 'google']);
+    }
+
+    public function testGetProductStore()
+    {
+        $obj = new _Project();
+        $this
+            ->string($obj->getProductStore('fx_android'))
+                ->isEqualTo('google');
+        $this
+            ->string($obj->getProductStore('google'))
+                ->isEqualTo('google');
+        $this
+            ->string($obj->getProductStore('fx_ios'))
+                ->isEqualTo('apple');
+        $this
+            ->string($obj->getProductStore('apple'))
+                ->isEqualTo('apple');
+        $this
+            ->string($obj->getProductStore('foobar'))
+                ->isEqualTo('');
+    }
+
+    public function testGetProductName()
+    {
+        $obj = new _Project();
+        $this
+            ->string($obj->getProductName('fx_android'))
+                ->isEqualTo('Firefox for Android');
+        $this
+            ->string($obj->getProductName('google'))
+                ->isEqualTo('Firefox for Android');
+        $this
+            ->string($obj->getProductName('fx_ios'))
+                ->isEqualTo('Firefox for iOS');
+        $this
+            ->string($obj->getProductName('apple'))
+                ->isEqualTo('Firefox for iOS');
+        $this
+            ->string($obj->getProductName('foobar'))
+                ->isEqualTo('foobar');
+    }
+
+    public function testGetProductChannels()
+    {
+        $obj = new _Project();
+
+        $this
+            ->array($obj->getProductChannels('fx_android'))
+                ->isEqualTo(['beta', 'release']);
+        $this
+            ->array($obj->getProductChannels('google'))
+                ->isEqualTo(['beta', 'release']);
+        $this
+            ->array($obj->getProductChannels('fx_ios'))
+                ->isEqualTo(['release']);
+        $this
+            ->array($obj->getProductChannels('apple'))
+                ->isEqualTo(['release']);
+        $this
+            ->array($obj->getProductChannels('foobar'))
+                ->isEqualTo([]);
     }
 
     public function testGetStoreMozillaCommonLocales()
     {
         $obj = new _Project();
+
+        // Google
         $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'release'));
+            ->array($obj->getStoreMozillaCommonLocales('fx_android', 'release'));
         $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'beta'));
+            ->array($obj->getStoreMozillaCommonLocales('fx_android', 'beta'));
+
+        $tmp_locales = $obj->getStoreMozillaCommonLocales('fx_android', 'release');
         $this
-            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'));
+            ->array($tmp_locales)
+                ->contains('ca')
+                ->notContains('af')
+                ->notContains('am')
+                ->hassize(38);
+        // Legacy product code
         $this
-            ->boolean($obj->getStoreMozillaCommonLocales('apple', 'beta'))
+            ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
+                ->isEqualTo($tmp_locales);
+
+        // App Store
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('fx_ios', 'release'));
+        $this
+            ->boolean($obj->getStoreMozillaCommonLocales('fx_ios', 'beta'))
                 ->isFalse();
+        $tmp_locales = $obj->getStoreMozillaCommonLocales('fx_ios', 'release');
         $this
-            ->boolean($obj->getStoreMozillaCommonLocales('FAKE_STORE', 'beta'))
+            ->array($tmp_locales)
+                ->contains('da')
+                ->notContains('af')
+                ->notContains('zh-Hans')
+                ->hassize(21);
+        // Legacy product code
+        $this
+            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'))
+                ->isEqualTo($tmp_locales);
+
+        // Unsupported
+        $this
+            ->boolean($obj->getStoreMozillaCommonLocales('FAKE_PRODUCT', 'beta'))
                 ->isFalse();
     }
 
     public function testGetStoreLocales()
     {
         $obj = new _Project();
-        $this
-            ->array($obj->getStoreLocales('google', true));
-        $this
-            ->array($obj->getStoreLocales('google', false));
-        $this
-            ->array($obj->getStoreLocales('apple', true));
-        $this
-            ->array($obj->getStoreLocales('apple', false));
+
+        // Unsupported store
         $this
             ->boolean($obj->getStoreLocales('foobar', false))
                 ->isFalse();
+
+        // Google Play
+        $this
+            ->array($obj->getStoreLocales('google', true))
+                ->hasKey('es-419')
+                ->contains('de')
+                ->hassize(51);
+        $this
+            ->array($obj->getStoreLocales('google', false))
+                ->contains('es-419')
+                ->hassize(51);
+
+        // App Store
+        $this
+            ->array($obj->getStoreLocales('apple', true))
+                ->hasKey('zh-Hans')
+                ->contains('zh-CN')
+                ->hassize(28);
+        $this
+            ->array($obj->getStoreLocales('apple', false))
+                ->contains('fr-CA')
+                ->hassize(28);
     }
 
-    public function testGetFirefoxLocales()
+    public function testGetProductLocales()
     {
         $obj = new _Project();
+
+        // Google
         $this
-            ->array($obj->getFirefoxLocales('google', true));
+            ->array($obj->getProductLocales('fx_android', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('google', false));
+            ->array($obj->getProductLocales('google', 'release'));
         $this
-            ->array($obj->getFirefoxLocales('apple', true));
+            ->array($obj->getProductLocales('google', 'beta'));
+        // Check fallback to release
+        $release_locales = $obj->getProductLocales('google', 'release');
         $this
-            ->array($obj->getFirefoxLocales('apple', false));
+            ->array($obj->getProductLocales('google', false))
+                ->isEqualTo($release_locales);
         $this
-            ->boolean($obj->getFirefoxLocales('foobar', false))
+            ->array($obj->getProductLocales('google', 'foobar'))
+                ->isEqualTo($release_locales);
+
+        // App Store
+        $this
+            ->array($obj->getProductLocales('fx_ios', 'release'));
+        $this
+            ->array($obj->getProductLocales('apple', 'release'));
+        $this
+            ->array($obj->getProductLocales('apple', 'beta'));
+
+        // Unsupported product
+        $this
+            ->boolean($obj->getProductLocales('foobar', false))
                 ->isFalse();
     }
 
     public function testGetLocalesMapping()
     {
         $obj = new _Project();
+
+        // Unsupported store
         $this
-            ->array($obj->getLocalesMapping('google', true));
-        $this
-            ->array($obj->getFirefoxLocales('google', false));
-        $this
-            ->array($obj->getFirefoxLocales('apple', true));
-        $this
-            ->array($obj->getFirefoxLocales('apple', false));
-        $this
-            ->boolean($obj->getFirefoxLocales('foobar', false))
+            ->boolean($obj->getLocalesMapping('foobar', false))
                 ->isFalse();
+
+        // Google Play
+        $this
+            ->array($obj->getLocalesMapping('google', false))
+                ->hasKey('es-419')
+                ->contains('de')
+                ->hassize(51);
+        $this
+            ->array($obj->getLocalesMapping('google', true))
+                ->contains('de-DE')
+                ->hassize(47);
+
+        // App Store
+        $this
+            ->array($obj->getLocalesMapping('apple', false))
+                ->hasKey('zh-Hans')
+                ->contains('zh-CN')
+                ->hassize(28);
+        $this
+            ->array($obj->getLocalesMapping('apple', true))
+                ->hasKey('zh-TW')
+                ->contains('zh-Hant')
+                ->hassize(25);
     }
 
     public function testGetTemplate()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getTemplate('google', 'release'))
-            ->string($obj->getTemplate('google', 'beta'));
+            ->string($obj->getTemplate('fx_android', 'release'))
+            ->string($obj->getTemplate('fx_android', 'beta'));
         $this
-            ->boolean($obj->getTemplate('google', 'foobar'))
+            ->boolean($obj->getTemplate('fx_android', 'foobar'))
                 ->isFalse();
     }
+
     public function testGetListingFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getListingFiles('google', 'release'))
-            ->string($obj->getListingFiles('google', 'beta'));
+            ->string($obj->getListingFiles('fx_android', 'release'))
+            ->string($obj->getListingFiles('fx_android', 'beta'));
         $this
-            ->boolean($obj->getListingFiles('google', 'foobar'))
+            ->boolean($obj->getListingFiles('fx_android', 'foobar'))
                 ->isFalse();
     }
+
     public function testGetWhatsnewFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getWhatsnewFiles('google', 'release'));
+            ->string($obj->getWhatsnewFiles('fx_android', 'release'));
         $this
-            ->string($obj->getWhatsnewFiles('google', 'beta'));
+            ->string($obj->getWhatsnewFiles('fx_android', 'beta'));
     }
 }
