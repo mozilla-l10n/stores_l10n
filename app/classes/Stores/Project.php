@@ -566,7 +566,7 @@ class Project
      */
     public function getWhatsnewFiles($product, $channel)
     {
-        return $this->getLangFile($this->getUpdatedProductCode($product), $channel, 'whatsnew');
+        return $this->getLangFile($product, $channel, 'whatsnew');
     }
 
     /**
@@ -580,6 +580,6 @@ class Project
      */
     public function getListingFiles($product, $channel)
     {
-        return $this->getLangFile($this->getUpdatedProductCode($product), $channel, 'langfile');
+        return $this->getLangFile($product, $channel, 'langfile');
     }
 }

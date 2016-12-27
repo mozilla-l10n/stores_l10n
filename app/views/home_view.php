@@ -2,21 +2,31 @@
 <div class="page-header">
     <h1>Dashboard and API for Google and Apple stores translations</h1>
 </div>
-<ul id="filters" class="nav nav-pills">
-    <li class="filter"><a href="#fx_android_beta" id="fx_android_beta">Firefox for Android Beta</a></li>
-    <li class="filter active"><a href="#fx_android_release" id="fx_android_release">Firefox for Android Release</a></li>
-    <li class="filter"><a href="#fx_ios_release" id="fx_ios_release">Firefox for iOS Release</a></li>
-</ul>
 
-<?=$stores['fx_android']['beta']?>
-<?=$stores['fx_android']['release']?>
-<?=$stores['fx_ios']['release']?>
+<?php
+$navigation = "<ul id=\"filters\" class=\"nav nav-pills\">\n";
+$main_content = '';
+foreach ($project->getSupportedProducts() as $product_id) {
+    foreach ($project->getProductChannels($product_id) as $channel_id) {
+        $full_id = "{$product_id}_{$channel_id}";
+        $product_name = $project->getProductName($product_id) . ' ' . ucfirst($channel_id);
+        $navigation .= "  <li class=\"filter\"><a href=\"#{$full_id}\" id=\"{$full_id}\">{$product_name}</a></li>\n";
+        $main_content .= $stores_data[$product_id][$channel_id];
+    }
+}
+$navigation .= "</ul>\n";
+
+echo $navigation;
+echo $main_content;
+?>
 
 <script src="media/assets/jquery/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
     $('table').hide();
+
     $('#fx_android_release_table').show();
+
     $('#filters a').click(function(e) {
         e.preventDefault();
         $('#filters li').removeClass('active');
@@ -24,6 +34,7 @@ $(document).ready(function() {
         $('#' + e.target.id + '_table').show();
         $('#' + e.target.id).parent().addClass('active');
     });
+
     // We want URL anchors to also work as filters
     var anchor = location.hash.substring(1);
     if (anchor !== '') {
