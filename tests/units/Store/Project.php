@@ -169,10 +169,11 @@ class Project extends atoum\test
         $tmp_locales = $obj->getStoreMozillaCommonLocales('fx_android', 'release');
         $this
             ->array($tmp_locales)
+                ->contains('en-US')
                 ->contains('ca')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(38);
+                ->hassize(39);
         // Legacy product code
         $this
             ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
@@ -187,6 +188,7 @@ class Project extends atoum\test
         $tmp_locales = $obj->getStoreMozillaCommonLocales('fx_ios', 'release');
         $this
             ->array($tmp_locales)
+                ->contains('en-US')
                 ->contains('da')
                 ->notContains('af')
                 ->notContains('zh-Hans')
