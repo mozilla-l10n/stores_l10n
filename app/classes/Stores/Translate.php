@@ -39,10 +39,10 @@ class Translate extends DotLangParser
      */
     protected $locales_path;
 
-    public function __construct($locale, $files)
+    public function __construct($locale, $files, $locales_path)
     {
         $this->locale = $locale;
-        $this->locales_path = LOCALES_PATH;
+        $this->locales_path = $locales_path;
         // We are passing several files
         if (is_array($files)) {
             $translations = $source_strings = [];

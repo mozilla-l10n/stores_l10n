@@ -6,7 +6,7 @@ $status = [];
 
 $get_status = function ($lang_file, $store_locales) {
     foreach ($store_locales as $lang) {
-        $obj = new Translate($lang, $lang_file);
+        $obj = new Translate($lang, $lang_file, LOCALES_PATH);
         $status[$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
 
@@ -20,7 +20,7 @@ $status['fx_android']['release'] = $get_status(
 
 foreach ($status['fx_android']['release'] as $lang => $state) {
     if ($state == 'translated') {
-        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_android', 'release'));
+        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_android', 'release'), LOCALES_PATH);
         $status['fx_android']['release'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
 }
@@ -32,7 +32,7 @@ $status['fx_android']['beta'] = $get_status(
 
 foreach ($status['fx_android']['beta'] as $lang => $state) {
     if ($state == 'translated') {
-        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_android', 'beta'));
+        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_android', 'beta'), LOCALES_PATH);
         $status['fx_android']['beta'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
 }
@@ -44,7 +44,7 @@ $status['fx_ios']['release'] = $get_status(
 
 foreach ($status['fx_ios']['release'] as $lang => $state) {
     if ($state == 'translated') {
-        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_ios', 'release'));
+        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_ios', 'release'), LOCALES_PATH);
         $status['fx_ios']['release'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
     }
 }

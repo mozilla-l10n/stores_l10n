@@ -18,7 +18,7 @@ if (is_string($whatsnew_files)) {
     $whatsnew_files = [$whatsnew_files];
 }
 
-$translations = new Translate($request['locale'], array_merge($listing_files, $whatsnew_files));
+$translations = new Translate($request['locale'], array_merge($listing_files, $whatsnew_files), LOCALES_PATH);
 
 // Include the current template
 require TEMPLATES . $project->getTemplate($request['product'], $request['channel']);

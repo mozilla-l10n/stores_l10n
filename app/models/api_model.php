@@ -26,7 +26,7 @@ if ($request->query_type == 'product') {
         lists.
     */
     foreach ($product_locales as $lang) {
-        $translations = new Translate($lang, $project->getListingFiles($product, $channel));
+        $translations = new Translate($lang, $project->getListingFiles($product, $channel), LOCALES_PATH);
 
         if ($translations->isFileTranslated()) {
             require TEMPLATES . $project->getTemplate($product, $channel);
@@ -59,7 +59,7 @@ if ($request->query_type == 'product') {
 
     $done = [];
     foreach ($product_locales as $lang) {
-        $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel));
+        $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel), LOCALES_PATH);
 
         if ($translations->isFileTranslated()) {
             // Include the current template
