@@ -1,5 +1,5 @@
+.composer_cache
 app/config/config.inc.php
-cache
 composer.lock
 composer.phar
 locales
