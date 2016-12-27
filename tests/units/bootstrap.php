@@ -13,21 +13,12 @@ define('CONTROLLERS', APP . 'controllers/');
 define('TEST_FILES',  realpath(__DIR__ . '/../testfiles/') . '/');
 define('LOCALES_PATH', TEST_FILES . 'langfiles/');
 
-// Hosting specific config are in a INI file
-if (file_exists(CONFIG . 'config.ini')) {
-    $config = parse_ini_file(CONFIG . 'config.ini');
-}
-
-if (isset($config['url'])) {
-    define('BASE_HTML_URL', $config['url']);
+// Load local settings
+$settings_file = CONFIG . '/config.inc.php';
+if (! file_exists($settings_file)) {
+    die('File app/config/config.inc.php is missing. Please check your configuration.');
 } else {
-    define('BASE_HTML_URL', 'http://localhost/');
-}
-
-if (isset($config['debug'])) {
-    define('DEBUG', (boolean) $config['debug']);
-} else {
-    define('DEBUG', false);
+    require $settings_file;
 }
 
 // Make sure we have a timezone set

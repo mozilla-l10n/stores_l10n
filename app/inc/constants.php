@@ -12,23 +12,16 @@ define('TEMPLATES',     APP . 'templates/');
 define('MODELS',        APP . 'models/');
 define('CONTROLLERS',   APP . 'controllers/');
 
-// Hosting specific config are in a INI file
-if (file_exists(CONFIG . 'config.ini')) {
-    $config = parse_ini_file(CONFIG . 'config.ini');
+// Load local settings
+$settings_file = CONFIG . 'config.inc.php';
+if (! file_exists($settings_file)) {
+    die('File app/config/config.inc.php is missing. Please check your configuration.');
+} else {
+    require $settings_file;
 }
 
 $protocol = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443
             ? 'https'
             : 'http';
 
-if (isset($config['url'])) {
-    define('BASE_HTML_URL', $config['url']);
-} else {
-    define('BASE_HTML_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/');
-}
-
-if (isset($config['debug'])) {
-    define('DEBUG', (boolean) $config['debug']);
-} else {
-    define('DEBUG', false);
-}
+define('BASE_HTML_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . $webroot_folder);
