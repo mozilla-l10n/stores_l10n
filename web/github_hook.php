@@ -5,14 +5,17 @@ date_default_timezone_set('Europe/Paris');
 
 // App variables
 $app_root = realpath(__DIR__ . '/../');
-$composer = $app_root . '/composer.phar';
+$composer = "{$app_root}/composer.phar";
 
 // Git variables
 $branch = 'master';
 $header = 'HTTP_X_HUB_SIGNATURE';
 
+// Include GitHub secret from config
+require "{$app_root}/app/config/config.inc.php";
+
 // Logging function to output content to /github_log.txt
-function logHookResult($message, $success = false)
+function logHookResult($message, $app_root, $success = false)
 {
     $log_headers = "$message\n";
     if (! $success) {
@@ -20,7 +23,7 @@ function logHookResult($message, $success = false)
             $log_headers .= "$header: $value \n";
         }
     }
-    file_put_contents(__DIR__ . '/../logs/github_log.txt', $log_headers);
+    file_put_contents("{$app_root}/logs/github_log.txt", $log_headers);
 }
 
 // CHECK: Download composer in the app root if it is not already there
@@ -53,23 +56,23 @@ if (isset($_SERVER[$header])) {
         flush();
 
         // Pull latest changes
-        $log = "Updating Git repository\n";
-        exec("git checkout $branch ; git pull origin $branch");
+        $log .= "Updating Git repository\n";
+        exec("git checkout $branch; git pull origin $branch");
 
         // Install or update dependencies
         if (file_exists($composer)) {
             chdir($app_root);
 
             // www-data does not have a HOME or COMPOSER_HOME, create one
-            $cache_folder = "{$app_root}/cache/.composer";
+            $cache_folder = "{$app_root}/.composer_cache";
             if (! is_dir($cache_folder)) {
-                $log = "Creating folder {$cache_folder}\n";
+                $log .= "Creating folder {$cache_folder}\n";
                 mkdir($cache_folder);
             }
 
-            putenv("COMPOSER_HOME={$app_root}/cache/.composer");
+            putenv("COMPOSER_HOME={$app_root}/.composer_cache");
 
-            if (file_exists($app_root . '/vendor')) {
+            if (file_exists("{$app_root}/vendor")) {
                 $log .= "Updating Composer\n";
                 exec("php {$composer} update > /dev/null 2>&1");
             } else {
@@ -79,10 +82,10 @@ if (isset($_SERVER[$header])) {
         }
 
         $log .= 'Last update: ' . date('d-m-Y H:i:s');
-        logHookResult($log, true);
+        logHookResult($log, $app_root, true);
     } else {
-        logHookResult('Invalid GitHub secret');
+        logHookResult('Invalid GitHub secret', $app_root);
     }
 } else {
-    logHookResult("{$header} header missing, define a secret key for your project in GitHub");
+    logHookResult("{$header} header missing, define a secret key for your project in GitHub", $app_root);
 }
