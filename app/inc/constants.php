@@ -12,6 +12,15 @@ define('TEMPLATES',     APP . 'templates/');
 define('MODELS',        APP . 'models/');
 define('CONTROLLERS',   APP . 'controllers/');
 
+// Length limits for stores
+$store_limits = [
+    'apple_keywords'           => 100,
+    'google_description'       => 4000,
+    'google_short_description' => 80,
+    'google_title'             => 30,
+    'google_whatsnew'          => 500,
+];
+
 // Load local settings
 $settings_file = CONFIG . 'config.inc.php';
 if (! file_exists($settings_file)) {

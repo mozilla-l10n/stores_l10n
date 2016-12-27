@@ -27,7 +27,8 @@ $get_length = function ($string) {
     return mb_strlen(trim(strip_tags($string)));
 };
 
-$set_limit = function ($limit, $length) {
+$set_limit = function ($type, $length) {
+    $limit = $store_limits[$type];
     if ($length <= $limit) {
         return $length . ' characters';
     }
@@ -38,16 +39,16 @@ $set_limit = function ($limit, $length) {
 // Google Play has lengths constraints, here we detect translations that are too long and insert a warning message
 $store = $project->getProductStore($request['product']);
 if ($store == 'google') {
-    $short_desc_warning = $set_limit(80, $get_length($short_desc($translations)));
-    $listing_warning    = $set_limit(4000, $get_length($description($translations)));
-    $title_warning      = $set_limit(30, $get_length($app_title($translations)));
+    $short_desc_warning = $set_limit('google_short_description', $get_length($short_desc($translations)));
+    $listing_warning    = $set_limit('google_description', $get_length($description($translations)));
+    $title_warning      = $set_limit('google_title', $get_length($app_title($translations)));
 
     if (in_array($request['channel'], ['beta', 'release'])) {
-        $whatsnew_warning = $set_limit(500, $get_length($whatsnew($translations)));
+        $whatsnew_warning = $set_limit('google_whatsnew', $get_length($whatsnew($translations)));
     }
 }
 
 // Apple App Store also has lengths constraints
 if ($store == 'apple') {
-    $keywords_warning = $set_limit(100, $get_length($keywords($translations)));
+    $keywords_warning = $set_limit('apple_keywords', $get_length($keywords($translations)));
 }

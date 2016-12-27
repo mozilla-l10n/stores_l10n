@@ -32,9 +32,9 @@ if ($request->query_type == 'product') {
             require TEMPLATES . $project->getTemplate($product, $channel);
             // The Google Store has string lengths constraints
             if ($store == 'google') {
-                $desc = $set_limit(4000, $description($translations));
-                $title = $set_limit(30, $app_title($translations));
-                $short_desc = $set_limit(80, $short_desc($translations));
+                $desc = $set_limit('google_description', $description($translations));
+                $title = $set_limit('google_title', $app_title($translations));
+                $short_desc = $set_limit('google_short_description', $short_desc($translations));
 
                 if (($desc + $title + $short_desc) == 3) {
                     $done[] = $lang;
@@ -43,7 +43,7 @@ if ($request->query_type == 'product') {
 
             // The Apple App Store has keywords lengths constraints
             if ($store == 'apple') {
-                if ($set_limit(100, $keywords($translations))) {
+                if ($set_limit('apple_keywords', $keywords($translations))) {
                     $done[] = $lang;
                 }
             }
@@ -71,7 +71,7 @@ if ($request->query_type == 'product') {
                         Only Google has a 500 characters limit for the What's
                         New section.
                     */
-                    if ($set_limit(500, $whatsnew($translations))) {
+                    if ($set_limit('google_whatsnew', $whatsnew($translations))) {
                         $done[] = $lang;
                     }
                     break;
