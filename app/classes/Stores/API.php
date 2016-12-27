@@ -119,33 +119,36 @@ class API
             ? $this->getQueryParameters($url['query'])
             : [];
 
+        /*
+            Start by analzing the service, then trace back to the first
+            parameter in the URI.
+        */
+        $service = '';
+        if (isset($this->parameters[1])) {
+            $service = $this->parameters[1];
+            $this->query['service'] = $service;
+        }
+
+        $query_type = in_array($service, ['localesmapping', 'storelocales'])
+            ? 'store'
+            : 'product';
+        $this->query_type = $query_type;
         if (isset($this->parameters[0])) {
-            if (isset($this->parameters[1])
-                && in_array($this->parameters[1], ['localesmapping', 'storelocales'])) {
-                // Store APIs
-                $this->query_type = 'store';
+            if ($query_type == 'store') {
                 $this->query['product'] = '';
                 $this->query['store'] = $this->parameters[0];
             } else {
-                // Product API
                 // Make sure to convert legacy product IDs to updated ones
-                $this->query_type = 'product';
                 $this->query['product'] = $this->project->getUpdatedProductCode($this->parameters[0]);
                 $this->query['store'] = $this->project->getProductStore($this->query['product']);
             }
-        }
-
-        if (isset($this->parameters[1])) {
-            $this->query['service'] = $this->parameters[1];
         }
 
         if (isset($this->parameters[2])) {
             $this->query['channel'] = $this->parameters[2];
         }
 
-        if (isset($this->parameters[1])
-            && $this->parameters[1] == 'translation'
-            && isset($this->parameters[3])) {
+        if ($service == 'translation' && isset($this->parameters[3])) {
             $this->query['locale'] = $this->parameters[3];
         }
     }
