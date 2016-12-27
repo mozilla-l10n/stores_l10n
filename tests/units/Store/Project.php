@@ -178,7 +178,7 @@ class Project extends atoum\test
             ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
                 ->isEqualTo($tmp_locales);
 
-        // AppStore
+        // App Store
         $this
             ->array($obj->getStoreMozillaCommonLocales('fx_ios', 'release'));
         $this
@@ -222,7 +222,7 @@ class Project extends atoum\test
                 ->contains('es-419')
                 ->hassize(51);
 
-        // AppStore
+        // App Store
         $this
             ->array($obj->getStoreLocales('apple', true))
                 ->hasKey('zh-Hans')
@@ -254,7 +254,7 @@ class Project extends atoum\test
             ->array($obj->getProductLocales('google', 'foobar'))
                 ->isEqualTo($release_locales);
 
-        // AppStore
+        // App Store
         $this
             ->array($obj->getProductLocales('fx_ios', 'release'));
         $this
@@ -288,7 +288,7 @@ class Project extends atoum\test
                 ->contains('de-DE')
                 ->hassize(47);
 
-        // AppStore
+        // App Store
         $this
             ->array($obj->getLocalesMapping('apple', false))
                 ->hasKey('zh-Hans')

@@ -1,6 +1,6 @@
      <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="page-header">
-    <h1>Dashboard and API for Google Play / Apple Appstore listings translation</h1>
+    <h1>Dashboard and API for Google and Apple stores translations</h1>
 </div>
 <ul id="filters" class="nav nav-pills">
     <li class="filter"><a href="#fx_android_beta" id="fx_android_beta">Firefox for Android Beta</a></li>

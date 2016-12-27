@@ -47,7 +47,7 @@ if ($store == 'google') {
     }
 }
 
-// Apple Appstore also has lengths constraints
+// Apple App Store also has lengths constraints
 if ($store == 'apple') {
     $keywords_warning = $set_limit(100, $get_length($keywords($translations)));
 }

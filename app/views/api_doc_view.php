@@ -25,7 +25,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h4>Examples:</h4>
 <ul>
     <li>List of Google Play locale codes: <?=$base?><a href="api/google/storelocales/">google/storelocales/</a></li>
-    <li>List of AppStore locale codes: <?=$base?><a href="api/apple/storelocales/">apple/storelocales/</a></li>
+    <li>List of App Store locale codes: <?=$base?><a href="api/apple/storelocales/">apple/storelocales/</a></li>
 </ul>
 
 
@@ -35,7 +35,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
 <h4>Examples:</h4>
 <ul>
     <li>Locale mapping for Google Play: <?=$base?><a href="api/google/localesmapping/">google/localesmapping/</a></li>
-    <li>Locale mapping for AppStore: <?=$base?><a href="api/apple/localesmapping/">apple/localesmapping/</a></li>
+    <li>Locale mapping for App Store: <?=$base?><a href="api/apple/localesmapping/">apple/localesmapping/</a></li>
 </ul>
 <h4>Notes:</h4>
 <ul>

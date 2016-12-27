@@ -41,7 +41,7 @@ if ($request->query_type == 'product') {
                 }
             }
 
-            // The Apple AppStore has keywords lengths constraints
+            // The Apple App Store has keywords lengths constraints
             if ($store == 'apple') {
                 if ($set_limit(100, $keywords($translations))) {
                     $done[] = $lang;

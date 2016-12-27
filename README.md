@@ -1,7 +1,7 @@
 # Stores l10n
 
 Web App providing the folllowing features:
-* Monitor the state of content translation for products shipping in Google Play and Apple Appstore.
+* Monitor the state of content translation for products shipping in Google Play and Apple App store.
 * Public JSON API allowing to extract formatted translations to feed the stores APIs to update published content.
 
 ## Installation
