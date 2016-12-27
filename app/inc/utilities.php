@@ -26,6 +26,6 @@ $_ = function ($string, $replacements = false) use ($translations, $view) {
 };
 
 // Closure used in the API model
-$set_limit = function ($type, $string) {
+$set_limit = function ($type, $string) use ($store_limits) {
     return mb_strlen(trim(strip_tags($string))) <= $store_limits[$type];
 };

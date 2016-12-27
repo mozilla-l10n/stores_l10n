@@ -68,7 +68,7 @@ class Translate extends DotLangParser
     /**
      * Return the translation for a string
      *
-     * @param string $string The string we want the translation for
+     * @param string $string The string we want to translate
      *
      * @return string The translation of the string or the source string if not translated
      */
@@ -86,11 +86,11 @@ class Translate extends DotLangParser
      *
      * @param string $string The string we want to check
      *
-     * @return boolean True if translated, False if not
+     * @return boolean True if translated, false if not
      */
     public function isStringTranslated($string)
     {
-        // The string doesn't exist
+        // String doesn't exist
         if (! isset($this->translations[$string])) {
             return false;
         }
@@ -106,7 +106,7 @@ class Translate extends DotLangParser
     /**
      * Check if a file is fully translated
      *
-     * @return boolean True if Translated, False is not translated or if
+     * @return boolean True if Translated, false is not translated or if
      *                 file doesn't exist
      */
     public function isFileTranslated()

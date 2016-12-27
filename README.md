@@ -7,10 +7,7 @@ Web App providing the folllowing features:
 ## Installation
 1. Clone the repository.
 2. Install [Composer](https://getcomposer.org/) and its dependencies with `composer install --no-dev`.
-3. Clone the translations repo in a `locales` folder in the root of the cloned repository
-```
-git clone https://github.com/mozilla-l10n/appstores/ locales
-```
+3. Clone the translations repo in a `locales` folder in the root of the cloned repository: ```git clone https://github.com/mozilla-l10n/appstores/ locales```
 4. Point a virtual host to the `web` directory.
 5. Copy `app/config/config.inc.php.ini` to `config.inc.php` and adapt the `$webroot_folder` to your installation.
 6. Make sure that the `logs` folder is writable by the user running the server (e.g. `www-data`).

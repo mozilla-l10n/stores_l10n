@@ -20,7 +20,7 @@ class Project
     ];
 
     /**
-     * Mapping between product and store
+     * Data about products: available channels, store, full name.
      *
      * @var array
      */
@@ -127,10 +127,10 @@ class Project
      * Store Code -> Mozilla Code
      *
      * Sources:
-     * Google: list provided by marketing in https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
+     * Google: https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
      * Apple: https://github.com/KrauseFx/deliver#available-language-codes
      *
-     * See also http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
+     * For Apple see also http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
      *
      * If false, locale is unsupported in Mozilla products.
      *
@@ -223,13 +223,12 @@ class Project
     ];
 
     /**
-     * List of products and associated release channels/templates
+     * List of products and associated templates
      *
      * @var array
      */
     public $templates = [
         'fx_android' => [
-            // channel => path to template file
             'release' => [
                 'template' => 'fx_android/release/listing_apr_2016.php',
                 'langfile' => 'android_release.lang',
@@ -242,7 +241,6 @@ class Project
                 ],
         ],
         'fx_ios' => [
-            // channel => path to template file
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
                 'langfile' => 'apple_description_release.lang',
@@ -341,12 +339,10 @@ class Project
     public function getProductName($product)
     {
         $product = $this->getUpdatedProductCode($product);
-        $product_name = $product;
-        if (isset($this->products_data[$product])) {
-            $product_name = $this->products_data[$product]['name'];
-        }
 
-        return $product_name;
+        return isset($this->products_data[$product])
+            ? $product_name = $this->products_data[$product]['name']
+            : $product;
     }
 
     /**
@@ -359,11 +355,10 @@ class Project
     public function getProductChannels($product)
     {
         $product = $this->getUpdatedProductCode($product);
-        $channels = isset($this->products_data[$product])
+
+        return isset($this->products_data[$product])
             ? $this->products_data[$product]['channels']
             : [];
-
-        return $channels;
     }
 
     /**
@@ -395,11 +390,9 @@ class Project
      */
     public function getUpdatedProductCode($product)
     {
-        if ($this->isLegacyProduct($product)) {
-            $product = $this->legacy_products[$product];
-        }
-
-        return $product;
+        return $this->isLegacyProduct($product)
+            ? $this->legacy_products[$product]
+            : $product;
     }
 
     /**
@@ -415,7 +408,7 @@ class Project
     }
 
     /**
-     * Get Common Locales supported by the product's store and Mozilla
+     * Get common Locales supported by the product's store and Mozilla
      *
      * @param string $product Product ID
      * @param string $channel Channel ID

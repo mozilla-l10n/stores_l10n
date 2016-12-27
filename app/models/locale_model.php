@@ -27,7 +27,7 @@ $get_length = function ($string) {
     return mb_strlen(trim(strip_tags($string)));
 };
 
-$set_limit = function ($type, $length) {
+$set_limit = function ($type, $length) use ($store_limits) {
     $limit = $store_limits[$type];
     if ($length <= $limit) {
         return $length . ' characters';

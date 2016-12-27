@@ -314,7 +314,7 @@ class API
     /**
      * Check that we have enough parameters in the URL to satisfy the request
      *
-     * @param int $number number of compulsory parameters
+     * @param int $number number of mandatory parameters
      *
      * @return boolean True if we can satisfy the request, false if we can't
      */
