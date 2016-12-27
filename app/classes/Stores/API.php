@@ -252,8 +252,8 @@ class API
                     return false;
                 }
 
-                if (! in_array($this->query['locale'], $this->project->getStoreLocales($this->query['store'], true))) {
-                    $this->log("'{$this->query['locale']}' is not a supported locale for {$this->query['product']}.");
+                if (! in_array($this->query['locale'], $this->project->getStoreMozillaCommonLocales($this->query['product'], $this->query['channel']))) {
+                    $this->log("'{$this->query['locale']}' is not a supported locale for {$this->query['product']}/{$this->query['channel']}.");
 
                     return false;
                 }
