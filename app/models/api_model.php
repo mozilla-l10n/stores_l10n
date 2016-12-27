@@ -25,7 +25,8 @@ if ($request->query_type == 'product') {
         in the switch that is the intersection of both the listing and whatsnew
         lists.
     */
-    foreach ($product_locales as $lang) {
+    $template_locales = $project->getSupportedLocales($product, $channel);
+    foreach ($template_locales as $lang) {
         $translations = new Translate($lang, $project->getListingFiles($product, $channel), LOCALES_PATH);
 
         if ($translations->isFileTranslated()) {
@@ -58,7 +59,7 @@ if ($request->query_type == 'product') {
     $whatsnew_json = $listing_json;
 
     $done = [];
-    foreach ($product_locales as $lang) {
+    foreach ($template_locales as $lang) {
         $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel), LOCALES_PATH);
 
         if ($translations->isFileTranslated()) {

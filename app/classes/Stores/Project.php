@@ -225,25 +225,45 @@ class Project
     /**
      * List of products and associated templates
      *
+     * This is the structure of the array:
+     *
+     * PRODUCT_ID => [
+     *     CHANNEL_ID => [
+     *         'template' => PATH TO LOCAL TEMPLATE,
+     *         'listing' => LANG FILE USED FOR LISTING,
+     *         'whatsnew' => LANG FILE USED FOR WHATSNEW,
+     *     ],
+     *
+     * It's possible to define a 'supported_locales' key if the product/channel
+     * needs to support only a subset of the shipping languages. E.g.
+     *
+     * PRODUCT_ID => [
+     *     CHANNEL_ID => [
+     *         'template' => PATH TO LOCAL TEMPLATE,
+     *         'listing' => LANG FILE USED FOR LISTING,
+     *         'whatsnew' => LANG FILE USED FOR WHATSNEW,
+     *         'supported_locales' => ['it'],
+     *     ],
+     *
      * @var array
      */
     public $templates = [
         'fx_android' => [
             'release' => [
                 'template' => 'fx_android/release/listing_apr_2016.php',
-                'langfile' => 'android_release.lang',
+                'listing'  => 'android_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_50.lang',
-                ],
+            ],
             'beta' => [
                 'template' => 'fx_android/beta/listing_may_2015.php',
-                'langfile' => 'description_beta_page.lang',
+                'listing'  => 'description_beta_page.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_51_beta.lang',
-                ],
+            ],
         ],
         'fx_ios' => [
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
-                'langfile' => 'apple_description_release.lang',
+                'listing'  => 'apple_description_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_ios_6_0.lang',
             ],
         ],
@@ -341,7 +361,7 @@ class Project
         $product = $this->getUpdatedProductCode($product);
 
         return isset($this->products_data[$product])
-            ? $product_name = $this->products_data[$product]['name']
+            ? $this->products_data[$product]['name']
             : $product;
     }
 
@@ -408,6 +428,26 @@ class Project
     }
 
     /**
+     * Check if the product supports only a subset of the shipping locales
+     *
+     * @param String $product Product ID
+     * @param string $channel Channel ID
+     *
+     * @return array List of supported locales, either by the product or
+     *               by the template (if a subset is defined)
+     */
+    public function getSupportedLocales($product, $channel)
+    {
+        if (isset($this->templates[$product][$channel]['supported_locales'])) {
+            return $this->templates[$product][$channel]['supported_locales'];
+        }
+
+        return isset($this->supported_locales[$product][$channel])
+            ? $this->supported_locales[$product][$channel]
+            : [];
+    }
+
+    /**
      * Get common Locales supported by the product's store and Mozilla
      *
      * @param string $product Product ID
@@ -427,10 +467,8 @@ class Project
         }
 
         $locales = [];
-        if ($store == 'google' && in_array($channel, ['beta', 'release'])) {
-            if (isset($this->supported_locales[$product][$channel])) {
-                $locales = $this->supported_locales[$product][$channel];
-            }
+        if ($store == 'google' && in_array($channel, $this->getProductChannels($product))) {
+            $locales = $this->getSupportedLocales($product, $channel);
 
             // HACK: adding ar as experiment (bug 1259200)
             if ($channel == 'release') {
@@ -439,10 +477,8 @@ class Project
             }
         }
 
-        if ($store == 'apple' && in_array($channel, ['release'])) {
-            if (isset($this->supported_locales[$product][$channel])) {
-                $locales = $this->supported_locales[$product][$channel];
-            }
+        if ($store == 'apple' && in_array($channel, $this->getProductChannels($product))) {
+            $locales = $this->getSupportedLocales($product, $channel);
         }
 
         if (count($locales) > 0) {
@@ -580,6 +616,6 @@ class Project
      */
     public function getListingFiles($product, $channel)
     {
-        return $this->getLangFile($product, $channel, 'langfile');
+        return $this->getLangFile($product, $channel, 'listing');
     }
 }
