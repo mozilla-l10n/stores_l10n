@@ -225,25 +225,34 @@ class Project
     /**
      * List of products and associated templates
      *
+     * This is the structure of the array:
+     *
+     * PRODUCT_ID => [
+     *     CHANNEL_ID => [
+     *         'template' => PATH TO LOCAL TEMPLATE,
+     *         'listing' => LANG FILE USED FOR LISTING,
+     *         'whatsnew' => LANG FILE USED FOR WHATSNEW,
+     *     ],
+     *
      * @var array
      */
     public $templates = [
         'fx_android' => [
             'release' => [
                 'template' => 'fx_android/release/listing_apr_2016.php',
-                'langfile' => 'android_release.lang',
+                'listing'  => 'android_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_50.lang',
-                ],
+            ],
             'beta' => [
                 'template' => 'fx_android/beta/listing_may_2015.php',
-                'langfile' => 'description_beta_page.lang',
+                'listing'  => 'description_beta_page.lang',
                 'whatsnew' => 'whatsnew/whatsnew_android_51_beta.lang',
-                ],
+            ],
         ],
         'fx_ios' => [
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
-                'langfile' => 'apple_description_release.lang',
+                'listing'  => 'apple_description_release.lang',
                 'whatsnew' => 'whatsnew/whatsnew_ios_6_0.lang',
             ],
         ],
@@ -427,7 +436,7 @@ class Project
         }
 
         $locales = [];
-        if ($store == 'google' && in_array($channel, ['beta', 'release'])) {
+        if ($store == 'google' && in_array($channel, $this->getProductChannels($product))) {
             if (isset($this->supported_locales[$product][$channel])) {
                 $locales = $this->supported_locales[$product][$channel];
             }
@@ -439,7 +448,7 @@ class Project
             }
         }
 
-        if ($store == 'apple' && in_array($channel, ['release'])) {
+        if ($store == 'apple' && in_array($channel, $this->getProductChannels($product))) {
             if (isset($this->supported_locales[$product][$channel])) {
                 $locales = $this->supported_locales[$product][$channel];
             }
@@ -580,6 +589,6 @@ class Project
      */
     public function getListingFiles($product, $channel)
     {
-        return $this->getLangFile($product, $channel, 'langfile');
+        return $this->getLangFile($product, $channel, 'listing');
     }
 }
