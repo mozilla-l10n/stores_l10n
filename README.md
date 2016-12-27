@@ -10,4 +10,5 @@ Web App providing the folllowing features:
 3. Clone the translations repo in a `locales` folder at the root of the cloned repo (`git clone https://github.com/mozilla-l10n/appstores/ locales`).
 4. Point a virtual host to the `web` directory.
 5. Copy `app/config/config.inc.php.ini` to `config.inc.php` and adapt the `$webroot_folder` to your installation.
-6. Set up a cron job to update the `locales` sub-repository.
+6. Make sure that the `logs` folder is writable by the user running the PHP server (e.g. `www-data`).
+7. Set up a cron job to update the `locales` sub-repository.
