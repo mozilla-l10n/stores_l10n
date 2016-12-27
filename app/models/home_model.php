@@ -1,51 +1,22 @@
 <?php
 namespace Stores;
 
-// Compute the completion status for all locales
+// Compute the completion status for all locales across products and channels
 $status = [];
+foreach ($project->getSupportedProducts() as $product_id) {
+    foreach ($project->getProductChannels($product_id) as $channel_id) {
+        // Get supported locales
+        $store_locales = $project->getStoreMozillaCommonLocales($product_id, $channel_id);
 
-$get_status = function ($lang_file, $store_locales) {
-    foreach ($store_locales as $lang) {
-        $obj = new Translate($lang, $lang_file, LOCALES_PATH);
-        $status[$lang] = $obj->isFileTranslated() ? 'translated' : '';
-    }
-
-    return $status;
-};
-
-$status['fx_android']['release'] = $get_status(
-    $project->getListingFiles('fx_android', 'release'),
-    $project->getStoreMozillaCommonLocales('fx_android', 'release')
-);
-
-foreach ($status['fx_android']['release'] as $lang => $state) {
-    if ($state == 'translated') {
-        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_android', 'release'), LOCALES_PATH);
-        $status['fx_android']['release'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
-    }
-}
-
-$status['fx_android']['beta'] = $get_status(
-    $project->getListingFiles('fx_android', 'beta'),
-    $project->getStoreMozillaCommonLocales('fx_android', 'beta')
-);
-
-foreach ($status['fx_android']['beta'] as $lang => $state) {
-    if ($state == 'translated') {
-        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_android', 'beta'), LOCALES_PATH);
-        $status['fx_android']['beta'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
-    }
-}
-
-$status['fx_ios']['release'] = $get_status(
-    $project->getListingFiles('fx_ios', 'release'),
-    $project->getStoreMozillaCommonLocales('fx_ios', 'release')
-);
-
-foreach ($status['fx_ios']['release'] as $lang => $state) {
-    if ($state == 'translated') {
-        $obj = new Translate($lang, $project->getWhatsnewFiles('fx_ios', 'release'), LOCALES_PATH);
-        $status['fx_ios']['release'][$lang] = $obj->isFileTranslated() ? 'translated' : '';
+        // Examine both listing and whatsnew
+        $lang_files = [
+            $project->getListingFiles($product_id, $channel_id),
+            $project->getWhatsnewFiles($product_id, $channel_id),
+        ];
+        foreach ($store_locales as $store_locale) {
+            $obj = new Translate($store_locale, $lang_files, LOCALES_PATH);
+            $status[$product_id][$channel_id][$store_locale] = $obj->isFileTranslated() ? 'translated' : '';
+        }
     }
 }
 
@@ -62,19 +33,17 @@ $html_table = function ($table_id, $table_title, $product, $channel) use ($statu
             <th class="text-center">Description Raw HTML</th>
             <th class="text-center">Description Json</th>
         </tr>
-        <?php foreach ($project->getStoreMozillaCommonLocales($product, $channel) as $lang): ?>
+        <?php foreach ($status[$product][$channel] as $locale => $status_locale): ?>
         <tr class="text-center">
-            <th><?=$lang?></th>
+            <th><?=$locale?></th>
             <?php
-            if ($status[$product][$channel][$lang] == 'translated') {
-                $color = ' success';
-            } else {
-                $color = '';
-            } ?>
+            $color = $status_locale == 'translated'
+                ? 'success'
+                : ''; ?>
             <td class='<?=$color?>'></td>
-            <td><a href="./locale/<?=$lang?>/<?=$product?>/<?=$channel?>/">Show</a></td>
-            <td><a href="./locale/<?=$lang?>/<?=$product?>/<?=$channel?>/html">HTML</a></td>
-            <td><a href="./api/<?=$product?>/translation/<?=$channel?>/<?=$lang?>/">Json</a></td>
+            <td><a href="./locale/<?=$locale?>/<?=$product?>/<?=$channel?>/">Show</a></td>
+            <td><a href="./locale/<?=$locale?>/<?=$product?>/<?=$channel?>/html">HTML</a></td>
+            <td><a href="./api/<?=$product?>/translation/<?=$channel?>/<?=$locale?>/">Json</a></td>
         </tr>
         <?php endforeach; ?>
         </table>
@@ -86,25 +55,14 @@ $html_table = function ($table_id, $table_title, $product, $channel) use ($statu
     return $table;
 };
 
-$stores = [];
-
-$stores['fx_android']['release'] = $html_table(
-    'fx_android_release_table',
-    'Firefox for Android <span class="text-danger">Release</span> Channel',
-    'fx_android',
-    'release'
-);
-
-$stores['fx_android']['beta'] = $html_table(
-    'fx_android_beta_table',
-    'Firefox for Android <span class="text-danger">Beta</span> Channel',
-    'fx_android',
-    'beta'
-);
-
-$stores['fx_ios']['release'] = $html_table(
-    'fx_ios_release_table',
-    'Firefox for iOS <span class="text-danger">Release</span> Channel',
-    'fx_ios',
-    'release'
-);
+$stores_data = [];
+foreach ($project->getSupportedProducts() as $product_id) {
+    foreach ($project->getProductChannels($product_id) as $channel_id) {
+        $stores_data[$product_id][$channel_id] = $html_table(
+            "{$product_id}_{$channel_id}_table",
+            $project->getProductName($product_id) . ' <span class="text-danger">' . ucfirst($channel_id) . '</span> Channel',
+            $product_id,
+            $channel_id
+        );
+    }
+}
