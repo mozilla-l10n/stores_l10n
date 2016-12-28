@@ -21,7 +21,7 @@ if (is_string($whatsnew_files)) {
 $translations = new Translate($request['locale'], array_merge($listing_files, $whatsnew_files), LOCALES_PATH);
 
 // Include the current template
-require TEMPLATES . $project->getTemplate($request['product'], $request['channel']);
+require TEMPLATES . $project->getTemplate($request['locale'], $request['product'], $request['channel']);
 
 $get_length = function ($string) {
     return mb_strlen(trim(strip_tags($string)));

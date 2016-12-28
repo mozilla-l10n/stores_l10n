@@ -269,6 +269,25 @@ class Project
         ],
     ];
 
+    /**
+     * List of locale specific template overrides
+     *
+     * The array includes a list of locales, and for each locale the same
+     * structure used in $template. Only changed values need to be added
+     * to the array. For example:
+     *
+     * LOCALE => [
+     *     PRODUCT_ID => [
+     *         CHANNEL_ID => [
+     *             'template' => PATH TO ALTERNATIVE TEMPLATE,
+     *         ]
+     *     ]
+     * ],
+     *
+     * @var array
+     */
+    public $templates_overrides = [];
+
     public function __construct()
     {
         /*
@@ -561,14 +580,20 @@ class Project
     /**
      * Get the template path for a product and channel
      *
+     * @param string $locale  Locale code
      * @param string $product Product ID
      * @param string $channel Channel ID
      *
      * @return mixed String containing the template path or false
      */
-    public function getTemplate($product, $channel)
+    public function getTemplate($locale, $product, $channel)
     {
         $product = $this->getUpdatedProductCode($product);
+
+        if (isset($this->templates_overrides[$locale][$product][$channel]['template'])) {
+            return $this->templates_overrides[$locale][$product][$channel]['template'];
+        };
+
         if (! isset($this->templates[$product][$channel]['template'])) {
             return false;
         }

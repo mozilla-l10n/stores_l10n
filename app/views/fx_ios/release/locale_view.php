@@ -9,7 +9,7 @@
 <pre><?= $whatsnew($translations) ?></pre>
 
 <h3>Screenshots text</h3>
-<pre style="text-align: center;"><?= $screenshots($translations) ?></pre>
+<pre class="text-center"><?= $screenshots($translations) ?></pre>
 
 <h3>Keywords&mdash; <?= $keywords_warning ?></h3>
 <pre><?= $keywords($translations) ?></pre>

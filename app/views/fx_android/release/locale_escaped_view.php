@@ -12,4 +12,4 @@
 <pre contenteditable="true" <?=$direction?>><?= htmlspecialchars($description($translations)) ?></pre>
 
 <h3>Google Play Screenshots Copy</h3>
-<pre style="text-align: center;" contenteditable="true" <?=$direction?>><?= htmlspecialchars(strip_tags($screenshots($translations))) ?></pre>
+<pre contenteditable="true" class="text-center" <?=$direction?>><?= htmlspecialchars(strip_tags($screenshots($translations))) ?></pre>
