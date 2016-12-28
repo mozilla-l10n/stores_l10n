@@ -307,10 +307,10 @@ class Project extends atoum\test
     {
         $obj = new _Project();
         $this
-            ->string($obj->getTemplate('fx_android', 'release'))
-            ->string($obj->getTemplate('fx_android', 'beta'));
+            ->string($obj->getTemplate('fr', 'fx_android', 'release'))
+            ->string($obj->getTemplate('it', 'fx_android', 'beta'));
         $this
-            ->boolean($obj->getTemplate('fx_android', 'foobar'))
+            ->boolean($obj->getTemplate('ja', 'fx_android', 'foobar'))
                 ->isFalse();
     }
 

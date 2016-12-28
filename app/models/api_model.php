@@ -31,7 +31,7 @@ if ($request->query_type == 'product') {
         $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'listing'), LOCALES_PATH);
         if ($translations->isFileTranslated()) {
             // Include the current template
-            require TEMPLATES . $project->getTemplate($product, $channel);
+            require TEMPLATES . $project->getTemplate($template_locale, $product, $channel);
 
             switch ($store) {
                 case 'google':
@@ -72,7 +72,7 @@ if ($request->query_type == 'product') {
         $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'whatsnew'), LOCALES_PATH);
         if ($translations->isFileTranslated()) {
             // Include the current template
-            require TEMPLATES . $project->getTemplate($product, $channel);
+            require TEMPLATES . $project->getTemplate($template_locale, $product, $channel);
 
             switch ($store) {
                 case 'google':
