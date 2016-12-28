@@ -30,8 +30,8 @@ class API extends atoum\test
                 'firefoxlocales',
             ],
             [
-                ['path' => 'api/fx_android/productlocales/release/'],
-                'productlocales',
+                ['path' => 'api/fx_android/supportedlocales/release/'],
+                'supportedlocales',
             ],
             [
                 ['path' => 'api/fx_ios/done/beta/'],
@@ -47,8 +47,8 @@ class API extends atoum\test
                 'firefoxlocales',
             ],
             [
-                ['path' => 'api/google/productlocales/release/'],
-                'productlocales',
+                ['path' => 'api/google/supportedlocales/release/'],
+                'supportedlocales',
             ],
             [
                 ['path' => 'api/apple/done/beta/'],
@@ -88,7 +88,7 @@ class API extends atoum\test
                 true,
             ],
             [
-                ['path' => 'api/google/productlocales/release/'],
+                ['path' => 'api/google/supportedlocales/release/'],
                 true,
             ],
             [
@@ -157,7 +157,7 @@ class API extends atoum\test
             ],
             [
                 // invalid path
-                ['path'  => 'api/toto/productlocales/'],
+                ['path'  => 'api/toto/supportedlocales/'],
                 ['error' => 'Product (toto) is invalid.'],
             ],
         ];

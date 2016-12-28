@@ -43,11 +43,11 @@ $base = '<em class="dim">' . BASE_HTML_URL . 'api/</em>';
     <li>There is an optional <var>reverse</var> parameter that can be appended as a query string, e.g.: <?=$base?><a href="api/google/localesmapping/?reverse">google/localesmapping/?reverse</a>. <br>This will output a mapping based on Mozilla codes and not the store codes, which means that locales Mozilla doesn't support but are supported by the store are not listed.</li>
 </ul>
 
-<h3 class="text-primary">{product}/productlocales/{channel}/</h3>
+<h3 class="text-primary">{product}/supportedlocales/{channel}/</h3>
 <h4>Description:</h4>
 <p>List all locale codes supported by product for a release and a platform.</p>
 <h4>Example:</h4>
-<p>All Firefox for Android locales on the release Channel: <?=$base?><a href="api/fx_android/productlocales/release/">fx_android/productlocales/release/</a></p>
+<p>All Firefox for Android locales on the release Channel: <?=$base?><a href="api/fx_android/supportedlocales/release/">fx_android/supportedlocales/release/</a></p>
 
 <h3 class="text-primary">{product}/listing/{channel}/</h3>
 <h4>Description:</h4>

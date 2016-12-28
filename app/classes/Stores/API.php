@@ -45,7 +45,7 @@ class API
         'firefoxlocales', // Legacy
         'listing',
         'localesmapping',
-        'productlocales',
+        'supportedlocales',
         'storelocales',
         'translation',
         'whatsnew',
@@ -222,8 +222,10 @@ class API
         $supported_channels = $this->project->getProductChannels($this->query['product']);
         switch ($service) {
             case 'firefoxlocales': // Legacy
-            case 'productlocales':
-                // {product}/productlocales/{channel}/
+                // TODO: remove this log and the service if unused
+                $this->log('LEGACY request: /firefoxlocales');
+            case 'supportedlocales':
+                // {product}/supportedlocales/{channel}/
                 if (! $this->verifyEnoughParameters(3)) {
                     return false;
                 }
