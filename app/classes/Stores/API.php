@@ -36,6 +36,23 @@ class API
     private $query_parameters;
 
     /**
+     * Information about supported and current API versions
+     *
+     * @var array
+     */
+    private $api_versions = [
+        'supported' => ['v1'],
+        'current'   => 'v1',
+    ];
+
+    /**
+     * API version in use
+     *
+     * @var string
+     */
+    private $current_api_version = '';
+
+    /**
      * List of available API services
      *
      * @var array
@@ -100,6 +117,9 @@ class API
      */
     public function __construct($url)
     {
+        if (! isset($url['path'])) {
+            $url['path'] = '';
+        }
         $this->url = $url;
 
         // We use the Monolog library to log our events
@@ -120,7 +140,7 @@ class API
             : [];
 
         /*
-            Start by analzing the service, then trace back to the first
+            Start by analyzing the service, then trace back to the first
             parameter in the URI.
         */
         $service = '';
@@ -179,6 +199,13 @@ class API
 
         // Check that we have enough parameters for a query
         if (! $this->verifyEnoughParameters(1)) {
+            return false;
+        }
+
+        // Check if the version is supported
+        if (! $this->isSupportedAPIVersion()) {
+            $this->log('Unsupported API version: ' . $this->current_api_version);
+
             return false;
         }
 
@@ -332,6 +359,40 @@ class API
     }
 
     /**
+     * Check if the API version if supported
+     *
+     * @return boolean True if the version is supported, false otherwise
+     */
+    public function isSupportedAPIVersion()
+    {
+        return in_array($this->current_api_version, $this->api_versions['supported']);
+    }
+
+    /**
+     * Check if the API version if formally valid (v1, v2, etc.)
+     *
+     * @param string $version API version
+     *
+     * @return boolean True if the version is valid, false otherwise
+     */
+    public function isValidAPIVersion($version)
+    {
+        return preg_match('/^v[0-9]{1,2}$/', $version) == 1
+            ? true
+            : false;
+    }
+
+    /**
+     * Get the current API version
+     *
+     * @return string Current API version
+     */
+    public function getCurrentAPIVersion()
+    {
+        return $this->api_versions['current'];
+    }
+
+    /**
      * Check if the requested product is supported
      *
      * @return boolean True if the product is supported, false otherwise
@@ -411,8 +472,25 @@ class API
         $parameters = explode('/', $parameters);
         // Remove empty values
         $parameters = array_filter($parameters);
-        // Remove 'api' as all API calls start with it
+        // Remove 'api' as all API calls start with /api
         array_shift($parameters);
+
+        /*
+            Store API version separately and remove the parameter.
+            To support legacy calls without version we can't assume the
+            first parameter after API is a version.
+        */
+        if (isset($parameters[0]) && $this->isValidAPIVersion($parameters[0])) {
+            $this->current_api_version = $parameters[0];
+            array_shift($parameters);
+        } else {
+            /*
+                If version is missing, assume it's a legacy call to v1.
+            */
+            $this->current_api_version = 'v1';
+            $this->log('LEGACY request without version. Fall back to v1.');
+        }
+
         // Reorder keys
         $parameters = array_values($parameters);
 
