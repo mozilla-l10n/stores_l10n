@@ -285,7 +285,7 @@ class API
                 }
 
                 if ($service == 'whatsnew') {
-                    if (! $this->project->getWhatsnewFiles($this->query['product'], $this->query['channel'])) {
+                    if (! $this->project->getLangFiles($this->query['product'], $this->query['channel'], 'whatsnew')) {
                         $this->log("Whatsnew section is not supported for {$this->query['product']} on '{$this->query['channel']}' channel.");
 
                         return false;
