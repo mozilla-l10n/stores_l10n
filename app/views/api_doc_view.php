@@ -49,9 +49,9 @@ $base = '<em class="dim">' . BASE_HTML_URL . "api/{$api_version}/</em>";
 
 <h3 class="text-primary">{product}/supportedlocales/{channel}/</h3>
 <h4>Description:</h4>
-<p>List all locale codes supported by product for a release and a platform.</p>
+<p>List all locale codes supported by product for the requested channel.</p>
 <h4>Example:</h4>
-<p>All Firefox for Android locales on the release Channel: <?=$base?><a href="api/<?=$api_version?>/fx_android/supportedlocales/release/">fx_android/supportedlocales/release/</a></p>
+<p>All Firefox for Android locales on the release channel: <?=$base?><a href="api/<?=$api_version?>/fx_android/supportedlocales/release/">fx_android/supportedlocales/release/</a></p>
 
 <h3 class="text-primary">{product}/listing/{channel}/</h3>
 <h4>Description:</h4>
@@ -95,7 +95,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . "api/{$api_version}/</em>";
 </p>
 
 <p>Translation of Firefox for iOS listing for French: <?=$base?><a href="api/<?=$api_version?>/fx_ios/translation/release/fr/">fx_ios/translation/release/fr/</a></p>
-<h4>Output for Apple AppsStore:</h4>
+<h4>Output for Apple App Store:</h4>
 <p>
 <pre><code class="json">{
     "title": "Blabla",
