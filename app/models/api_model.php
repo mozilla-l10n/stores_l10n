@@ -8,10 +8,6 @@ $locale = isset($request->query['locale']) ? $request->query['locale'] : '';
 $store = $request->query['store'];
 $product = $request->query['product'];
 $product_locales = $project->getProductLocales($product, $channel);
-$supported_locales = array_unique(array_values($project->getLocalesMapping($store)));
-$valid_locales = function ($done) use ($supported_locales) {
-    return array_values(array_intersect($done, $supported_locales));
-};
 
 if ($request->query_type == 'product') {
     /*
@@ -25,32 +21,34 @@ if ($request->query_type == 'product') {
         in the switch that is the intersection of both the listing and whatsnew
         lists.
     */
-    $template_locales = $project->getSupportedLocales($product, $channel);
-    foreach ($template_locales as $lang) {
-        $translations = new Translate($lang, $project->getListingFiles($product, $channel), LOCALES_PATH);
-
+    $template_locales = $project->getStoreMozillaCommonLocales($product, $channel);
+    foreach ($template_locales as $template_locale) {
+        $translations = new Translate($template_locale, $project->getListingFiles($product, $channel), LOCALES_PATH);
         if ($translations->isFileTranslated()) {
+            // Include the current template
             require TEMPLATES . $project->getTemplate($product, $channel);
-            // The Google Store has string lengths constraints
-            if ($store == 'google') {
-                $desc = $set_limit('google_description', $description($translations));
-                $title = $set_limit('google_title', $app_title($translations));
-                $short_desc = $set_limit('google_short_description', $short_desc($translations));
 
-                if (($desc + $title + $short_desc) == 3) {
-                    $done[] = $lang;
-                }
-            }
+            switch ($store) {
+                case 'google':
+                    $desc = $set_limit('google_description', $description($translations));
+                    $title = $set_limit('google_title', $app_title($translations));
+                    $short_desc = $set_limit('google_short_description', $short_desc($translations));
 
-            // The Apple App Store has keywords lengths constraints
-            if ($store == 'apple') {
-                if ($set_limit('apple_keywords', $keywords($translations))) {
-                    $done[] = $lang;
-                }
+                    if (($desc + $title + $short_desc) == 3) {
+                        $done[] = $template_locale;
+                    }
+                    break;
+                case 'apple':
+                    if ($set_limit('apple_keywords', $keywords($translations))) {
+                        $done[] = $template_locale;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
-    $listing_json = $valid_locales($done);
+    $listing_json = $done;
 
     /*
         By default, we consider whatsnew identical to listing, this way we ignore it
@@ -59,8 +57,8 @@ if ($request->query_type == 'product') {
     $whatsnew_json = $listing_json;
 
     $done = [];
-    foreach ($template_locales as $lang) {
-        $translations = new Translate($lang, $project->getWhatsnewFiles($product, $channel), LOCALES_PATH);
+    foreach ($template_locales as $template_locale) {
+        $translations = new Translate($template_locale, $project->getWhatsnewFiles($product, $channel), LOCALES_PATH);
 
         if ($translations->isFileTranslated()) {
             // Include the current template
@@ -68,23 +66,19 @@ if ($request->query_type == 'product') {
 
             switch ($store) {
                 case 'google':
-                    /*
-                        Only Google has a 500 characters limit for the What's
-                        New section.
-                    */
                     if ($set_limit('google_whatsnew', $whatsnew($translations))) {
-                        $done[] = $lang;
+                        $done[] = $template_locale;
                     }
                     break;
                 case 'apple':
-                    $done[] = $lang;
+                    $done[] = $template_locale;
                     break;
                 default:
                     break;
             }
         }
     }
-    $whatsnew_json = $valid_locales($done);
+    $whatsnew_json = $done;
 }
 
 switch ($request->getService()) {
