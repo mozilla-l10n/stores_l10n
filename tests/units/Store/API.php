@@ -151,6 +151,11 @@ class API extends atoum\test
                 ['error' => null],
             ],
             [
+                // Valid path
+                ['path'  => 'api/v1/google/storelocales/'],
+                ['error' => null],
+            ],
+            [
                 // invalid path
                 ['path'  => 'api/toto/storelocales/'],
                 ['error' => 'Store (toto) is invalid.'],
