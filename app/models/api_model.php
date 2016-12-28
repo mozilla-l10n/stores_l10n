@@ -23,6 +23,11 @@ if ($request->query_type == 'product') {
     */
     $template_locales = $project->getStoreMozillaCommonLocales($product, $channel);
     foreach ($template_locales as $template_locale) {
+        // Consider en-US complete and move to next locale
+        if ($template_locale == 'en-US') {
+            $done[] = $template_locale;
+            continue;
+        }
         $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'listing'), LOCALES_PATH);
         if ($translations->isFileTranslated()) {
             // Include the current template
@@ -58,8 +63,13 @@ if ($request->query_type == 'product') {
 
     $done = [];
     foreach ($template_locales as $template_locale) {
-        $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'whatsnew'), LOCALES_PATH);
+        // Consider en-US complete and move to next locale
+        if ($template_locale == 'en-US') {
+            $done[] = $template_locale;
+            continue;
+        }
 
+        $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'whatsnew'), LOCALES_PATH);
         if ($translations->isFileTranslated()) {
             // Include the current template
             require TEMPLATES . $project->getTemplate($product, $channel);
