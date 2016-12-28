@@ -96,7 +96,7 @@ switch ($request->getService()) {
         $json = $project->getStoreLocales($store);
         break;
     case 'firefoxlocales': // Legacy
-    case 'productlocales':
+    case 'supportedlocales':
         $json = $product_locales;
         break;
     case 'localesmapping':
