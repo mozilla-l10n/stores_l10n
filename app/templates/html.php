@@ -33,7 +33,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="<?=($url['path'] == '/') ? 'active' : ''?>"><a href="#">Home</a></li>
-            <li class="<?=($url['path'] == 'api/documentation') ? 'active' : ''?>"><a href="api/documentation">API</a></li>
+            <li class="<?=($url['path'] == '/documentation') ? 'active' : ''?>"><a href="documentation">API</a></li>
             <li><a href="https://github.com/mozilla-l10n/stores_l10n/">Code on Github</a></li>
             <li><a href="https://github.com/mozilla-l10n/stores_l10n/issues">Report bug</a></li>
           </ul>
