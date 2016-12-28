@@ -117,6 +117,9 @@ class API
      */
     public function __construct($url)
     {
+        if (! isset($url['path'])) {
+            $url['path'] = '';
+        }
         $this->url = $url;
 
         // We use the Monolog library to log our events
@@ -196,6 +199,13 @@ class API
 
         // Check that we have enough parameters for a query
         if (! $this->verifyEnoughParameters(1)) {
+            return false;
+        }
+
+        // Check if the version is supported
+        if (! $this->isSupportedAPIVersion()) {
+            $this->log('Unsupported API version: ' . $this->current_api_version);
+
             return false;
         }
 
@@ -349,7 +359,17 @@ class API
     }
 
     /**
-     * Check if the API version if valid
+     * Check if the API version if supported
+     *
+     * @return boolean True if the version is supported, false otherwise
+     */
+    public function isSupportedAPIVersion()
+    {
+        return in_array($this->current_api_version, $this->api_versions['supported']);
+    }
+
+    /**
+     * Check if the API version if formally valid (v1, v2, etc.)
      *
      * @param string $version API version
      *
@@ -357,7 +377,9 @@ class API
      */
     public function isValidAPIVersion($version)
     {
-        return in_array($version, $this->api_versions['supported']);
+        return preg_match('/^v[0-9]{1,2}$/', $version) == 1
+            ? true
+            : false;
     }
 
     /**
@@ -453,14 +475,17 @@ class API
         // Remove 'api' as all API calls start with /api
         array_shift($parameters);
 
-        // Store API version separately and remove the parameter
+        /*
+            Store API version separately and remove the parameter.
+            To support legacy calls without version we can't assume the
+            first parameter after API is a version.
+        */
         if (isset($parameters[0]) && $this->isValidAPIVersion($parameters[0])) {
             $this->current_api_version = $parameters[0];
             array_shift($parameters);
         } else {
             /*
-                If version is missing or unsupported, assume it's a legacy
-                call to v1. Can't fail on unsupported versions for now.
+                If version is missing, assume it's a legacy call to v1.
             */
             $this->current_api_version = 'v1';
             $this->log('LEGACY request without version. Fall back to v1.');

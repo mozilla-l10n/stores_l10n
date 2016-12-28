@@ -80,38 +80,54 @@ class API extends atoum\test
                 false,
             ],
             [
-                ['path' => 'api/google/storelocales/'],
+                ['path' => 'api/v1/google/storelocales/'],
                 true,
             ],
             [
-                ['path' => 'api/google/firefoxlocales/release/'],
+                ['path' => 'api/v1/google/firefoxlocales/release/'],
                 true,
             ],
             [
-                ['path' => 'api/google/supportedlocales/release/'],
+                ['path' => 'api/v1/google/supportedlocales/release/'],
                 true,
             ],
             [
-                ['path' => 'api/google/localesmapping/'],
+                ['path' => 'api/v1/google/localesmapping/'],
                 true,
             ],
             [
-                ['path' => 'api/fx_android/done/release/'],
+                ['path' => 'api/v1/fx_android/done/release/'],
                 true,
             ],
             [
-                ['path' => 'api/fx_android/listing/release/'],
+                ['path' => 'api/v1/fx_android/listing/release/'],
                 true,
             ],
             [
-                ['path' => 'api/fx_android/whatsnew/release/'],
+                ['path' => 'api/v1/fx_android/whatsnew/release/'],
                 true,
             ],
             [
-                ['path' => 'api/fx_android/translation/beta/de/'],
+                ['path' => 'api/v1/fx_android/translation/beta/de/'],
                 true,
             ],
             // Legacy calls
+            [
+                ['path' => 'api/v1/google/done/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/v1/google/listing/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/v1/google/whatsnew/release/'],
+                true,
+            ],
+            [
+                ['path' => 'api/v1/google/translation/beta/de/'],
+                true,
+            ],
             [
                 ['path' => 'api/google/done/release/'],
                 true,
@@ -142,13 +158,50 @@ class API extends atoum\test
                 ->isEqualTo($b);
     }
 
+    public function isValidAPIVersionDP()
+    {
+        return [
+            [
+                'v1',
+                true,
+            ],
+            [
+                'foo',
+                false,
+            ],
+            [
+                'f1',
+                false,
+            ],
+            [
+                'ver1',
+                false,
+            ],
+            [
+                'v20',
+                true,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider isValidAPIVersionDP
+     */
+    public function testIsValidAPIVersion($a, $b)
+    {
+        $obj = new _API('');
+        $this
+            ->boolean($obj->isValidAPIVersion($a))
+                ->isEqualTo($b);
+    }
+
     public function invalidAPICallDP()
     {
         return [
             [
                 // Valid path
                 ['path'  => 'api/google/storelocales/'],
-                ['error' => null],
+                ['error' => 'LEGACY request without version. Fall back to v1.'],
             ],
             [
                 // Valid path
@@ -156,12 +209,17 @@ class API extends atoum\test
                 ['error' => null],
             ],
             [
-                // invalid path
+                // Unsupported version
+                ['path'  => 'api/v3/google/storelocales/'],
+                ['error' => 'Unsupported API version: v3'],
+            ],
+            [
+                // Invalid path
                 ['path'  => 'api/toto/storelocales/'],
                 ['error' => 'Store (toto) is invalid.'],
             ],
             [
-                // invalid path
+                // Invalid path
                 ['path'  => 'api/toto/supportedlocales/'],
                 ['error' => 'Product (toto) is invalid.'],
             ],
