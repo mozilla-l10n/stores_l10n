@@ -9,7 +9,7 @@ switch ($url['path']) {
         $controller = 'home';
         break;
 
-    case 'api/documentation':
+    case 'documentation':
         $controller = 'api_doc';
         break;
 

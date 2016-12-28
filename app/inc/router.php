@@ -41,7 +41,7 @@ require_once INC . 'urls.php';
 $match = false;
 
 // Perfect match between requested url and a static page we provide
-if (in_array($url['path'], array_keys($urls))) {
+if (in_array($url['path'], $urls)) {
     $match = true;
 }
 
@@ -52,7 +52,7 @@ if (in_array(explode('/', $url['path'])[0], $urls)) {
 
 if (! $match) {
     header('HTTP/1.1 404 Not Found');
-    die('resource not found');
+    die('Resource not found');
 }
 
 // Always redirect to an url ending with slashes
