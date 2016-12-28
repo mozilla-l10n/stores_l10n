@@ -587,7 +587,7 @@ class Project
      *
      * @return mixed String containing the langfile name(s) or false
      */
-    protected function getLangFile($product, $channel, $section)
+    public function getLangFiles($product, $channel, $section)
     {
         $product = $this->getUpdatedProductCode($product);
         if (! isset($this->templates[$product][$channel][$section])) {
@@ -595,33 +595,5 @@ class Project
         }
 
         return $this->templates[$product][$channel][$section];
-    }
-
-    /**
-     * Get the lang file name(s) for whatsnew section if it exists. Returns
-     * false otherwise.
-     *
-     * @param string $product Product ID
-     * @param string $channel Channel ID
-     *
-     * @return mixed String containing the langfile name(s) or false
-     */
-    public function getWhatsnewFiles($product, $channel)
-    {
-        return $this->getLangFile($product, $channel, 'whatsnew');
-    }
-
-    /**
-     * Get the lang file name(s) for listing section if it exists. Returns
-     * false otherwise.
-     *
-     * @param string $product Product ID
-     * @param string $channel Channel ID
-     *
-     * @return mixed String containing the langfile name(s) or false
-     */
-    public function getListingFiles($product, $channel)
-    {
-        return $this->getLangFile($product, $channel, 'listing');
     }
 }

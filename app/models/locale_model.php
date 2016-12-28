@@ -3,8 +3,8 @@ namespace Stores;
 
 $direction = $project->isRTL($request['locale']) ? 'dir="rtl"' : 'dir="ltr"';
 
-$listing_files  = $project->getListingFiles($request['product'], $request['channel']);
-$whatsnew_files = $project->getWhatsnewFiles($request['product'], $request['channel']);
+$listing_files  = $project->getLangFiles($request['product'], $request['channel'], 'listing');
+$whatsnew_files = $project->getLangFiles($request['product'], $request['channel'], 'whatsnew');
 
 if (is_string($listing_files)) {
     $listing_files = [$listing_files];

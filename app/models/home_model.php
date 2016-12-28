@@ -10,8 +10,8 @@ foreach ($project->getSupportedProducts() as $product_id) {
 
         // Examine both listing and whatsnew
         $lang_files = [
-            $project->getListingFiles($product_id, $channel_id),
-            $project->getWhatsnewFiles($product_id, $channel_id),
+            $project->getLangFiles($product_id, $channel_id, 'listing'),
+            $project->getLangFiles($product_id, $channel_id, 'whatsnew'),
         ];
         foreach ($store_locales as $store_locale) {
             $obj = new Translate($store_locale, $lang_files, LOCALES_PATH);

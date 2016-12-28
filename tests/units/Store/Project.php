@@ -314,23 +314,18 @@ class Project extends atoum\test
                 ->isFalse();
     }
 
-    public function testGetListingFiles()
+    public function testGetLangFiles()
     {
         $obj = new _Project();
         $this
-            ->string($obj->getListingFiles('fx_android', 'release'))
-            ->string($obj->getListingFiles('fx_android', 'beta'));
+            ->string($obj->getLangFiles('fx_android', 'release', 'listing'))
+            ->string($obj->getLangFiles('fx_android', 'beta', 'listing'));
         $this
-            ->boolean($obj->getListingFiles('fx_android', 'foobar'))
+            ->boolean($obj->getLangFiles('fx_android', 'foobar', 'listing'))
                 ->isFalse();
-    }
-
-    public function testGetWhatsnewFiles()
-    {
-        $obj = new _Project();
         $this
-            ->string($obj->getWhatsnewFiles('fx_android', 'release'));
+            ->string($obj->getLangFiles('fx_android', 'release', 'whatsnew'));
         $this
-            ->string($obj->getWhatsnewFiles('fx_android', 'beta'));
+            ->string($obj->getLangFiles('fx_android', 'beta', 'whatsnew'));
     }
 }
