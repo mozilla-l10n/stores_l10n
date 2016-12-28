@@ -8,6 +8,7 @@
 <h3>What’s new</h3>
 <pre><?= $whatsnew($translations) ?></pre>
 
+<<<<<<< HEAD
 <?php
     /*
         Check if the file used for screenshots exists, display this section
@@ -25,6 +26,10 @@
         };
     }
 ?>
+=======
+<h3>Screenshots text</h3>
+<pre class="text-center"><?= $screenshots($translations) ?></pre>
+>>>>>>> Support Focus for iOS
 
 <h3>Keywords&mdash; <?= $keywords_warning ?></h3>
 <pre><?= $keywords($translations) ?></pre>
