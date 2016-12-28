@@ -12,4 +12,4 @@
 <pre <?=$direction?>><?= $description($translations) ?></pre>
 
 <h3>Google Play Screenshots Copy</h3>
-<pre style="text-align: center;" <?=$direction?>><?= $screenshots($translations) ?></pre>
+<pre class="text-center" <?=$direction?>><?= $screenshots($translations) ?></pre>
