@@ -1,4 +1,8 @@
- pre {
+pre {
     white-space: pre-wrap;
     word-break: keep-all;
+}
+
+h2.bg-primary {
+    padding: 0.2em 0.4em;
 }
