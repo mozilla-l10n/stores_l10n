@@ -107,34 +107,3 @@ $whatsnew = function ($translations) use ($_) {
 • {$_('App optimization improvements')}
 OUT;
 };
-
-$screenshots_api = [
-    [
-        'title' => br2nl($_('Fast. Smart. Yours')),
-        'text'  => br2nl($_('Upgrade to the power of Firefox and<br>join hundreds of millions of<br>Firefox users on desktop and mobile.')),
-    ],
-    [
-        'title' => br2nl($_('Fast. Smart. Yours')),
-        'text'  => br2nl($_('Upgrade to the power of Firefox and<br>join hundreds of millions of<br>Firefox users on desktop and mobile.')),
-    ],
-    [
-        'title' => '',
-        'text'  => br2nl($_('Announcing<br>Firefox for iOS<br>Download now!')),
-    ],
-    [
-        'title' => br2nl($_('Intuitive visual tab design')),
-        'text'  => br2nl($_('Quickly find and manage<br>your open browser tabs')),
-    ],
-    [
-        'title' => br2nl($_('Intelligent searches')),
-        'text'  => br2nl($_('Get accurate, predictive results <br>before you finish typing')),
-    ],
-    [
-        'title' => br2nl($_('Seamless browsing <br>with Sync')),
-        'text'  => br2nl($_('Instantly access your bookmarks, <br>history, open tabs and passwords <br>everywhere you use Firefox')),
-    ],
-    [
-        'title' => br2nl($_('Private Browsing')),
-        'text'  => br2nl($_('Make specific tabs private and browse<br>the Web without your history being saved')),
-    ],
-];

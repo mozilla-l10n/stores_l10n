@@ -124,7 +124,6 @@ switch ($request->getService()) {
                 'title'       => $app_title($translations),
                 'description' => strip_tags(br2nl($description($translations))),
                 'keywords'    => $keywords($translations),
-                'screenshots' => $screenshots_api,
             ];
         }
 

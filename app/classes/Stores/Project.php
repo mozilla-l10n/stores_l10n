@@ -37,6 +37,12 @@ class Project
                 'name'     => 'Firefox for iOS',
                 'store'    => 'apple',
             ],
+        'focus_ios' =>
+            [
+                'channels' => ['release'],
+                'name'     => 'Focus for iOS',
+                'store'    => 'apple',
+            ],
     ];
 
     /**
@@ -120,6 +126,12 @@ class Project
                 'uz', 'zh-CN', 'zh-TW',
             ],
         ],
+        'focus_ios' => [
+            'release' => [
+                'de', 'es-ES', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR', 'ru',
+                'zh-CN',
+            ],
+        ],
     ];
 
     /**
@@ -128,7 +140,7 @@ class Project
      *
      * Sources:
      * Google: https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
-     * Apple: https://github.com/KrauseFx/deliver#available-language-codes
+     * Apple: https://github.com/fastlane/fastlane/tree/master/deliver#available-language-codes
      *
      * For Apple see also http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
      *
@@ -265,6 +277,13 @@ class Project
                 'template' => 'fx_ios/release/listing_sept_2015.php',
                 'listing'  => 'fx_ios/description_release.lang',
                 'whatsnew' => 'fx_ios/whatsnew/ios_6_0.lang',
+            ],
+        ],
+        'focus_ios' => [
+            'release' => [
+                'template' => 'focus_ios/release/listing_jan_2017.php',
+                'listing'  => 'focus_ios/description_release.lang',
+                'whatsnew' => 'focus_ios/whatsnew/focus_2_1.lang',
             ],
         ],
     ];

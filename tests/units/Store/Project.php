@@ -84,7 +84,7 @@ class Project extends atoum\test
         $obj = new _Project();
         $this
             ->array($obj->getSupportedProducts())
-                ->isEqualTo(['fx_android', 'fx_ios']);
+                ->isEqualTo(['fx_android', 'fx_ios', 'focus_ios']);
     }
 
     public function testGetSupportedStores()
