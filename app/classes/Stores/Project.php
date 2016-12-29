@@ -251,20 +251,20 @@ class Project
         'fx_android' => [
             'release' => [
                 'template' => 'fx_android/release/listing_apr_2016.php',
-                'listing'  => 'android_release.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_50.lang',
+                'listing'  => 'fx_android/description_release.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_50.lang',
             ],
             'beta' => [
                 'template' => 'fx_android/beta/listing_may_2015.php',
-                'listing'  => 'description_beta_page.lang',
-                'whatsnew' => 'whatsnew/whatsnew_android_51_beta.lang',
+                'listing'  => 'fx_android/description_beta.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_51_beta.lang',
             ],
         ],
         'fx_ios' => [
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
-                'listing'  => 'apple_description_release.lang',
-                'whatsnew' => 'whatsnew/whatsnew_ios_6_0.lang',
+                'listing'  => 'fx_ios/description_release.lang',
+                'whatsnew' => 'fx_ios/whatsnew/ios_6_0.lang',
             ],
         ],
     ];
