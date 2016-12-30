@@ -309,16 +309,9 @@ class Project
 
     public function __construct()
     {
-        /*
-            Clean up list of locales supported in Firefox for iOS,
-            set beta and aurora channel with the same list as release.
-        */
-        $fx_ios_locales = self::cleanUpiOS($this->supported_locales['fx_ios']['release']);
-        $this->supported_locales['fx_ios'] = [
-            'aurora'  => $fx_ios_locales,
-            'beta'    => $fx_ios_locales,
-            'release' => $fx_ios_locales,
-        ];
+        // Clean up list of locales supported in iOS products
+        $this->supported_locales['fx_ios']['release'] = self::cleanUpiOS($this->supported_locales['fx_ios']['release']);
+        $this->supported_locales['focus_ios']['release'] = self::cleanUpiOS($this->supported_locales['focus_ios']['release']);
 
         // Add en-US to Android locales
         foreach (['aurora', 'beta', 'release'] as $channel) {
