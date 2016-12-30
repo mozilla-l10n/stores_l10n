@@ -28,15 +28,13 @@ OUT;
 
 $screenshots = function ($translations) use ($_) {
     return <<<OUT
-<<<<<<< HEAD
 {$_('Automatically block ads<br>& other Web trackers')}
 
 {$_('Browse Faster<br>Web pages may load faster<br>by removing trackers')}
-=======
-{$_('<b>Automatically block ads</b><br> & other Web trackers')}
 
-{$_('<b>Browse Faster</b><br> Web pages may load faster by removing trackers')}
->>>>>>> Support Focus for iOS
+{$_('Automatically block ads<br>& other Web trackers')}
+
+{$_('Browse Faster<br>Web pages may load faster<br>by removing trackers')}
 
 {$_('Before')}
 
@@ -44,11 +42,7 @@ $screenshots = function ($translations) use ($_) {
 
 {$_('Tracker')}
 
-<<<<<<< HEAD
 {$_('From Mozilla<br>A brand you trust')}
-=======
-{$_('<b>From Mozilla</b><br> A brand you trust')}
->>>>>>> Support Focus for iOS
 OUT;
 };
 
