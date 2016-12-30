@@ -3,22 +3,8 @@ namespace Stores;
 
 $direction = $project->isRTL($request['locale']) ? 'dir="rtl"' : 'dir="ltr"';
 
-$listing_files  = $project->getLangFiles($request['product'], $request['channel'], 'listing');
-$whatsnew_files = $project->getLangFiles($request['product'], $request['channel'], 'whatsnew');
-
-if (is_string($listing_files)) {
-    $listing_files = [$listing_files];
-}
-
-if ($whatsnew_files === false) {
-    $whatsnew_files = [];
-}
-
-if (is_string($whatsnew_files)) {
-    $whatsnew_files = [$whatsnew_files];
-}
-
-$translations = new Translate($request['locale'], array_merge($listing_files, $whatsnew_files), LOCALES_PATH);
+$lang_files = $project->getLangFiles($request['locale'], $request['product'], $request['channel'], 'all');
+$translations = new Translate($request['locale'], $lang_files, LOCALES_PATH);
 
 // Include the current template
 require TEMPLATES . $project->getTemplate($request['locale'], $request['product'], $request['channel']);

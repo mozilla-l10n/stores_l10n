@@ -8,12 +8,9 @@ foreach ($project->getSupportedProducts() as $product_id) {
         // Get supported locales
         $store_locales = $project->getStoreMozillaCommonLocales($product_id, $channel_id);
 
-        // Examine both listing and whatsnew
-        $lang_files = [
-            $project->getLangFiles($product_id, $channel_id, 'listing'),
-            $project->getLangFiles($product_id, $channel_id, 'whatsnew'),
-        ];
         foreach ($store_locales as $store_locale) {
+            // Examine both listing and whatsnew
+            $lang_files = $project->getLangFiles($store_locale, $product_id, $channel_id, 'all');
             $obj = new Translate($store_locale, $lang_files, LOCALES_PATH);
             $status[$product_id][$channel_id][$store_locale] = $obj->isFileTranslated() ? 'translated' : '';
         }

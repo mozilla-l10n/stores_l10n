@@ -624,20 +624,38 @@ class Project
      * Get the lang file name(s) for a product and channel.
      * Can be filtered by Section.
      *
+     * @param string $locale  Locale code
      * @param string $product Product ID
      * @param string $channel Channel ID
      * @param string $section Name of the section defined in $this->template
-     *                        containing the lang file(s).
+     *                        containing the lang file(s). If 'all' return
+     *                        all lang files defined.
      *
-     * @return mixed String containing the langfile name(s) or false
+     * @return array Array of langfile names, empty if not supported
      */
-    public function getLangFiles($product, $channel, $section)
+    public function getLangFiles($locale, $product, $channel, $section)
     {
+        // Convert legacy products IDs
         $product = $this->getUpdatedProductCode($product);
-        if (! isset($this->templates[$product][$channel][$section])) {
-            return false;
+
+        if ($section == 'all') {
+            // Take all available sections, filter out known non-sections
+            $sections = array_keys($this->templates[$product][$channel]);
+            $sections = array_diff($sections, ['template', 'supported_locales']);
+        } else {
+            $sections = [$section];
         }
 
-        return $this->templates[$product][$channel][$section];
+        $templates = [];
+        foreach ($sections as $section_name) {
+            // Check if there is an override, otherwise take the default lang file
+            if (isset($this->templates[$product][$channel][$section_name])) {
+                $templates[] = isset($this->templates_overrides[$locale][$product][$channel][$section_name])
+                    ? $this->templates_overrides[$locale][$product][$channel][$section_name]
+                    : $this->templates[$product][$channel][$section_name];
+            }
+        }
+
+        return $templates;
     }
 }
