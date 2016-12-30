@@ -128,8 +128,8 @@ class Project
         ],
         'focus_ios' => [
             'release' => [
-                'de', 'es-ES', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR', 'ru',
-                'zh-CN',
+                'cs', 'de', 'es-ES', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR',
+                'ru', 'zh-CN',
             ],
         ],
     ];
@@ -281,9 +281,10 @@ class Project
         ],
         'focus_ios' => [
             'release' => [
-                'template' => 'focus_ios/release/listing_jan_2017.php',
-                'listing'  => 'focus_ios/description_release.lang',
-                'whatsnew' => 'focus_ios/whatsnew/focus_2_1.lang',
+                'template'    => 'focus_ios/release/listing_jan_2017.php',
+                'listing'     => 'focus_ios/description_release.lang',
+                'whatsnew'    => 'focus_ios/whatsnew/focus_2_1.lang',
+                'screenshots' => 'focus_ios/screenshots_v2_1.lang',
             ],
         ],
     ];

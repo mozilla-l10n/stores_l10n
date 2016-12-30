@@ -47,9 +47,22 @@ class Translate extends DotLangParser
         if (is_array($files)) {
             $translations = $source_strings = [];
             foreach ($files as $file) {
+                /*
+                    If the localized file is missing, ignore also en-US strings.
+                    For example we might have screenshots only for a subset of
+                    locales, and supported locales are defined in langchecker.
+                    If the file is missing, it means locale is not supported
+                    and shouldn't be considered incomplete for these missing
+                    translations.
+                */
+                $locale_file = $this->locales_path . $this->locale . '/' . $file;
+                if (! file_exists($locale_file)) {
+                    continue;
+                }
+
                 $translations = array_merge(
                     $translations,
-                    $this->parseFile($this->locales_path . $this->locale . '/' . $file)['strings']
+                    $this->parseFile($locale_file)['strings']
                 );
 
                 $source_strings = array_merge(
@@ -106,8 +119,7 @@ class Translate extends DotLangParser
     /**
      * Check if a file is fully translated
      *
-     * @return boolean True if Translated, false is not translated or if
-     *                 file doesn't exist
+     * @return boolean True if translated, false is not translated
      */
     public function isFileTranslated()
     {
