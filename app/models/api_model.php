@@ -9,7 +9,7 @@ $store = $request->query['store'];
 $product = $request->query['product'];
 $product_locales = $project->getProductLocales($product, $channel);
 
-if ($request->query_type == 'product') {
+if ($request->query_type == 'product' && ! in_array($request->getService(), ['firefoxlocales', 'supportedlocales'])) {
     /*
         The Done API returns the status of a locale which can have mutiple files
         to translate. Specifically, for Google channels, localizers should
