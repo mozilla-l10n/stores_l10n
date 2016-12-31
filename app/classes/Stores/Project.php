@@ -129,7 +129,7 @@ class Project
         'focus_ios' => [
             'release' => [
                 'cs', 'de', 'es-ES', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR',
-                'ru', 'zh-CN',
+                'ru', 'zh-CN', 'zh-TW',
             ],
         ],
     ];
