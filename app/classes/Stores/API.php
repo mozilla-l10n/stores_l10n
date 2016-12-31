@@ -257,6 +257,12 @@ class API
                     return false;
                 }
 
+                /*
+                    For supportedlocales the list of channels depends on
+                    $supported_locales, not on the channels for which we
+                    support stores localization.
+                */
+                $supported_channels = $this->project->getProductChannels($this->query['product'], true);
                 if (! in_array($this->query['channel'], $supported_channels)) {
                     $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
 
