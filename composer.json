@@ -16,6 +16,10 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/mozilla-l10n/phpclass-cache"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/mozilla-l10n/phpclass-json"
         },
         {
@@ -25,10 +29,11 @@
     ],
 
     "require": {
-        "monolog/monolog" : "~1.1",
-        "components/jquery": "~1.1",
-        "components/bootstrap": "~3.3",
         "components/bootstrap-default": "~3.2",
+        "components/bootstrap": "~3.3",
+        "components/jquery": "~1.1",
+        "monolog/monolog" : "~1.1",
+        "mozillal10n/cache": "~0.1",
         "mozillal10n/json": "~0.1",
         "robloach/component-installer": "*"
     },

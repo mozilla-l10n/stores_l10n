@@ -15,3 +15,8 @@ require_once INSTALL . 'vendor/autoload.php';
 
 // Initalize a Project object that contains key information
 $project = new Project;
+
+// Cache class
+define('CACHE_ENABLED', true);
+define('CACHE_PATH', INSTALL . 'cache/');
+define('CACHE_TIME', 900);

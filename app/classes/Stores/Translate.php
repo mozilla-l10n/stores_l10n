@@ -1,6 +1,8 @@
 <?php
 namespace Stores;
 
+use Cache\Cache;
+
 /*
  * Stores class
  *
@@ -43,39 +45,50 @@ class Translate extends DotLangParser
     {
         $this->locale = $locale;
         $this->locales_path = $locales_path;
-        // We are passing several files
-        if (is_array($files)) {
-            $translations = $source_strings = [];
-            foreach ($files as $file) {
-                /*
-                    If the localized file is missing, ignore also en-US strings.
-                    For example we might have screenshots only for a subset of
-                    locales, and supported locales are defined in langchecker.
-                    If the file is missing, it means locale is not supported
-                    and shouldn't be considered incomplete for these missing
-                    translations.
-                */
-                $locale_file = $this->locales_path . $this->locale . '/' . $file;
-                if (! file_exists($locale_file)) {
-                    continue;
-                }
 
-                $translations = array_merge(
-                    $translations,
-                    $this->parseFile($locale_file)['strings']
-                );
-
-                $source_strings = array_merge(
-                    $source_strings,
-                    array_keys($this->parseFile($this->locales_path . 'en-US/' . $file)['strings'])
-                );
-            }
-            $this->translations = $translations;
-            $this->source_strings = $source_strings;
-        } else {
-            $this->translations = $this->parseFile($this->locales_path . $this->locale . '/' . $files)['strings'];
-            $this->source_strings = array_keys($this->parseFile($this->locales_path . 'en-US/' . $files)['strings']);
+        if (! is_array($files)) {
+            $files = [$files];
         }
+
+        $translations = $source_strings = [];
+        foreach ($files as $file) {
+            /*
+                If the localized file is missing, ignore also en-US strings.
+                For example we might have screenshots only for a subset of
+                locales, and supported locales are defined in langchecker.
+                If the file is missing, it means locale is not supported
+                and shouldn't be considered incomplete for these missing
+                translations.
+            */
+            $locale_file = $this->locales_path . $this->locale . '/' . $file;
+            if (! file_exists($locale_file)) {
+                continue;
+            }
+
+            $cache_id = str_replace('-', '_', strtolower($this->locale)) . '_' . str_replace('/', '_', $file);
+            if (! $new_localized_strings = Cache::getKey($cache_id)) {
+                $new_localized_strings = $this->parseFile($locale_file)['strings'];
+                Cache::setKey($cache_id, $new_localized_strings);
+            }
+
+            $translations = array_merge(
+                $translations,
+                $new_localized_strings
+            );
+
+            $cache_id = 'enus_' . str_replace('/', '_', $file);
+            if (! $new_source_strings = Cache::getKey($cache_id)) {
+                $new_source_strings = array_keys($this->parseFile($this->locales_path . 'en-US/' . $file)['strings']);
+                Cache::setKey($cache_id, $new_source_strings);
+            }
+
+            $source_strings = array_merge(
+                $source_strings,
+                $new_source_strings
+            );
+        }
+        $this->translations = $translations;
+        $this->source_strings = $source_strings;
     }
 
     /**
