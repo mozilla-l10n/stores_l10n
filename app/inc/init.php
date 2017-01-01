@@ -17,6 +17,9 @@ require_once INSTALL . 'vendor/autoload.php';
 $project = new Project;
 
 // Cache class
-define('CACHE_ENABLED', true);
+if (! defined('CACHE_ENABLED')) {
+    // Allow disabling cache via config
+    define('CACHE_ENABLED', true);
+}
 define('CACHE_PATH', INSTALL . 'cache/');
 define('CACHE_TIME', 900);
