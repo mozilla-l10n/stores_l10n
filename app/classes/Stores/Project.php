@@ -572,9 +572,12 @@ class Project
 
         // Return requested channel, or fall back to release
         if (isset($this->supported_locales[$product])) {
-            return isset($this->supported_locales[$product][$channel])
+            $locales = isset($this->supported_locales[$product][$channel])
                 ? $this->supported_locales[$product][$channel]
                 : $this->supported_locales[$product]['release'];
+
+            // Drop en-US
+            return array_diff($locales, ['en-US']);
         }
 
         return false;

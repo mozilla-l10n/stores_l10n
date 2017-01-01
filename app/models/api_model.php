@@ -7,7 +7,6 @@ $channel = isset($request->query['channel']) ? $request->query['channel'] : '';
 $locale = isset($request->query['locale']) ? $request->query['locale'] : '';
 $store = $request->query['store'];
 $product = $request->query['product'];
-$product_locales = $project->getProductLocales($product, $channel);
 
 if ($request->query_type == 'product' && ! in_array($request->getService(), ['firefoxlocales', 'supportedlocales'])) {
     /*
@@ -103,7 +102,7 @@ switch ($request->getService()) {
         break;
     case 'firefoxlocales': // Legacy
     case 'supportedlocales':
-        $json = $product_locales;
+        $json = $project->getProductLocales($product, $channel);
         break;
     case 'localesmapping':
         $json = $project->getLocalesMapping($store, isset($_GET['reverse']));
