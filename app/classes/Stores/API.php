@@ -97,13 +97,6 @@ class API
     public $query = [];
 
     /**
-     * Used to store query type
-     *
-     * @var string
-     */
-    public $query_type;
-
-    /**
      * Project object to get information like supported locales
      *
      * @var object
@@ -147,12 +140,11 @@ class API
             ? $this->parameters[1]
             : '';
 
-        $query_type = in_array($this->query['service'], ['localesmapping', 'storelocales'])
+        $this->query['query_type'] = in_array($this->query['service'], ['localesmapping', 'storelocales'])
             ? 'store'
             : 'product';
-        $this->query_type = $query_type;
         if (isset($this->parameters[0])) {
-            if ($query_type == 'store') {
+            if ($this->query['query_type'] == 'store') {
                 $this->query['product'] = '';
                 $this->query['store'] = $this->parameters[0];
             } else {
@@ -208,14 +200,14 @@ class API
         }
 
         // Check that the product is supported
-        if ($this->query_type == 'product') {
+        if ($this->query['query_type'] == 'product') {
             if (! $this->isValidProduct()) {
                 return false;
             }
         }
 
         // Check that the store is supported
-        if ($this->query_type == 'store') {
+        if ($this->query['query_type'] == 'store') {
             if (! $this->isValidStore()) {
                 return false;
             }
@@ -337,7 +329,7 @@ class API
      */
     public function isTranslationRequired() {
         return $this->query['service']
-            && $this->query_type == 'product'
+            && $this->query['query_type'] == 'product'
             && ! in_array($this->query['service'], ['firefoxlocales', 'supportedlocales']);
     }
 
