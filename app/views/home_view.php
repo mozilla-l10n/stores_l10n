@@ -9,7 +9,10 @@ $main_content = '';
 foreach ($project->getSupportedProducts() as $product_id) {
     foreach ($project->getProductChannels($product_id) as $channel_id) {
         $full_id = "{$product_id}_{$channel_id}";
-        $product_name = $project->getProductName($product_id) . ' ' . ucfirst($channel_id);
+        $product_name = $project->getProductName($product_id);
+        if ($channel_id != 'release') {
+            $product_name .= ' ' . ucfirst($channel_id);
+        }
         $navigation .= "  <li class=\"filter\"><a href=\"#{$full_id}\" id=\"{$full_id}\">{$product_name}</a></li>\n";
         $main_content .= $stores_data[$product_id][$channel_id];
     }

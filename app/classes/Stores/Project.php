@@ -37,6 +37,12 @@ class Project
                 'name'     => 'Firefox for iOS',
                 'store'    => 'apple',
             ],
+        'focus_ios' =>
+            [
+                'channels' => ['release'],
+                'name'     => 'Focus for iOS',
+                'store'    => 'apple',
+            ],
     ];
 
     /**
@@ -120,6 +126,12 @@ class Project
                 'uz', 'zh-CN', 'zh-TW',
             ],
         ],
+        'focus_ios' => [
+            'release' => [
+                'cs', 'de', 'es-ES', 'fr', 'id', 'it', 'ja', 'pl', 'pt-BR',
+                'ru', 'zh-CN', 'zh-TW',
+            ],
+        ],
     ];
 
     /**
@@ -128,7 +140,7 @@ class Project
      *
      * Sources:
      * Google: https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
-     * Apple: https://github.com/KrauseFx/deliver#available-language-codes
+     * Apple: https://github.com/fastlane/fastlane/tree/master/deliver#available-language-codes
      *
      * For Apple see also http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
      *
@@ -267,6 +279,14 @@ class Project
                 'whatsnew' => 'fx_ios/whatsnew/ios_6_0.lang',
             ],
         ],
+        'focus_ios' => [
+            'release' => [
+                'template'    => 'focus_ios/release/listing_jan_2017.php',
+                'listing'     => 'focus_ios/description_release.lang',
+                'whatsnew'    => 'focus_ios/whatsnew/focus_2_1.lang',
+                'screenshots' => 'focus_ios/screenshots_v2_1.lang',
+            ],
+        ],
     ];
 
     /**
@@ -290,16 +310,9 @@ class Project
 
     public function __construct()
     {
-        /*
-            Clean up list of locales supported in Firefox for iOS,
-            set beta and aurora channel with the same list as release.
-        */
-        $fx_ios_locales = self::cleanUpiOS($this->supported_locales['fx_ios']['release']);
-        $this->supported_locales['fx_ios'] = [
-            'aurora'  => $fx_ios_locales,
-            'beta'    => $fx_ios_locales,
-            'release' => $fx_ios_locales,
-        ];
+        // Clean up list of locales supported in iOS products
+        $this->supported_locales['fx_ios']['release'] = self::cleanUpiOS($this->supported_locales['fx_ios']['release']);
+        $this->supported_locales['focus_ios']['release'] = self::cleanUpiOS($this->supported_locales['focus_ios']['release']);
 
         // Add en-US to Android locales
         foreach (['aurora', 'beta', 'release'] as $channel) {
@@ -605,20 +618,38 @@ class Project
      * Get the lang file name(s) for a product and channel.
      * Can be filtered by Section.
      *
+     * @param string $locale  Locale code
      * @param string $product Product ID
      * @param string $channel Channel ID
      * @param string $section Name of the section defined in $this->template
-     *                        containing the lang file(s).
+     *                        containing the lang file(s). If 'all' return
+     *                        all lang files defined.
      *
-     * @return mixed String containing the langfile name(s) or false
+     * @return array Array of langfile names, empty if not supported
      */
-    public function getLangFiles($product, $channel, $section)
+    public function getLangFiles($locale, $product, $channel, $section)
     {
+        // Convert legacy products IDs
         $product = $this->getUpdatedProductCode($product);
-        if (! isset($this->templates[$product][$channel][$section])) {
-            return false;
+
+        if ($section == 'all') {
+            // Take all available sections, filter out known non-sections
+            $sections = array_keys($this->templates[$product][$channel]);
+            $sections = array_diff($sections, ['template', 'supported_locales']);
+        } else {
+            $sections = [$section];
         }
 
-        return $this->templates[$product][$channel][$section];
+        $templates = [];
+        foreach ($sections as $section_name) {
+            // Check if there is an override, otherwise take the default lang file
+            if (isset($this->templates[$product][$channel][$section_name])) {
+                $templates[] = isset($this->templates_overrides[$locale][$product][$channel][$section_name])
+                    ? $this->templates_overrides[$locale][$product][$channel][$section_name]
+                    : $this->templates[$product][$channel][$section_name];
+            }
+        }
+
+        return $templates;
     }
 }

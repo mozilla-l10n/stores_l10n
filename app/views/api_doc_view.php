@@ -12,7 +12,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . "api/{$api_version}/</em>";
 <h2 class="bg-primary">Available Variables in the API</h2>
 <ul>
     <li><code>{store}</code>: store providers. Supported values: <var>google</var>, <var>apple</var>.</li>
-    <li><code>{product}</code>: product IDs. Supported values: <var>fx_android</var> (<del>google</del>), <var>fx_ios</var> (<del>apple</del>). Between parenthesis are legacy deprecated values.</li>
+    <li><code>{product}</code>: product IDs. Supported values: <var>fx_android</var> (<del>google</del>), <var>fx_ios</var> (<del>apple</del>), <var>focus_ios</var>. Between parenthesis are legacy deprecated values.</li>
     <li><code>{channel}</code>:
         <ul>
             <li>Google: <var>beta</var>, <var>release</var>.</li>

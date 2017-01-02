@@ -28,7 +28,10 @@ if ($request->query_type == 'product') {
             $done[] = $template_locale;
             continue;
         }
-        $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'listing'), LOCALES_PATH);
+        $translations = new Translate(
+            $template_locale,
+            $project->getLangFiles($template_locale, $product, $channel, 'listing'),
+            LOCALES_PATH);
         if ($translations->isFileTranslated()) {
             // Include the current template
             require TEMPLATES . $project->getTemplate($template_locale, $product, $channel);
@@ -69,7 +72,10 @@ if ($request->query_type == 'product') {
             continue;
         }
 
-        $translations = new Translate($template_locale, $project->getLangFiles($product, $channel, 'whatsnew'), LOCALES_PATH);
+        $translations = new Translate(
+            $template_locale,
+            $project->getLangFiles($template_locale, $product, $channel, 'whatsnew'),
+            LOCALES_PATH);
         if ($translations->isFileTranslated()) {
             // Include the current template
             require TEMPLATES . $project->getTemplate($template_locale, $product, $channel);
@@ -124,7 +130,6 @@ switch ($request->getService()) {
                 'title'       => $app_title($translations),
                 'description' => strip_tags(br2nl($description($translations))),
                 'keywords'    => $keywords($translations),
-                'screenshots' => $screenshots_api,
             ];
         }
 

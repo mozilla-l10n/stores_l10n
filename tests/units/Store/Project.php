@@ -84,7 +84,7 @@ class Project extends atoum\test
         $obj = new _Project();
         $this
             ->array($obj->getSupportedProducts())
-                ->isEqualTo(['fx_android', 'fx_ios']);
+                ->isEqualTo(['fx_android', 'fx_ios', 'focus_ios']);
     }
 
     public function testGetSupportedStores()
@@ -307,7 +307,8 @@ class Project extends atoum\test
     {
         $obj = new _Project();
         $this
-            ->string($obj->getTemplate('fr', 'fx_android', 'release'))
+            ->string($obj->getTemplate('fr', 'fx_android', 'release'));
+        $this
             ->string($obj->getTemplate('it', 'fx_android', 'beta'));
         $this
             ->boolean($obj->getTemplate('ja', 'fx_android', 'foobar'))
@@ -318,14 +319,30 @@ class Project extends atoum\test
     {
         $obj = new _Project();
         $this
-            ->string($obj->getLangFiles('fx_android', 'release', 'listing'))
-            ->string($obj->getLangFiles('fx_android', 'beta', 'listing'));
+            ->array($obj->getLangFiles('fr', 'fx_android', 'release', 'listing'))
+                ->hassize(1)
+                ->contains('fx_android/description_release.lang');
+
         $this
-            ->boolean($obj->getLangFiles('fx_android', 'foobar', 'listing'))
-                ->isFalse();
+            ->array($obj->getLangFiles('fr', 'fx_android', 'beta', 'listing'))
+                ->hassize(1)
+                ->contains('fx_android/description_beta.lang');
+
         $this
-            ->string($obj->getLangFiles('fx_android', 'release', 'whatsnew'));
+            ->array($obj->getLangFiles('fr', 'fx_android', 'beta', 'all'))
+                ->hassize(2)
+                ->contains('fx_android/description_beta.lang');
+
         $this
-            ->string($obj->getLangFiles('fx_android', 'beta', 'whatsnew'));
+            ->array($obj->getLangFiles('fr', 'fx_android', 'foobar', 'listing'))
+                ->hassize(0);
+
+        $this
+            ->array($obj->getLangFiles('fr', 'fx_android', 'release', 'whatsnew'))
+                ->hassize(1);
+
+        $this
+            ->array($obj->getLangFiles('fr', 'fx_android', 'beta', 'whatsnew'))
+                ->hassize(1);
     }
 }
