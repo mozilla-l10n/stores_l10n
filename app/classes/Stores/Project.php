@@ -577,7 +577,7 @@ class Project
                 : $this->supported_locales[$product]['release'];
 
             // Drop en-US
-            return array_diff($locales, ['en-US']);
+            return array_values(array_diff($locales, ['en-US']));
         }
 
         return false;
