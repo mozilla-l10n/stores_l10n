@@ -327,7 +327,8 @@ class API
      *
      * @return boolean Returns true if we need translations, false otherwise
      */
-    public function isTranslationRequired() {
+    public function isTranslationRequired()
+    {
         return $this->query['service']
             && $this->query['query_type'] == 'product'
             && ! in_array($this->query['service'], ['firefoxlocales', 'supportedlocales']);
