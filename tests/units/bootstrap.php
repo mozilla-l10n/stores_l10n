@@ -14,12 +14,8 @@ define('TEST_FILES',  realpath(__DIR__ . '/../testfiles/') . '/');
 define('LOCALES_PATH', TEST_FILES . 'langfiles/');
 
 // Load local settings
-$settings_file = CONFIG . '/config.inc.php';
-if (! file_exists($settings_file)) {
-    die('File app/config/config.inc.php is missing. Please check your configuration.');
-} else {
-    require $settings_file;
-}
+$webroot_folder = '/';
+const DEBUG = false;
 
 // Make sure we have a timezone set
 date_default_timezone_set('Europe/Paris');

@@ -7,9 +7,9 @@ $channel = isset($request->query['channel']) ? $request->query['channel'] : '';
 $locale = isset($request->query['locale']) ? $request->query['locale'] : '';
 $store = $request->query['store'];
 $product = $request->query['product'];
-$product_locales = $project->getProductLocales($product, $channel);
+$service = $request->getService();
 
-if ($request->query_type == 'product') {
+if ($request->isTranslationRequired()) {
     /*
         The Done API returns the status of a locale which can have mutiple files
         to translate. Specifically, for Google channels, localizers should
@@ -97,13 +97,13 @@ if ($request->query_type == 'product') {
     $whatsnew_json = $done;
 }
 
-switch ($request->getService()) {
+switch ($service) {
     case 'storelocales':
         $json = $project->getStoreLocales($store);
         break;
     case 'firefoxlocales': // Legacy
     case 'supportedlocales':
-        $json = $product_locales;
+        $json = $project->getProductLocales($product, $channel);
         break;
     case 'localesmapping':
         $json = $project->getLocalesMapping($store, isset($_GET['reverse']));

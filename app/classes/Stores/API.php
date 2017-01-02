@@ -97,13 +97,6 @@ class API
     public $query = [];
 
     /**
-     * Used to store query type
-     *
-     * @var string
-     */
-    public $query_type;
-
-    /**
      * Project object to get information like supported locales
      *
      * @var object
@@ -143,18 +136,15 @@ class API
             Start by analyzing the service, then trace back to the first
             parameter in the URI.
         */
-        $service = '';
-        if (isset($this->parameters[1])) {
-            $service = $this->parameters[1];
-            $this->query['service'] = $service;
-        }
+        $this->query['service'] = isset($this->parameters[1])
+            ? $this->parameters[1]
+            : '';
 
-        $query_type = in_array($service, ['localesmapping', 'storelocales'])
+        $this->query['query_type'] = in_array($this->query['service'], ['localesmapping', 'storelocales'])
             ? 'store'
             : 'product';
-        $this->query_type = $query_type;
         if (isset($this->parameters[0])) {
-            if ($query_type == 'store') {
+            if ($this->query['query_type'] == 'store') {
                 $this->query['product'] = '';
                 $this->query['store'] = $this->parameters[0];
             } else {
@@ -168,7 +158,7 @@ class API
             $this->query['channel'] = $this->parameters[2];
         }
 
-        if ($service == 'translation' && isset($this->parameters[3])) {
+        if ($this->query['service'] == 'translation' && isset($this->parameters[3])) {
             $this->query['locale'] = $this->parameters[3];
         }
     }
@@ -180,7 +170,7 @@ class API
      */
     public function getService()
     {
-        return $this->isValidService() ? $this->parameters[1] : 'Invalid service';
+        return $this->query['service'];
     }
 
     /**
@@ -210,14 +200,14 @@ class API
         }
 
         // Check that the product is supported
-        if ($this->query_type == 'product') {
+        if ($this->query['query_type'] == 'product') {
             if (! $this->isValidProduct()) {
                 return false;
             }
         }
 
         // Check that the store is supported
-        if ($this->query_type == 'store') {
+        if ($this->query['query_type'] == 'store') {
             if (! $this->isValidStore()) {
                 return false;
             }
@@ -229,7 +219,7 @@ class API
         }
 
         // Check if the call to the service is technically valid
-        if (! $this->isValidServiceCall($this->query['service'])) {
+        if (! $this->isValidServiceCall()) {
             return false;
         }
 
@@ -240,14 +230,12 @@ class API
      * Check if we call a service that we do support and check that
      * the request is technically correct for that service
      *
-     * @param string $service The name of the service
-     *
-     * @return boolean Returns True if we have a valid service call, False otherwise
+     * @return boolean Returns true if we have a valid service call, false otherwise
      */
-    private function isValidServiceCall($service)
+    private function isValidServiceCall()
     {
         $supported_channels = $this->project->getProductChannels($this->query['product']);
-        switch ($service) {
+        switch ($this->query['service']) {
             case 'firefoxlocales': // Legacy
                 // TODO: remove this log and the service if unused
                 $this->log('LEGACY request: /firefoxlocales');
@@ -257,6 +245,12 @@ class API
                     return false;
                 }
 
+                /*
+                    For supportedlocales the list of channels depends on
+                    $supported_locales, not on the channels for which we
+                    support stores localization.
+                */
+                $supported_channels = $this->project->getProductChannels($this->query['product'], true);
                 if (! in_array($this->query['channel'], $supported_channels)) {
                     $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
 
@@ -313,7 +307,7 @@ class API
                     return false;
                 }
 
-                if ($service == 'whatsnew') {
+                if ($this->query['service'] == 'whatsnew') {
                     if (! $this->project->getLangFiles('all', $this->query['product'], $this->query['channel'], 'whatsnew')) {
                         $this->log("Whatsnew section is not supported for {$this->query['product']} on '{$this->query['channel']}' channel.");
 
@@ -326,6 +320,18 @@ class API
         }
 
         return true;
+    }
+
+    /**
+     * Check if we need to check file translations for this service
+     *
+     * @return boolean Returns true if we need translations, false otherwise
+     */
+    public function isTranslationRequired()
+    {
+        return $this->query['service']
+            && $this->query['query_type'] == 'product'
+            && ! in_array($this->query['service'], ['firefoxlocales', 'supportedlocales']);
     }
 
     /**
@@ -435,8 +441,8 @@ class API
             return false;
         }
 
-        if (! in_array($this->parameters[1], $this->services)) {
-            $this->log("The service requested ({$this->parameters[1]}) doesn't exist");
+        if (! in_array($this->query['service'], $this->services)) {
+            $this->log("The service requested ({$this->query['service']}) doesn't exist");
 
             return false;
         }

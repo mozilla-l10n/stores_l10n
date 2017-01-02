@@ -406,13 +406,22 @@ class Project
     /**
      * Get the channels supported for product ID
      *
-     * @param String $product Product ID
+     * @param String  $product      Product ID
+     * @param Boolean $all_channels If true, returns all locales supported
+     *                              by product, not just those supported
+     *                              for store localization
      *
      * @return array List of supported channels
      */
-    public function getProductChannels($product)
+    public function getProductChannels($product, $all_channels = false)
     {
         $product = $this->getUpdatedProductCode($product);
+
+        if ($all_channels) {
+            return isset($this->supported_locales[$product])
+                ? array_keys($this->supported_locales[$product])
+                : [];
+        }
 
         return isset($this->products_data[$product])
             ? $this->products_data[$product]['channels']
@@ -563,9 +572,12 @@ class Project
 
         // Return requested channel, or fall back to release
         if (isset($this->supported_locales[$product])) {
-            return isset($this->supported_locales[$product][$channel])
+            $locales = isset($this->supported_locales[$product][$channel])
                 ? $this->supported_locales[$product][$channel]
                 : $this->supported_locales[$product]['release'];
+
+            // Drop en-US
+            return array_values(array_diff($locales, ['en-US']));
         }
 
         return false;

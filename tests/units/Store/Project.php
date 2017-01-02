@@ -143,6 +143,11 @@ class Project extends atoum\test
             ->array($obj->getProductChannels('fx_android'))
                 ->isEqualTo(['beta', 'release']);
         $this
+            ->array($obj->getProductChannels('fx_android', true))
+                ->hassize(3)
+                ->contains('beta')
+                ->contains('aurora');
+        $this
             ->array($obj->getProductChannels('google'))
                 ->isEqualTo(['beta', 'release']);
         $this
@@ -242,11 +247,17 @@ class Project extends atoum\test
 
         // Google
         $this
-            ->array($obj->getProductLocales('fx_android', 'release'));
+            ->array($obj->getProductLocales('fx_android', 'release'))
+                ->notContains('en-US')
+                ->contains('fr');
         $this
-            ->array($obj->getProductLocales('google', 'release'));
+            ->array($obj->getProductLocales('google', 'release'))
+                ->notContains('en-US')
+                ->contains('fr');
         $this
-            ->array($obj->getProductLocales('google', 'beta'));
+            ->array($obj->getProductLocales('google', 'beta'))
+                ->notContains('en-US')
+                ->contains('fr');
         // Check fallback to release
         $release_locales = $obj->getProductLocales('google', 'release');
         $this
@@ -258,11 +269,17 @@ class Project extends atoum\test
 
         // App Store
         $this
-            ->array($obj->getProductLocales('fx_ios', 'release'));
+            ->array($obj->getProductLocales('fx_ios', 'release'))
+                ->notContains('en-US')
+                ->contains('it');
         $this
-            ->array($obj->getProductLocales('apple', 'release'));
+            ->array($obj->getProductLocales('apple', 'release'))
+                ->notContains('en-US')
+                ->contains('it');
         $this
-            ->array($obj->getProductLocales('apple', 'beta'));
+            ->array($obj->getProductLocales('apple', 'beta'))
+                ->notContains('en-US')
+                ->contains('it');
 
         // Unsupported product
         $this
