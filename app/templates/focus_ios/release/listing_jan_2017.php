@@ -32,10 +32,6 @@ $screenshots = function ($translations) use ($_) {
 
 {$_('Browse Faster<br>Web pages may load faster<br>by removing trackers')}
 
-{$_('Automatically block ads<br>& other Web trackers')}
-
-{$_('Browse Faster<br>Web pages may load faster<br>by removing trackers')}
-
 {$_('Before')}
 
 {$_('After')}
