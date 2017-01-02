@@ -13,7 +13,7 @@ class API extends atoum\test
         return [
             [
                 ['path' => 'test'],
-                'Invalid service',
+                '',
             ],
             // Store APIs
             [
@@ -235,6 +235,70 @@ class API extends atoum\test
         $obj->isValidRequest();
         $this
             ->array($obj->invalidAPICall())
+                ->isEqualTo($b);
+    }
+
+    public function isTranslationRequiredDP()
+    {
+        return [
+            [
+                ['path' => 'test'],
+                false,
+            ],
+            // Store APIs
+            [
+                ['path' => 'api/google/storelocales/'],
+                false,
+            ],
+            [
+                ['path' => 'api/google/localesmapping/'],
+                false,
+            ],
+            // Product APIs
+            [
+                ['path' => 'api/fx_android/firefoxlocales/release/'],
+                false,
+            ],
+            [
+                ['path' => 'api/fx_android/supportedlocales/release/'],
+                false,
+            ],
+            [
+                ['path' => 'api/fx_ios/done/beta/'],
+                true,
+            ],
+            [
+                ['path' => 'api/fx_android/translation/beta/de/'],
+                true,
+            ],
+            // Legacy calls
+            [
+                ['path' => 'api/google/firefoxlocales/release/'],
+                false,
+            ],
+            [
+                ['path' => 'api/google/supportedlocales/release/'],
+                false,
+            ],
+            [
+                ['path' => 'api/apple/done/beta/'],
+                true,
+            ],
+            [
+                ['path' => 'api/google/translation/beta/de/'],
+                true,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider isTranslationRequiredDP
+     */
+    public function testIsTranslationRequired($a, $b)
+    {
+        $obj = new _API($a);
+        $this
+            ->boolean($obj->isTranslationRequired())
                 ->isEqualTo($b);
     }
 }
