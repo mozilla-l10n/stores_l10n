@@ -101,7 +101,6 @@ switch ($service) {
     case 'storelocales':
         $json = $project->getStoreLocales($store);
         break;
-    case 'firefoxlocales': // Legacy
     case 'supportedlocales':
         $json = $project->getProductLocales($product, $channel);
         break;

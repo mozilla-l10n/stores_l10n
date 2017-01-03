@@ -59,7 +59,6 @@ class API
      */
     private $services = [
         'done',
-        'firefoxlocales', // Legacy
         'listing',
         'localesmapping',
         'supportedlocales',
@@ -236,9 +235,6 @@ class API
     {
         $supported_channels = $this->project->getProductChannels($this->query['product']);
         switch ($this->query['service']) {
-            case 'firefoxlocales': // Legacy
-                // TODO: remove this log and the service if unused
-                $this->log('LEGACY request: /firefoxlocales');
             case 'supportedlocales':
                 // {product}/supportedlocales/{channel}/
                 if (! $this->verifyEnoughParameters(3)) {
@@ -331,7 +327,7 @@ class API
     {
         return $this->query['service']
             && $this->query['query_type'] == 'product'
-            && ! in_array($this->query['service'], ['firefoxlocales', 'supportedlocales']);
+            && $this->query['service'] != 'supportedlocales';
     }
 
     /**
