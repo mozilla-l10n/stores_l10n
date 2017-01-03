@@ -9,10 +9,15 @@ foreach ($project->getSupportedProducts() as $product_id) {
         $store_locales = $project->getStoreMozillaCommonLocales($product_id, $channel_id);
 
         foreach ($store_locales as $store_locale) {
-            // Examine both listing and whatsnew
-            $lang_files = $project->getLangFiles($store_locale, $product_id, $channel_id, 'all');
-            $obj = new Translate($store_locale, $lang_files, LOCALES_PATH);
-            $status[$product_id][$channel_id][$store_locale] = $obj->isFileTranslated() ? 'translated' : '';
+            if ($store_locale == 'en-US') {
+                // Always consider en-US done
+                $status[$product_id][$channel_id][$store_locale] = 'translated';
+            } else {
+                // Examine both listing and whatsnew
+                $lang_files = $project->getLangFiles($store_locale, $product_id, $channel_id, 'all');
+                $obj = new Translate($store_locale, $lang_files, LOCALES_PATH);
+                $status[$product_id][$channel_id][$store_locale] = $obj->isFileTranslated() ? 'translated' : '';
+            }
         }
     }
 }
