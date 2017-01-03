@@ -2,7 +2,7 @@
 
 Web App providing the folllowing features:
 * Monitor the state of content translation for products shipping in Google Play and Apple App store.
-* Public JSON API allowing to extract formatted translations to feed the stores APIs and update published content.
+* Public [JSON API](https://l10n.mozilla-community.org/stores_l10n/documentation/) allowing to extract formatted translations to feed the stores APIs and update published content.
 
 ## Installation
 1. Clone the repository.
