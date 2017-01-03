@@ -121,8 +121,8 @@ class Translate extends DotLangParser
             return false;
         }
 
-        // String is identical to source
-        if ($string == $this->translations[$string]) {
+        // String is identical to source. Skip for reference en-US
+        if ($this->locale != 'en-US' && $string == $this->translations[$string]) {
             return false;
         }
 
