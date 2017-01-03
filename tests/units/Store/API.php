@@ -26,10 +26,6 @@ class API extends atoum\test
             ],
             // Product APIs
             [
-                ['path' => 'api/fx_android/firefoxlocales/release/'],
-                'firefoxlocales',
-            ],
-            [
                 ['path' => 'api/fx_android/supportedlocales/release/'],
                 'supportedlocales',
             ],
@@ -42,10 +38,6 @@ class API extends atoum\test
                 'translation',
             ],
             // Legacy calls
-            [
-                ['path' => 'api/google/firefoxlocales/release/'],
-                'firefoxlocales',
-            ],
             [
                 ['path' => 'api/google/supportedlocales/release/'],
                 'supportedlocales',
@@ -81,10 +73,6 @@ class API extends atoum\test
             ],
             [
                 ['path' => 'api/v1/google/storelocales/'],
-                true,
-            ],
-            [
-                ['path' => 'api/v1/google/firefoxlocales/release/'],
                 true,
             ],
             [
@@ -256,10 +244,6 @@ class API extends atoum\test
             ],
             // Product APIs
             [
-                ['path' => 'api/fx_android/firefoxlocales/release/'],
-                false,
-            ],
-            [
                 ['path' => 'api/fx_android/supportedlocales/release/'],
                 false,
             ],
@@ -272,10 +256,6 @@ class API extends atoum\test
                 true,
             ],
             // Legacy calls
-            [
-                ['path' => 'api/google/firefoxlocales/release/'],
-                false,
-            ],
             [
                 ['path' => 'api/google/supportedlocales/release/'],
                 false,

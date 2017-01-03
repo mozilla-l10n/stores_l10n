@@ -76,7 +76,6 @@ $paths = [
     ['apple/whatsnew/release/', 200, false],
     ['google/listing/release/', 200, false],
     ['v1/google/supportedlocales/release/', 200, '["an","as","az","bn-IN","br","ca","cak","cs","cy","da","de","dsb","en-GB","en-ZA","eo","es-AR","es-CL","es-ES","es-MX","et","eu","ff","fi","fr","fy-NL","ga-IE","gd","gl","gn","gu-IN","hi-IN","hr","hsb","hu","hy-AM","id","is","it","ja","kk","kn","ko","lt","lv","mai","ml","mr","ms","my","nb-NO","nl","nn-NO","or","pa-IN","pl","pt-BR","pt-PT","rm","ro","ru","sk","sl","son","sq","sr","sv-SE","ta","te","th","tr","uk","uz","xh","zh-CN","zh-TW"]'],
-    ['google/firefoxlocales/release/', 200, '["an","as","az","bn-IN","br","ca","cak","cs","cy","da","de","dsb","en-GB","en-ZA","eo","es-AR","es-CL","es-ES","es-MX","et","eu","ff","fi","fr","fy-NL","ga-IE","gd","gl","gn","gu-IN","hi-IN","hr","hsb","hu","hy-AM","id","is","it","ja","kk","kn","ko","lt","lv","mai","ml","mr","ms","my","nb-NO","nl","nn-NO","or","pa-IN","pl","pt-BR","pt-PT","rm","ro","ru","sk","sl","son","sq","sr","sv-SE","ta","te","th","tr","uk","uz","xh","zh-CN","zh-TW"]'],
 ];
 
 $obj = new \pchevrel\Verif('Check API responses');
