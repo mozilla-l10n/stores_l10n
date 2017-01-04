@@ -1,6 +1,7 @@
 <?php
 namespace Stores;
 
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -117,7 +118,10 @@ class API
         // We use the Monolog library to log our events
         $this->logger = new Logger('API');
         if ($this->logging) {
-            $this->logger->pushHandler(new StreamHandler(INSTALL . 'logs/api-errors.log'));
+            $output_format = "[%datetime%] %message% %context% %extra%\n";
+            $handler = new StreamHandler(INSTALL . 'logs/api-errors.log', Logger::DEBUG);
+            $handler->setFormatter(new LineFormatter($output_format, null, false, true));
+            $this->logger->pushHandler($handler);
         }
         // Also log to error console in Debug mode
         if (DEBUG) {
@@ -456,9 +460,12 @@ class API
     private function log($message)
     {
         $this->error = $message;
+        $ip = isset($_SERVER['REMOTE_ADDR'])
+            ? $_SERVER['REMOTE_ADDR']
+            : 'unknown';
 
         return $this->logging
-            ? $this->logger->addWarning($message, [$this->url['path']])
+            ? $this->logger->warning($message, [$this->url['path'], $ip])
             : false;
     }
 
