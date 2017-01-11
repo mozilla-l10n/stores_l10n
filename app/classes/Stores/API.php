@@ -108,61 +108,63 @@ class API
      *
      * @param array $url parsed url
      */
-    public function __construct($url)
+    public function __construct($url = null)
     {
-        if (! isset($url['path'])) {
-            $url['path'] = '';
-        }
-        $this->url = $url;
-
-        // We use the Monolog library to log our events
-        $this->logger = new Logger('API');
-        if ($this->logging) {
-            $output_format = "[%datetime%] %message% %context% %extra%\n";
-            $handler = new StreamHandler(INSTALL . 'logs/api-errors.log', Logger::DEBUG);
-            $handler->setFormatter(new LineFormatter($output_format, null, false, true));
-            $this->logger->pushHandler($handler);
-        }
-        // Also log to error console in Debug mode
-        if (DEBUG) {
-            $this->logger->pushHandler(new ErrorLogHandler());
-        }
-
-        $this->project = new Project;
-
-        $this->parameters = $this->getParameters($url['path']);
-        $this->query_parameters = isset($url['query'])
-            ? $this->getQueryParameters($url['query'])
-            : [];
-
-        /*
-            Start by analyzing the service, then trace back to the first
-            parameter in the URI.
-        */
-        $this->query['service'] = isset($this->parameters[1])
-            ? $this->parameters[1]
-            : '';
-
-        $this->query['query_type'] = in_array($this->query['service'], ['localesmapping', 'storelocales'])
-            ? 'store'
-            : 'product';
-        if (isset($this->parameters[0])) {
-            if ($this->query['query_type'] == 'store') {
-                $this->query['product'] = '';
-                $this->query['store'] = $this->parameters[0];
-            } else {
-                // Make sure to convert legacy product IDs to updated ones
-                $this->query['product'] = $this->project->getUpdatedProductCode($this->parameters[0]);
-                $this->query['store'] = $this->project->getProductStore($this->query['product']);
+        if (isset($url)) {
+            if (! isset($url['path'])) {
+                $url['path'] = '';
             }
-        }
+            $this->url = $url;
 
-        if (isset($this->parameters[2])) {
-            $this->query['channel'] = $this->parameters[2];
-        }
+            // We use the Monolog library to log our events
+            $this->logger = new Logger('API');
+            if ($this->logging) {
+                $output_format = "[%datetime%] %message% %context% %extra%\n";
+                $handler = new StreamHandler(INSTALL . 'logs/api-errors.log', Logger::DEBUG);
+                $handler->setFormatter(new LineFormatter($output_format, null, false, true));
+                $this->logger->pushHandler($handler);
+            }
+            // Also log to error console in Debug mode
+            if (DEBUG) {
+                $this->logger->pushHandler(new ErrorLogHandler());
+            }
 
-        if ($this->query['service'] == 'translation' && isset($this->parameters[3])) {
-            $this->query['locale'] = $this->parameters[3];
+            $this->project = new Project;
+
+            $this->parameters = $this->getParameters($url['path']);
+            $this->query_parameters = isset($url['query'])
+                ? $this->getQueryParameters($url['query'])
+                : [];
+
+            /*
+                Start by analyzing the service, then trace back to the first
+                parameter in the URI.
+            */
+            $this->query['service'] = isset($this->parameters[1])
+                ? $this->parameters[1]
+                : '';
+
+            $this->query['query_type'] = in_array($this->query['service'], ['localesmapping', 'storelocales'])
+                ? 'store'
+                : 'product';
+            if (isset($this->parameters[0])) {
+                if ($this->query['query_type'] == 'store') {
+                    $this->query['product'] = '';
+                    $this->query['store'] = $this->parameters[0];
+                } else {
+                    // Make sure to convert legacy product IDs to updated ones
+                    $this->query['product'] = $this->project->getUpdatedProductCode($this->parameters[0]);
+                    $this->query['store'] = $this->project->getProductStore($this->query['product']);
+                }
+            }
+
+            if (isset($this->parameters[2])) {
+                $this->query['channel'] = $this->parameters[2];
+            }
+
+            if ($this->query['service'] == 'translation' && isset($this->parameters[3])) {
+                $this->query['locale'] = $this->parameters[3];
+            }
         }
     }
 

@@ -22,7 +22,10 @@ foreach ($project->getSupportedProducts() as $product_id) {
     }
 }
 
-$html_table = function ($table_id, $table_title, $product, $channel) use ($status, $project) {
+$request = new API();
+$api_version = $request->getCurrentAPIVersion();
+
+$html_table = function ($table_id, $table_title, $product, $channel) use ($status, $project, $api_version) {
     ob_start(); ?>
         <table id="<?=$table_id?>" class="table table-bordered table-condensed table-striped">
         <tr>
@@ -45,7 +48,7 @@ $html_table = function ($table_id, $table_title, $product, $channel) use ($statu
             <td class='<?=$color?>'></td>
             <td><a href="./locale/<?=$locale?>/<?=$product?>/<?=$channel?>/">Show</a></td>
             <td><a href="./locale/<?=$locale?>/<?=$product?>/<?=$channel?>/html">HTML</a></td>
-            <td><a href="./api/<?=$product?>/translation/<?=$channel?>/<?=$locale?>/">Json</a></td>
+            <td><a href="./api/<?=$api_version?>/<?=$product?>/translation/<?=$channel?>/<?=$locale?>/">Json</a></td>
         </tr>
         <?php endforeach; ?>
         </table>
