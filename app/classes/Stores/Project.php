@@ -128,9 +128,12 @@ class Project
         ],
         'focus_ios' => [
             'release' => [
-                'cs', 'de', 'en-US', 'es-CL', 'es-ES', 'fr', 'hu', 'id', 'it',
-                'ja', 'kab', 'pl', 'pt-BR', 'ru', 'sk', 'sl', 'sv-SE', 'zh-CN',
-                'zh-TW',
+                'ar', 'az', 'br', 'cs', 'cy', 'de', 'dsb', 'en-US', 'eo',
+                'es-CL', 'es-ES', 'fa', 'fr', 'ga-IE', 'gd', 'he', 'hi-IN',
+                'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk', 'kn', 'lo',
+                'my', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'ro',
+                'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'th', 'tr', 'uk', 'uz',
+                'zh-CN', 'zh-TW',
             ],
         ],
     ];
