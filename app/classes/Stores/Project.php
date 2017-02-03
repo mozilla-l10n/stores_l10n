@@ -195,9 +195,9 @@ class Project
             'el-GR'  => 'el',
             'en-GB'  => 'en-GB',
             'en-US'  => 'en-US',
-            'es-419' => 'es-MX', // Spanish, South America
+            'es-419' => false, // Spanish, South America. See https://github.com/mozilla-l10n/stores_l10n/issues/105
             'es-ES'  => 'es-ES',
-            'es-US'  => 'es-MX', // Spanish, South America
+            'es-US'  => false, // Spanish, South America. See https://github.com/mozilla-l10n/stores_l10n/issues/105
             'et'     => 'et',
             'fa'     => 'fa',
             'fi-FI'  => 'fi',
