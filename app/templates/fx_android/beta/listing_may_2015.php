@@ -40,8 +40,7 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Improved media controls')}
-* {$_('Improved security with the “secure” cookie keyword (Strict Secure Cookies specification)')}
-* {$_('Removed Battery Status API to reduce fingerprinting of users by trackers')}
+* {$_('Right to left language support')}
+* {$_('EME (Encrypted Media Extensions) DRM video enabled on Firefox for Android')}
 OUT;
 };
