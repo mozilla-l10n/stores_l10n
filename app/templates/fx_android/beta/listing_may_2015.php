@@ -41,6 +41,5 @@ $app_title = function ($translations) use ($_) {
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
 * {$_('Right to left language support')}
-* {$_('EME (Encrypted Media Extensions) DRM video enabled on Firefox for Android')}
 OUT;
 };
