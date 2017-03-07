@@ -48,8 +48,6 @@ $keywords = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-• {$_('Change your default search engine')}
-• {$_('Added a new button to easily share a webpage or open the existing webpage in Firefox or Safari')}
-• {$_('New languages added')}
+• {$_('This update adds support for the following new localizations: Albanian, Basque, Bengali, Breton, Burmese, Catalan, Hebrew, Icelandic, Irish, Kazakh, Korean, Lao, Lower Sorbian, Norwegian Bokmål, Norwegian Nynorsk, Persian, Portuguese (Portugal), Scottish Gaelic, Thai, Upper Sorbian.')}
 OUT;
 };

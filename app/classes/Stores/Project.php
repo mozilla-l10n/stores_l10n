@@ -287,7 +287,7 @@ class Project
             'release' => [
                 'template'    => 'focus_ios/release/listing_jan_2017.php',
                 'listing'     => 'focus_ios/description_release.lang',
-                'whatsnew'    => 'focus_ios/whatsnew/focus_2_1.lang',
+                'whatsnew'    => 'focus_ios/whatsnew/focus_3_1.lang',
                 'screenshots' => 'focus_ios/screenshots_v2_1.lang',
             ],
         ],
