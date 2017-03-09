@@ -102,8 +102,6 @@ OUT;
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-• {$_('Automatically open web links in Firefox from mail apps such as Outlook, Airmail, Mail.Ru, myMail and Spark. Also, make one of these mail services your default mail app when sending emails from Firefox.')}
-• {$_('Fixed other bugs')}
-• {$_('App optimization improvements')}
+• {$_('iPad users, all your open browser tabs now appear above the address bar for quick access.')}
 OUT;
 };

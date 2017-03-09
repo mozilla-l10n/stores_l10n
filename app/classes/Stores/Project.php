@@ -280,7 +280,7 @@ class Project
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
                 'listing'  => 'fx_ios/description_release.lang',
-                'whatsnew' => 'fx_ios/whatsnew/ios_6_0.lang',
+                'whatsnew' => 'fx_ios/whatsnew/ios_7_0.lang',
             ],
         ],
         'focus_ios' => [
