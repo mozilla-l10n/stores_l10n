@@ -37,6 +37,12 @@ class Project
                 'name'     => 'Firefox for iOS',
                 'store'    => 'apple',
             ],
+        'focus_android' =>
+            [
+                'channels' => ['release'],
+                'name'     => 'Focus for Android',
+                'store'    => 'google',
+            ],
         'focus_ios' =>
             [
                 'channels' => ['release'],
@@ -124,6 +130,15 @@ class Project
                 'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro',
                 'ru', 'son', 'sk', 'sl', 'sv-SE', 'te', 'th', 'tl', 'tr', 'uk',
                 'uz', 'zh-CN', 'zh-TW',
+            ],
+        ],
+        'focus_android' => [
+            'release' => [
+                'ar', 'ast', 'az', 'bn-BD', 'ca', 'cs', 'cy', 'de', 'el', 'eo',
+                'es-AR', 'es-CL', 'es-ES', 'es-MX', 'fa', 'fr', 'fy-NL', 'he',
+                'hu', 'hy-AM', 'id', 'it', 'ja', 'kab', 'ko', 'lo', 'nl', 'pl',
+                'pt-BR', 'ru', 'sk', 'sl', 'sq', 'sv-SE', 'th', 'tr', 'uk',
+                'zh-CN', 'zh-TW',
             ],
         ],
         'focus_ios' => [
@@ -289,6 +304,13 @@ class Project
                 'listing'     => 'focus_ios/description_release.lang',
                 'whatsnew'    => 'focus_ios/whatsnew/focus_3_1.lang',
                 'screenshots' => 'focus_ios/screenshots_v2_1.lang',
+            ],
+        ],
+        'focus_android' => [
+            'release' => [
+                'template'    => 'focus_android/release/listing_mar_2017.php',
+                'listing'     => 'focus_android/description_release.lang',
+                'screenshots' => 'focus_android/screenshots_v1.lang',
             ],
         ],
     ];
