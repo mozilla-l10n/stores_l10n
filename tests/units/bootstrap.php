@@ -1,16 +1,16 @@
 <?php
 
 // Constants for the project
-define('INSTALL',     realpath(__DIR__ . '/../../') . '/');
-define('APP',         INSTALL . 'app/');
-define('WEB',         INSTALL . 'web/');
-define('INC',         APP . 'inc/');
-define('VIEWS',       APP . 'views/');
-define('CONFIG',      APP . 'config/');
-define('TEMPLATES',   APP . 'templates/');
-define('MODELS',      APP . 'models/');
+define('INSTALL', realpath(__DIR__ . '/../../') . '/');
+define('APP', INSTALL . 'app/');
+define('WEB', INSTALL . 'web/');
+define('INC', APP . 'inc/');
+define('VIEWS', APP . 'views/');
+define('CONFIG', APP . 'config/');
+define('TEMPLATES', APP . 'templates/');
+define('MODELS', APP . 'models/');
 define('CONTROLLERS', APP . 'controllers/');
-define('TEST_FILES',  realpath(__DIR__ . '/../testfiles/') . '/');
+define('TEST_FILES', realpath(__DIR__ . '/../testfiles/') . '/');
 define('LOCALES_PATH', TEST_FILES . 'langfiles/');
 
 // Load local settings

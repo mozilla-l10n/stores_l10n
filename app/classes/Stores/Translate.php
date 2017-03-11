@@ -16,14 +16,14 @@ class Translate extends DotLangParser
     /**
      * Array of source strings
      *
-     * @var Array
+     * @var array
      */
     protected $source_strings = [];
 
     /**
      * Array of translations
      *
-     * @var Array
+     * @var array
      */
     protected $translations = [];
 

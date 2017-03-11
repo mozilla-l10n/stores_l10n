@@ -22,7 +22,7 @@
             <pre class="text-center"><?= $screenshots($translations) ?></pre>
 <?php
 
-        };
+        }
     }
 ?>
 

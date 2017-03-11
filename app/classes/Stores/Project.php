@@ -328,9 +328,9 @@ class Project
     /**
      * Clean up the list of shipping locales for iOS
      *
-     * @param String $shipping_locales The list of shipping locales
+     * @param string $shipping_locales The list of shipping locales
      *
-     * @return String Cleaned up list of locales
+     * @return string Cleaned up list of locales
      */
     public function cleanUpiOS($shipping_locales)
     {
@@ -362,7 +362,7 @@ class Project
     /**
      * Check if a locale is Right-To-Left
      *
-     * @param String $locale Locale code to check
+     * @param string $locale Locale code to check
      *
      * @return boolean true if $locale is a Right-To-Left locale, false otherwise
      */
@@ -374,7 +374,7 @@ class Project
     /**
      * Get the store associated to a product ID
      *
-     * @param String $product Product ID
+     * @param string $product Product ID
      *
      * @return string Store's code
      */
@@ -394,7 +394,7 @@ class Project
     /**
      * Get the name associated to product ID
      *
-     * @param String $product Product ID
+     * @param string $product Product ID
      *
      * @return string Product's name
      */
@@ -410,8 +410,8 @@ class Project
     /**
      * Get the channels supported for product ID
      *
-     * @param String  $product      Product ID
-     * @param Boolean $all_channels If true, returns all locales supported
+     * @param string  $product      Product ID
+     * @param boolean $all_channels If true, returns all locales supported
      *                              by product, not just those supported
      *                              for store localization
      *
@@ -455,7 +455,7 @@ class Project
     /**
      * Convert legacy product ID if necessary
      *
-     * @param String $product Product ID
+     * @param string $product Product ID
      *
      * @return string Product ID, updated if legacy
      */
@@ -469,7 +469,7 @@ class Project
     /**
      * Check if the product ID is a legacy code
      *
-     * @param String $product Product ID
+     * @param string $product Product ID
      *
      * @return boolean true if $product is a legacy ID, false otherwise
      */
@@ -481,7 +481,7 @@ class Project
     /**
      * Check if the product supports only a subset of the shipping locales
      *
-     * @param String $product Product ID
+     * @param string $product Product ID
      * @param string $channel Channel ID
      *
      * @return array List of supported locales, either by the product or
@@ -504,7 +504,7 @@ class Project
      * @param string $product Product ID
      * @param string $channel Channel ID
      *
-     * @return Mixed Array of locales or false if the call is incorrect
+     * @return mixed Array of locales or false if the call is incorrect
      */
     public function getStoreMozillaCommonLocales($product, $channel)
     {
@@ -549,7 +549,7 @@ class Project
      * @param boolean $mapping If false returns mapping as Store->Mozilla,
      *                         if true returns mapping as Mozilla->Store
      *
-     * @return Mixed Array of locales or false if the call is incorrect
+     * @return mixed Array of locales or false if the call is incorrect
      */
     public function getStoreLocales($store, $mapping = false)
     {
@@ -621,7 +621,7 @@ class Project
 
         if (isset($this->templates_overrides[$locale][$product][$channel]['template'])) {
             return $this->templates_overrides[$locale][$product][$channel]['template'];
-        };
+        }
 
         if (! isset($this->templates[$product][$channel]['template'])) {
             return false;

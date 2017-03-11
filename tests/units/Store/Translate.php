@@ -12,7 +12,7 @@ class Translate extends atoum\test
     {
         $obj = new _Translate('fr', 'foobar1.lang', LOCALES_PATH);
         $this
-            ->string($obj->get("This is a string"))
+            ->string($obj->get('This is a string'))
                 ->isEqualTo("C'est une chaîne");
     }
 
@@ -20,10 +20,10 @@ class Translate extends atoum\test
     {
         $obj = new _Translate('fr', 'foobar1.lang', LOCALES_PATH);
         $this
-            ->boolean($obj->isStringTranslated("This is a string"))
+            ->boolean($obj->isStringTranslated('This is a string'))
                 ->isTrue();
         $this
-            ->boolean($obj->isStringTranslated("This is another string"))
+            ->boolean($obj->isStringTranslated('This is another string'))
                 ->isFalse();
     }
 

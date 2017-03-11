@@ -12,7 +12,7 @@ if (substr($_SERVER['REQUEST_URI'], 0, strlen($base_url)) == $base_url) {
 }
 unset($base_url);
 
-$url  = parse_url($_SERVER['REQUEST_URI']);
+$url = parse_url($_SERVER['REQUEST_URI']);
 $file = pathinfo($url['path']);
 
 // Real files and folders don't get pre-processed

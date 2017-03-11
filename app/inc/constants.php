@@ -1,16 +1,16 @@
 <?php
 
 // Constants for the project
-define('INSTALL',       realpath(__DIR__ . '/../../') . '/');
-define('APP',           INSTALL . 'app/');
-define('WEB',           INSTALL . 'web/');
-define('LOCALES_PATH',  INSTALL . 'locales/');
-define('INC',           APP . 'inc/');
-define('VIEWS',         APP . 'views/');
-define('CONFIG',        APP . 'config/');
-define('TEMPLATES',     APP . 'templates/');
-define('MODELS',        APP . 'models/');
-define('CONTROLLERS',   APP . 'controllers/');
+define('INSTALL', realpath(__DIR__ . '/../../') . '/');
+define('APP', INSTALL . 'app/');
+define('WEB', INSTALL . 'web/');
+define('LOCALES_PATH', INSTALL . 'locales/');
+define('INC', APP . 'inc/');
+define('VIEWS', APP . 'views/');
+define('CONFIG', APP . 'config/');
+define('TEMPLATES', APP . 'templates/');
+define('MODELS', APP . 'models/');
+define('CONTROLLERS', APP . 'controllers/');
 
 // Length limits for stores
 $store_limits = [

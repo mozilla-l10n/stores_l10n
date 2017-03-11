@@ -8,20 +8,16 @@ switch ($url['path']) {
     case '/':
         $controller = 'home';
         break;
-
     case 'documentation':
         $controller = 'api_doc';
         break;
-
     case Utils::StartsWith($url['path'], 'api'):
         $controller = 'api';
         $template = false;
         break;
-
     case Utils::StartsWith($url['path'], 'locale'):
         $controller = 'locale';
         break;
-
     default:
         $controller = 'home';
         break;
