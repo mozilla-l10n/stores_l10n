@@ -96,15 +96,15 @@ if (! isset($request['output'])) {
 
 switch ($request['output']) {
     case 'show':
-        $view  = 'locale';
+        $view = 'locale';
         $template = 'html.php';
         break;
     case 'html':
-        $view  = 'locale_escaped';
+        $view = 'locale_escaped';
         $template = 'html.php';
         break;
     default:
-        $view  = 'locale';
+        $view = 'locale';
         break;
 }
 include MODELS . 'locale_model.php';

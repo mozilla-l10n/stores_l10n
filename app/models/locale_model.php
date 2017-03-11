@@ -26,8 +26,8 @@ $set_limit = function ($type, $length) use ($store_limits) {
 $store = $project->getProductStore($request['product']);
 if ($store == 'google') {
     $short_desc_warning = $set_limit('google_short_description', $get_length($short_desc($translations)));
-    $listing_warning    = $set_limit('google_description', $get_length($description($translations)));
-    $title_warning      = $set_limit('google_title', $get_length($app_title($translations)));
+    $listing_warning = $set_limit('google_description', $get_length($description($translations)));
+    $title_warning = $set_limit('google_title', $get_length($app_title($translations)));
 
     if (in_array($request['channel'], ['beta', 'release'])) {
         $whatsnew_warning = $set_limit('google_whatsnew', $get_length($whatsnew($translations)));

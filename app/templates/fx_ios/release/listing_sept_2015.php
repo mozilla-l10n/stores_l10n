@@ -55,7 +55,7 @@ $description = function ($translations) use ($_) {
 - {$_('Follow Firefox on Twitter: {{twitter_link}}', $replacements)}
 
 <b>{$_('ABOUT MOZILLA')}</b>
-{$_("Mozilla exists to build the Internet as a public resource accessible to all because we believe open and free is better than closed and controlled.")} {$_("We build products like Firefox to promote choice and transparency and give people more control over their lives online.")} {$_('Learn more at {{mozilla_org_link}}', $replacements)}
+{$_('Mozilla exists to build the Internet as a public resource accessible to all because we believe open and free is better than closed and controlled.')} {$_('We build products like Firefox to promote choice and transparency and give people more control over their lives online.')} {$_('Learn more at {{mozilla_org_link}}', $replacements)}
 
 {$_('Privacy Policy: {{privacy_link}}', $replacements)}
 OUT;
