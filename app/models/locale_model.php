@@ -16,10 +16,10 @@ $get_length = function ($string) {
 $set_limit = function ($type, $length) use ($store_limits) {
     $limit = $store_limits[$type];
     if ($length <= $limit) {
-        return $length . ' characters';
+        return "{$length} characters";
     }
 
-    return '<strong style="color:red">' . $length . " characters, too long. Limit is {$limit}.</strong>";
+    return "<strong style=\"color: red\">{$length} characters, too long. Limit is {$limit}.</strong>";
 };
 
 // Google Play has lengths constraints, here we detect translations that are too long and insert a warning message

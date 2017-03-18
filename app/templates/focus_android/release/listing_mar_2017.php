@@ -5,7 +5,7 @@ namespace Stores;
 include INC . 'utilities.php';
 
 $app_title = function ($translations) use ($_) {
-    return $_('Firefox Focus: The privacy browser');
+    return $_('Firefox Focus: Private Browser');
 };
 
 $description = function ($translations) use ($_) {
@@ -32,20 +32,6 @@ $short_desc = function ($translations) use ($_) {
 
 $screenshots = function ($translations) use ($_) {
     return <<<OUT
-{$_('Automatically block ads<br>& other Web trackers')}
-
-{$_('Browse Faster<br>Web pages may load faster<br>by removing trackers')}
-
-{$_('Before')}
-
-{$_('After')}
-
-{$_('Tracker')}
-
-{$_('From Mozilla<br>A brand you trust')}
+{$_('Small download<br>Only 3MB')}
 OUT;
-};
-
-$keywords = function ($translations) use ($_) {
-    return $_('internet,safari,chrome,opera,explorer,search,adblock,flash,browser,browsing,incognito,private,browse');
 };

@@ -1,11 +1,13 @@
 <h1>Focus for Android Listing Copy (<?= $request['locale'] ?>)</h1>
-<h3>Title</h3>
+
+<h3>Title &mdash; <?= $title_warning ?></h3>
 <pre><?= $app_title($translations) ?></pre>
 
-<h3>Description</h3>
-<pre><?= $description($translations) ?></pre>
+<h3>Short Description &mdash; <?= $short_desc_warning ?></h3>
+<pre><?= $short_desc($translations) ?></pre>
 
-<h2><em><?= $short_desc($translations) ?>&mdash;<?= $short_desc_warning ?></em></h2>
+<h3>Description &mdash; <?= $listing_warning ?></h3>
+<pre><?= $description($translations) ?></pre>
 
 <?php
     /*
@@ -24,6 +26,3 @@
         }
     }
 ?>
-
-<h3>Keywords</h3>
-<pre><?= $keywords($translations) ?></pre>
