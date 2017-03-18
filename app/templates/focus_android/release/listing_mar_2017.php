@@ -27,7 +27,7 @@ OUT;
 };
 
 $short_desc = function ($translations) use ($_) {
-    return $_('Firefox Focus: The privacy browser');
+    return $_('Get The Privacy Browser. Fast & always private from Firefox, a browser you trust');
 };
 
 $screenshots = function ($translations) use ($_) {
