@@ -35,8 +35,8 @@ $html_table = function ($table_id, $table_title, $product, $channel) use ($statu
             <th class="text-center">Locale</th>
             <th class="text-center">Completion</th>
             <th class="text-center">General View</th>
-            <th class="text-center">Description Raw HTML</th>
-            <th class="text-center">Description Json</th>
+            <th class="text-center">Description raw HTML</th>
+            <th class="text-center">Description JSON</th>
         </tr>
         <?php foreach ($status[$product][$channel] as $locale => $status_locale): ?>
         <tr class="text-center">
@@ -48,7 +48,7 @@ $html_table = function ($table_id, $table_title, $product, $channel) use ($statu
             <td class='<?=$color?>'></td>
             <td><a href="./locale/<?=$locale?>/<?=$product?>/<?=$channel?>/">Show</a></td>
             <td><a href="./locale/<?=$locale?>/<?=$product?>/<?=$channel?>/html">HTML</a></td>
-            <td><a href="./api/<?=$api_version?>/<?=$product?>/translation/<?=$channel?>/<?=$locale?>/">Json</a></td>
+            <td><a href="./api/<?=$api_version?>/<?=$product?>/translation/<?=$channel?>/<?=$locale?>/">JSON</a></td>
         </tr>
         <?php endforeach; ?>
         </table>

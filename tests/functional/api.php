@@ -34,6 +34,7 @@ $paths = [
     ['v1/fx_android/done/release/', 200, false],
     ['v1/fx_android/done/beta/', 200, false],
     ['v1/fx_ios/done/release/', 200, false],
+    ['v1/focus_android/done/release/', 200, false],
     ['v1/focus_ios/done/release/', 200, false],
     ['v1/fx_android/translation/release/ja/', 200, false],
     ['v1/fx_android/translation/release/en-US/', 200, false],

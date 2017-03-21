@@ -1,12 +1,13 @@
-<h1>Focus for iOS Listing Copy (<?= $request['locale'] ?>)</h1>
-<h3>Title</h3>
+<h1>Focus for Android Listing Copy (<?= $request['locale'] ?>)</h1>
+
+<h3>Title &mdash; <?= $title_warning ?></h3>
 <pre contenteditable="true"><?= htmlspecialchars($app_title($translations)) ?></pre>
 
-<h3>Description</h3>
-<pre contenteditable="true"><?= strip_tags($description($translations)) ?></pre>
+<h3>Short Description &mdash; <?= $short_desc_warning ?></h3>
+<pre contenteditable="true"><?= $short_desc($translations) ?></pre>
 
-<h3>What’s new</h3>
-<pre contenteditable="true"><?= $whatsnew($translations) ?></pre>
+<h3>Description &mdash; <?= $listing_warning ?></h3>
+<pre contenteditable="true"><?= strip_tags($description($translations)) ?></pre>
 
 <?php
     /*
@@ -24,7 +25,3 @@
 
         }
     }
-?>
-
-<h3>Keywords</h3>
-<pre contenteditable="true"><?= htmlspecialchars($keywords($translations)) ?></pre>
