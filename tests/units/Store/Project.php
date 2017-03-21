@@ -179,7 +179,7 @@ class Project extends atoum\test
                 ->notContains('af')
                 ->notContains('am')
                 ->notContains('es-MX')
-                ->hassize(38);
+                ->hassize(37);
         // Legacy product code
         $this
             ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
@@ -308,7 +308,7 @@ class Project extends atoum\test
             ->array($obj->getLocalesMapping('google', true))
                 ->contains('de-DE')
                 ->notContains('es-US')
-                ->hassize(46);
+                ->hassize(45);
 
         // App Store
         $this
