@@ -79,7 +79,7 @@ class Project
      * http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
      *
      * Source for Firefox for iOS:
-     * https://raw.githubusercontent.com/mozilla/firefox-ios/v6.x/shipping_locales.txt
+     * https://raw.githubusercontent.com/mozilla/firefox-ios/v7.x/shipping_locales.txt
      *
      * The list for iOS needs to be cleaned up later in the costructor.
      *
@@ -99,15 +99,15 @@ class Project
                 'th', 'tr', 'uk', 'ur', 'uz', 'xh', 'zh-CN', 'zh-TW',
             ],
             'beta' => [
-                'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy',
-                'da', 'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL',
-                'es-ES', 'es-MX', 'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL',
-                'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu',
-                'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'kn', 'ko', 'lt',
-                'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
-                'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk',
-                'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk',
-                'uz', 'xh', 'zh-CN', 'zh-TW',
+                'an', 'ar', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs',
+                'cy', 'da', 'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR',
+                'es-CL', 'es-ES', 'es-MX', 'et', 'eu', 'fa', 'ff', 'fi', 'fr',
+                'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'he', 'hi-IN',
+                'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'kk',
+                'kn', 'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO',
+                'nl', 'nn-NO', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm',
+                'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te',
+                'th', 'tr', 'uk', 'ur', 'uz', 'xh', 'zh-CN', 'zh-TW',
             ],
             'release' => [
                 'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy',
@@ -123,22 +123,22 @@ class Project
         ],
         'fx_ios' => [
             'release' => [
-                'ast', 'az', 'bg', 'bn-BD', 'br', 'ca', 'cs', 'cy', 'da', 'de',
-                'dsb', 'en-GB', 'en-US', 'eo', 'es-ES', 'es-CL', 'es-MX', 'eu',
-                'fr', 'fy-NL', 'ga-IE', 'gd', 'he', 'hsb', 'hu', 'id', 'is',
-                'it', 'ja', 'kab', 'kk', 'km', 'ko', 'lo', 'lt', 'lv', 'nb-NO',
+                'ast', 'az', 'bg', 'bn', 'br', 'ca', 'cs', 'cy', 'da', 'de',
+                'dsb', 'el', 'en-GB', 'en-US', 'eo', 'es', 'es-CL', 'es-MX',
+                'eu', 'fr', 'ga-IE', 'gd', 'hsb', 'hu', 'id', 'is', 'it', 'ja',
+                'kab', 'kk', 'km', 'ko', 'lo', 'lt', 'lv', 'my', 'nb-NO',
                 'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro',
-                'ru', 'son', 'sk', 'sl', 'sv-SE', 'te', 'th', 'tl', 'tr', 'uk',
-                'uz', 'zh-CN', 'zh-TW',
+                'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'te', 'th', 'tl', 'tr',
+                'uk', 'uz', 'zh-CN', 'zh-TW',
             ],
         ],
         'focus_android' => [
             'release' => [
-                'ar', 'ast', 'az', 'bn-BD', 'ca', 'cs', 'cy', 'de', 'el', 'eo',
-                'es-AR', 'es-CL', 'es-ES', 'es-MX', 'fa', 'fr', 'fy-NL', 'he',
-                'hu', 'hy-AM', 'id', 'it', 'ja', 'kab', 'ko', 'lo', 'nl', 'pl',
-                'pt-BR', 'ru', 'sk', 'sl', 'sq', 'sv-SE', 'th', 'tr', 'uk',
-                'zh-CN', 'zh-TW',
+                'ar', 'ast', 'az', 'bg', 'bn-BD', 'ca', 'cs', 'cy', 'de', 'el',
+                'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'fa', 'fr', 'fy-NL',
+                'he', 'hu', 'hy-AM', 'id', 'it', 'ja', 'kab', 'ko', 'lo', 'nl',
+                'pl', 'pt-BR', 'ro', 'ru', 'sk', 'sl', 'sq', 'sv-SE', 'th',
+                'tr', 'uk', 'ur', 'zh-CN', 'zh-TW',
             ],
         ],
         'focus_ios' => [
@@ -148,7 +148,7 @@ class Project
                 'he', 'hi-IN', 'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk',
                 'kn', 'ko', 'lo', 'my', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR',
                 'pt-PT', 'ro', 'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'th',
-                'tl', 'tr', 'uk', 'uz', 'zh-CN', 'zh-TW',
+                'tl', 'tr', 'uk', 'ur', 'uz', 'zh-CN', 'zh-TW',
             ],
         ],
     ];

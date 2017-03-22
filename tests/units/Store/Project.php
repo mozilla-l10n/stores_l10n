@@ -198,7 +198,7 @@ class Project extends atoum\test
                 ->contains('da')
                 ->notContains('af')
                 ->notContains('zh-Hans')
-                ->hassize(21);
+                ->hassize(22);
         // Legacy product code
         $this
             ->array($obj->getStoreMozillaCommonLocales('apple', 'release'))
