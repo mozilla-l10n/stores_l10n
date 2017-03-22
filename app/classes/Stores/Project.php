@@ -86,6 +86,25 @@ class Project
      * @var array
      */
     private $supported_locales = [
+        'focus_android' => [
+            'release' => [
+                'ar', 'ast', 'az', 'bg', 'bn-BD', 'ca', 'cs', 'cy', 'de', 'el',
+                'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'fa', 'fr', 'fy-NL',
+                'he', 'hu', 'hy-AM', 'id', 'it', 'ja', 'kab', 'ko', 'lo', 'nl',
+                'pl', 'pt-BR', 'ro', 'ru', 'sk', 'sl', 'sq', 'sv-SE', 'th',
+                'tr', 'uk', 'ur', 'zh-CN', 'zh-TW',
+            ],
+        ],
+        'focus_ios' => [
+            'release' => [
+                'af', 'ar', 'az', 'bn', 'br', 'ca', 'cs', 'cy', 'de', 'dsb',
+                'el', 'eo', 'es-CL', 'es-ES', 'eu', 'fa', 'fr', 'ga-IE', 'gd',
+                'he', 'hi-IN', 'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk',
+                'kn', 'ko', 'lo', 'my', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR',
+                'pt-PT', 'ro', 'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'th',
+                'tl', 'tr', 'uk', 'ur', 'uz', 'zh-CN', 'zh-TW',
+            ],
+        ],
         'fx_android' => [
             'aurora' => [
                 'an', 'ar', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs',
@@ -130,25 +149,6 @@ class Project
                 'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro',
                 'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'te', 'th', 'tl', 'tr',
                 'uk', 'uz', 'zh-CN', 'zh-TW',
-            ],
-        ],
-        'focus_android' => [
-            'release' => [
-                'ar', 'ast', 'az', 'bg', 'bn-BD', 'ca', 'cs', 'cy', 'de', 'el',
-                'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'fa', 'fr', 'fy-NL',
-                'he', 'hu', 'hy-AM', 'id', 'it', 'ja', 'kab', 'ko', 'lo', 'nl',
-                'pl', 'pt-BR', 'ro', 'ru', 'sk', 'sl', 'sq', 'sv-SE', 'th',
-                'tr', 'uk', 'ur', 'zh-CN', 'zh-TW',
-            ],
-        ],
-        'focus_ios' => [
-            'release' => [
-                'af', 'ar', 'az', 'bn', 'br', 'ca', 'cs', 'cy', 'de', 'dsb',
-                'el', 'eo', 'es-CL', 'es-ES', 'eu', 'fa', 'fr', 'ga-IE', 'gd',
-                'he', 'hi-IN', 'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk',
-                'kn', 'ko', 'lo', 'my', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR',
-                'pt-PT', 'ro', 'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'th',
-                'tl', 'tr', 'uk', 'ur', 'uz', 'zh-CN', 'zh-TW',
             ],
         ],
     ];
