@@ -1,12 +1,13 @@
 <h1>Focus for iOS Listing Copy (<?= $request['locale'] ?>)</h1>
+
 <h3>Title</h3>
-<pre><?= $app_title($translations) ?></pre>
+<pre <?= $direction ?>><?= $app_title($translations) ?></pre>
 
 <h3>Description</h3>
-<pre><?= $description($translations) ?></pre>
+<pre <?= $direction ?>><?= $description($translations) ?></pre>
 
 <h3>What’s new</h3>
-<pre><?= $whatsnew($translations) ?></pre>
+<pre <?= $direction ?>><?= $whatsnew($translations) ?></pre>
 
 <?php
     /*
@@ -19,7 +20,7 @@
         if (file_exists($locale_file)) {
             ?>
             <h3>Screenshots</h3>
-            <pre class="text-center"><?= $screenshots($translations) ?></pre>
+            <pre <?= $direction ?> class="text-center"><?= $screenshots($translations) ?></pre>
 <?php
 
         }
@@ -27,4 +28,4 @@
 ?>
 
 <h3>Keywords&mdash; <?= $keywords_warning ?></h3>
-<pre><?= $keywords($translations) ?></pre>
+<pre <?= $direction ?>><?= $keywords($translations) ?></pre>
