@@ -1,6 +1,8 @@
 <?php
 namespace Stores;
 
+use Json\Json;
+
 /**
  * Project class
  *
@@ -73,85 +75,9 @@ class Project
     /**
      * Locales supported in products and channels.
      *
-     * Sources for Android:
-     * http://hg.mozilla.org/releases/mozilla-release/raw-file/tip/mobile/android/locales/maemo-locales
-     * http://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/mobile/android/locales/maemo-locales
-     * http://hg.mozilla.org/releases/mozilla-aurora/raw-file/tip/mobile/android/locales/maemo-locales
-     *
-     * Source for Firefox for iOS:
-     * https://raw.githubusercontent.com/mozilla/firefox-ios/v7.x/shipping_locales.txt
-     *
-     * The list for iOS needs to be cleaned up later in the costructor.
-     *
      * @var array
      */
-    private $supported_locales = [
-        'focus_android' => [
-            'release' => [
-                'ar', 'ast', 'az', 'bg', 'bn-BD', 'ca', 'cs', 'cy', 'de', 'el',
-                'eo', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'fa', 'fr', 'fy-NL',
-                'he', 'hu', 'hy-AM', 'id', 'it', 'ja', 'kab', 'ko', 'lo', 'nl',
-                'pl', 'pt-BR', 'ro', 'ru', 'sk', 'sl', 'sq', 'sv-SE', 'th',
-                'tr', 'uk', 'ur', 'zh-CN', 'zh-TW',
-            ],
-        ],
-        'focus_ios' => [
-            'release' => [
-                'af', 'ar', 'az', 'bn', 'br', 'ca', 'cs', 'cy', 'de', 'dsb',
-                'el', 'eo', 'es-CL', 'es-ES', 'eu', 'fa', 'fr', 'ga-IE', 'gd',
-                'he', 'hi-IN', 'hsb', 'hu', 'id', 'is', 'it', 'ja', 'kab', 'kk',
-                'kn', 'ko', 'lo', 'my', 'nb-NO', 'nl', 'nn-NO', 'pl', 'pt-BR',
-                'pt-PT', 'ro', 'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'th',
-                'tl', 'tr', 'uk', 'ur', 'uz', 'zh-CN', 'zh-TW',
-            ],
-        ],
-        'fx_android' => [
-            'aurora' => [
-                'an', 'ar', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs',
-                'cy', 'da', 'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR',
-                'es-CL', 'es-ES', 'es-MX', 'et', 'eu', 'fa', 'ff', 'fi', 'fr',
-                'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'he', 'hi-IN',
-                'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'kk',
-                'kn', 'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO',
-                'nl', 'nn-NO', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm',
-                'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te',
-                'th', 'tr', 'uk', 'ur', 'uz', 'xh', 'zh-CN', 'zh-TW',
-            ],
-            'beta' => [
-                'an', 'ar', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs',
-                'cy', 'da', 'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR',
-                'es-CL', 'es-ES', 'es-MX', 'et', 'eu', 'fa', 'ff', 'fi', 'fr',
-                'fy-NL', 'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'he', 'hi-IN',
-                'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'kk',
-                'kn', 'ko', 'lt', 'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO',
-                'nl', 'nn-NO', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm',
-                'ro', 'ru', 'sk', 'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te',
-                'th', 'tr', 'uk', 'ur', 'uz', 'xh', 'zh-CN', 'zh-TW',
-            ],
-            'release' => [
-                'an', 'as', 'ast', 'az', 'bn-IN', 'br', 'ca', 'cak', 'cs', 'cy',
-                'da', 'de', 'dsb', 'en-GB', 'en-ZA', 'eo', 'es-AR', 'es-CL',
-                'es-ES', 'es-MX', 'et', 'eu', 'ff', 'fi', 'fr', 'fy-NL',
-                'ga-IE', 'gd', 'gl', 'gn', 'gu-IN', 'hi-IN', 'hr', 'hsb', 'hu',
-                'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'kn', 'ko', 'lt',
-                'lv', 'mai', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
-                'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk',
-                'sl', 'son', 'sq', 'sr', 'sv-SE', 'ta', 'te', 'th', 'tr', 'uk',
-                'uz', 'xh', 'zh-CN', 'zh-TW',
-            ],
-        ],
-        'fx_ios' => [
-            'release' => [
-                'ast', 'az', 'bg', 'bn', 'br', 'ca', 'cs', 'cy', 'da', 'de',
-                'dsb', 'el', 'en-GB', 'en-US', 'eo', 'es', 'es-CL', 'es-MX',
-                'eu', 'fr', 'ga-IE', 'gd', 'hsb', 'hu', 'id', 'is', 'it', 'ja',
-                'kab', 'kk', 'km', 'ko', 'lo', 'lt', 'lv', 'my', 'nb-NO',
-                'ne-NP', 'nl', 'nn-NO', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro',
-                'ru', 'ses', 'sk', 'sl', 'sq', 'sv-SE', 'te', 'th', 'tl', 'tr',
-                'uk', 'uz', 'zh-CN', 'zh-TW',
-            ],
-        ],
-    ];
+    private $shipping_locales = [];
 
     /**
      * Locales mapping between Mozilla and Stores codes. Format:
@@ -337,14 +263,21 @@ class Project
 
     public function __construct()
     {
+        $json_object = new Json;
+        $config_folder = realpath(__DIR__ . '/../../config/');
+
+        $this->shipping_locales = $json_object
+            ->setURI("{$config_folder}/shipping_locales.json")
+            ->fetchContent();
+
         // Clean up list of locales supported in iOS products
-        $this->supported_locales['fx_ios']['release'] = self::cleanUpiOS($this->supported_locales['fx_ios']['release']);
-        $this->supported_locales['focus_ios']['release'] = self::cleanUpiOS($this->supported_locales['focus_ios']['release']);
+        $this->shipping_locales['fx_ios']['release'] = self::cleanUpiOS($this->shipping_locales['fx_ios']['release']);
+        $this->shipping_locales['focus_ios']['release'] = self::cleanUpiOS($this->shipping_locales['focus_ios']['release']);
 
         // Add en-US to Android locales
         foreach (['aurora', 'beta', 'release'] as $channel) {
-            $this->supported_locales['fx_android'][$channel][] = 'en-US';
-            sort($this->supported_locales['fx_android'][$channel]);
+            $this->shipping_locales['fx_android'][$channel][] = 'en-US';
+            sort($this->shipping_locales['fx_android'][$channel]);
         }
     }
 
@@ -445,8 +378,8 @@ class Project
         $product = $this->getUpdatedProductCode($product);
 
         if ($all_channels) {
-            return isset($this->supported_locales[$product])
-                ? array_keys($this->supported_locales[$product])
+            return isset($this->shipping_locales[$product])
+                ? array_keys($this->shipping_locales[$product])
                 : [];
         }
 
@@ -516,8 +449,8 @@ class Project
             return $this->templates[$product][$channel]['supported_locales'];
         }
 
-        return isset($this->supported_locales[$product][$channel])
-            ? $this->supported_locales[$product][$channel]
+        return isset($this->shipping_locales[$product][$channel])
+            ? $this->shipping_locales[$product][$channel]
             : [];
     }
 
@@ -598,10 +531,10 @@ class Project
         $product = $this->getUpdatedProductCode($product);
 
         // Return requested channel, or fall back to release
-        if (isset($this->supported_locales[$product])) {
-            $locales = isset($this->supported_locales[$product][$channel])
-                ? $this->supported_locales[$product][$channel]
-                : $this->supported_locales[$product]['release'];
+        if (isset($this->shipping_locales[$product])) {
+            $locales = isset($this->shipping_locales[$product][$channel])
+                ? $this->shipping_locales[$product][$channel]
+                : $this->shipping_locales[$product]['release'];
 
             // Drop en-US
             return array_values(array_diff($locales, ['en-US']));
