@@ -232,7 +232,7 @@ class Project
             'lv'     => 'lv',
             'ms'     => 'ms',
             'nl-NL'  => 'nl',
-            'no-NO'  => false, // Correct value: 'nb-NO'. See https://bugzilla.mozilla.org/show_bug.cgi?id=1349039
+            'no-NO'  => 'nb-NO',
             'pl-PL'  => 'pl',
             'pt-BR'  => 'pt-BR',
             'pt-PT'  => 'pt-PT',
