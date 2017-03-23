@@ -201,7 +201,7 @@ class Project
         ],
         'google' => [
             'af'     => 'af',
-            'ar'     => 'ar',
+            'ar'     => false, // Correct value: 'ar'. See https://bugzilla.mozilla.org/show_bug.cgi?id=1349039
             'am'     => false,
             'bg'     => 'bg',
             'cs-CZ'  => 'cs',
