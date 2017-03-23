@@ -176,10 +176,10 @@ class Project extends atoum\test
             ->array($tmp_locales)
                 ->contains('en-US')
                 ->contains('ca')
+                ->contains('es-MX')
                 ->notContains('af')
                 ->notContains('am')
-                ->notContains('es-MX')
-                ->hassize(37);
+                ->hassize(38);
         // Legacy product code
         $this
             ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
@@ -302,13 +302,13 @@ class Project extends atoum\test
             ->array($obj->getLocalesMapping('google', false))
                 ->hasKey('es-419')
                 ->contains('de')
-                ->notContains('es-MX')
+                ->contains('es-MX')
                 ->hassize(51);
         $this
             ->array($obj->getLocalesMapping('google', true))
                 ->contains('de-DE')
-                ->notContains('es-US')
-                ->hassize(45);
+                ->notContains('fil')
+                ->hassize(46);
 
         // App Store
         $this

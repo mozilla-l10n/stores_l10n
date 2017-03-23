@@ -201,7 +201,7 @@ class Project
         ],
         'google' => [
             'af'     => 'af',
-            'ar'     => false, // Correct value: 'ar'. See https://bugzilla.mozilla.org/show_bug.cgi?id=1349039
+            'ar'     => 'ar',
             'am'     => false,
             'bg'     => 'bg',
             'cs-CZ'  => 'cs',
@@ -211,9 +211,9 @@ class Project
             'el-GR'  => 'el',
             'en-GB'  => 'en-GB',
             'en-US'  => 'en-US',
-            'es-419' => false, // Spanish, South America. See https://github.com/mozilla-l10n/stores_l10n/issues/105
+            'es-419' => 'es-MX',
             'es-ES'  => 'es-ES',
-            'es-US'  => false, // Spanish, South America. See https://github.com/mozilla-l10n/stores_l10n/issues/105
+            'es-US'  => 'es-MX',
             'et'     => 'et',
             'fa'     => 'fa',
             'fi-FI'  => 'fi',
