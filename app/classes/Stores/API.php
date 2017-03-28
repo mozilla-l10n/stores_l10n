@@ -249,7 +249,7 @@ class API
 
                 /*
                     For supportedlocales the list of channels depends on
-                    $supported_locales, not on the channels for which we
+                    $shipping_locales, not on the channels for which we
                     support stores localization.
                 */
                 $supported_channels = $this->project->getProductChannels($this->query['product'], true);

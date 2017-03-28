@@ -5,6 +5,7 @@ Web App providing the folllowing features:
 * Public [JSON API](https://l10n.mozilla-community.org/stores_l10n/documentation/) allowing to extract formatted translations to feed the stores APIs and update published content.
 
 ## Installation
+
 1. Clone the repository.
 2. Install [Composer](https://getcomposer.org/) and its dependencies with `composer install --no-dev`.
 3. Clone the translations repo in a `locales` folder in the root of the cloned repository: ```git clone https://github.com/mozilla-l10n/appstores/ locales```
@@ -14,4 +15,5 @@ Web App providing the folllowing features:
 7. Set up a cron job to update the `locales` sub-repository (production server is set to 15 minutes).
 
 ## Production instance
+
 Production istance is hosted at https://l10n.mozilla-community.org/stores_l10n/ and updated automatically via GitHub webhooks.

@@ -1,7 +1,6 @@
 .composer_cache
 .php_cs.cache
 app/config/config.inc.php
-app/scripts/locales.php
 cache/*.cache
 composer.lock
 composer.phar
