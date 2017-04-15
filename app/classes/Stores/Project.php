@@ -229,12 +229,12 @@ class Project
             'release' => [
                 'template' => 'fx_android/release/listing_apr_2016.php',
                 'listing'  => 'fx_android/description_release.lang',
-                'whatsnew' => 'fx_android/whatsnew/android_52.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_53.lang',
             ],
             'beta' => [
                 'template' => 'fx_android/beta/listing_may_2015.php',
                 'listing'  => 'fx_android/description_beta.lang',
-                'whatsnew' => 'fx_android/whatsnew/android_53_beta.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_54_beta.lang',
             ],
         ],
         'fx_ios' => [

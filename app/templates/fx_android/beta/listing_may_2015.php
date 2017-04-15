@@ -40,6 +40,8 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Right to left language support')}
+* {$_('Added Bulgarian (bg) and Kabyle (kab) locales')}
+* {$_('Improved bookmarks sync performance for Firefox for Android')}
+* {$_('Improved stability during media playback')}
 OUT;
 };
