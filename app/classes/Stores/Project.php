@@ -294,7 +294,7 @@ class Project
         $this->shipping_locales['focus_ios']['release'] = self::cleanUpiOS($this->shipping_locales['focus_ios']['release']);
 
         // Add en-US to Android locales
-        foreach (['aurora', 'beta', 'release'] as $channel) {
+        foreach (['central', 'beta', 'release'] as $channel) {
             $this->shipping_locales['fx_android'][$channel][] = 'en-US';
             sort($this->shipping_locales['fx_android'][$channel]);
         }

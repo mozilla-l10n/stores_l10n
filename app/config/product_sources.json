@@ -1,39 +1,39 @@
 {
   "focus_android": [
     {
-      "channel": "release", 
-      "format": "txt", 
+      "channel": "release",
+      "format": "txt",
       "source": "https://l10n.mozilla-community.org/webstatus/api/?product=focus-android&txt"
     }
-  ], 
+  ],
   "focus_ios": [
     {
-      "channel": "release", 
-      "format": "txt", 
+      "channel": "release",
+      "format": "txt",
       "source": "https://l10n.mozilla-community.org/webstatus/api/?product=focus-ios&txt"
     }
-  ], 
+  ],
   "fx_android": [
     {
-      "channel": "aurora", 
-      "format": "txt", 
-      "source": "http://hg.mozilla.org/releases/mozilla-aurora/raw-file/default/mobile/android/locales/maemo-locales"
-    }, 
+      "channel": "central",
+      "format": "txt",
+      "source": "http://hg.mozilla.org/mozilla-central/raw-file/default/mobile/android/locales/maemo-locales"
+    },
     {
-      "channel": "beta", 
-      "format": "txt", 
+      "channel": "beta",
+      "format": "txt",
       "source": "http://hg.mozilla.org/releases/mozilla-beta/raw-file/default/mobile/android/locales/maemo-locales"
-    }, 
+    },
     {
-      "channel": "release", 
-      "format": "txt", 
+      "channel": "release",
+      "format": "txt",
       "source": "http://hg.mozilla.org/releases/mozilla-release/raw-file/default/mobile/android/locales/maemo-locales"
     }
-  ], 
+  ],
   "fx_ios": [
     {
-      "channel": "release", 
-      "format": "txt", 
+      "channel": "release",
+      "format": "txt",
       "source": "https://raw.githubusercontent.com/mozilla-mobile/firefox-ios/v7.x/shipping_locales.txt"
     }
   ]
