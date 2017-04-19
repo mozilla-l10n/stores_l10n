@@ -146,7 +146,7 @@ class Project extends atoum\test
             ->array($obj->getProductChannels('fx_android', true))
                 ->hassize(3)
                 ->contains('beta')
-                ->contains('aurora');
+                ->contains('central');
         $this
             ->array($obj->getProductChannels('google'))
                 ->isEqualTo(['beta', 'release']);
@@ -179,7 +179,7 @@ class Project extends atoum\test
                 ->contains('es-MX')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(50);
+                ->hassize(53);
 
         // Legacy product code
         $this

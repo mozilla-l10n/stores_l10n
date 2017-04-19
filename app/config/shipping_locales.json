@@ -108,12 +108,13 @@
     ]
   }, 
   "fx_android": {
-    "aurora": [
+    "beta": [
       "an", 
       "ar", 
       "as", 
       "ast", 
       "az", 
+      "bg", 
       "bn-IN", 
       "br", 
       "ca", 
@@ -153,6 +154,7 @@
       "it", 
       "ja", 
       "ka", 
+      "kab", 
       "kk", 
       "kn", 
       "ko", 
@@ -191,12 +193,13 @@
       "zh-CN", 
       "zh-TW"
     ], 
-    "beta": [
+    "central": [
       "an", 
       "ar", 
       "as", 
       "ast", 
       "az", 
+      "bg", 
       "bn-IN", 
       "br", 
       "ca", 
@@ -236,6 +239,7 @@
       "it", 
       "ja", 
       "ka", 
+      "kab", 
       "kk", 
       "kn", 
       "ko", 
@@ -276,6 +280,7 @@
     ], 
     "release": [
       "an", 
+      "ar", 
       "as", 
       "ast", 
       "az", 
@@ -297,6 +302,7 @@
       "es-MX", 
       "et", 
       "eu", 
+      "fa", 
       "ff", 
       "fi", 
       "fr", 
@@ -306,6 +312,7 @@
       "gl", 
       "gn", 
       "gu-IN", 
+      "he", 
       "hi-IN", 
       "hr", 
       "hsb", 
@@ -348,6 +355,7 @@
       "th", 
       "tr", 
       "uk", 
+      "ur", 
       "uz", 
       "xh", 
       "zh-CN", 
