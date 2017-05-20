@@ -15,7 +15,7 @@ $base = '<em class="dim">' . BASE_HTML_URL . "api/{$api_version}/</em>";
     <li><code>{product}</code>: product IDs. Supported values: <var>fx_android</var>, <var>fx_ios</var>, <var>focus_ios</var>.</li>
     <li><code>{channel}</code>:
         <ul>
-            <li>Google: <var>beta</var>, <var>release</var>.</li>
+            <li>Google: <var>nightly</var>, <var>beta</var>, <var>release</var>.</li>
             <li>Apple: <var>release</var>.</li>
         </ul>
     </li>

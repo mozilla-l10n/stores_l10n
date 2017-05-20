@@ -15,7 +15,7 @@
   ],
   "fx_android": [
     {
-      "channel": "central",
+      "channel": "nightly",
       "format": "txt",
       "source": "http://hg.mozilla.org/mozilla-central/raw-file/default/mobile/android/locales/maemo-locales"
     },

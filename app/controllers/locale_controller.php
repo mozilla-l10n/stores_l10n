@@ -80,7 +80,7 @@ if (! in_array($request['product'], $project->getSupportedProducts())) {
     die('Unknown product or output format.');
 }
 
-if (! in_array($request['channel'], ['beta', 'release'])) {
+if (! in_array($request['channel'], $project->getProductChannels($request['product']))) {
     die('This channel is not supported.');
 }
 

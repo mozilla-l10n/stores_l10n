@@ -101,12 +101,12 @@ class Project extends atoum\test
 
         $this
             ->array($obj->getProductChannels('fx_android'))
-                ->isEqualTo(['beta', 'release']);
+                ->isEqualTo(['beta', 'nightly', 'release']);
         $this
             ->array($obj->getProductChannels('fx_android', true))
                 ->hassize(3)
                 ->contains('beta')
-                ->contains('central');
+                ->contains('nightly');
         $this
             ->array($obj->getProductChannels('fx_ios'))
                 ->isEqualTo(['release']);

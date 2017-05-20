@@ -29,7 +29,7 @@ class Project
     private $products_data = [
         'fx_android' =>
             [
-                'channels' => ['beta', 'release'],
+                'channels' => ['beta', 'nightly', 'release'],
                 'name'     => 'Firefox for Android',
                 'store'    => 'google',
             ],
@@ -224,6 +224,11 @@ class Project
                 'listing'  => 'fx_android/description_beta.lang',
                 'whatsnew' => 'fx_android/whatsnew/android_54_beta.lang',
             ],
+            'nightly' => [
+                'template' => 'fx_android/nightly/listing_may_2017.php',
+                'listing'  => 'fx_android/description_nightly.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_nightly.lang',
+            ],
         ],
         'fx_ios' => [
             'release' => [
@@ -282,7 +287,7 @@ class Project
         $this->shipping_locales['focus_ios']['release'] = self::cleanUpiOS($this->shipping_locales['focus_ios']['release']);
 
         // Add en-US to Android locales
-        foreach (['central', 'beta', 'release'] as $channel) {
+        foreach (['nightly', 'beta', 'release'] as $channel) {
             $this->shipping_locales['fx_android'][$channel][] = 'en-US';
             sort($this->shipping_locales['fx_android'][$channel]);
         }
