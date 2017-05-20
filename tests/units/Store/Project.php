@@ -133,7 +133,7 @@ class Project extends atoum\test
                 ->contains('es-MX')
                 ->notContains('af')
                 ->notContains('am')
-                ->hassize(53);
+                ->hassize(52);
 
         // App Store
         $this

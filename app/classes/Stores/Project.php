@@ -449,12 +449,6 @@ class Project
         $locales = [];
         if ($store == 'google' && in_array($channel, $this->getProductChannels($product))) {
             $locales = $this->getSupportedLocales($product, $channel);
-
-            // HACK: adding ar as experiment (bug 1259200)
-            if ($channel == 'release') {
-                $locales[] = 'ar';
-                sort($locales);
-            }
         }
 
         if ($store == 'apple' && in_array($channel, $this->getProductChannels($product))) {
