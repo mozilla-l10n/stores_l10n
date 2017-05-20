@@ -51,34 +51,6 @@ class Project extends atoum\test
                 ->isTrue();
     }
 
-    public function testIsLegacyProduct()
-    {
-        $obj = new _Project();
-        $this
-            ->boolean($obj->isLegacyProduct('google'))
-                ->isTrue();
-        $this
-            ->boolean($obj->isLegacyProduct('apple'))
-                ->isTrue();
-        $this
-            ->boolean($obj->isLegacyProduct('fx_ios'))
-                ->isFalse();
-    }
-
-    public function testGetUpdatedProductCode()
-    {
-        $obj = new _Project();
-        $this
-            ->string($obj->getUpdatedProductCode('google'))
-                ->isEqualTo('fx_android');
-        $this
-            ->string($obj->getUpdatedProductCode('apple'))
-                ->isEqualTo('fx_ios');
-        $this
-            ->string($obj->getUpdatedProductCode('fx_android'))
-                ->isEqualTo('fx_android');
-    }
-
     public function testGetSupportedProducts()
     {
         $obj = new _Project();
@@ -102,13 +74,7 @@ class Project extends atoum\test
             ->string($obj->getProductStore('fx_android'))
                 ->isEqualTo('google');
         $this
-            ->string($obj->getProductStore('google'))
-                ->isEqualTo('google');
-        $this
             ->string($obj->getProductStore('fx_ios'))
-                ->isEqualTo('apple');
-        $this
-            ->string($obj->getProductStore('apple'))
                 ->isEqualTo('apple');
         $this
             ->string($obj->getProductStore('foobar'))
@@ -122,13 +88,7 @@ class Project extends atoum\test
             ->string($obj->getProductName('fx_android'))
                 ->isEqualTo('Firefox for Android');
         $this
-            ->string($obj->getProductName('google'))
-                ->isEqualTo('Firefox for Android');
-        $this
             ->string($obj->getProductName('fx_ios'))
-                ->isEqualTo('Firefox for iOS');
-        $this
-            ->string($obj->getProductName('apple'))
                 ->isEqualTo('Firefox for iOS');
         $this
             ->string($obj->getProductName('foobar'))
@@ -148,13 +108,7 @@ class Project extends atoum\test
                 ->contains('beta')
                 ->contains('central');
         $this
-            ->array($obj->getProductChannels('google'))
-                ->isEqualTo(['beta', 'release']);
-        $this
             ->array($obj->getProductChannels('fx_ios'))
-                ->isEqualTo(['release']);
-        $this
-            ->array($obj->getProductChannels('apple'))
                 ->isEqualTo(['release']);
         $this
             ->array($obj->getProductChannels('foobar'))
@@ -181,11 +135,6 @@ class Project extends atoum\test
                 ->notContains('am')
                 ->hassize(53);
 
-        // Legacy product code
-        $this
-            ->array($obj->getStoreMozillaCommonLocales('google', 'release'))
-                ->isEqualTo($tmp_locales);
-
         // App Store
         $this
             ->array($obj->getStoreMozillaCommonLocales('fx_ios', 'release'));
@@ -200,10 +149,6 @@ class Project extends atoum\test
                 ->notContains('af')
                 ->notContains('zh-Hans')
                 ->hassize(22);
-        // Legacy product code
-        $this
-            ->array($obj->getStoreMozillaCommonLocales('apple', 'release'))
-                ->isEqualTo($tmp_locales);
 
         // Unsupported
         $this
@@ -253,20 +198,16 @@ class Project extends atoum\test
                 ->notContains('en-US')
                 ->contains('fr');
         $this
-            ->array($obj->getProductLocales('google', 'release'))
-                ->notContains('en-US')
-                ->contains('fr');
-        $this
-            ->array($obj->getProductLocales('google', 'beta'))
+            ->array($obj->getProductLocales('fx_android', 'beta'))
                 ->notContains('en-US')
                 ->contains('fr');
         // Check fallback to release
-        $release_locales = $obj->getProductLocales('google', 'release');
+        $release_locales = $obj->getProductLocales('fx_android', 'release');
         $this
-            ->array($obj->getProductLocales('google', false))
+            ->array($obj->getProductLocales('fx_android', false))
                 ->isEqualTo($release_locales);
         $this
-            ->array($obj->getProductLocales('google', 'foobar'))
+            ->array($obj->getProductLocales('fx_android', 'foobar'))
                 ->isEqualTo($release_locales);
 
         // App Store
@@ -275,11 +216,7 @@ class Project extends atoum\test
                 ->notContains('en-US')
                 ->contains('it');
         $this
-            ->array($obj->getProductLocales('apple', 'release'))
-                ->notContains('en-US')
-                ->contains('it');
-        $this
-            ->array($obj->getProductLocales('apple', 'beta'))
+            ->array($obj->getProductLocales('fx_ios', 'beta'))
                 ->notContains('en-US')
                 ->contains('it');
 

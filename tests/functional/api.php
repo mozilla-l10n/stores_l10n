@@ -62,19 +62,6 @@ $paths = [
     ['fx_android/whatsnew/beta/', 200, false],
     ['fx_ios/whatsnew/release/', 200, false],
     ['fx_android/listing/release/', 200, false],
-    // Legacy product IDs and services
-    ['google/done/release/', 200, false],
-    ['google/done/release/', 200, false],
-    ['google/done/beta/', 200, false],
-    ['apple/done/release/', 200, false],
-    ['google/translation/release/ja/', 200, false],
-    ['google/translation/release/en-US/', 200, false],
-    ['google/translation/beta/fr/', 200, false],
-    ['google/translation/beta/en-US/', 200, false],
-    ['google/whatsnew/release/', 200, false],
-    ['google/whatsnew/beta/', 200, false],
-    ['apple/whatsnew/release/', 200, false],
-    ['google/listing/release/', 200, false],
 ];
 
 $obj = new \pchevrel\Verif('Check API responses');
@@ -101,22 +88,22 @@ $check = function ($object, $paths) {
 $check($obj, $paths);
 
 $obj
-    ->setPath('google/translation/release/ja/')
+    ->setPath('fx_android/translation/release/ja/')
     ->fetchContent()
     ->hasKeys(['title', 'short_desc', 'long_desc']);
 
 $obj
-    ->setPath('apple/translation/release/fr/')
+    ->setPath('fx_ios/translation/release/fr/')
     ->fetchContent()
     ->hasKeys(['title', 'description', 'keywords', 'whatsnew']);
 
 $obj
-    ->setPath('google/translation/release/fr/')
+    ->setPath('fx_android/translation/release/fr/')
     ->fetchContent()
     ->hasKeys(['title',  'short_desc', 'long_desc', 'whatsnew']);
 
 $obj
-    ->setPath('google/translation/beta/fr/')
+    ->setPath('fx_android/translation/beta/fr/')
     ->fetchContent()
     ->hasKeys(['title',  'short_desc', 'long_desc', 'whatsnew']);
 

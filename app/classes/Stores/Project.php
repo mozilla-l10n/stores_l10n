@@ -61,18 +61,6 @@ class Project
     private $supported_stores = ['apple', 'google'];
 
     /**
-     * Legacy product codes
-     * apple = fx_ios
-     * google = fx_android
-     *
-     * @var array
-     */
-    private $legacy_products = [
-        'google' => 'fx_android',
-        'apple'  => 'fx_ios',
-    ];
-
-    /**
      * Locales supported in products and channels.
      *
      * @var array
@@ -356,11 +344,8 @@ class Project
     public function getProductStore($product)
     {
         $store = '';
-        $product = $this->getUpdatedProductCode($product);
         if (isset($this->products_data[$product])) {
             $store = $this->products_data[$product]['store'];
-        } elseif ($this->isLegacyProduct($product)) {
-            $store = $product;
         }
 
         return $store;
@@ -375,8 +360,6 @@ class Project
      */
     public function getProductName($product)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         return isset($this->products_data[$product])
             ? $this->products_data[$product]['name']
             : $product;
@@ -394,8 +377,6 @@ class Project
      */
     public function getProductChannels($product, $all_channels = false)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         if ($all_channels) {
             return isset($this->shipping_locales[$product])
                 ? array_keys($this->shipping_locales[$product])
@@ -428,32 +409,6 @@ class Project
     }
 
     /**
-     * Convert legacy product ID if necessary
-     *
-     * @param string $product Product ID
-     *
-     * @return string Product ID, updated if legacy
-     */
-    public function getUpdatedProductCode($product)
-    {
-        return $this->isLegacyProduct($product)
-            ? $this->legacy_products[$product]
-            : $product;
-    }
-
-    /**
-     * Check if the product ID is a legacy code
-     *
-     * @param string $product Product ID
-     *
-     * @return boolean true if $product is a legacy ID, false otherwise
-     */
-    public function isLegacyProduct($product)
-    {
-        return isset($this->legacy_products[$product]);
-    }
-
-    /**
      * Check if the product supports only a subset of the shipping locales
      *
      * @param string $product Product ID
@@ -483,9 +438,8 @@ class Project
      */
     public function getStoreMozillaCommonLocales($product, $channel)
     {
-        // Map product to its store. Support legacy product codes.
+        // Map product to its store.
         $store = $this->getProductStore($product);
-        $product = $this->getUpdatedProductCode($product);
 
         // Return early if store is unsupported
         if (! isset($this->locales_mapping[$store])) {
@@ -547,8 +501,6 @@ class Project
      */
     public function getProductLocales($product, $channel)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         // Return requested channel, or fall back to release
         if (isset($this->shipping_locales[$product])) {
             $locales = isset($this->shipping_locales[$product][$channel])
@@ -592,8 +544,6 @@ class Project
      */
     public function getTemplate($locale, $product, $channel)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         if (isset($this->templates_overrides[$locale][$product][$channel]['template'])) {
             return $this->templates_overrides[$locale][$product][$channel]['template'];
         }
@@ -620,9 +570,6 @@ class Project
      */
     public function getLangFiles($locale, $product, $channel, $section)
     {
-        // Convert legacy products IDs
-        $product = $this->getUpdatedProductCode($product);
-
         if ($section == 'all') {
             // Take all available sections, filter out known non-sections
             $sections = array_keys($this->templates[$product][$channel]);

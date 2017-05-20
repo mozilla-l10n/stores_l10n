@@ -37,19 +37,6 @@ class API extends atoum\test
                 ['path' => 'api/fx_android/translation/beta/de/'],
                 'translation',
             ],
-            // Legacy calls
-            [
-                ['path' => 'api/google/supportedlocales/release/'],
-                'supportedlocales',
-            ],
-            [
-                ['path' => 'api/apple/done/beta/'],
-                'done',
-            ],
-            [
-                ['path' => 'api/google/translation/beta/de/'],
-                'translation',
-            ],
         ];
     }
 
@@ -76,10 +63,6 @@ class API extends atoum\test
                 true,
             ],
             [
-                ['path' => 'api/v1/google/supportedlocales/release/'],
-                true,
-            ],
-            [
                 ['path' => 'api/v1/google/localesmapping/'],
                 true,
             ],
@@ -99,38 +82,14 @@ class API extends atoum\test
                 ['path' => 'api/v1/fx_android/translation/beta/de/'],
                 true,
             ],
-            // Legacy calls
+            // Legacy call (products: google, apple), unsupported
             [
-                ['path' => 'api/v1/google/done/release/'],
-                true,
-            ],
-            [
-                ['path' => 'api/v1/google/listing/release/'],
-                true,
-            ],
-            [
-                ['path' => 'api/v1/google/whatsnew/release/'],
-                true,
-            ],
-            [
-                ['path' => 'api/v1/google/translation/beta/de/'],
-                true,
-            ],
-            [
-                ['path' => 'api/google/done/release/'],
-                true,
-            ],
-            [
-                ['path' => 'api/google/listing/release/'],
-                true,
+                ['path' => 'api/v1/apple/done/release/'],
+                false,
             ],
             [
                 ['path' => 'api/google/whatsnew/release/'],
-                true,
-            ],
-            [
-                ['path' => 'api/google/translation/beta/de/'],
-                true,
+                false,
             ],
         ];
     }
@@ -253,19 +212,6 @@ class API extends atoum\test
             ],
             [
                 ['path' => 'api/fx_android/translation/beta/de/'],
-                true,
-            ],
-            // Legacy calls
-            [
-                ['path' => 'api/google/supportedlocales/release/'],
-                false,
-            ],
-            [
-                ['path' => 'api/apple/done/beta/'],
-                true,
-            ],
-            [
-                ['path' => 'api/google/translation/beta/de/'],
                 true,
             ],
         ];

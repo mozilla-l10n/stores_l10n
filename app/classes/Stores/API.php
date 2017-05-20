@@ -152,8 +152,7 @@ class API
                     $this->query['product'] = '';
                     $this->query['store'] = $this->parameters[0];
                 } else {
-                    // Make sure to convert legacy product IDs to updated ones
-                    $this->query['product'] = $this->project->getUpdatedProductCode($this->parameters[0]);
+                    $this->query['product'] = $this->parameters[0];
                     $this->query['store'] = $this->project->getProductStore($this->query['product']);
                 }
             }
