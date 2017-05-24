@@ -20,7 +20,7 @@ if ($url_parts == 3) {
     // Url type: /locale/apple/release/
     $request = [
         'locale'  => null,
-        'product' => isset($components[1]) ? $project->getUpdatedProductCode($components[1]) : null,
+        'product' => isset($components[1]) ? $components[1] : null,
         'channel' => isset($components[2]) ? $components[2] : null,
         'output'  => 'show',
     ];
@@ -30,7 +30,7 @@ if ($url_parts == 3) {
         // Url type: /locale/apple/release/html
         $request = [
             'locale'  => null,
-            'product' => isset($components[1]) ? $project->getUpdatedProductCode($components[1]) : null,
+            'product' => isset($components[1]) ? $components[1] : null,
             'channel' => isset($components[2]) ? $components[2] : null,
             'output'  => isset($components[3]) ? $components[3] : 'show',
         ];
@@ -38,7 +38,7 @@ if ($url_parts == 3) {
         // Url type: /locale/it/apple/release/
         $request = [
             'locale'  => isset($components[1]) ? $components[1] : null,
-            'product' => isset($components[2]) ? $project->getUpdatedProductCode($components[2]) : null,
+            'product' => isset($components[2]) ? $components[2] : null,
             'channel' => isset($components[3]) ? $components[3] : null,
             'output'  => 'show',
         ];
@@ -47,7 +47,7 @@ if ($url_parts == 3) {
     // Url type: /locale/it/apple/release/html
     $request = [
         'locale'  => isset($components[1]) ? $components[1] : null,
-        'product' => isset($components[2]) ? $project->getUpdatedProductCode($components[2]) : null,
+        'product' => isset($components[2]) ? $components[2] : null,
         'channel' => isset($components[3]) ? $components[3] : null,
         'output'  => isset($components[4]) ? $components[4] : 'show',
     ];
@@ -80,7 +80,7 @@ if (! in_array($request['product'], $project->getSupportedProducts())) {
     die('Unknown product or output format.');
 }
 
-if (! in_array($request['channel'], ['beta', 'release'])) {
+if (! in_array($request['channel'], $project->getProductChannels($request['product']))) {
     die('This channel is not supported.');
 }
 

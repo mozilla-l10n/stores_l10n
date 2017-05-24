@@ -29,7 +29,7 @@ class Project
     private $products_data = [
         'fx_android' =>
             [
-                'channels' => ['beta', 'release'],
+                'channels' => ['beta', 'nightly', 'release'],
                 'name'     => 'Firefox for Android',
                 'store'    => 'google',
             ],
@@ -59,18 +59,6 @@ class Project
      * @var array
      */
     private $supported_stores = ['apple', 'google'];
-
-    /**
-     * Legacy product codes
-     * apple = fx_ios
-     * google = fx_android
-     *
-     * @var array
-     */
-    private $legacy_products = [
-        'google' => 'fx_android',
-        'apple'  => 'fx_ios',
-    ];
 
     /**
      * Locales supported in products and channels.
@@ -236,6 +224,11 @@ class Project
                 'listing'  => 'fx_android/description_beta.lang',
                 'whatsnew' => 'fx_android/whatsnew/android_54_beta.lang',
             ],
+            'nightly' => [
+                'template' => 'fx_android/nightly/listing_may_2017.php',
+                'listing'  => 'fx_android/description_nightly.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_nightly.lang',
+            ],
         ],
         'fx_ios' => [
             'release' => [
@@ -294,7 +287,7 @@ class Project
         $this->shipping_locales['focus_ios']['release'] = self::cleanUpiOS($this->shipping_locales['focus_ios']['release']);
 
         // Add en-US to Android locales
-        foreach (['central', 'beta', 'release'] as $channel) {
+        foreach (['nightly', 'beta', 'release'] as $channel) {
             $this->shipping_locales['fx_android'][$channel][] = 'en-US';
             sort($this->shipping_locales['fx_android'][$channel]);
         }
@@ -356,11 +349,8 @@ class Project
     public function getProductStore($product)
     {
         $store = '';
-        $product = $this->getUpdatedProductCode($product);
         if (isset($this->products_data[$product])) {
             $store = $this->products_data[$product]['store'];
-        } elseif ($this->isLegacyProduct($product)) {
-            $store = $product;
         }
 
         return $store;
@@ -375,8 +365,6 @@ class Project
      */
     public function getProductName($product)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         return isset($this->products_data[$product])
             ? $this->products_data[$product]['name']
             : $product;
@@ -394,8 +382,6 @@ class Project
      */
     public function getProductChannels($product, $all_channels = false)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         if ($all_channels) {
             return isset($this->shipping_locales[$product])
                 ? array_keys($this->shipping_locales[$product])
@@ -428,32 +414,6 @@ class Project
     }
 
     /**
-     * Convert legacy product ID if necessary
-     *
-     * @param string $product Product ID
-     *
-     * @return string Product ID, updated if legacy
-     */
-    public function getUpdatedProductCode($product)
-    {
-        return $this->isLegacyProduct($product)
-            ? $this->legacy_products[$product]
-            : $product;
-    }
-
-    /**
-     * Check if the product ID is a legacy code
-     *
-     * @param string $product Product ID
-     *
-     * @return boolean true if $product is a legacy ID, false otherwise
-     */
-    public function isLegacyProduct($product)
-    {
-        return isset($this->legacy_products[$product]);
-    }
-
-    /**
      * Check if the product supports only a subset of the shipping locales
      *
      * @param string $product Product ID
@@ -483,9 +443,8 @@ class Project
      */
     public function getStoreMozillaCommonLocales($product, $channel)
     {
-        // Map product to its store. Support legacy product codes.
+        // Map product to its store.
         $store = $this->getProductStore($product);
-        $product = $this->getUpdatedProductCode($product);
 
         // Return early if store is unsupported
         if (! isset($this->locales_mapping[$store])) {
@@ -495,12 +454,6 @@ class Project
         $locales = [];
         if ($store == 'google' && in_array($channel, $this->getProductChannels($product))) {
             $locales = $this->getSupportedLocales($product, $channel);
-
-            // HACK: adding ar as experiment (bug 1259200)
-            if ($channel == 'release') {
-                $locales[] = 'ar';
-                sort($locales);
-            }
         }
 
         if ($store == 'apple' && in_array($channel, $this->getProductChannels($product))) {
@@ -547,8 +500,6 @@ class Project
      */
     public function getProductLocales($product, $channel)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         // Return requested channel, or fall back to release
         if (isset($this->shipping_locales[$product])) {
             $locales = isset($this->shipping_locales[$product][$channel])
@@ -592,8 +543,6 @@ class Project
      */
     public function getTemplate($locale, $product, $channel)
     {
-        $product = $this->getUpdatedProductCode($product);
-
         if (isset($this->templates_overrides[$locale][$product][$channel]['template'])) {
             return $this->templates_overrides[$locale][$product][$channel]['template'];
         }
@@ -620,9 +569,6 @@ class Project
      */
     public function getLangFiles($locale, $product, $channel, $section)
     {
-        // Convert legacy products IDs
-        $product = $this->getUpdatedProductCode($product);
-
         if ($section == 'all') {
             // Take all available sections, filter out known non-sections
             $sections = array_keys($this->templates[$product][$channel]);
