@@ -132,8 +132,7 @@ class Project extends atoum\test
                 ->contains('ca')
                 ->contains('es-MX')
                 ->notContains('af')
-                ->notContains('am')
-                ->hassize(52);
+                ->notContains('am');
 
         // App Store
         $this
@@ -147,8 +146,7 @@ class Project extends atoum\test
                 ->contains('en-US')
                 ->contains('da')
                 ->notContains('af')
-                ->notContains('zh-Hans')
-                ->hassize(22);
+                ->notContains('zh-Hans');
 
         // Unsupported
         $this
@@ -169,23 +167,19 @@ class Project extends atoum\test
         $this
             ->array($obj->getStoreLocales('google', true))
                 ->hasKey('es-419')
-                ->contains('de')
-                ->hassize(70);
+                ->contains('de');
         $this
             ->array($obj->getStoreLocales('google', false))
-                ->contains('es-419')
-                ->hassize(70);
+                ->contains('es-419');
 
         // App Store
         $this
             ->array($obj->getStoreLocales('apple', true))
                 ->hasKey('zh-Hans')
-                ->contains('zh-CN')
-                ->hassize(28);
+                ->contains('zh-CN');
         $this
             ->array($obj->getStoreLocales('apple', false))
-                ->contains('fr-CA')
-                ->hassize(28);
+                ->contains('fr-CA');
     }
 
     public function testGetProductLocales()
@@ -240,25 +234,21 @@ class Project extends atoum\test
             ->array($obj->getLocalesMapping('google', false))
                 ->hasKey('es-419')
                 ->contains('de')
-                ->contains('es-MX')
-                ->hassize(70);
+                ->contains('es-MX');
         $this
             ->array($obj->getLocalesMapping('google', true))
                 ->contains('de-DE')
-                ->notContains('fil')
-                ->hassize(66);
+                ->notContains('fil');
 
         // App Store
         $this
             ->array($obj->getLocalesMapping('apple', false))
                 ->hasKey('zh-Hans')
-                ->contains('zh-CN')
-                ->hassize(28);
+                ->contains('zh-CN');
         $this
             ->array($obj->getLocalesMapping('apple', true))
                 ->hasKey('zh-TW')
-                ->contains('zh-Hant')
-                ->hassize(25);
+                ->contains('zh-Hant');
     }
 
     public function testGetTemplate()
