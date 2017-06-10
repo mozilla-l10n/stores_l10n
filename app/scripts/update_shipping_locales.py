@@ -27,6 +27,8 @@ def main():
             for locale in response:
                 if locale != '' and locale not in locales:
                     locales.append(locale.rstrip())
+            if 'en-US' not in locales:
+                locales.append('en-US')
             # Sort locales
             locales.sort()
 

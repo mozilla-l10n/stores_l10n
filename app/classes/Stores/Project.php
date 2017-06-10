@@ -285,12 +285,6 @@ class Project
         // Clean up list of locales supported in iOS products
         $this->shipping_locales['fx_ios']['release'] = self::cleanUpiOS($this->shipping_locales['fx_ios']['release']);
         $this->shipping_locales['focus_ios']['release'] = self::cleanUpiOS($this->shipping_locales['focus_ios']['release']);
-
-        // Add en-US to Android locales
-        foreach (['nightly', 'beta', 'release'] as $channel) {
-            $this->shipping_locales['fx_android'][$channel][] = 'en-US';
-            sort($this->shipping_locales['fx_android'][$channel]);
-        }
     }
 
     /**
@@ -306,7 +300,6 @@ class Project
             Some changes are needed from the raw list of locales for iOS:
             * es -> es-ES
             * ses -> son
-            * drop en-US
         */
         if (in_array('es', $shipping_locales)) {
             $shipping_locales = array_diff($shipping_locales, ['es']);
@@ -317,8 +310,6 @@ class Project
             $shipping_locales = array_diff($shipping_locales, ['ses']);
             $shipping_locales[] = 'son';
         }
-
-        $shipping_locales[] = 'en-US';
 
         // Make sure the list doesn't have duplicates and it's sorted
         $shipping_locales = array_unique($shipping_locales);

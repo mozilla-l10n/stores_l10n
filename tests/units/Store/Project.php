@@ -11,7 +11,7 @@ class Project extends atoum\test
     public function testCleanUpiOS()
     {
         $obj = new _Project();
-        $shipping_locales = ['ar', 'es', 'en-GB', 'ses', 'son', 'ta'];
+        $shipping_locales = ['ar', 'es', 'en-US', 'en-GB', 'ses', 'son', 'ta'];
         $shipping_locales = $obj->cleanUpiOS($shipping_locales);
 
         $this
