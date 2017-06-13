@@ -51,6 +51,12 @@ class Project
                 'name'     => 'Focus for iOS',
                 'store'    => 'apple',
             ],
+        'klar_android' =>
+            [
+                'channels' => ['release'],
+                'name'     => 'Klar for Android',
+                'store'    => 'google',
+            ],
     ];
 
     /**
@@ -250,6 +256,12 @@ class Project
                 'template'    => 'focus_android/release/listing_mar_2017.php',
                 'listing'     => 'focus_android/description_release.lang',
                 'screenshots' => 'focus_android/screenshots_v1.lang',
+            ],
+        ],
+        'klar_android' => [
+            'release' => [
+                'template'    => 'klar_android/release/listing_mar_2017.php',
+                'listing'     => 'klar_android/description_release.lang',
             ],
         ],
     ];

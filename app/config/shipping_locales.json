@@ -136,6 +136,7 @@
       "da", 
       "de", 
       "dsb", 
+      "el", 
       "en-GB", 
       "en-US", 
       "en-ZA", 
@@ -171,6 +172,7 @@
       "kk", 
       "kn", 
       "ko", 
+      "lo", 
       "lt", 
       "lv", 
       "mai", 
@@ -442,6 +444,14 @@
       "uz", 
       "zh-CN", 
       "zh-TW"
+    ]
+  }, 
+  "klar_android": {
+    "release": [
+      "de", 
+      "en-US", 
+      "fr", 
+      "it"
     ]
   }
 }

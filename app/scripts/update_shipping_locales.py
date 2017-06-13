@@ -21,12 +21,19 @@ def main():
     shipping_locales = {}
     for product, product_data in update_sources.iteritems():
         for data in product_data:
-            locales = []
-            print('Reading sources for {0} ({1})'.format(product, data['channel']))
-            response = urllib2.urlopen(data['source'])
-            for locale in response:
-                if locale != '' and locale not in locales:
-                    locales.append(locale.rstrip())
+            if data['format'] == 'array':
+                # Hard-coded list of locales
+                locales = data['source']
+            else:
+                # Get locales from a TXT source
+                locales = []
+                print('Reading sources for {0} ({1})'.format(product, data['channel']))
+                response = urllib2.urlopen(data['source'])
+                for locale in response:
+                    if locale != '' and locale not in locales:
+                        locales.append(locale.rstrip())
+
+            # Make sure to add en-US
             if 'en-US' not in locales:
                 locales.append('en-US')
             # Sort locales
