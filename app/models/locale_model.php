@@ -18,6 +18,7 @@ $get_length = function ($string) {
         maximum length.
     */
     $pattern = '/<span[^<]*?>([^<]*)<\/span>/im';
+
     return mb_strlen(trim(preg_replace($pattern, '$1', $string)));
 };
 
