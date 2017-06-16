@@ -10,7 +10,15 @@ $translations = new Translate($request['locale'], $lang_files, LOCALES_PATH);
 require TEMPLATES . $project->getTemplate($request['locale'], $request['product'], $request['channel']);
 
 $get_length = function ($string) {
-    return mb_strlen(trim(strip_tags($string)));
+    /*
+        In locale view a lot of markup is added: the string is injected in a
+        <span> with a style if untranslated, or with the original string as a
+        title if translated. Need to get rid of this markup to calculate the
+        length of the section, and can't strip tags since markup adds to the
+        maximum length.
+    */
+    $pattern = '/<span[^<]*?>([^<]*)<\/span>/im';
+    return mb_strlen(trim(preg_replace($pattern, '$1', $string)));
 };
 
 $set_limit = function ($type, $length) use ($store_limits) {
