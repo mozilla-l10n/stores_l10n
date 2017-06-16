@@ -22,35 +22,35 @@ $description = function ($translations) use ($_) {
     return <<<OUT
 {$_('Experience a fast, smart and personal Web.')} {$_('Firefox is the independent, people-first browser made by Mozilla, voted the Most Trusted Internet Company for Privacy.')} {$_('Upgrade today and join hundreds of millions who depend on Firefox for a more personal browsing experience.')}
 
-{$_('FAST. SMART. YOURS.')}
+<strong>{$_('FAST. SMART. YOURS.')}</strong>
 {$_('Firefox is made with you in mind and gives you the power to take back control of your Web experience.')}
 {$_('That’s why we design the product with smart features that take the guesswork out of browsing.')}
 
-{$_('SEARCH INTELLIGENTLY & GET THERE FASTER')}
+<strong>{$_('SEARCH INTELLIGENTLY & GET THERE FASTER')}</strong>
 - {$_('Firefox anticipates your needs and intuitively provides multiple suggested and previously searched results across your favorite search engines. Every time.')}
 - {$_('Easily access shortcuts to search providers including Wikipedia, Twitter and Amazon.')}
 
-{$_('NEXT LEVEL PRIVACY')}
+<strong>{$_('NEXT LEVEL PRIVACY')}</strong>
 - {$_('Your privacy has been upgraded.')} {$_('Private Browsing with Tracking Protection blocks parts of Web pages that may track your browsing activity.')}
 
-{$_('SYNC FIREFOX ACROSS YOUR DEVICES')}
+<strong>{$_('SYNC FIREFOX ACROSS YOUR DEVICES')}</strong>
 - {$_('With a Firefox Account, access your history, bookmarks and open tabs from your desktop on your smartphone and tablet.')}
 - {$_('Firefox also safely remembers your passwords across devices so you don’t have to.')}
 
-{$_('INTUITIVE VISUAL TABS')}
+<strong>{$_('INTUITIVE VISUAL TABS')}</strong>
 - {$_('Intuitive visual and numbered tabs easily let you find content for future reference.')}
 - {$_('Open as many tabs as you like without losing track of your open Web pages.')}
 
-{$_('EASY ACCESS TO YOUR TOP SITES')}
+<strong>{$_('EASY ACCESS TO YOUR TOP SITES')}</strong>
 - {$_('Spend your time reading your favorites sites instead of looking for them.')}
 
-{$_('ADD-ONS FOR EVERYTHING')}
+<strong>{$_('ADD-ONS FOR EVERYTHING')}</strong>
 - {$_('Take control of your Web experience by personalizing Firefox with add-ons like ad blockers, password and download managers and more.')}
 
-{$_('QUICK SHARE')}
+<strong>{$_('QUICK SHARE')}</strong>
 - {$_('Firefox remembers your most recently used apps to help you easily share content to Facebook, Twitter, WhatsApp, Skype and more.')}
 
-{$_('TAKE IT TO THE BIG SCREEN')}
+<strong>{$_('TAKE IT TO THE BIG SCREEN')}</strong>
 - {$_('Send video and Web content from your smartphone or tablet to any TV equipped with supported streaming capabilities.')}
 
 {$_('Learn more about Firefox for Android:')}
@@ -60,7 +60,7 @@ $description = function ($translations) use ($_) {
 - {$_('Like Firefox on Facebook: {{facebook_link}}', $replacements)}
 - {$_('Follow Firefox on Twitter: {{twitter_link}}', $replacements)}
 
-<b>{$_('ABOUT MOZILLA')}</b>
+<strong>{$_('ABOUT MOZILLA')}</strong>
 {$_('Mozilla exists to build the Internet as a public resource accessible to all because we believe open and free is better than closed and controlled.')} {$_('We build products like Firefox to promote choice and transparency and give people more control over their lives online.')} {$_('Learn more at {{mozilla_org_link}}', $replacements)}
 
 {$_('Privacy Policy: {{privacy_link}}', $replacements)}
