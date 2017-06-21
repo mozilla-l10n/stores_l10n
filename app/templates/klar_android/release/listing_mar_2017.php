@@ -5,7 +5,7 @@ namespace Stores;
 include INC . 'utilities.php';
 
 // Use new title only if it's translated
-if ($translations->isStringTranslated('Firefox Focus: The privacy browser')) {
+if ($translations->isStringTranslated('Firefox Klar: The privacy browser')) {
     $app_title = function ($translations) use ($_) {
         return $_('Firefox Klar: The privacy browser');
     };
