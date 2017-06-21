@@ -4,9 +4,16 @@ namespace Stores;
 // Include closure needed in template
 include INC . 'utilities.php';
 
-$app_title = function ($translations) use ($_) {
-    return $_('Firefox Focus: Private Browser');
-};
+// Use new title only if it's translated
+if ($translations->isStringTranslated('Firefox Focus: The privacy browser')) {
+    $app_title = function ($translations) use ($_) {
+        return $_('Firefox Focus: The privacy browser');
+    };
+} else {
+    $app_title = function ($translations) use ($_) {
+        return $_('Firefox Focus: Private Browser');
+    };
+}
 
 $description = function ($translations) use ($_) {
     return <<<OUT
