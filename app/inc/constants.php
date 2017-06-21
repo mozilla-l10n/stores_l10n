@@ -12,12 +12,15 @@ define('TEMPLATES', APP . 'templates/');
 define('MODELS', APP . 'models/');
 define('CONTROLLERS', APP . 'controllers/');
 
-// Length limits for stores
+/*
+    Length limits for stores.
+    For Android: https://support.google.com/googleplay/android-developer/answer/113469?hl=en
+*/
 $store_limits = [
     'apple_keywords'           => 100,
     'google_description'       => 4000,
     'google_short_description' => 80,
-    'google_title'             => 30,
+    'google_title'             => 50,
     'google_whatsnew'          => 500,
 ];
 
