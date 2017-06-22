@@ -94,7 +94,9 @@ if ($request->isTranslationRequired()) {
             }
         }
     }
-    $whatsnew_json = $done;
+    if ($done != ['en-US']) {
+        $whatsnew_json = $done;
+    }
 }
 
 switch ($service) {

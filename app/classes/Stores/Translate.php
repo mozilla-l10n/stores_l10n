@@ -142,6 +142,11 @@ class Translate extends DotLangParser
         }
 
         foreach ($this->source_strings as $value) {
+            // HACK: ignore new title for Focus for Android
+            if ($value == 'Firefox Focus: The privacy browser') {
+                continue;
+            }
+
             // Missing string in localized file
             if (! isset($this->translations[$value])) {
                 return false;
