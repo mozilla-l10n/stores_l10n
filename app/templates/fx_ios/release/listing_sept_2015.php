@@ -102,6 +102,9 @@ OUT;
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-• {$_('iPad users, all your open browser tabs now appear above the address bar for quick access.')}
+• {$_('Added a new tab experience that shows recently visited sites and highlights from previous visits')}
+• {$_('Ease the strain on your eyes by using the new Night Mode')}
+• {$_('Access QR codes through a built-in QR code reader')}
+• {$_('Automatically send a web page or tab to another Firefox synced device - across desktop, iOS and Android devices')}
 OUT;
 };
