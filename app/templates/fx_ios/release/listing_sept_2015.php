@@ -100,11 +100,27 @@ $other = function ($translations) use ($_) {
 OUT;
 };
 
-$whatsnew = function ($translations) use ($_) {
-    return <<<OUT
+$current_locale = is_array($request)
+    ? $request['locale'] // HTML view
+    : $request->query['locale']; // API object
+
+if ($current_locale == 'de') {
+    $whatsnew = function ($translations) use ($_) {
+        return <<<OUT
+• {$_('Added a new tab experience that shows recently visited sites and highlights from previous visits')}
+• {$_('Ease the strain on your eyes by using the new Night Mode')}
+• {$_('Access QR codes through a built-in QR code reader')}
+• {$_('Get feature recommendations and hints to improve your Firefox experience')}
+• {$_('Automatically send a web page or tab to another Firefox synced device - across desktop and mobile devices')}
+OUT;
+};
+} else {
+    $whatsnew = function ($translations) use ($_) {
+        return <<<OUT
 • {$_('Added a new tab experience that shows recently visited sites and highlights from previous visits')}
 • {$_('Ease the strain on your eyes by using the new Night Mode')}
 • {$_('Access QR codes through a built-in QR code reader')}
 • {$_('Automatically send a web page or tab to another Firefox synced device - across desktop and mobile devices')}
 OUT;
 };
+}
