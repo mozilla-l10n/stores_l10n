@@ -105,6 +105,6 @@ $whatsnew = function ($translations) use ($_) {
 • {$_('Added a new tab experience that shows recently visited sites and highlights from previous visits')}
 • {$_('Ease the strain on your eyes by using the new Night Mode')}
 • {$_('Access QR codes through a built-in QR code reader')}
-• {$_('Automatically send a web page or tab to another Firefox synced device - across desktop, and mobile devices')}
+• {$_('Automatically send a web page or tab to another Firefox synced device - across desktop and mobile devices')}
 OUT;
 };
