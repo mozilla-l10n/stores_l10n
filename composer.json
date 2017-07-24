@@ -16,15 +16,18 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/mozilla-l10n/phpclass-cache"
+            "url": "https://github.com/mozilla-l10n/phpclass-cache",
+            "no-api": true
         },
         {
             "type": "vcs",
-            "url": "https://github.com/mozilla-l10n/phpclass-json"
+            "url": "https://github.com/mozilla-l10n/phpclass-json",
+            "no-api": true
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pascalchevrel/Verif/"
+            "url": "https://github.com/pascalchevrel/Verif/",
+            "no-api": true
         }
     ],
 
