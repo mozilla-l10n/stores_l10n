@@ -4,7 +4,6 @@ app/config/config.inc.php
 cache/*.cache
 composer.lock
 composer.phar
-locales
 logs/api-errors.log
 logs/github_log.txt
 vendor
