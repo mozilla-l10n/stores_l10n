@@ -4,7 +4,6 @@
 define('INSTALL', realpath(__DIR__ . '/../../') . '/');
 define('APP', INSTALL . 'app/');
 define('WEB', INSTALL . 'web/');
-define('LOCALES_PATH', INSTALL . 'locales/');
 define('INC', APP . 'inc/');
 define('VIEWS', APP . 'views/');
 define('CONFIG', APP . 'config/');
@@ -31,6 +30,13 @@ if (! file_exists($settings_file)) {
 } else {
     require $settings_file;
 }
+
+// Make sure that $l10n_path ends with a slash
+if (! isset($l10n_path)) {
+    die('$l10n_path is missing in your configuration file. Please update app/config/config.inc.php');
+}
+$l10n_path = rtrim($l10n_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+define('LOCALES_PATH', $l10n_path);
 
 $protocol = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443
             ? 'https'
