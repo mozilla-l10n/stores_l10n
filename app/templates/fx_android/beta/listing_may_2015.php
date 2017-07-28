@@ -40,8 +40,8 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('New Greek and Lao locales')}
-* {$_('Double tap and drag gesture allows one-handed zooming, consistent with other Android applications')}
-* {$_('Font size on web pages now uses system font size settings')}
+* {$_('Android WebExtension API implemented')}
+* {$_('Utilize hardware encoders & decoders for WebRTC to save power consumption and improve performance')}
+* {$_('Support of Android 4.0 (API 15) ended')}
 OUT;
 };
