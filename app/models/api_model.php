@@ -134,10 +134,13 @@ switch ($service) {
             ];
         }
 
-        // Do we have a Whatsnew file for this release ?
-        if (isset($whatsnew)) {
-            $json['whatsnew'] = $whatsnew($translations);
-        }
+        /*
+            Always expose a "whatsnew" key in the JSON file, leave it empty in
+            case there's no content for this version.
+        */
+        $json['whatsnew'] = isset($whatsnew)
+            ? $whatsnew($translations)
+            : '';
         break;
     case 'whatsnew':
         $json = $whatsnew_json;
