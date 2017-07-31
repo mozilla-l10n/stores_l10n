@@ -43,11 +43,3 @@ $short_desc = function ($translations) use ($_) {
 $app_title = function ($translations) use ($_) {
     return $_('Firefox Nightly for Developers');
 };
-
-$whatsnew = function ($translations) use ($_, $replacements) {
-    return <<<OUT
-{$_('Your app is up to date!')}
-
-{$_('Firefox Aurora is no longer available and has transitioned to Firefox Nightly in order to streamline our releases and get new features quickly out to users. No action is needed from you - just keep supporting the open web by using this developer version of Firefox. More details here: {{dawn_post}}', $replacements)}
-OUT;
-};

@@ -233,7 +233,6 @@ class Project
             'nightly' => [
                 'template' => 'fx_android/nightly/listing_may_2017.php',
                 'listing'  => 'fx_android/description_nightly.lang',
-                'whatsnew' => 'fx_android/whatsnew/android_nightly.lang',
             ],
         ],
         'fx_ios' => [

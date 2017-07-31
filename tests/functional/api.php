@@ -46,7 +46,6 @@ $paths = [
     ['v1/fx_android/translation/nightly/en-US/', 200, false],
     ['v1/fx_android/whatsnew/release/', 200, false],
     ['v1/fx_android/whatsnew/beta/', 200, false],
-    ['v1/fx_android/whatsnew/nightly/', 200, false],
     ['v1/fx_ios/whatsnew/release/', 200, false],
     ['v1/focus_ios/whatsnew/release/', 200, false],
     ['v1/fx_android/listing/release/', 200, false],
