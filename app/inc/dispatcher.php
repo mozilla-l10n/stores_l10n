@@ -18,6 +18,10 @@ switch ($url['path']) {
     case Utils::StartsWith($url['path'], 'locale'):
         $controller = 'locale';
         break;
+    case Utils::StartsWith($url['path'], 'product'):
+        $controller = 'product';
+        $template = false;
+        break;
     default:
         $controller = 'home';
         break;

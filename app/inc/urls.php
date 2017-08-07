@@ -5,4 +5,5 @@ $urls = [
     'api',
     'documentation',
     'locale',
+    'product',
 ];

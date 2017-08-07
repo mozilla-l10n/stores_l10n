@@ -6,3 +6,7 @@ pre {
 h2.bg-primary {
     padding: 0.2em 0.4em;
 }
+
+#whatsnew_area {
+    min-height: 700px;
+}

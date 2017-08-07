@@ -599,4 +599,18 @@ class Project
 
         return $templates;
     }
+
+    /**
+     * Return true if whatsnew is available for product/channel
+     *
+     * @param string $product Product ID
+     * @param string $channel Channel ID
+     *
+     * @return boolean True if product/channel has a whatsnew section,
+     *                 false otherwise
+     */
+    public function hasWhatsnew($product, $channel)
+    {
+        return in_array('whatsnew', array_keys($this->templates[$product][$channel]));
+    }
 }
