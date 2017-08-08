@@ -263,6 +263,17 @@ class Project extends atoum\test
                 ->isFalse();
     }
 
+    public function testHasWhatsnew()
+    {
+        $obj = new _Project();
+        $this
+            ->boolean($obj->hasWhatsnew('fx_android', 'release'))
+                ->isTrue();
+        $this
+            ->boolean($obj->hasWhatsnew('fx_android', 'nightly'))
+                ->isFalse();
+    }
+
     public function testGetLangFiles()
     {
         $obj = new _Project();

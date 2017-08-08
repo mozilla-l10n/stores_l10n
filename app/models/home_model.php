@@ -31,6 +31,20 @@ $html_table = function ($table_id, $table_title, $product, $channel) use ($statu
         <tr>
             <th class="text-center" colspan="5"><?=$table_title?></th>
         </tr>
+    <?php
+        if ($project->getProductStore($product) == 'google' &&
+            $project->hasWhatsnew($product, $channel)) {
+            $display_link = BASE_HTML_URL . "product/{$product}/{$channel}/whatsnew/";
+            $raw_link = "{$display_link}raw";
+    ?>
+            <tr>
+                <td colspan="5">
+                    <strong>What's New content for Play store:</strong> <a href="<?=$display_link?>" class="btn btn-info btn-sm">Show</a> <a href="<?=$raw_link?>" class="btn btn-info btn-sm">TXT</a>
+                </td>
+            </tr>
+    <?php
+        }
+    ?>
         <tr>
             <th class="text-center">Locale</th>
             <th class="text-center">Completion</th>
