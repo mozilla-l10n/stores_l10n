@@ -103,7 +103,6 @@ $short_desc = function ($translations) use ($_) {
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
 * {$_('New Greek and Lao locales')}
-* {$_('Double tap and drag gesture allows one-handed zooming, consistent with other Android applications')}
 * {$_('Font size on web pages now uses system font size settings')}
 OUT;
 };
