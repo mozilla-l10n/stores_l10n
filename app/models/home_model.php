@@ -7,7 +7,7 @@ foreach ($project->getSupportedProducts() as $product_id) {
     foreach ($project->getProductChannels($product_id) as $channel_id) {
         // Get supported locales
         $store_locales = $project->getStoreMozillaCommonLocales($product_id, $channel_id);
-
+        $store = $project->getProductStore($product_id);
         foreach ($store_locales as $store_locale) {
             if ($store_locale == 'en-US') {
                 // Always consider en-US done
@@ -15,8 +15,39 @@ foreach ($project->getSupportedProducts() as $product_id) {
             } else {
                 // Examine both listing and whatsnew
                 $lang_files = $project->getLangFiles($store_locale, $product_id, $channel_id, 'all');
-                $obj = new Translate($store_locale, $lang_files, LOCALES_PATH);
-                $status[$product_id][$channel_id][$store_locale] = $obj->isFileTranslated() ? 'translated' : '';
+                $translations = new Translate($store_locale, $lang_files, LOCALES_PATH);
+
+                $done = false;
+                // Check for limit errors
+                if ($translations->isFileTranslated()) {
+                    // Include the current template
+                    require TEMPLATES . $project->getTemplate($store_locale, $product_id, $channel_id);
+
+                    switch ($store) {
+                        case 'google':
+                            $desc_status = $set_limit('google_description', $description($translations));
+                            $title_status = $set_limit('google_title', $app_title($translations));
+                            $short_desc_status = $set_limit('google_short_description', $short_desc($translations));
+                            $overall_status = $desc_status + $title_status + $short_desc_status;
+                            if ($overall_status == 3) {
+                                $done = true;
+                            }
+                            break;
+                        case 'apple':
+                            $keywords_status = $set_limit('apple_keywords', $keywords($translations));
+                            $title_status = $set_limit('apple_title', $get_length($app_title($translations)));
+                            $subtitle_status = $set_limit('apple_subtitle', $get_length($app_subtitle($translations)));
+                            $overall_status = $keywords_status + $title_status + $subtitle_status;
+                            if ($overall_status == 3) {
+                                $done = true;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                $status[$product_id][$channel_id][$store_locale] = $done ? 'translated' : '';
             }
         }
     }

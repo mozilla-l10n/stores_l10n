@@ -104,9 +104,17 @@ $other = function ($translations) use ($_) {
 OUT;
 };
 
-$current_locale = is_array($request)
-    ? $request['locale'] // HTML view
-    : $request->query['locale']; // API object
+$current_locale = '';
+if (isset($request)) {
+    $current_locale = is_array($request)
+        ? $request['locale'] // HTML view
+        : $request->query['locale']; // API object
+} else {
+    // Home view
+    if (isset($store_locale)) {
+        $current_locale = $store_locale;
+    }
+}
 
 if ($current_locale == 'de') {
     $whatsnew = function ($translations) use ($_) {
