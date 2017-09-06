@@ -51,4 +51,6 @@ if ($store == 'google') {
 // Apple App Store also has lengths constraints
 if ($store == 'apple') {
     $keywords_warning = $set_limit('apple_keywords', $get_length($keywords($translations)));
+    $title_warning = $set_limit('apple_title', $get_length($app_title($translations)));
+    $subtitle_warning = $set_limit('apple_subtitle', $get_length($app_subtitle($translations)));
 }

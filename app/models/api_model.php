@@ -38,16 +38,20 @@ if ($request->isTranslationRequired()) {
 
             switch ($store) {
                 case 'google':
-                    $desc = $set_limit('google_description', $description($translations));
-                    $title = $set_limit('google_title', $app_title($translations));
-                    $short_desc = $set_limit('google_short_description', $short_desc($translations));
-
-                    if (($desc + $title + $short_desc) == 3) {
+                    $desc_status = $set_limit('google_description', $description($translations));
+                    $title_status = $set_limit('google_title', $app_title($translations));
+                    $short_desc_status = $set_limit('google_short_description', $short_desc($translations));
+                    $overall_status = $desc_status + $title_status + $short_desc_status;
+                    if ($overall_status == 3) {
                         $done[] = $template_locale;
                     }
                     break;
                 case 'apple':
-                    if ($set_limit('apple_keywords', $keywords($translations))) {
+                    $keywords_status = $set_limit('apple_keywords', $keywords($translations));
+                    $title_status = $set_limit('apple_title', $get_length($app_title($translations)));
+                    $subtitle_status = $set_limit('apple_subtitle', $get_length($app_subtitle($translations)));
+                    $overall_status = $keywords_status + $title_status + $subtitle_status;
+                    if ($overall_status == 3) {
                         $done[] = $template_locale;
                     }
                     break;

@@ -8,6 +8,10 @@ $app_title = function ($translations) use ($_) {
     return $_('Firefox Web Browser');
 };
 
+$app_subtitle = function ($translations) use ($_) {
+    return $_('Fast and private browsing');
+};
+
 $description = function ($translations) use ($_) {
     $replacements = [
         '{{support_link}}'     => 'https://support.mozilla.org/mobile',

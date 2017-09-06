@@ -5,7 +5,11 @@ namespace Stores;
 include INC . 'utilities.php';
 
 $app_title = function ($translations) use ($_) {
-    return $_('Firefox Focus: The privacy browser');
+    return $_('Firefox Focus: Privacy Browser');
+};
+
+$app_subtitle = function ($translations) use ($_) {
+    return $_('Always-on ad blocking');
 };
 
 $description = function ($translations) use ($_) {
