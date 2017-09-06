@@ -133,6 +133,7 @@ switch ($service) {
         if ($store == 'apple') {
             $json = [
                 'title'       => $app_title($translations),
+                'subtitle'    => $app_subtitle($translations),
                 'description' => strip_tags(br2nl($description($translations))),
                 'keywords'    => $keywords($translations),
             ];
