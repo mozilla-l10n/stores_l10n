@@ -16,6 +16,8 @@ define('CONTROLLERS', APP . 'controllers/');
     For Android: https://support.google.com/googleplay/android-developer/answer/113469?hl=en
 */
 $store_limits = [
+    'apple_title'              => 30,
+    'apple_subtitle'           => 30,
     'apple_keywords'           => 100,
     'google_description'       => 4000,
     'google_short_description' => 80,

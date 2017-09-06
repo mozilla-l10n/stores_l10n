@@ -1,7 +1,10 @@
 <h1>Firefox for iOS Listing Copy (<?= $request['locale'] ?>)</h1>
 
-<h3>Title</h3>
+<h3>Title <?= $title_warning ?></h3>
 <pre <?= $direction ?> contenteditable="true"><?= htmlspecialchars($app_title($translations)) ?></pre>
+
+<h3>Subtitle <?= $subtitle_warning ?></h3>
+<pre <?= $direction ?> contenteditable="true"><?= htmlspecialchars($app_subtitle($translations)) ?></pre>
 
 <h3>Description</h3>
 <pre <?= $direction ?> contenteditable="true"><?= strip_tags($description($translations)) ?></pre>
