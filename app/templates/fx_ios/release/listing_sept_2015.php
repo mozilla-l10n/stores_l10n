@@ -116,23 +116,10 @@ if (isset($request)) {
     }
 }
 
-if ($current_locale == 'de') {
-    $whatsnew = function ($translations) use ($_) {
+$whatsnew = function ($translations) use ($_) {
         return <<<OUT
-• {$_('Added a new tab experience that shows recently visited sites and highlights from previous visits')}
-• {$_('Ease the strain on your eyes by using the new Night Mode')}
-• {$_('Access QR codes through a built-in QR code reader')}
-• {$_('Get feature recommendations and hints to improve your Firefox experience')}
-• {$_('Automatically send a web page or tab to another Firefox synced device - across desktop and mobile devices')}
+• {$_('Tracking protection is now enabled in private browsing mode by default. Firefox will automatically block third party trackers, which limits ads following you around the internet and increases browsing speed.')}
+• {$_('Improved sync functionality between your mobile and desktop versions of Firefox. Update passwords, history and bookmarks on mobile and access them on your desktop browser (and vice versa).')}
+• {$_('Compatibility with iOS 11.')}
 OUT;
 };
-} else {
-    $whatsnew = function ($translations) use ($_) {
-        return <<<OUT
-• {$_('Added a new tab experience that shows recently visited sites and highlights from previous visits')}
-• {$_('Ease the strain on your eyes by using the new Night Mode')}
-• {$_('Access QR codes through a built-in QR code reader')}
-• {$_('Automatically send a web page or tab to another Firefox synced device - across desktop and mobile devices')}
-OUT;
-};
-}
