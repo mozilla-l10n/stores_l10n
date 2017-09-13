@@ -48,8 +48,8 @@ if ($request->isTranslationRequired()) {
                     break;
                 case 'apple':
                     $keywords_status = $set_limit('apple_keywords', $keywords($translations));
-                    $title_status = $set_limit('apple_title', $get_length($app_title($translations)));
-                    $subtitle_status = $set_limit('apple_subtitle', $get_length($app_subtitle($translations)));
+                    $title_status = $set_limit('apple_title', $app_title($translations));
+                    $subtitle_status = $set_limit('apple_subtitle', $app_subtitle($translations));
                     $overall_status = $keywords_status + $title_status + $subtitle_status;
                     if ($overall_status == 3) {
                         $done[] = $template_locale;
