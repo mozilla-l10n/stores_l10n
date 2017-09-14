@@ -107,7 +107,7 @@ class Project
             'ja'      => 'ja',
             'ko'      => 'ko',
             'ms'      => 'ms',
-            'nl'      => 'nl',
+            'nl-NL'   => 'nl',
             'no'      => 'nb-NO',
             'pt-BR'   => 'pt-BR',
             'pt-PT'   => 'pt-PT',
