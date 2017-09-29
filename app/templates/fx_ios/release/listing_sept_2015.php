@@ -38,7 +38,6 @@ $description = function ($translations) use ($_) {
 - {$_('Your personal information belongs to you. In Private Browsing mode, Firefox won’t remember any of your history or cookies, but new bookmarks will be saved.')}
 - {$_('Delete your browsing history, passwords and more in a single tap.')}
 - {$_('Choose the private data you want to remove.')}
-- **{$_('iOS 9 required for Private Browsing mode')}**
 
 {$_('SYNC FIREFOX ACROSS YOUR DEVICES')}
 - {$_('With a Firefox Account, access your history, bookmarks and open tabs from your desktop on your smartphone and tablet.')}
