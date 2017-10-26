@@ -118,7 +118,7 @@ if (isset($request)) {
 if (in_array($current_locale, ['de', 'en-US'])) {
     $whatsnew = function ($translations) use ($_) {
         return <<<OUT
-• {$_('Firefox has a new look and feel that we call “Photon”. It’s a modern design that puts users’ needs first - with easier access to the menu, rearranged menu items and an updated minimalist look. Take a peek!')}
+• {$_('Firefox has a new look and feel that we call “Photon.” It’s a modern design that puts users’ needs first - with easier access to the menu, rearranged menu items and an updated minimalist look. Take a peek!')}
 • {$_('“Highlights” appear when opening a new tab to allow you to easily jump back to a previously viewed site.')}
 • {$_('Search suggestions are enabled by default, unless you have previously opted out.')}
 • {$_('Added “No Image” mode to allow you to automatically block images from loading.')}
@@ -128,7 +128,7 @@ OUT;
 } else {
     $whatsnew = function ($translations) use ($_) {
         return <<<OUT
-• {$_('Firefox has a new look and feel that we call “Photon”. It’s a modern design that puts users’ needs first - with easier access to the menu, rearranged menu items and an updated minimalist look. Take a peek!')}
+• {$_('Firefox has a new look and feel that we call “Photon.” It’s a modern design that puts users’ needs first - with easier access to the menu, rearranged menu items and an updated minimalist look. Take a peek!')}
 • {$_('“Highlights” appear when opening a new tab to allow you to easily jump back to a previously viewed site.')}
 • {$_('Search suggestions are enabled by default, unless you have previously opted out.')}
 • {$_('Added “No Image” mode to allow you to automatically block images from loading.')}
