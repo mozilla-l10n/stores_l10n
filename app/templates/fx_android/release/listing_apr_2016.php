@@ -102,8 +102,8 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Android WebExtension API implemented')}
-* {$_('Utilize hardware encoders & decoders for WebRTC to save power consumption and improve performance')}
-* {$_('Support of Android 4.0 (API 15) ended')}
+* {$_('A clean, modern visual refresh')}
+* {$_('An all-new home page with quick access to top sites and recent history')}
+* {$_('An experience designed in parallel with the new Firefox Quantum, our fast, modern desktop browser')}
 OUT;
 };
