@@ -102,8 +102,9 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('A clean, modern visual refresh')}
-* {$_('An all-new home page with quick access to top sites and recent history')}
-* {$_('An experience designed in parallel with the new Firefox Quantum, our fast, modern desktop browser')}
+* {$_('Added the ability for users to add websites to home screen like native applications')}
+* {$_('Added support for FLAC (Free Lossless Audio Codec) playback')}
+* {$_('Added Bengali from Bangladesh (bn-BD) and Nepali (ne-NP) locales')}
+* {$_('Removed the Firefox Search widget from home screen')}
 OUT;
 };
