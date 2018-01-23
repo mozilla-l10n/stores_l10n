@@ -41,6 +41,5 @@ $app_title = function ($translations) use ($_) {
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
 * {$_('Improved user experience on HTTP Live Streaming (HLS) media playback')}
-* {$_('Our super fast CSS engine, Quantum CSS (aka Stylo), has now also been enabled in Firefox for Android')}
 OUT;
 };
