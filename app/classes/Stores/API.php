@@ -110,7 +110,7 @@ class API
      */
     public function __construct($url = null)
     {
-        if (isset($url)) {
+        if (isset($url) && ! empty($url)) {
             if (! isset($url['path'])) {
                 $url['path'] = '';
             }
