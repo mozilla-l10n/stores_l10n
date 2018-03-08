@@ -2,6 +2,8 @@
   "focus_android": {
     "release": [
       "am", 
+      "an", 
+      "anp", 
       "ar", 
       "ast", 
       "az", 
@@ -29,6 +31,7 @@
       "fr", 
       "fy-NL", 
       "ga-IE", 
+      "gu-IN", 
       "he", 
       "hi-IN", 
       "hr", 
@@ -68,6 +71,7 @@
       "th", 
       "tr", 
       "trs", 
+      "tt", 
       "uk", 
       "ur", 
       "vi", 
@@ -80,6 +84,7 @@
   "focus_ios": {
     "release": [
       "af", 
+      "an", 
       "ar", 
       "ast", 
       "az", 
@@ -429,6 +434,7 @@
       "uk", 
       "ur", 
       "uz", 
+      "vi", 
       "wo", 
       "xh", 
       "zam", 

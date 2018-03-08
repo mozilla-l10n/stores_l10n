@@ -102,9 +102,6 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Added the ability for users to add websites to home screen like native applications')}
-* {$_('Added support for FLAC (Free Lossless Audio Codec) playback')}
-* {$_('Added Bengali from Bangladesh (bn-BD) and Nepali (ne-NP) locales')}
-* {$_('Removed the Firefox Search widget from home screen')}
+* {$_('Improved user experience on HTTP Live Streaming (HLS) media playback')}
 OUT;
 };
