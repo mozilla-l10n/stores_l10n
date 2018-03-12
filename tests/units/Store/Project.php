@@ -304,4 +304,52 @@ class Project extends atoum\test
             ->array($obj->getLangFiles('fr', 'fx_android', 'beta', 'whatsnew'))
                 ->hassize(1);
     }
+
+    public function testGetLatestVersion()
+    {
+        $obj = new _Project();
+
+        // Override the $templates array
+        $obj->templates = [
+            'fx_android' => [
+                'release' => [
+                    'whatsnew' => 'fx_android/whatsnew/android_59.lang',
+                ],
+                'beta' => [
+                    'whatsnew' => 'fx_android/whatsnew/android_60.lang',
+                ],
+                'nightly' => [],
+            ],
+            'fx_ios' => [
+                'release' => [
+                    'template' => 'fx_ios/release/listing_sept_2015.php',
+                ],
+            ],
+        ];
+        $this
+            ->integer($obj->getLatestVersion('fx_android'))
+                ->isEqualTo(60);
+        $this
+            ->integer($obj->getLatestVersion('fx_ios'))
+                ->isEqualTo(0);
+        $this
+            ->integer($obj->getLatestVersion('foo'))
+                ->isEqualTo(0);
+
+        // Override the $templates array
+        $obj->templates = [
+            'fx_android' => [
+                'release' => [
+                    'whatsnew' => 'fx_android/whatsnew/android_57_b.lang',
+                ],
+                'beta' => [
+                    'whatsnew' => 'fx_android/whatsnew/android_48c.lang',
+                ],
+                'nightly' => [],
+            ],
+        ];
+        $this
+            ->integer($obj->getLatestVersion('fx_android'))
+                ->isEqualTo(57);
+    }
 }

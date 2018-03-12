@@ -5,13 +5,14 @@ namespace Stores;
 $json = $done = [];
 $channel = isset($request->query['channel']) ? $request->query['channel'] : '';
 $locale = isset($request->query['locale']) ? $request->query['locale'] : '';
+$product_version = isset($request->query['version']) ? $request->query['version'] : '';
 $store = $request->query['store'];
 $product = $request->query['product'];
 $service = $request->getService();
 
 if ($request->isTranslationRequired()) {
     /*
-        The Done API returns the status of a locale which can have mutiple files
+        The Done API returns the status of a locale which can have multiple files
         to translate. Specifically, for Google channels, localizers should
         translate the listing page on Google Play but also periodically a file that
         contains strings for the What's New pane.
@@ -122,26 +123,33 @@ switch ($service) {
 
         require MODELS . 'locale_model.php';
 
-        if ($store == 'google') {
-            $json = [
-                'title'      => $app_title($translations),
-                'short_desc' => $short_desc($translations),
-                'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translations)),
-            ];
-        }
+        if ($product_version == '') {
+            // There is no numeric version specified, so it's a standard
+            // translation API request, i.e. {product}/translation/{channel}/{locale}
+            if ($store == 'google') {
+                $json = [
+                    'title'      => $app_title($translations),
+                    'short_desc' => $short_desc($translations),
+                    'long_desc'  => str_replace(["\r", "\n"], "\n", $description($translations)),
+                ];
+            }
 
-        if ($store == 'apple') {
-            $json = [
-                'title'       => $app_title($translations),
-                'subtitle'    => $app_subtitle($translations),
-                'description' => strip_tags(br2nl($description($translations))),
-                'keywords'    => $keywords($translations),
-            ];
+            if ($store == 'apple') {
+                $json = [
+                    'title'       => $app_title($translations),
+                    'subtitle'    => $app_subtitle($translations),
+                    'description' => strip_tags(br2nl($description($translations))),
+                    'keywords'    => $keywords($translations),
+                ];
+            }
         }
 
         /*
             Always expose a "whatsnew" key in the JSON file, leave it empty in
             case there's no content for this version.
+
+            For requests like {product}/translation/{version_number}/{locale}
+            it's going to be the only content returned.
         */
         $json['whatsnew'] = isset($whatsnew)
             ? $whatsnew($translations)

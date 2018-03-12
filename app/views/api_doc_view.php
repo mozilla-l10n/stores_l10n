@@ -1,5 +1,6 @@
 <?php
 $api_version = $request->getCurrentAPIVersion();
+$android_latest_version = $project->getLatestVersion('fx_android');
 $base = '<em class="dim">' . BASE_HTML_URL . "api/{$api_version}/</em>";
 ?>
 <div class="page-header">
@@ -114,6 +115,19 @@ $base = '<em class="dim">' . BASE_HTML_URL . "api/{$api_version}/</em>";
     ]
 }</code></pre>
 </p>
+
+<h3 class="text-primary">{product}/translation/{version_number}/{locale}/</h3>
+<h4>Description:</h4>
+<p>Return the translation for the What’s new content of a specific version.</p>
+<h4>Examples:</h4>
+<p>Translation of the Google Play What’s new content for Japanese, for version 60: <?=$base?><a href="api/<?=$api_version?>/fx_android/translation/<?=$android_latest_version?>/ja/">fx_android/translation/<?=$android_latest_version?>/ja/</a></p>
+<h4>Output:</h4>
+<p>
+<pre><code class="json">{
+    "whatsnew": "Blabla"
+}</code></pre>
+</p>
+
 <h2 class="bg-primary">Notes</h2>
 <ol>
     <li>Invalid API calls return a 400 HTTP error and a json file explaining the problem with this format:

@@ -3,6 +3,7 @@ namespace tests\units\Stores;
 
 use atoum;
 use Stores\API as _API;
+use Stores\Project as _Project;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -35,6 +36,10 @@ class API extends atoum\test
             ],
             [
                 ['path' => 'api/fx_android/translation/beta/de/'],
+                'translation',
+            ],
+            [
+                ['path' => 'api/fx_android/translation/59/de/'],
                 'translation',
             ],
         ];
@@ -82,6 +87,16 @@ class API extends atoum\test
                 ['path' => 'api/v1/fx_android/translation/beta/de/'],
                 true,
             ],
+            # Failure because the version is unsupported
+            [
+                ['path' => 'api/v1/fx_android/translation/50/de/'],
+                false,
+            ],
+            # Failure because the version is not numeric
+            [
+                ['path' => 'api/v1/fx_android/translation/59test/de/'],
+                false,
+            ],
             // Legacy call (products: google, apple), unsupported
             [
                 ['path' => 'api/v1/apple/done/release/'],
@@ -103,6 +118,16 @@ class API extends atoum\test
         $this
             ->boolean($obj->isValidRequest())
                 ->isEqualTo($b);
+    }
+
+    public function testCurrentWhatsnewAPI()
+    {
+        $project = new _Project();
+        $version = $project->getLatestVersion('fx_android');
+        $obj = new _API(['path' => "api/v1/fx_android/translation/{$version}/de/"]);
+        $this
+            ->boolean($obj->isValidRequest())
+                ->isTrue();
     }
 
     public function isValidAPIVersionDP()
@@ -212,6 +237,10 @@ class API extends atoum\test
             ],
             [
                 ['path' => 'api/fx_android/translation/beta/de/'],
+                true,
+            ],
+            [
+                ['path' => 'api/fx_android/translation/59/de/'],
                 true,
             ],
         ];

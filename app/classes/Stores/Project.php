@@ -228,7 +228,7 @@ class Project
             'beta' => [
                 'template' => 'fx_android/beta/listing_may_2015.php',
                 'listing'  => 'fx_android/description_beta.lang',
-                'whatsnew' => 'fx_android/whatsnew/android_60_beta.lang',
+                'whatsnew' => 'fx_android/whatsnew/android_60.lang',
             ],
             'nightly' => [
                 'template' => 'fx_android/nightly/listing_may_2017.php',
@@ -388,18 +388,46 @@ class Project
     }
 
     /**
+     * Extract the latest version of product ID from the lang filename
+     *
+     * @param string $product Product ID
+     *
+     * @return string Latest version
+     */
+    public function getLatestVersion($product)
+    {
+        $latest_version = 0;
+        $supported_channels = $this->getProductChannels($product);
+        foreach ($supported_channels as $channel) {
+            if ($this->hasWhatsnew($product, $channel)) {
+                $whatsnewfiles = $this->getLangFiles('en-US', $product, $channel, 'whatsnew');
+                $matches = [];
+                // Examples of lang file name: android_60.lang, android_60a.lang, android_60_b.lang
+                if (preg_match('/.*_(\d+)(?:[_a-z])*\.lang/i', $whatsnewfiles[0], $matches)) {
+                    $version_number = $matches[1];
+                    if (intval($version_number) > $latest_version) {
+                        $latest_version = intval($version_number);
+                    }
+                }
+            }
+        }
+
+        return $latest_version;
+    }
+
+    /**
      * Get the channels supported for product ID
      *
-     * @param string  $product      Product ID
-     * @param boolean $all_channels If true, returns all locales supported
-     *                              by product, not just those supported
-     *                              for store localization
+     * @param string  $product  Product ID
+     * @param boolean $shipping If true, returns all locales supported
+     *                          by product, not just those supported
+     *                          for store localization
      *
      * @return array List of supported channels
      */
-    public function getProductChannels($product, $all_channels = false)
+    public function getProductChannels($product, $shipping = false)
     {
-        if ($all_channels) {
+        if ($shipping) {
             return isset($this->shipping_locales[$product])
                 ? array_keys($this->shipping_locales[$product])
                 : [];
