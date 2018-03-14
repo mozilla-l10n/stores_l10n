@@ -163,6 +163,19 @@ class API
 
             if ($this->query['service'] == 'translation' && isset($this->parameters[3])) {
                 $this->query['locale'] = $this->parameters[3];
+                /*
+                    At this point the second parameter is treated as a channel.
+                    For /translation it can also be a numeric version:
+                    - {product}/translation/{channel}/{locale}
+                    - {product}/translation/{version_number}/{locale}
+
+                    If the channel is unsupported, assume it's a version number,
+                    further checks are performed later.
+                */
+                $supported_channels = $this->project->getProductChannels($this->query['product']);
+                if (! in_array($this->query['channel'], $supported_channels)) {
+                    $this->query['version'] = $this->parameters[2];
+                }
             }
         }
     }
@@ -266,20 +279,62 @@ class API
                 break;
             case 'translation':
                 // {product}/translation/{channel}/{locale}
+                // {product}/translation/{version_number}/{locale}
                 if (! $this->verifyEnoughParameters(4)) {
                     return false;
                 }
 
-                if (! in_array($this->query['channel'], $supported_channels)) {
-                    $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
+                if (isset($this->query['version'])) {
+                    // {product}/translation/{version_number}/{locale}
 
-                    return false;
-                }
+                    // Check if the version is numeric
+                    if (! intval($this->query['version'])) {
+                        $this->log("'{$this->query['version']}' is not a numeric version.");
 
-                if (! in_array($this->query['locale'], $this->project->getStoreMozillaCommonLocales($this->query['product'], $this->query['channel']))) {
-                    $this->log("'{$this->query['locale']}' is not a supported locale for {$this->query['product']}/{$this->query['channel']}.");
+                        return false;
+                    }
 
-                    return false;
+                    /*
+                        Check if this version is known to the system by looking
+                        into template names. For example, the lang file used for
+                        version 60 of whatsnew content for Android should be
+                        called android_60.lang
+                    */
+                    $supported_channels = $this->project->getProductChannels($this->query['product']);
+                    $supported_version = false;
+                    foreach ($supported_channels as $channel) {
+                        if ( !$supported_version && $this->project->hasWhatsnew($this->query['product'], $channel)) {
+                            $whatsnewfiles = $this->project->getLangFiles(
+                                $this->query['locale'],
+                                $this->query['product'],
+                                $channel,
+                                'whatsnew'
+                            );
+                            if (! empty($whatsnewfiles) && strpos($whatsnewfiles[0], "_{$this->query['version']}") !== false) {
+                                // Store the channel this version is mapped to
+                                $this->query['channel'] = $channel;
+                                $supported_version = true;
+                            }
+                        }
+                    }
+                    if (! $supported_version) {
+                        $this->log("'{$this->query['version']}' is not a supported version for {$this->query['product']} or this product doesn't support What's new content.");
+
+                        return false;
+                    }
+                } else {
+                    // {product}/translation/{channel}/{locale}
+                    if (! in_array($this->query['channel'], $supported_channels)) {
+                        $this->log("'{$this->query['channel']}' is not a supported channel for {$this->query['product']}.");
+
+                        return false;
+                    }
+
+                    if (! in_array($this->query['locale'], $this->project->getStoreMozillaCommonLocales($this->query['product'], $this->query['channel']))) {
+                        $this->log("'{$this->query['locale']}' is not a supported locale for {$this->query['product']}/{$this->query['channel']}.");
+
+                        return false;
+                    }
                 }
                 break;
             case 'storelocales':

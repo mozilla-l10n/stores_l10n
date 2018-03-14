@@ -9,6 +9,9 @@ date_default_timezone_set('Europe/Paris');
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+require INSTALL_ROOT . '/app/inc/init.php';
+$android_latest_version = $project->getLatestVersion('fx_android');
+
 // Launch PHP dev server in the background
 chdir(INSTALL_ROOT);
 exec('./start.sh -tests-server > /dev/null 2>&1 & echo $!', $output);
@@ -39,6 +42,8 @@ $paths = [
     ['v1/klar_android/done/release/', 200, false],
     ['v1/focus_ios/done/release/', 200, false],
     ['v1/fx_android/translation/release/ja/', 200, false],
+    ['v1/fx_android/translation/10/ja/', 400, false],
+    ["v1/fx_android/translation/{$android_latest_version}/fr/", 200, false],
     ['v1/fx_android/translation/release/en-US/', 200, false],
     ['v1/fx_android/translation/beta/fr/', 200, false],
     ['v1/fx_android/translation/beta/en-US/', 200, false],
@@ -110,6 +115,11 @@ $obj
     ->setPath('fx_android/translation/beta/fr/')
     ->fetchContent()
     ->hasKeys(['title',  'short_desc', 'long_desc', 'whatsnew']);
+
+$obj
+    ->setPath("fx_android/translation/{$android_latest_version}/fr/")
+    ->fetchContent()
+    ->hasKeys(['whatsnew']);
 
 $obj->report();
 
