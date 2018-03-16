@@ -282,22 +282,7 @@ class Project
      *
      * @var array
      */
-    public $templates_overrides = [
-       'de' => [
-           'fx_ios' => [
-               'release' => [
-                   'whatsnew' => 'fx_ios/whatsnew/ios_10b.lang',
-               ],
-           ],
-       ],
-       'en-US' => [
-           'fx_ios' => [
-               'release' => [
-                   'whatsnew' => 'fx_ios/whatsnew/ios_10b.lang',
-               ],
-           ],
-       ],
-     ];
+    public $templates_overrides = [];
 
     public function __construct()
     {
