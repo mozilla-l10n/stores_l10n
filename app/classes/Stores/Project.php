@@ -239,7 +239,7 @@ class Project
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
                 'listing'  => 'fx_ios/description_release.lang',
-                'whatsnew' => 'fx_ios/whatsnew/ios_10.lang',
+                'whatsnew' => 'fx_ios/whatsnew/ios_11.lang',
             ],
         ],
         'focus_ios' => [
@@ -282,22 +282,7 @@ class Project
      *
      * @var array
      */
-    public $templates_overrides = [
-       'de' => [
-           'fx_ios' => [
-               'release' => [
-                   'whatsnew' => 'fx_ios/whatsnew/ios_10b.lang',
-               ],
-           ],
-       ],
-       'en-US' => [
-           'fx_ios' => [
-               'release' => [
-                   'whatsnew' => 'fx_ios/whatsnew/ios_10b.lang',
-               ],
-           ],
-       ],
-     ];
+    public $templates_overrides = [];
 
     public function __construct()
     {
