@@ -102,6 +102,6 @@ $short_desc = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('Improved user experience on HTTP Live Streaming (HLS) media playback')}
+* {$_('The new CSS engine introduced in the Firefox Quantum (57.0) desktop browser is now enabled in Firefox for Android')}
 OUT;
 };
