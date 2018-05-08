@@ -34,7 +34,7 @@
     {
       "channel": "release",
       "format": "txt",
-      "source": "https://raw.githubusercontent.com/mozilla-mobile/firefox-ios/v7.x/shipping_locales.txt"
+      "source": "https://raw.githubusercontent.com/mozilla-mobile/firefox-ios/master/shipping_locales.txt"
     }
   ],
   "klar_android": [
