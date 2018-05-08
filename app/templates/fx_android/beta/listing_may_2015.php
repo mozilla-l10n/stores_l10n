@@ -40,6 +40,7 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('The new CSS engine introduced in the Firefox Quantum (57.0) desktop browser is now enabled in Firefox for Android')}
+* {$_('Quantum CSS improvements which improve page rendering times')}
+* {$_('Faster scrolling due to treating touch event listeners as passive by default')}
 OUT;
 };
