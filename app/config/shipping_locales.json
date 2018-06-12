@@ -1,11 +1,13 @@
 {
   "focus_android": {
     "release": [
+      "af", 
       "am", 
       "an", 
       "anp", 
       "ar", 
       "ast", 
+      "ay", 
       "az", 
       "bg", 
       "bn-BD", 
@@ -60,8 +62,10 @@
       "nl", 
       "nn-NO", 
       "oc", 
+      "pai", 
       "pl", 
       "pt-BR", 
+      "quy", 
       "ro", 
       "ru", 
       "sk", 
@@ -470,6 +474,7 @@
       "de", 
       "dsb", 
       "el", 
+      "en-CA", 
       "en-GB", 
       "en-US", 
       "eo", 
