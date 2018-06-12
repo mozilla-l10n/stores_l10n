@@ -40,6 +40,6 @@ $app_title = function ($translations) use ($_) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-* {$_('We’re working to make Firefox for Android better with each new release. Read the release notes to learn about any new features, bug fixes, and performance improvements at https://www.mozilla.org/en-US/firefox/android/notes/.')}
+{$_('We’re working to make Firefox for Android better with each new release. Read the release notes to learn about any new features, bug fixes, and performance improvements at https://www.mozilla.org/en-US/firefox/android/notes/.')}
 OUT;
 };
