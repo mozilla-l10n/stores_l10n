@@ -239,7 +239,7 @@ class Project
             'release' => [
                 'template' => 'fx_ios/release/listing_sept_2015.php',
                 'listing'  => 'fx_ios/description_release.lang',
-                'whatsnew' => 'fx_ios/whatsnew/ios_12.lang',
+                'whatsnew' => 'fx_ios/whatsnew/ios_13.lang',
             ],
         ],
         'focus_ios' => [

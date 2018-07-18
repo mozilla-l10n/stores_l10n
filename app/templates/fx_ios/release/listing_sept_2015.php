@@ -117,9 +117,8 @@ if (isset($request)) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-{$_('Our latest release includes features that can help you be more productive.')}
-• {$_('We have combined share extensions into a single one that lets you easily open links from other applications in Firefox. You can also add them to your bookmarks or even your reading list.')}
-• {$_('Syncing devices is now easier to access and verify straight from the menu.')}
-• {$_('We now have support for downloading files to your device, which can be shared with other applications. Downloads are accessible via the built-in Files app. Want to save a PDF file for later? Long press links to download them for offline use.')}
+{$_('This latest release comes with some design improvements for easier navigation and discoverability. Additionally:')}
+• {$_('You can now search, filter, and drag the order of your currently open tabs.')}
+• {$_('For easier night-time viewing, we now have a dark theme. On/Off and auto preferences are available in settings.')}
 OUT;
 };
