@@ -117,8 +117,10 @@ if (isset($request)) {
 
 $whatsnew = function ($translations) use ($_) {
     return <<<OUT
-{$_('This latest release comes with some design improvements for easier navigation and discoverability. Additionally:')}
-• {$_('You can now search, filter, and drag the order of your currently open tabs.')}
-• {$_('For easier night-time viewing, we now have a dark theme. On/Off and auto preferences are available in settings.')}
+{$_('Our latest release includes features that can help you access and organize the online content you’re interested in.')}
+• {$_('Siri Shortcuts to open a new tab in private browsing mode. Make sure to upgrade to iOS 12 to access.')}
+• {$_('Clear Specific Website Data in your history, so you can pick and choose the information you want to keep, and what you want to remove.')}
+• {$_('Dark Theme improvements to make browsing even easier on the eyes.')}
+• {$_('Performance enhancements for faster navigation.')}
 OUT;
 };
