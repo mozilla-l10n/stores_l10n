@@ -81,7 +81,7 @@ class Project
      * Google: https://bugzilla.mozilla.org/show_bug.cgi?id=1090731#c18
      * Apple: https://github.com/fastlane/fastlane/tree/master/deliver#available-language-codes
      *
-     * For Apple see also http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
+     * For Apple see also https://docs.fastlane.tools/actions/appstore/#available-language-codes
      * For Google see also https://support.google.com/googleplay/android-developer/answer/113469
      *
      * If false, locale is unsupported in Mozilla products.
@@ -125,7 +125,7 @@ class Project
             'ar'     => 'ar',
             'be'     => 'be',
             'bg'     => 'bg',
-            'bn-BD'  => 'bn-BD',
+            'bn-BD'  => 'bn',
             'ca'     => 'ca',
             'cs-CZ'  => 'cs',
             'da-DK'  => 'da',
