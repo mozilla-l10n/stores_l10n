@@ -4,7 +4,31 @@ namespace Stores;
 // Include closure needed in template
 include INC . 'utilities.php';
 
-$app_title = function ($translations) use ($_) {
+$current_locale = '';
+if (isset($request)) {
+    $current_locale = is_array($request)
+        ? $request['locale'] // HTML view
+        : $request->query['locale']; // API object
+} else {
+    // Home view
+    if (isset($store_locale)) {
+        $current_locale = $store_locale;
+    }
+}
+
+$app_title = function ($translations) use ($_, $current_locale) {
+    # See https://bugzilla.mozilla.org/show_bug.cgi?id=1548374
+    # Title is "Mozilla Firefox" only for European languages
+
+    $eu_locales = [
+        'bg', 'cs', 'da', 'de', 'el', 'es-ES', 'et', 'fi', 'fr', 'hr', 'hu',
+        'it', 'lt', 'nl', 'pl', 'pt-PT', 'ro', 'sk', 'sl', 'sv-SE',
+    ];
+
+    if (in_array($current_locale, $eu_locales)) {
+        return 'Mozilla Firefox';
+    }
+
     return $_('Firefox Browser fast & private');
 };
 
