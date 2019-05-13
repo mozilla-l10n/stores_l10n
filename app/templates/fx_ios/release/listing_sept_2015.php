@@ -20,7 +20,7 @@ $description = function ($translations) use ($_) {
         '{{facebook_link}}'    => 'http://mzl.la/FXFacebook',
         '{{twitter_link}}'     => 'http://mzl.la/FXTwitter',
         '{{mozilla_org_link}}' => 'https://www.mozilla.org',
-        '{{privacy_link}}'     => 'http://www.mozilla.org/legal/privacy/firefox.html',
+        '{{privacy_link}}'     => 'https://www.mozilla.org/legal/privacy/firefox.html',
     ];
 
     return <<<OUT
