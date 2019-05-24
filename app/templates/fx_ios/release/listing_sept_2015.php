@@ -15,10 +15,10 @@ $app_subtitle = function ($translations) use ($_) {
 $description = function ($translations) use ($_) {
     $replacements = [
         '{{support_link}}'     => 'https://support.mozilla.org/mobile',
-        '{{permission_link}}'  => 'http://mzl.la/Permissions',
+        '{{permission_link}}'  => 'https://mzl.la/Permissions',
         '{{blog_link}}'        => 'https://blog.mozilla.org',
-        '{{facebook_link}}'    => 'http://mzl.la/FXFacebook',
-        '{{twitter_link}}'     => 'http://mzl.la/FXTwitter',
+        '{{facebook_link}}'    => 'https://mzl.la/FXFacebook',
+        '{{twitter_link}}'     => 'https://mzl.la/FXTwitter',
         '{{mozilla_org_link}}' => 'https://www.mozilla.org',
         '{{privacy_link}}'     => 'https://www.mozilla.org/legal/privacy/firefox.html',
     ];

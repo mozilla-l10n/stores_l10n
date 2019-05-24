@@ -7,9 +7,9 @@ include INC . 'utilities.php';
 $replacements = [
     '{{dawn_post}}'         => 'https://hacks.mozilla.org/2017/04/simplifying-firefox-release-channels/',
     '{{download_link}}'     => 'https://play.google.com/store/apps/details?id=org.mozilla.firefox',
-    '{{bug_link}}'          => 'http://mzl.la/android_bugs',
+    '{{bug_link}}'          => 'https://mzl.la/android_bugs',
     '{{telemetry_link}}'    => 'https://www.mozilla.org/privacy/firefox/#telemetry',
-    '{{permissions_link}}'  => 'http://mzl.la/Permissions',
+    '{{permissions_link}}'  => 'https://mzl.la/Permissions',
     '{{requirements_link}}' => 'https://www.mozilla.org/firefox/mobile/platforms/',
     '{{privacy_link}}'      => 'https://www.mozilla.org/privacy/firefox/',
 ];

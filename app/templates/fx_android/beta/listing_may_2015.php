@@ -6,8 +6,8 @@ include INC . 'utilities.php';
 
 $description = function ($translations) use ($_) {
     $replacements = [
-        '{{android_bugs}}'     => 'http://mzl.la/android_bugs',
-        '{{permission_link}}'  => 'http://mzl.la/Permissions',
+        '{{android_bugs}}'     => 'https://mzl.la/android_bugs',
+        '{{permission_link}}'  => 'https://mzl.la/Permissions',
         '{{mozilla_org_link}}' => 'https://www.mozilla.org',
     ];
 
